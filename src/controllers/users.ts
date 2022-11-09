@@ -16,7 +16,7 @@ export const getAllUsers = async (_req: Request, res: Response) => {
 export const getUser = async (req: Request, res: Response) => {
   try {
     const user = await library.show(+req.params.id)
-    return res.send(user)
+    return res.status(200).send(user)
   } catch (error) {
     res.status(401).json(error)
   }
@@ -37,7 +37,7 @@ export const createUser = async (req: Request, res: Response) => {
 
     const newUser = await library.create(user)
     const token = jwt.sign(newUser, process.env.TOKEN_SECRET as string)
-    res.status(200).json(token)
+    return res.status(200).json(token)
   } catch (error) {
     console.log(error)
     res.status(400).json(error)
@@ -47,7 +47,7 @@ export const createUser = async (req: Request, res: Response) => {
 export const deleteUser = async (req: Request, res: Response) => {
   try {
     const deletedUser = await library.delete(+req.params.id)
-    return res.send(deletedUser)
+    return res.status(200).send(deletedUser)
   } catch (error) {
     console.log(error)
     res.status(401).json(error)
@@ -66,8 +66,10 @@ export const updateUser = async (req: Request, res: Response) => {
       created_date: new Date(),
       updated_date: new Date()
     }
+
     const updated = await library.update(user)
-    return res.json(updated)
+    // const token = jwt.sign(updated, process.env.TOKEN_SECRET as string)
+    return res.status(200).json(updated)
   } catch (error) {
     console.log(error)
     res.status(401).json(error)

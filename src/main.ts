@@ -3,6 +3,7 @@ import morgan from 'morgan'
 import * as dotenv from 'dotenv'
 
 import usersRoutes from './routers/users'
+import blocksRoutes from './routers/blocks'
 
 dotenv.config()
 
@@ -22,6 +23,7 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.use(usersRoutes)
+app.use(blocksRoutes)
 
 // start express server
 app.listen(PORT, () => {

@@ -11,5 +11,7 @@ CREATE TABLE books (
     conclusion text,
     user_id integer REFERENCES users(id) NOT NULL,
     shelf_id integer REFERENCES shelfs(id) NOT NULL,
-    book_number_in_shelf integer NOT NULL
+    book_number_in_shelf integer NOT NULL,
+    created_date TIMESTAMP NOT NULL,
+    updated_date TIMESTAMP NOT NULL
 );
