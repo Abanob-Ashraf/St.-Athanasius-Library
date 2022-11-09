@@ -1,5 +1,3 @@
-/* Replace with your SQL commands */
-
 CREATE TABLE books (
     id SERIAL PRIMARY KEY,
     book_code VARCHAR(100),

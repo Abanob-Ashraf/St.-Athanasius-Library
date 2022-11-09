@@ -17,9 +17,9 @@ export type User = {
   last_name: string
   email: string
   password: string
+  admin_flag: boolean
   created_date: Date
   updated_date: Date
-  admin_flag: boolean
 }
 
 export class UsersModel {
@@ -32,7 +32,10 @@ export class UsersModel {
         u.first_name,
         u.last_name,
         u.email,
-        hashing
+        hashing,
+        u.admin_flag,
+        u.created_date,
+        u.updated_date
       ])
       const user = result.rows[0]
       connection.release()
@@ -79,7 +82,9 @@ export class UsersModel {
         u.first_name,
         u.last_name,
         u.email,
-        hashing
+        hashing,
+        u.admin_flag,
+        u.updated_date
       ])
       const user = result.rows[0]
       connection.release()

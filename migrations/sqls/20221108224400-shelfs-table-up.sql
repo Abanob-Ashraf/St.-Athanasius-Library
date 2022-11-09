@@ -1,5 +1,3 @@
-/* Replace with your SQL commands */
-
 CREATE TABLE shelfs (
     id SERIAL PRIMARY KEY,
     shelf_number integer,

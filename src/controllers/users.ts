@@ -2,11 +2,11 @@ import { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import { User, UsersModel } from '../models/users'
 
-const store = new UsersModel()
+const library = new UsersModel()
 
 export const getAllUsers = async (_req: Request, res: Response) => {
   try {
-    const users = await store.index()
+    const users = await library.index()
     return res.status(200).send(users)
   } catch (error) {
     res.status(401).json(error)
@@ -15,7 +15,7 @@ export const getAllUsers = async (_req: Request, res: Response) => {
 
 export const getUser = async (req: Request, res: Response) => {
   try {
-    const user = await store.show(+req.params.id)
+    const user = await library.show(+req.params.id)
     return res.send(user)
   } catch (error) {
     res.status(401).json(error)
@@ -29,13 +29,13 @@ export const createUser = async (req: Request, res: Response) => {
       last_name: req.body.last_name,
       email: req.body.email,
       password: req.body.password,
-      created_date: req.body.created_date,
-      updated_date: req.body.updated_date,
       admin_flag: req.body.admin_flag,
+      created_date: new Date(),
+      updated_date: new Date(),
       id: undefined as unknown as number
     }
 
-    const newUser = await store.create(user)
+    const newUser = await library.create(user)
     const token = jwt.sign(newUser, process.env.TOKEN_SECRET as string)
     res.status(200).json(token)
   } catch (error) {
@@ -46,7 +46,7 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const deleteUser = async (req: Request, res: Response) => {
   try {
-    const deletedUser = await store.delete(+req.params.id)
+    const deletedUser = await library.delete(+req.params.id)
     return res.send(deletedUser)
   } catch (error) {
     console.log(error)
@@ -62,13 +62,14 @@ export const updateUser = async (req: Request, res: Response) => {
       last_name: req.body.last_name,
       email: req.body.email,
       password: req.body.password,
-      created_date: req.body.created_date,
-      updated_date: req.body.updated_date,
-      admin_flag: req.body.admin_flag
+      admin_flag: req.body.admin_flag,
+      created_date: new Date(),
+      updated_date: new Date()
     }
-    const updated = await store.update(user)
+    const updated = await library.update(user)
     return res.json(updated)
   } catch (error) {
+    console.log(error)
     res.status(401).json(error)
   }
 }
