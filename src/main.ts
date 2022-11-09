@@ -13,7 +13,7 @@ app.use(morgan('short'))
 // add routing for / path
 app.get('/', (req: Request, res: Response) => {
   res.json({
-    message: 'Hello World 🌍'
+    message: 'Hello To my library 🌍'
   })
 })
 
