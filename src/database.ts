@@ -14,6 +14,7 @@ const {
 } = process.env
 
 console.log(ENV)
+console.log(`Database is connected at prot:${DB_PORT}`)
 
 const Client = new Pool({
   host: POSTGRES_HOST,
