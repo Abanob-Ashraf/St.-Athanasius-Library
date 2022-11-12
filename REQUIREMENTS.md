@@ -35,6 +35,16 @@ For example: `http://localhost:port:3000`
 |     Delete  |  DELETE  | /blocks/:id | Delete a block with ID                     |      TRUE      |
 
 
+#### Shelf
+
+| - FUNCTIONS | - Methos |  - Routes   |               - Description                | Token Required |
+|:-----------:|:--------:|-------------|--------------------------------------------|:--------------:|
+|     Index   |    GET   | /shelfs     | Show all shelfs                            |      TRUE      |
+|      Show   |    GET   | /shelfs/:id | Search for one shelf with ID               |      TRUE      |
+|     Create  |   POST   | /shelfs     | Create new shelf                           |      TRUE      |
+|     Update  |    PUT   | /shelfs/:id | Update a shelf with ID                     |      TRUE      |
+|     Delete  |  DELETE  | /shelfs/:id | Delete a shelf with ID                     |      TRUE      |
+
 <!-- #### Orders
 
 |         - FUNCTIONS        | - Methos |    - Routes      |            - Description                 | Token Required |
@@ -46,17 +56,7 @@ For example: `http://localhost:port:3000`
 |    Show Active By User ID  |    GET   | /orders/active   | Search for Active orders with User ID    |      TRUE      |
 |            Create          |   POST   | /orders          | Create new User                          |      TRUE      |
 |            Update          |    PUT   | /orders/:id      | Update a product with ID                 |      TRUE      |
-|            Delete          |  DELETE  | /orders/:id      | Delete a product with ID                 |      TRUE      |
-
-#### Orders Products
-
-| - FUNCTIONS | - Methos |       - Routes      |                - Description               | Token Required |
-|:-----------:|:--------:|:-------------------:|:------------------------------------------:|:--------------:|
-|     Index   |    GET   | /ordersproducts     | Show all orders products                   |      TRUE      |
-|      Show   |    GET   | /ordersproducts/:id | Search for one order product with order ID |      TRUE      |
-|     Create  |   POST   | /ordersproducts     | Create new orders products                 |      TRUE      |
-|     Update  |    PUT   | /ordersproducts/:id | Update a orders productswith order ID      |      TRUE      |
-|     Delete  |  DELETE  | /ordersproducts/:id | Delete a orders products  with order ID    |      TRUE      | -->
+|            Delete          |  DELETE  | /orders/:id      | Delete a product with ID                 |      TRUE      | -->
 
 ## Data Shapes
 
@@ -84,16 +84,18 @@ For example: `http://localhost:port:3000`
 |   updated_date   |   TIMESTAMP NOT NULL  |
 
 
-<!-- #### Orders
+#### Shelf
 
-|  - columns |                 - Type                |
-|:----------:|:-------------------------------------:|
-|     id     |           SERIAL PRIMARY KEY          |
-|   status   |          VARCHAR(30) NOT NULL         |
-|   user_id  | integer REFERENCES users(id) NOT NULL |
-| order_time |           TIMESTAMP NOT NULL          |
+|    - columns     |                 - Type                 |
+|:----------------:|:--------------------------------------:|
+|       id         |          SERIAL PRIMARY KEY            |
+|   Shelf_number   |           integer NOT NULL             |
+|    Shelf_name    |        VARCHAR(100) NOT NULL           |
+|     block_id     | integer REFERENCES blocks(id) NOT NULL |
+|   created_date   |          TIMESTAMP NOT NULL            |
+|   updated_date   |          TIMESTAMP NOT NULL            |
 
-#### Orders Products
+<!-- #### Orders Products
 
 |  - columns |                  - Type                  |
 |:----------:|:----------------------------------------:|
