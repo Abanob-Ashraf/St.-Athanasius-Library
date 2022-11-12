@@ -56,7 +56,6 @@ export class BlocksModel {
       connection.release()
       return block
     } catch (error) {
-      console.log(error)
       throw new Error(`Unable to get block ${id} error: ${error}`)
     }
   }

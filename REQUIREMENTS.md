@@ -79,7 +79,7 @@ For example: `http://localhost:port:3000`
 |:----------------:|:---------------------:|
 |       id         |   SERIAL PRIMARY KEY  |
 |   block_number   |    integer NOT NULL   |
-|    block_name    | VARCHAR(100) NOT NULL |
+|    block_name    |      VARCHAR(100)     |
 |   created_date   |   TIMESTAMP NOT NULL  |
 |   updated_date   |   TIMESTAMP NOT NULL  |
 
@@ -90,7 +90,7 @@ For example: `http://localhost:port:3000`
 |:----------------:|:--------------------------------------:|
 |       id         |          SERIAL PRIMARY KEY            |
 |   Shelf_number   |           integer NOT NULL             |
-|    Shelf_name    |        VARCHAR(100) NOT NULL           |
+|    Shelf_name    |             VARCHAR(100)               |
 |     block_id     | integer REFERENCES blocks(id) NOT NULL |
 |   created_date   |          TIMESTAMP NOT NULL            |
 |   updated_date   |          TIMESTAMP NOT NULL            |

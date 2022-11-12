@@ -58,7 +58,6 @@ export class ShelfsModel {
       connection.release()
       return shelf
     } catch (error) {
-      console.log(error)
       throw new Error(`Unable to get shelf ${id} error: ${error}`)
     }
   }

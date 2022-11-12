@@ -67,7 +67,6 @@ export class UsersModel {
       connection.release()
       return user
     } catch (error) {
-      console.log(error)
       throw new Error(`Unable to get user ${id} error: ${error}`)
     }
   }

@@ -34,7 +34,6 @@ export const createBlock = async (req: Request, res: Response) => {
     const newBlock = await library.create(block)
     return res.status(200).json(newBlock)
   } catch (error) {
-    console.log(error)
     res.status(400).json(error)
   }
 }
@@ -44,7 +43,6 @@ export const deleteBlock = async (req: Request, res: Response) => {
     const deletedBlock = await library.delete(+req.params.id)
     return res.status(200).send(deletedBlock)
   } catch (error) {
-    console.log(error)
     res.status(401).json(error)
   }
 }
@@ -63,7 +61,6 @@ export const updateBlock = async (req: Request, res: Response) => {
     // const token = jwt.sign(updated, process.env.TOKEN_SECRET as string)
     return res.status(200).json(updated)
   } catch (error) {
-    console.log(error)
     res.status(401).json(error)
   }
 }

@@ -35,7 +35,6 @@ export const createShelf = async (req: Request, res: Response) => {
     const newShelf = await library.create(shelf)
     return res.status(200).json(newShelf)
   } catch (error) {
-    console.log(error)
     res.status(400).json(error)
   }
 }
@@ -45,7 +44,6 @@ export const deleteShelf = async (req: Request, res: Response) => {
     const deletedShelf = await library.delete(+req.params.id)
     return res.status(200).send(deletedShelf)
   } catch (error) {
-    console.log(error)
     res.status(401).json(error)
   }
 }
@@ -65,7 +63,6 @@ export const updateShelf = async (req: Request, res: Response) => {
     // const token = jwt.sign(updated, process.env.TOKEN_SECRET as string)
     return res.status(200).json(updated)
   } catch (error) {
-    console.log(error)
     res.status(401).json(error)
   }
 }
