@@ -14,27 +14,26 @@ For example: `http://localhost:port:3000`
 |:------------------:|:--------:|--------------------|-----------------------------------|:--------------:|
 |        -----       |    GET   |         /          | Welcome Message for user          |      FALSE     |
 
-<!-- #### Products
-
-|     - FUNCTIONS    | - Methos |     - Routes       |         - Description             | Token Required |
-|:------------------:|:--------:|--------------------|-----------------------------------|:--------------:|
-|         Index      |    GET   | /products          | Show all products                 |      FALSE     |
-|         Show       |    GET   | /products/:id      | Search for one product with ID    |      FALSE     |
-|        Create      |   POST   | /products          | Create new Product                |      TRUE      |
-|        Update      |    PUT   | /products/:id      | Update a product with ID          |      TRUE      |
-|        Delete      |  DELETE  | /products/:id      | Delete a product with ID          |      TRUE      |
-|        popular     |    GET   | /products/popular  | Top 5 most popular products       |      FALSE     |
-|   Show by category |    GET   | /products/category | Search for products with category |      FALSE     | -->
-
 #### Users
 
-| - FUNCTIONS | - Methos |  - Routes  |                 - Description                   | Token Required |
-|:-----------:|:--------:|------------|-------------------------------------------------|:--------------:|
-|     Index   |    GET   | /users     | Show all users                                  |      TRUE      |
-|      Show   |    GET   | /users/:id | Search for one user with ID                     |      TRUE      |
-|     Create  |   POST   | /users     | Create new User                                 |      FALSE     |
-|     Update  |    PUT   | /users/:id | Update a product with ID                        |      TRUE      |
-|     Delete  |  DELETE  | /users/:id | Delete a product with ID                        |      TRUE      |
+| - FUNCTIONS | - Methos |  - Routes  |               - Description                 | Token Required |
+|:-----------:|:--------:|------------|---------------------------------------------|:--------------:|
+|     Index   |    GET   | /users     | Show all users                              |      TRUE      |
+|      Show   |    GET   | /users/:id | Search for one user with ID                 |      TRUE      |
+|     Create  |   POST   | /users     | Create new user                             |      FALSE     |
+|     Update  |    PUT   | /users/:id | Update a user with ID                       |      TRUE      |
+|     Delete  |  DELETE  | /users/:id | Delete a user with ID                       |      TRUE      |
+
+#### Blocks
+
+| - FUNCTIONS | - Methos |  - Routes   |               - Description                | Token Required |
+|:-----------:|:--------:|-------------|--------------------------------------------|:--------------:|
+|     Index   |    GET   | /blocks     | Show all blocks                            |      TRUE      |
+|      Show   |    GET   | /blocks/:id | Search for one block with ID               |      TRUE      |
+|     Create  |   POST   | /blocks     | Create new block                           |      TRUE      |
+|     Update  |    PUT   | /blocks/:id | Update a block with ID                     |      TRUE      |
+|     Delete  |  DELETE  | /blocks/:id | Delete a block with ID                     |      TRUE      |
+
 
 <!-- #### Orders
 
@@ -61,28 +60,29 @@ For example: `http://localhost:port:3000`
 
 ## Data Shapes
 
-<!-- #### Product
-
-|    - columns   |         - Type        |
-|:--------------:|:---------------------:|
-|        id      |   SERIAL PRIMARY KEY  |
-|      title     | VARCHAR(100) NOT NULL |
-|      price     |    integer NOT NULL   |
-|   description  |          text         |
-|     category   | VARCHAR(100) NOT NULL | -->
-
 #### User
 
-|   - columns    |       - Type          |
-|:--------------:|:---------------------:|
-|     id         |   SERIAL PRIMARY KEY  |
-|   first_name   | VARCHAR(100) NOT NULL |
-|   last_name    | VARCHAR(100) NOT NULL |
-|    email       | VARCHAR(100) NOT NULL |
-|   password     | VARCHAR(100) NOT NULL |
-|  admin_flag    |    BOOLEAN NOT NULL   |
-|  created_date  |   TIMESTAMP NOT NULL  |
-|  updated_date  |   TIMESTAMP NOT NULL  |
+|    - columns     |       - Type          |
+|:----------------:|:---------------------:|
+|       id         |   SERIAL PRIMARY KEY  |
+|    first_name    | VARCHAR(100) NOT NULL |
+|    last_name     | VARCHAR(100) NOT NULL |
+|      email       | VARCHAR(100) NOT NULL |
+|     password     | VARCHAR(100) NOT NULL |
+|    admin_flag    |    BOOLEAN NOT NULL   |
+|   created_date   |   TIMESTAMP NOT NULL  |
+|   updated_date   |   TIMESTAMP NOT NULL  |
+
+#### Block
+
+|    - columns     |         - Type        |
+|:----------------:|:---------------------:|
+|       id         |   SERIAL PRIMARY KEY  |
+|   block_number   |    integer NOT NULL   |
+|    block_name    | VARCHAR(100) NOT NULL |
+|   created_date   |   TIMESTAMP NOT NULL  |
+|   updated_date   |   TIMESTAMP NOT NULL  |
+
 
 <!-- #### Orders
 
