@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv'
 import usersRoutes from './routers/users'
 import blocksRoutes from './routers/blocks'
 import shelfsRoutes from './routers/shelfs'
+import booksRoutes from './routers/books'
 
 dotenv.config()
 
@@ -26,6 +27,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use(usersRoutes)
 app.use(blocksRoutes)
 app.use(shelfsRoutes)
+app.use(booksRoutes)
 
 // start express server
 app.listen(PORT, () => {
