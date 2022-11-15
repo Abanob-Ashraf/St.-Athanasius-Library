@@ -5,13 +5,16 @@
   "scripts": {
     "clean": "rimraf build/",
     "build": "npm run clean && npx tsc",
-    "jasmine": "jasmine",
+    "jasmine": "npm run build && jasmine",
     "dev": "nodemon ./src/main.ts",
     "start": "npm run build && nodemon build/main.js",
-    "test": "set ENV=test && db-migrate up --config ./database.json -e test && npm run build && npm run jasmine && db-migrate reset --config ./database.json -e test",
+    "database:up": "db-migrate up",
+    "database:fkdata": "psql -U abano -d librarydb -a -f data_migrations/initialization.sql",
+    "database:reset": "db-migrate reset",
+    "test": "set ENV=test && db-migrate --env test up && npm run jasmine && db-migrate --env test reset",
     "prettier": "prettier --write src/**/*.{ts,tsx,js,jsx}",
     "lint": "eslint . --ext .ts",
-    "lintfix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix"
   },
   "keywords": [],
   "author": "Abanob Ashraf",

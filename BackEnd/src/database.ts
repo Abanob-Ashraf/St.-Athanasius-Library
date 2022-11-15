@@ -3,24 +3,16 @@ import { Pool } from 'pg'
 
 dotenv.config()
 
-const {
-  POSTGRES_HOST,
-  DB_PORT,
-  POSTGRES_DB,
-  POSTGRES_DB_TEST,
-  POSTGRES_USER,
-  POSTGRES_PASSWORD,
-  ENV
-} = process.env
+const { DB_HOST, DB_PORT, DB_NAME, DB_NAME_TEST, DB_USER, DB_PASSWORD, ENV } = process.env
 
 console.log(ENV)
 console.log(`Database is connected at prot:${DB_PORT}`)
 
 const Client = new Pool({
-  host: POSTGRES_HOST,
-  database: ENV === 'dev' ? POSTGRES_DB : POSTGRES_DB_TEST,
-  user: POSTGRES_USER,
-  password: POSTGRES_PASSWORD,
+  host: DB_HOST,
+  database: ENV === 'dev' ? DB_NAME : DB_NAME_TEST,
+  user: DB_USER,
+  password: DB_PASSWORD,
   port: parseInt(DB_PORT as string)
 })
 

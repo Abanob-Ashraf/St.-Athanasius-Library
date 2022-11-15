@@ -1,16 +1,16 @@
 {
   "dev": {
     "driver": "pg",
-    "host": "127.0.0.1",
-    "database": "librarydb",
-    "user": {"ENV": "POSTGRES_USER"},
-    "password": {"ENV": "POSTGRES_PASSWORD"}
+    "host": { "ENV": "DB_HOST" },
+    "database": { "ENV": "DB_NAME" },
+    "user": {"ENV": "DB_USER"},
+    "password": {"ENV": "DB_PASSWORD"}
   },
   "test": {
     "driver": "pg",
-    "host": "127.0.0.1",
-    "database": "librarydb_test",
-    "user": {"ENV": "POSTGRES_USER"},
-    "password": {"ENV": "POSTGRES_PASSWORD"}
+    "host": { "ENV": "DB_HOST" },
+    "database": { "ENV": "DB_NAME_TEST" },
+    "user": {"ENV": "DB_USER"},
+    "password": {"ENV": "DB_PASSWORD"}
   }
 }
