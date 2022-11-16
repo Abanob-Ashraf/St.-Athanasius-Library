@@ -31,6 +31,7 @@ app.use(booksRoutes)
 
 // start express server
 app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`Server is starting at prot:${PORT}`)
 })
 

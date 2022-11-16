@@ -1,9 +1,19 @@
+/* eslint-disable no-console */
 import dotenv from 'dotenv'
 import { Pool } from 'pg'
 
 dotenv.config()
 
-const { DB_HOST, DB_PORT, DB_NAME, DB_NAME_TEST, DB_USER, DB_PASSWORD, ENV } = process.env
+// eslint-disable-next-line prettier/prettier
+const { 
+  DB_HOST, 
+  DB_PORT, 
+  DB_NAME, 
+  DB_NAME_TEST, 
+  DB_USER, 
+  DB_PASSWORD, 
+  ENV 
+} = process.env
 
 console.log(ENV)
 console.log(`Database is connected at prot:${DB_PORT}`)
