@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Response, Request, NextFunction } from 'express'
 
 interface Error {
