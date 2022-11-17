@@ -1,9 +1,9 @@
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import { Block, BlocksModel } from '../models/blocks'
 
 const library = new BlocksModel()
 
-export const createBlock = async (req: Request, res: Response) => {
+export const createBlock = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const block: Block = {
       block_number: req.body.block_number,
@@ -14,31 +14,43 @@ export const createBlock = async (req: Request, res: Response) => {
     }
 
     const newBlock = await library.create(block)
-    return res.status(200).json(newBlock)
+    res.json({
+      status: 'success',
+      data: { ...newBlock },
+      message: 'Block created successfully'
+    })
   } catch (error) {
-    res.status(400).json(error)
+    next(error)
   }
 }
 
-export const getAllBlocks = async (_req: Request, res: Response) => {
+export const getAllBlocks = async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const blocks = await library.index()
-    return res.status(200).send(blocks)
+    res.json({
+      status: 'success',
+      data: blocks,
+      message: 'Blocks retrieved successfully'
+    })
   } catch (error) {
-    res.status(401).json(error)
+    next(error)
   }
 }
 
-export const getBlock = async (req: Request, res: Response) => {
+export const getBlock = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const block = await library.show(+req.params.id)
-    return res.status(200).send(block)
+    res.json({
+      status: 'success',
+      data: block,
+      message: 'Block retrieved successfully'
+    })
   } catch (error) {
-    res.status(401).json(error)
+    next(error)
   }
 }
 
-export const updateBlock = async (req: Request, res: Response) => {
+export const updateBlock = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const block = {
       id: +req.params.id,
@@ -49,18 +61,25 @@ export const updateBlock = async (req: Request, res: Response) => {
     }
 
     const updated = await library.update(block)
-    // const token = jwt.sign(updated, process.env.TOKEN_SECRET as string)
-    return res.status(200).json(updated)
+    res.json({
+      status: 'success',
+      data: updated,
+      message: 'Block updated successfully'
+    })
   } catch (error) {
-    res.status(401).json(error)
+    next(error)
   }
 }
 
-export const deleteBlock = async (req: Request, res: Response) => {
+export const deleteBlock = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const deletedBlock = await library.delete(+req.params.id)
-    return res.status(200).send(deletedBlock)
+    res.json({
+      status: 'success',
+      data: deletedBlock,
+      message: 'Block deleted successfully'
+    })
   } catch (error) {
-    res.status(401).json(error)
+    next(error)
   }
 }

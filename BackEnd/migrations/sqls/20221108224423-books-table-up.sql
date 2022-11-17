@@ -1,7 +1,7 @@
 CREATE TABLE books (
     id SERIAL PRIMARY KEY,
-    book_code VARCHAR(100),
-    book_name VARCHAR(100) NOT NULL,
+    book_code VARCHAR(100) UNIQUE,
+    book_name VARCHAR(100) UNIQUE NOT NULL,
     author VARCHAR(100) NOT NULL,
     -- date_of_printing VARCHAR(100),
     number_of_copies integer NOT NULL,

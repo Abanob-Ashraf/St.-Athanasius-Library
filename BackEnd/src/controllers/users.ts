@@ -36,7 +36,7 @@ export const getMany = async (_req: Request, res: Response, next: NextFunction) 
     res.json({
       status: 'success',
       data: users,
-      message: 'User retrieved successfully'
+      message: 'Users retrieved successfully'
     })
   } catch (error) {
     next(error)

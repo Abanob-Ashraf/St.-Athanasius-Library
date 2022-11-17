@@ -1,9 +1,9 @@
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import { Book, BooksModel } from '../models/books'
 
 const library = new BooksModel()
 
-export const createBook = async (req: Request, res: Response) => {
+export const createBook = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const book: Book = {
       book_code: req.body.book_code,
@@ -23,40 +23,56 @@ export const createBook = async (req: Request, res: Response) => {
     }
 
     const newBook = await library.create(book)
-    return res.status(200).json(newBook)
+    res.json({
+      status: 'success',
+      data: { ...newBook },
+      message: 'Book created successfully'
+    })
   } catch (error) {
-    res.status(400).json(error)
+    next(error)
   }
 }
 
-export const getAllBooks = async (_req: Request, res: Response) => {
+export const getAllBooks = async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const books = await library.index()
-    return res.status(200).send(books)
+    res.json({
+      status: 'success',
+      data: books,
+      message: 'Books retrieved successfully'
+    })
   } catch (error) {
-    res.status(401).json(error)
+    next(error)
   }
 }
 
-export const getBookById = async (req: Request, res: Response) => {
+export const getBookById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const book = await library.showById(+req.params.id)
-    return res.status(200).send(book)
+    res.json({
+      status: 'success',
+      data: book,
+      message: 'Book retrieved successfully'
+    })
   } catch (error) {
-    res.status(401).json(error)
+    next(error)
   }
 }
 
-export const getBookByName = async (req: Request, res: Response) => {
+export const getBookByName = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const book = await library.showByName(req.body.book_name)
-    return res.status(200).send(book)
+    res.json({
+      status: 'success',
+      data: book,
+      message: 'Book retrieved successfully'
+    })
   } catch (error) {
-    res.status(401).json(error)
+    next(error)
   }
 }
 
-export const updateBook = async (req: Request, res: Response) => {
+export const updateBook = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const book = {
       id: +req.params.id,
@@ -77,17 +93,25 @@ export const updateBook = async (req: Request, res: Response) => {
 
     const updated = await library.update(book)
     // const token = jwt.sign(updated, process.env.TOKEN_SECRET as string)
-    return res.status(200).json(updated)
+    res.json({
+      status: 'success',
+      data: updated,
+      message: 'Book updated successfully'
+    })
   } catch (error) {
-    res.status(401).json(error)
+    next(error)
   }
 }
 
-export const deleteBook = async (req: Request, res: Response) => {
+export const deleteBook = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const deletedBook = await library.delete(+req.params.id)
-    return res.status(200).send(deletedBook)
+    res.json({
+      status: 'success',
+      data: deletedBook,
+      message: 'Book deleted successfully'
+    })
   } catch (error) {
-    res.status(401).json(error)
+    next(error)
   }
 }

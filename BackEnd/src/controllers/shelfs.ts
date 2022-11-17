@@ -1,9 +1,9 @@
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import { Shelf, ShelfsModel } from '../models/shelfs'
 
 const library = new ShelfsModel()
 
-export const createShelf = async (req: Request, res: Response) => {
+export const createShelf = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const shelf: Shelf = {
       shelf_number: req.body.shelf_number,
@@ -15,30 +15,42 @@ export const createShelf = async (req: Request, res: Response) => {
     }
 
     const newShelf = await library.create(shelf)
-    return res.status(200).json(newShelf)
+    res.json({
+      status: 'success',
+      data: { ...newShelf },
+      message: 'Shelf created successfully'
+    })
   } catch (error) {
-    res.status(400).json(error)
+    next(error)
   }
 }
 
-export const getAllShelfs = async (_req: Request, res: Response) => {
+export const getAllShelfs = async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const shelfs = await library.index()
-    return res.status(200).send(shelfs)
+    res.json({
+      status: 'success',
+      data: shelfs,
+      message: 'Shelfs retrieved successfully'
+    })
   } catch (error) {
-    res.status(401).json(error)
+    next(error)
   }
 }
 
-export const getShelf = async (req: Request, res: Response) => {
+export const getShelf = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const shelf = await library.show(+req.params.id)
-    return res.status(200).send(shelf)
+    res.json({
+      status: 'success',
+      data: shelf,
+      message: 'Shelf retrieved successfully'
+    })
   } catch (error) {
-    res.status(401).json(error)
+    next(error)
   }
 }
-export const updateShelf = async (req: Request, res: Response) => {
+export const updateShelf = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const shelf = {
       id: +req.params.id,
@@ -51,17 +63,25 @@ export const updateShelf = async (req: Request, res: Response) => {
 
     const updated = await library.update(shelf)
     // const token = jwt.sign(updated, process.env.TOKEN_SECRET as string)
-    return res.status(200).json(updated)
+    res.json({
+      status: 'success',
+      data: updated,
+      message: 'Sjelf updated successfully'
+    })
   } catch (error) {
-    res.status(401).json(error)
+    next(error)
   }
 }
 
-export const deleteShelf = async (req: Request, res: Response) => {
+export const deleteShelf = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const deletedShelf = await library.delete(+req.params.id)
-    return res.status(200).send(deletedShelf)
+    res.json({
+      status: 'success',
+      data: deletedShelf,
+      message: 'Shelf deleted successfully'
+    })
   } catch (error) {
-    res.status(401).json(error)
+    next(error)
   }
 }
