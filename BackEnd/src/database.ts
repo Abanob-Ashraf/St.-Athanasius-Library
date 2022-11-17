@@ -26,4 +26,8 @@ const Client = new Pool({
   port: parseInt(DB_PORT as string)
 })
 
+Client.on('error', (error: Error) => {
+  console.error(`Error: ${error.message}`)
+})
+
 export default Client

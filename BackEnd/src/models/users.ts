@@ -41,12 +41,14 @@ export class UsersModel {
       connection.release()
       return user
     } catch (error) {
-      throw new Error(`Unable to create ${u.first_name + ' ' + u.last_name} error: ${error}`)
+      throw new Error(
+        `Unable to create (${u.first_name + ' ' + u.last_name}): ${(error as Error).message}`
+      )
     }
   }
 
   //getAllUsers
-  async index(): Promise<User[]> {
+  async getMany(): Promise<User[]> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(getAllUsers)
@@ -54,12 +56,12 @@ export class UsersModel {
       connection.release()
       return user
     } catch (error) {
-      throw new Error(`Unable to get users error: ${error}`)
+      throw new Error(`Unable to get users ${(error as Error).message}`)
     }
   }
 
   //getUser
-  async show(id: number): Promise<User[]> {
+  async getOne(id: number): Promise<User[]> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(getSingleUserById, [id])
@@ -67,7 +69,7 @@ export class UsersModel {
       connection.release()
       return user
     } catch (error) {
-      throw new Error(`Unable to get user ${id} error: ${error}`)
+      throw new Error(`Unable to get user ${id}, ${(error as Error).message}`)
     }
   }
 
@@ -89,7 +91,9 @@ export class UsersModel {
       connection.release()
       return user
     } catch (error) {
-      throw new Error(`Unable to update ${u.id} error: ${error}`)
+      throw new Error(
+        `Unable to update ${u.first_name + ' ' + u.last_name}, ${(error as Error).message}`
+      )
     }
   }
 
@@ -101,7 +105,7 @@ export class UsersModel {
       connection.release()
       return result.rows[0]
     } catch (error) {
-      throw new Error(`Unable to delete user ${id} error: ${error}`)
+      throw new Error(`Unable to delete user ${id} ${(error as Error).message}`)
     }
   }
 }

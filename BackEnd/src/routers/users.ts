@@ -1,14 +1,14 @@
 import { Router } from 'express'
 import { authorize } from '../middlewares/authantication'
-import { getAllUsers, getUser, createUser, updateUser, deleteUser } from '../controllers/users'
+import { getMany, getOne, createUser, updateUser, deleteUser } from '../controllers/users'
 
 const routes = Router()
 
-routes.get('/users', authorize, getAllUsers)
-
-routes.get('/users/:id', authorize, getUser)
-
 routes.post('/users', createUser)
+
+routes.get('/users', authorize, getMany)
+
+routes.get('/users/:id', authorize, getOne)
 
 routes.put('/users/:id', authorize, updateUser)
 

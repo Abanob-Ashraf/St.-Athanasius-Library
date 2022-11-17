@@ -30,7 +30,7 @@ export class BlocksModel {
       connection.release()
       return block
     } catch (error) {
-      throw new Error(`Unable to create ${bl.block_number} error: ${error}`)
+      throw new Error(`Unable to create ${bl.block_number}, ${(error as Error).message}`)
     }
   }
 
@@ -43,7 +43,7 @@ export class BlocksModel {
       connection.release()
       return block
     } catch (error) {
-      throw new Error(`Unable to get blocks error: ${error}`)
+      throw new Error(`Unable to get blocks, ${(error as Error).message}`)
     }
   }
 
@@ -56,7 +56,7 @@ export class BlocksModel {
       connection.release()
       return block
     } catch (error) {
-      throw new Error(`Unable to get block ${id} error: ${error}`)
+      throw new Error(`Unable to get block ${id}, ${(error as Error).message}`)
     }
   }
 
@@ -74,7 +74,7 @@ export class BlocksModel {
       connection.release()
       return block
     } catch (error) {
-      throw new Error(`Unable to update ${bl.id} error: ${error}`)
+      throw new Error(`Unable to update ${bl.id}, ${(error as Error).message}`)
     }
   }
 
@@ -86,7 +86,7 @@ export class BlocksModel {
       connection.release()
       return result.rows[0]
     } catch (error) {
-      throw new Error(`Unable to delete user ${id} error: ${error}`)
+      throw new Error(`Unable to delete user ${id}, ${(error as Error).message}`)
     }
   }
 }

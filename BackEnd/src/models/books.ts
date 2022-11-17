@@ -49,7 +49,7 @@ export class BooksModel {
       connection.release()
       return book
     } catch (error) {
-      throw new Error(`Unable to create ${b.book_name} error: ${error}`)
+      throw new Error(`Unable to create ${b.book_name}, ${(error as Error).message}`)
     }
   }
 
@@ -62,7 +62,7 @@ export class BooksModel {
       connection.release()
       return book
     } catch (error) {
-      throw new Error(`Unable to get books error: ${error}`)
+      throw new Error(`Unable to get books, ${(error as Error).message}`)
     }
   }
 
@@ -75,7 +75,7 @@ export class BooksModel {
       connection.release()
       return book
     } catch (error) {
-      throw new Error(`Unable to get book ${id} error: ${error}`)
+      throw new Error(`Unable to get book ${id}, ${(error as Error).message}`)
     }
   }
 
@@ -88,7 +88,7 @@ export class BooksModel {
       connection.release()
       return book
     } catch (error) {
-      throw new Error(`Unable to get book ${book_name} error: ${error}`)
+      throw new Error(`Unable to get book ${book_name}, ${(error as Error).message}`)
     }
   }
 
@@ -115,7 +115,7 @@ export class BooksModel {
       connection.release()
       return book
     } catch (error) {
-      throw new Error(`Unable to update ${b.id} error: ${error}`)
+      throw new Error(`Unable to update ${b.id}, ${(error as Error).message}`)
     }
   }
 
@@ -127,7 +127,7 @@ export class BooksModel {
       connection.release()
       return result.rows[0]
     } catch (error) {
-      throw new Error(`Unable to delete user ${id} error: ${error}`)
+      throw new Error(`Unable to delete user ${id}, ${(error as Error).message}`)
     }
   }
 }

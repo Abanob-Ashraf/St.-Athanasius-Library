@@ -32,7 +32,7 @@ export class ShelfsModel {
       connection.release()
       return shelf
     } catch (error) {
-      throw new Error(`Unable to create ${sh.shelf_number} error: ${error}`)
+      throw new Error(`Unable to create ${sh.shelf_number}, ${(error as Error).message}`)
     }
   }
 
@@ -45,7 +45,7 @@ export class ShelfsModel {
       connection.release()
       return shelf
     } catch (error) {
-      throw new Error(`Unable to get shelfs error: ${error}`)
+      throw new Error(`Unable to get shelfs, ${(error as Error).message}`)
     }
   }
 
@@ -58,7 +58,7 @@ export class ShelfsModel {
       connection.release()
       return shelf
     } catch (error) {
-      throw new Error(`Unable to get shelf ${id} error: ${error}`)
+      throw new Error(`Unable to get shelf ${id}, ${(error as Error).message}`)
     }
   }
 
@@ -77,7 +77,7 @@ export class ShelfsModel {
       connection.release()
       return shelf
     } catch (error) {
-      throw new Error(`Unable to update ${sh.id} error: ${error}`)
+      throw new Error(`Unable to update ${sh.id}, ${(error as Error).message}`)
     }
   }
 
@@ -89,7 +89,7 @@ export class ShelfsModel {
       connection.release()
       return result.rows[0]
     } catch (error) {
-      throw new Error(`Unable to delete user ${id} error: ${error}`)
+      throw new Error(`Unable to delete user ${id}, ${(error as Error).message}`)
     }
   }
 }
