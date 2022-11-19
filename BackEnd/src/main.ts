@@ -5,10 +5,7 @@ import rateLimit from 'express-rate-limit'
 import errorMiddleware from './middlewares/error'
 import * as dotenv from 'dotenv'
 
-import usersRoutes from './routers/users'
-import blocksRoutes from './routers/blocks'
-import shelfsRoutes from './routers/shelfs'
-import booksRoutes from './routers/books'
+import routes from './routes/main'
 
 dotenv.config()
 
@@ -47,10 +44,7 @@ app.get('/', (_req: Request, res: Response) => {
 // error handler middleware
 app.use(errorMiddleware)
 
-app.use(usersRoutes)
-app.use(blocksRoutes)
-app.use(shelfsRoutes)
-app.use(booksRoutes)
+app.use('/library', routes)
 
 app.use((_: Request, res: Response) => {
   res.status(404).json({
