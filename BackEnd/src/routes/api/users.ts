@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { authorize } from '../../middlewares/authantication'
+import authorize from '../../middlewares/authantication'
 import {
   createUser,
   updateUser,

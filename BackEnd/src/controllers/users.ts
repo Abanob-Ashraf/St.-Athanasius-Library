@@ -91,8 +91,16 @@ export const deleteUser = async (req: Request, res: Response, next: NextFunction
 }
 
 export const authenticateUser = async (req: Request, res: Response, next: NextFunction) => {
+  const { email, password } = req.body
+  if (!email || !password) {
+    return res.status(401).json({
+      status: 'error',
+      message: 'missing or malformed parameters. email, password required'
+    })
+  }
+
   try {
-    const user = await library.authenticate(req.body.email, req.body.password)
+    const user = await library.authenticate(email, password)
     const token = jwt.sign({ user }, process.env.TOKEN_SECRET as unknown as string)
     if (!user) {
       return res.status(401).json({

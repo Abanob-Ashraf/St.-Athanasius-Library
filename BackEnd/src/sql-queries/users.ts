@@ -14,4 +14,5 @@ export const deleteUser = 'DELETE FROM users WHERE id=($1) RETURNING id, first_n
 
 export const authenticateQ = 'SELECT password FROM users WHERE email=($1)'
 
-export const authenticateQ2 = 'SELECT id, first_name, last_name, email FROM users WHERE email=($1)'
+export const authenticateQ2 =
+  'SELECT id, first_name, last_name, email, admin_flag FROM users WHERE email=($1)'
