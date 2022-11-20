@@ -1,11 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
-interface Error {
-  status?: number
-  name?: string
-  message?: string
-  stack?: string
-}
+import { Error } from './error'
 
 const handleUnauthorizedError = (next: NextFunction) => {
   const error: Error = new Error('Login Error, Please login again')

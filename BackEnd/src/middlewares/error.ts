@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Response, Request, NextFunction } from 'express'
 
-interface Error {
+export interface Error {
   status?: number
   name?: string
   message?: string
