@@ -5,4 +5,3 @@ CREATE TABLE blocks (
     created_date TIMESTAMP NOT NULL,
     updated_date TIMESTAMP NOT NULL
 );
-

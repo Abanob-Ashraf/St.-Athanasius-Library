@@ -15,4 +15,3 @@ CREATE TABLE books (
     created_date TIMESTAMP NOT NULL,
     updated_date TIMESTAMP NOT NULL
 );
-
