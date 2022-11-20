@@ -16,8 +16,8 @@ routes.route('/').get(authorize, getAllShelfs)
 
 routes.route('/:id').get(authorize, getShelf)
 
-routes.route('/:id').get(authorize, updateShelf)
+routes.route('/:id').put(authorize, updateShelf)
 
-routes.route('/:id').get(authorize, deleteShelf)
+routes.route('/:id').delete(authorize, deleteShelf)
 
 export default routes

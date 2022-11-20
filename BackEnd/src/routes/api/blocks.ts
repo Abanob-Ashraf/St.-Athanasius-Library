@@ -16,8 +16,8 @@ routes.route('/').get(authorize, getAllBlocks)
 
 routes.route('/:id').get(authorize, getBlock)
 
-routes.route('/:id').get(authorize, updateBlock)
+routes.route('/:id').put(authorize, updateBlock)
 
-routes.route('/:id').get(authorize, deleteBlock)
+routes.route('/:id').delete(authorize, deleteBlock)
 
 export default routes

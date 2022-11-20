@@ -19,8 +19,8 @@ routes.route('/name').get(authorize, getBookByName)
 
 routes.route('/:id').get(authorize, getBookById)
 
-routes.route('/:id').get(authorize, updateBook)
+routes.route('/:id').put(authorize, updateBook)
 
-routes.route('/:id').get(authorize, deleteBook)
+routes.route('/:id').delete(authorize, deleteBook)
 
 export default routes

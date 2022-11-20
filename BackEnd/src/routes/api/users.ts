@@ -1,17 +1,26 @@
 import { Router } from 'express'
 import { authorize } from '../../middlewares/authantication'
-import { getMany, getOne, createUser, updateUser, deleteUser } from '../../controllers/users'
+import {
+  createUser,
+  updateUser,
+  deleteUser,
+  authenticateUser,
+  getManyUsers,
+  getOneUser
+} from '../../controllers/users'
 
 const routes = Router()
 
 routes.route('/').post(createUser)
 
-routes.route('/').get(authorize, getMany)
+routes.route('/authenticate').get(authenticateUser)
 
-routes.route('/:id').get(authorize, getOne)
+routes.route('/').get(authorize, getManyUsers)
 
-routes.route('/:id').get(authorize, updateUser)
+routes.route('/:id').get(authorize, getOneUser)
 
-routes.route('/:id').get(authorize, deleteUser)
+routes.route('/:id').put(authorize, updateUser)
+
+routes.route('/:id').delete(authorize, deleteUser)
 
 export default routes

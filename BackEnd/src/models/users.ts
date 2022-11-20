@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt'
 import Client from '../database'
 import {
+  authenticateQ,
+  authenticateQ2,
   createUser,
   deleteUser,
   getAllUsers,
@@ -48,7 +50,7 @@ export class UsersModel {
   }
 
   //getAllUsers
-  async getMany(): Promise<User[]> {
+  async getManyUsers(): Promise<User[]> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(getAllUsers)
@@ -61,7 +63,7 @@ export class UsersModel {
   }
 
   //getUser
-  async getOne(id: number): Promise<User[]> {
+  async getOneUser(id: number): Promise<User[]> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(getSingleUserById, [id])
@@ -106,6 +108,26 @@ export class UsersModel {
       return result.rows[0]
     } catch (error) {
       throw new Error(`Unable to delete user ${id} ${(error as Error).message}`)
+    }
+  }
+
+  //authenticateUser
+  async authenticate(email: string, password: string): Promise<User | null> {
+    try {
+      const connection = await Client.connect()
+      const result = await connection.query(authenticateQ, [email])
+      if (result.rows.length) {
+        const { password: hashPassword } = result.rows[0]
+        const isPasswordValid = bcrypt.compareSync(password + pepper, hashPassword)
+        if (isPasswordValid) {
+          const userInfo = await connection.query(authenticateQ2, [email])
+          return userInfo.rows[0]
+        }
+      }
+      connection.release()
+      return null
+    } catch (error) {
+      throw new Error(`Unable to login: ${(error as Error).message}`)
     }
   }
 }

@@ -18,11 +18,9 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
     }
 
     const newUser = await library.create(user)
-    const token = jwt.sign(newUser, process.env.TOKEN_SECRET as string)
     res.json({
       status: 'success',
       data: { ...newUser },
-      token,
       message: 'User created successfully'
     })
   } catch (error) {
@@ -30,9 +28,9 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
   }
 }
 
-export const getMany = async (_req: Request, res: Response, next: NextFunction) => {
+export const getManyUsers = async (_req: Request, res: Response, next: NextFunction) => {
   try {
-    const users = await library.getMany()
+    const users = await library.getManyUsers()
     res.json({
       status: 'success',
       data: users,
@@ -43,9 +41,9 @@ export const getMany = async (_req: Request, res: Response, next: NextFunction) 
   }
 }
 
-export const getOne = async (req: Request, res: Response, next: NextFunction) => {
+export const getOneUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = await library.getOne(+req.params.id)
+    const user = await library.getOneUser(+req.params.id)
     res.json({
       status: 'success',
       data: user,
@@ -69,7 +67,6 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
     }
 
     const updated = await library.update(user)
-    // const token = jwt.sign(updated, process.env.TOKEN_SECRET as string)
     res.json({
       status: 'success',
       data: updated,
@@ -90,5 +87,25 @@ export const deleteUser = async (req: Request, res: Response, next: NextFunction
     })
   } catch (error) {
     next(error)
+  }
+}
+
+export const authenticateUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = await library.authenticate(req.body.email, req.body.password)
+    const token = jwt.sign({ user }, process.env.TOKEN_SECRET as unknown as string)
+    if (!user) {
+      return res.status(401).json({
+        status: 'error',
+        message: 'the username and password do not match please try again'
+      })
+    }
+    return res.json({
+      status: 'success',
+      data: { ...user, token },
+      message: 'user authenticated successfully'
+    })
+  } catch (err) {
+    return next(err)
   }
 }
