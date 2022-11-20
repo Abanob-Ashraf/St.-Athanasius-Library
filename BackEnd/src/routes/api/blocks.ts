@@ -12,7 +12,7 @@ const routes = Router()
 
 routes.route('/').post(authorize, createBlock)
 
-routes.get('/', authorize, getAllBlocks)
+routes.route('/').get(authorize, getAllBlocks)
 
 routes.route('/:id').get(authorize, getBlock)
 
