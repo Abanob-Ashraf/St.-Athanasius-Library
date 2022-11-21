@@ -16,10 +16,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900;1000&display=swap" rel="stylesheet">
     <!-- Title Icon -->
     <link rel="icon" href="./IMGS/LOGO/Logo.png">
-    <title>ST:Athanasius's Library | Login</title>
+    <title>ST:Athanasius's Library | Sign-up</title>
 </head>
 <body>
-
     <div class="container-con">
         <div class="header">
             <div class="container">
@@ -32,24 +31,37 @@
                 <form action="#" class="sign-up-form">
                     <h2 class="title">انشاء حساب</h2>
                     <div class="input-field">
-                        <div class="input-field-duble">
-                            <i class="fas fa-user"></i>
-                            <input type="text" placeholder="الاسم الاول" />
-                            <input type="text" placeholder="الاسم الاخير" />
-                        </div>
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="الاسم الاول" required name="First-name" id="first-name"/>
+                        <i class="fas fa-check-circle check"></i>
+                        <i class="fas fa-exclamation-circle exclamation"></i>
+                    </div>
+                    <small>يرجي كتابه الاسم بدون ارقام او علامات ترمزيه و ان لاتزيد عدد الاحرف عن 10 او اقل من 3</small>
+                    <div class="input-field">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <input type="text" placeholder="الاسم الاخير" name="Last-name" id="last-name"/>
+                        <i class="fas fa-check-circle check"></i>
+                        <i class="fas fa-exclamation-circle exclamation"></i>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" placeholder="البريد الالكتروني" />
+                        <input type="email" placeholder="البريد الالكتروني" required name="Email" id="email"/>
+                        <i class="fas fa-check-circle check"></i>
+                        <i class="fas fa-exclamation-circle exclamation"></i>
                     </div>
+                    <small>يرجي كتابه الحساب الالكتروني الصحيح</small>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="كلمه المرور" />
+                        <input type="password" placeholder="كلمه المرور" required name="Password" id="password"/>
+                        <i class="fas fa-check-circle check"></i>
+                        <i class="fas fa-exclamation-circle exclamation"></i>
                     </div>
-                    <input type="submit" value="التاكيد" class="btn solid" />
+                    <small>يرجي كتابه كلمه المرور بدون علامات ترمزيه و ان لاتزيد عدد (الاحرف \الارقام) عن 14 او اقل من 8</small>
+                    <input type="submit" value="انشاء" class="btn solid" />
                 </form>
             </div>
         </div>
     </div>
+    <script src="./js/sign_up.js"></script>
 </body>
 </html>

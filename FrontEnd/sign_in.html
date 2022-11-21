@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900;1000&display=swap" rel="stylesheet">
     <!-- Title Icon -->
     <link rel="icon" href="./IMGS/LOGO/Logo.png">
-    <title>ST:Athanasius's Library | Login</title>
+    <title>ST:Athanasius's Library | Sign-in</title>
 </head>
 <body>
     <div class="container-con">
@@ -32,19 +32,26 @@
                     <h2 class="title">تسجيل الدخول</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="اسم المستخدم" />
+                        <input type="text" placeholder="اسم المستخدم" required name="User-name" id="user"/>
+                        <i class="fas fa-check-circle check"></i>
+                        <i class="fas fa-exclamation-circle exclamation"></i>
                     </div>
+                    <small></small>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="كلمه المرور" />
+                        <input type="password" placeholder="كلمه المرور" name="Password" id="password"/>
+                        <i class="fas fa-check-circle check"></i>
+                        <i class="fas fa-exclamation-circle exclamation"></i>
                     </div>
+                    <small></small>
                     <div class="submit">
-                        <input type="submit" value="تسجيل الدخول" class="btn solid" />
+                        <input type="submit" value="تسجيل الدخول" class="btn solid" required/>
                         <input type="submit" class="btn" value="انشاء حساب" />
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script src="./js/sign_in.js"></script>
 </body>
 </html>

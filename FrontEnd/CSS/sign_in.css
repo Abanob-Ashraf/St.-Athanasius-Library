@@ -61,6 +61,7 @@ body{
 .header{
     position: absolute;
 }
+
 .header .container{
     display: flex;
     align-items: center;
@@ -127,6 +128,41 @@ form {
     display: flex;
     justify-content: space-between;
 }
+
+.input-field.success input{
+    border-color: #2ecc71;
+    border-width: 2px;
+}
+
+.input-field.success i{
+    border-color: #2ecc71;
+    color: #2ecc71;
+    border-width: 2px;
+}
+
+.input-field.success .check{
+    visibility: visible;
+}
+
+.input-field.error input{
+    border-color: #e74c3c;
+    border-width: 2px;
+}
+
+.input-field.error + small{
+    display: block;
+}
+
+.input-field.error .exclamation{
+    visibility: visible;
+}
+
+.input-field.error i{
+    border-color: #e74c3c;
+    color: #e74c3c;
+    border-width: 2px;
+}
+
 .input-field i{
     width: 15%;
     display: flex;
@@ -144,6 +180,7 @@ form {
     -ms-border-radius: 0px 10px 10px 0px;
     -o-border-radius: 0px 10px 10px 0px;
 }
+
 .input-field input{
     width: 85%;
     outline: none;
@@ -156,42 +193,31 @@ form {
     -o-border-radius: 10px 0px 0px 10px;
 }
 
-.input-field .input-field-duble{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-}
-
-.input-field .input-field-duble i{
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    top: -15px;
-    right: 15px;
-    border: 1px solid #acacac;
-    background-color: white;
-}
-
-.input-field .input-field-duble input{
-    height: 100%;
-    width: calc((100% - 20px) / 2);
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-}
 
 .input-field input::placeholder {
     color: #aaa;
     font-weight: 500;
+}
+
+.input-field .check,
+.input-field .exclamation{
+    position: absolute;
+    padding: 0;
+    border: 0;
+    left: 1%;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    visibility: hidden;
+}
+
+small{
+    font-weight: 700;
+    color: #e74c3c;
+    display: none;
 }
 
 .submit{
