@@ -1,0 +1,226 @@
+/* Global Rules */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+body{
+    direction: rtl;
+}
+.container{
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Small Screen */
+@media (min-width:576px){
+    .container{
+        width: 540px;
+    }
+}
+
+/* Small Screen */
+@media (min-width:576px){
+    .container{
+        width: 540px;
+    }
+}
+
+/* Medium Screen */
+@media (min-width:768px){
+    .container{
+        width: 720px;
+    }
+}
+
+/* Larg Screen */
+@media (min-width:992px){
+    .container{
+        width: 960px;
+    }
+}
+
+/* XLarg Screen */
+@media (min-width:1200px){
+    .container{
+        width: 1140px;
+    }
+}
+
+/* XXLarg Screen */
+@media (min-width:1400px){
+    .container{
+        width: 1320px;
+    }
+}
+/* End Global Rules */
+/* Header */
+.header{
+    position: absolute;
+}
+.header .container{
+    display: flex;
+    align-items: center;
+}
+/* End Header */
+.container-con{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.container-con:before {
+    content: "";
+    position: absolute;
+    height: 2000px;
+    width: 2000px;
+    top: -10%;
+    right: 48%;
+    transform: translateY(-50%);
+    background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
+    transition: 1.8s ease-in-out;
+    border-radius: 50%;
+    z-index: 6;
+}  
+
+.forms-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.signin {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 75%;
+    width: 50%;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0px 80px;
+}
+
+.title {
+    font-size: 35.2px;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.input-field{
+    max-width: 380px;
+    width: 100%;
+    margin: 10px 0;
+    height: 50px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+.input-field i{
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0%;
+    border-top: 1px solid #acacac;
+    border-right: 1px solid #acacac;
+    border-bottom: 1px solid #acacac;
+    border-left: none;
+    color: #acacac;
+    border-radius: 0px 10px 10px 0px;
+    -webkit-border-radius: 0px 10px 10px 0px;
+    -moz-border-radius: 0px 10px 10px 0px;
+    -ms-border-radius: 0px 10px 10px 0px;
+    -o-border-radius: 0px 10px 10px 0px;
+}
+.input-field input{
+    width: 85%;
+    outline: none;
+    padding: 10px;
+    border: 1px solid #acacac;
+    border-radius: 10px 0px 0px 10px;
+    -webkit-border-radius: 10px 0px 0px 10px;
+    -moz-border-radius: 10px 0px 0px 10px;
+    -ms-border-radius: 10px 0px 0px 10px;
+    -o-border-radius: 10px 0px 0px 10px;
+}
+
+.input-field .input-field-duble{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.input-field .input-field-duble i{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    top: -15px;
+    right: 15px;
+    border: 1px solid #acacac;
+    background-color: white;
+}
+
+.input-field .input-field-duble input{
+    height: 100%;
+    width: calc((100% - 20px) / 2);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.input-field input::placeholder {
+    color: #aaa;
+    font-weight: 500;
+}
+
+.submit{
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit input:not(:last-child){
+    margin-left: 20px;
+}
+
+.btn {
+    width: 150px;
+    background-color: #5995fd;
+    border: none;
+    outline: none;
+    height: 50px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    color: white;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.btn:hover {
+    background-color: #4d84e2;
+}
