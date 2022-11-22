@@ -57,7 +57,7 @@ body{
     }
 }
 /* End Global Rules */
-/* Header */
+
 .header{
     position: absolute;
 }
@@ -66,7 +66,7 @@ body{
     display: flex;
     align-items: center;
 }
-/* End Header */
+
 .container-con{
     position: relative;
     width: 100%;
@@ -245,6 +245,11 @@ small{
     margin: 10px 0;
     cursor: pointer;
     transition: 0.5s;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
 }
 
 .btn:hover {
