@@ -6,7 +6,8 @@ import {
   deleteUser,
   authenticateUser,
   getManyUsers,
-  getOneUser
+  getOneUser,
+  getAllDeletedUsers
 } from '../../controllers/users'
 
 const routes = Router()
@@ -14,6 +15,8 @@ const routes = Router()
 routes.route('/').post(createUser)
 
 routes.route('/authenticate').get(authenticateUser)
+
+routes.route('/deleted').get(authorize, getAllDeletedUsers)
 
 routes.route('/').get(authorize, getManyUsers)
 

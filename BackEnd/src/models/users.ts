@@ -7,6 +7,7 @@ import {
   createUser,
   deleteUser,
   dropFkey,
+  getAllDeletedUsers,
   getAllUsers,
   getSingleUserById,
   insertuserDataToDeletedUser,
@@ -136,6 +137,19 @@ export class UsersModel {
       return null
     } catch (error) {
       throw new Error(`Unable to login: ${(error as Error).message}`)
+    }
+  }
+
+  //getAllDeletedUsers
+  async getAllDeletedUsers(): Promise<User[]> {
+    try {
+      const connection = await Client.connect()
+      const result = await connection.query(getAllDeletedUsers)
+      const user = result.rows
+      connection.release()
+      return user
+    } catch (error) {
+      throw new Error(`Unable to get  deleted users ${(error as Error).message}`)
     }
   }
 }

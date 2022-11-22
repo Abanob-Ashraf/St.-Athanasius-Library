@@ -34,3 +34,7 @@ export const authenticateQ = 'SELECT password FROM users WHERE email=($1)'
 
 export const authenticateQ2 =
   'SELECT id, first_name, last_name, email, admin_flag FROM users WHERE email=($1)'
+
+//getAll Deleted Users
+export const getAllDeletedUsers =
+  'SELECT id, first_name, last_name, email, admin_flag, created_date, updated_date FROM deleted_users'
