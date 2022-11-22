@@ -1,12 +1,15 @@
 import bcrypt from 'bcrypt'
 import Client from '../database'
 import {
+  addFkey,
   authenticateQ,
   authenticateQ2,
   createUser,
   deleteUser,
+  dropFkey,
   getAllUsers,
   getSingleUserById,
+  updateBookAfterDeleteUser,
   updateUser
 } from '../sql-queries/users'
 
@@ -103,7 +106,10 @@ export class UsersModel {
   async delete(id: number): Promise<User> {
     try {
       const connection = await Client.connect()
+      await connection.query(dropFkey)
       const result = await connection.query(deleteUser, [id])
+      await connection.query(updateBookAfterDeleteUser, [id])
+      await connection.query(addFkey)
       connection.release()
       return result.rows[0]
     } catch (error) {
