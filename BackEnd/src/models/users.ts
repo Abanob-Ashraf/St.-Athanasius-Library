@@ -1,12 +1,10 @@
 import bcrypt from 'bcrypt'
 import Client from '../database'
 import {
-  ADDFKEYCURRENTUSER,
   AUTHANTICATE,
   AUTHANTICATE2,
   CREATEUSER,
   DELETEUSER,
-  DROPFKEY,
   GETALLDELETEDUSERS,
   GETMANYUSERS,
   GETONEUSER,
@@ -50,9 +48,7 @@ export class UsersModel {
       connection.release()
       return user
     } catch (error) {
-      throw new Error(
-        `Unable to create (${u.first_name + ' ' + u.last_name}): ${(error as Error).message}`
-      )
+      throw new Error(`Unable to create ${u.first_name + ' ' + u.last_name} error: ${error}`)
     }
   }
 
@@ -73,10 +69,15 @@ export class UsersModel {
   async getOneUser(id: number): Promise<User[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(GETONEUSER, [id])
-      const user = { ...result.rows[0] }
+      const test = await connection.query(GETONEUSER, [id])
+      if (test.rows.length) {
+        const result = await connection.query(GETONEUSER, [id])
+        const user = { ...result.rows[0] }
+        connection.release()
+        return user
+      }
       connection.release()
-      return user
+      return test.rows[0]
     } catch (error) {
       throw new Error(`Unable to get user ${id}, ${(error as Error).message}`)
     }
@@ -86,20 +87,25 @@ export class UsersModel {
   async update(u: User): Promise<User> {
     try {
       const connection = await Client.connect()
-      const hashing = bcrypt.hashSync(u.password + pepper, parseInt(saltRounds as string))
-      const result = await connection.query(UPDATEUSER, [
-        u.id,
-        u.first_name,
-        u.last_name,
-        u.email,
-        hashing,
-        u.admin_flag,
-        u.user_status,
-        u.updated_date
-      ])
-      const user = result.rows[0]
+      const test = await connection.query(GETONEUSER, [u.id])
+      if (test.rows.length) {
+        const hashing = bcrypt.hashSync(u.password + pepper, parseInt(saltRounds as string))
+        const result = await connection.query(UPDATEUSER, [
+          u.id,
+          u.first_name,
+          u.last_name,
+          u.email,
+          hashing,
+          u.admin_flag,
+          u.user_status,
+          u.updated_date
+        ])
+        const user = result.rows[0]
+        connection.release()
+        return user
+      }
       connection.release()
-      return user
+      return test.rows[0]
     } catch (error) {
       throw new Error(
         `Unable to update ${u.first_name + ' ' + u.last_name}, ${(error as Error).message}`
@@ -111,21 +117,23 @@ export class UsersModel {
   async delete(id: number, user_status: string, updated_date: Date): Promise<User | null> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(SELECTSTATUS, [id])
-      if (result.rows.length) {
+      const test = await connection.query(GETONEUSER, [id])
+      if (test.rows.length) {
+        const result = await connection.query(SELECTSTATUS, [id])
         const { user_status: status } = result.rows[0]
         const isStatusAVILABLE = status
         if (isStatusAVILABLE == 'AVILABLE') {
-          await connection.query(DROPFKEY)
           const deleteUser = await connection.query(DELETEUSER, [id, user_status, updated_date])
           await connection.query(UPDATEBOOKAFTERDELETEUSER, [id])
-          await connection.query(ADDFKEYCURRENTUSER)
           connection.release()
           return deleteUser.rows[0]
+        } else {
+          connection.release()
+          return null
         }
       }
       connection.release()
-      return null
+      return test.rows[0]
     } catch (error) {
       throw new Error(`Unable to delete user ${id} ${(error as Error).message}`)
     }

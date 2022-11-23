@@ -17,16 +17,11 @@ export const UPDATEUSER =
 //Delete User
 export const SELECTSTATUS = 'SELECT user_status FROM users WHERE id=($1)'
 
-export const DROPFKEY = 'ALTER TABLE Books DROP CONSTRAINT books_user_id_fkey'
-
 export const DELETEUSER =
   'UPDATE users SET user_status=($2), updated_date=($3) WHERE id=($1) RETURNING *'
 
 export const UPDATEBOOKAFTERDELETEUSER =
   'UPDATE books SET user_id=NULL, old_user=($1) WHERE user_id=($1)'
-
-export const ADDFKEYCURRENTUSER =
-  'ALTER TABLE Books ADD CONSTRAINT books_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id)'
 
 //Sign in
 export const AUTHANTICATE = 'SELECT password FROM users WHERE email=($1)'

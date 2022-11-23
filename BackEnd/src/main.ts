@@ -2,7 +2,6 @@ import express, { Application, Request, Response } from 'express'
 import morgan from 'morgan'
 import helmet from 'helmet'
 import rateLimit from 'express-rate-limit'
-import errorMiddleware from './middlewares/error'
 import * as dotenv from 'dotenv'
 
 import routes from './routes/main'
@@ -41,15 +40,10 @@ app.get('/', (_req: Request, res: Response) => {
   })
 })
 
-// error handler middleware
-app.use(errorMiddleware)
-
 app.use('/library', routes)
 
 app.use((_: Request, res: Response) => {
-  res.status(404).json({
-    message: 'Ohh you are lost, read the API documentation to find your way back home 😂'
-  })
+  res.status(404).end('Ohh you are lost, read the API documentation to find your way back home 😂')
 })
 
 // start express server
