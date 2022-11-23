@@ -69,15 +69,14 @@ export class UsersModel {
   async getOneUser(id: number): Promise<User[]> {
     try {
       const connection = await Client.connect()
-      const test = await connection.query(GETONEUSER, [id])
-      if (test.rows.length) {
-        const result = await connection.query(GETONEUSER, [id])
+      const result = await connection.query(GETONEUSER, [id])
+      if (result.rows.length) {
         const user = { ...result.rows[0] }
         connection.release()
         return user
       }
       connection.release()
-      return test.rows[0]
+      return result.rows[0]
     } catch (error) {
       throw new Error(`Unable to get user ${id}, ${(error as Error).message}`)
     }
