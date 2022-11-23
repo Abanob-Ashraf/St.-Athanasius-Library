@@ -1,28 +1,77 @@
 let form = document.forms[0];
-let user = document.getElementById("user");
-let paassword = document.getElementById("password");
-let inputField = document.querySelectorAll(".sign-in-form .input-field");
-let one = document.querySelector(".one");
-let two = document.querySelector(".two");
-let go = document.querySelector(".create");
+let inputFiled = document.querySelectorAll(".input-field");
+let content = document.querySelectorAll("small");
+let userName = document.getElementsByName("userName")[0];
+let password = document.getElementsByName("password")[0];
 
-document.addEventListener("click",()=>{
-    inputField.forEach((e)=>{
-        e.classList.remove("success","error")
-    })
-})
+// Rander The Validtion On Page
+document.addEventListener("click",() => {
+    inputFiled.forEach((e) => {
+        e.classList.remove("success","error");
+    });
+});
 
-form.addEventListener("submit",(e)=>{
-    e.preventDefault()
-    let userValue = user.value.trim()
-    let passwordValue = paassword.value.trim()
-    inputField.forEach((e)=>{
-        if (userValue.length >= 3 && userValue.length <= 10 && passwordValue.length >= 8 && passwordValue.length <= 14){
-            e.classList.add("success")
-        }else{
-            e.classList.add("error")
-            one.textContent = `يرجي كتابه الاسم بدون ارقام او علامات ترمزيه و ان لاتزيد عدد الاحرف عن 10 او اقل من 3`
-            two.textContent = `يرجي كتابه كلمه المرور بدون علامات ترمزيه و ان لاتزيد عدد (الاحرف - الارقام) عن 14 او اقل من 8`
+// Submit Form
+form.addEventListener('submit', (e) => {
+    validateForm();
+    console.log(isFormValid());
+    if(isFormValid () == true){
+        form.submit();
+    }else {
+        e.preventDefault();
+    }
+
+});
+
+// Test Validton
+function isFormValid(){
+    let inputFiled = document.querySelectorAll(".input-field");
+    let result = true;
+    inputFiled.forEach((e)=>{
+        if(e.classList.contains('error')){
+            result = false;
         }
-    })
-})
+    });
+    return result;
+}
+
+// Validate Oprators
+function validateForm() {
+    let userNameValue = userName.value.trim();
+    let passwordValue = password.value.trim();
+
+    // userName Validtion
+    if(userNameValue === ''){
+        setError(userName);
+    }else if(userNameValue.length < 3 || userNameValue.length > 10){
+        setError(userName);
+    }else {
+        setSuccess(userName);
+    }
+    // password Validtion
+    if(passwordValue === ''){
+        setError(password);
+    }else if(passwordValue.length < 8 || passwordValue.length > 14){
+        setError(password);
+    }else {
+        setSuccess(password);
+    }
+}
+
+// Set Error Validate
+function setError(eValue) {
+    let parentOfElement = eValue.parentElement;
+    if(parentOfElement.classList.contains('success')){
+        parentOfElement.classList.remove('success');
+    }
+    parentOfElement.classList.add('error');
+}
+
+// Set Success Validate
+function setSuccess(eValue){
+    let parentOfElement = eValue.parentElement;
+    if(parentOfElement.classList.contains('error')){
+        parentOfElement.classList.remove('error');
+    }
+    parentOfElement.classList.add('success');
+}
