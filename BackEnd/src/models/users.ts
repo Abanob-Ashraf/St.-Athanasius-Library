@@ -1,18 +1,18 @@
 import bcrypt from 'bcrypt'
 import Client from '../database'
 import {
-  addFkeyCurrentUser,
-  authenticateQ,
-  authenticateQ2,
-  createUser,
-  deleteUser,
-  dropFkey,
-  getAllDeletedUsers,
-  getAllUsers,
-  getSingleUserById,
-  insertuserDataToDeletedUser,
-  updateBookAfterDeleteUser,
-  updateUser
+  ADDFKEYCURRENTUSER,
+  AUTHANTICATE,
+  AUTHANTICATE2,
+  CREATEUSER,
+  DELETEUSER,
+  DROPFKEY,
+  GETALLDELETEDUSERS,
+  GETMANYUSERS,
+  GETONEUSER,
+  SELECTSTATUS,
+  UPDATEBOOKAFTERDELETEUSER,
+  UPDATEUSER
 } from '../sql-queries/users'
 
 const saltRounds = process.env.SALT_ROUND
@@ -25,6 +25,7 @@ export type User = {
   email: string
   password: string
   admin_flag: boolean
+  user_status: string
   created_date: Date
   updated_date: Date
 }
@@ -35,12 +36,13 @@ export class UsersModel {
     try {
       const connection = await Client.connect()
       const hashing = bcrypt.hashSync(u.password + pepper, parseInt(saltRounds as string))
-      const result = await connection.query(createUser, [
+      const result = await connection.query(CREATEUSER, [
         u.first_name,
         u.last_name,
         u.email,
         hashing,
         u.admin_flag,
+        u.user_status,
         u.created_date,
         u.updated_date
       ])
@@ -58,7 +60,7 @@ export class UsersModel {
   async getManyUsers(): Promise<User[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(getAllUsers)
+      const result = await connection.query(GETMANYUSERS)
       const user = result.rows
       connection.release()
       return user
@@ -71,7 +73,7 @@ export class UsersModel {
   async getOneUser(id: number): Promise<User[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(getSingleUserById, [id])
+      const result = await connection.query(GETONEUSER, [id])
       const user = { ...result.rows[0] }
       connection.release()
       return user
@@ -85,13 +87,14 @@ export class UsersModel {
     try {
       const connection = await Client.connect()
       const hashing = bcrypt.hashSync(u.password + pepper, parseInt(saltRounds as string))
-      const result = await connection.query(updateUser, [
+      const result = await connection.query(UPDATEUSER, [
         u.id,
         u.first_name,
         u.last_name,
         u.email,
         hashing,
         u.admin_flag,
+        u.user_status,
         u.updated_date
       ])
       const user = result.rows[0]
@@ -105,16 +108,24 @@ export class UsersModel {
   }
 
   //deleteUser
-  async delete(id: number): Promise<User> {
+  async delete(id: number, user_status: string, updated_date: Date): Promise<User | null> {
     try {
       const connection = await Client.connect()
-      await connection.query(insertuserDataToDeletedUser, [id])
-      await connection.query(dropFkey)
-      const result = await connection.query(deleteUser, [id])
-      await connection.query(updateBookAfterDeleteUser, [id])
-      await connection.query(addFkeyCurrentUser)
+      const result = await connection.query(SELECTSTATUS, [id])
+      if (result.rows.length) {
+        const { user_status: status } = result.rows[0]
+        const isStatusAVILABLE = status
+        if (isStatusAVILABLE == 'AVILABLE') {
+          await connection.query(DROPFKEY)
+          const deleteUser = await connection.query(DELETEUSER, [id, user_status, updated_date])
+          await connection.query(UPDATEBOOKAFTERDELETEUSER, [id])
+          await connection.query(ADDFKEYCURRENTUSER)
+          connection.release()
+          return deleteUser.rows[0]
+        }
+      }
       connection.release()
-      return result.rows[0]
+      return null
     } catch (error) {
       throw new Error(`Unable to delete user ${id} ${(error as Error).message}`)
     }
@@ -124,12 +135,12 @@ export class UsersModel {
   async authenticate(email: string, password: string): Promise<User | null> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(authenticateQ, [email])
+      const result = await connection.query(AUTHANTICATE, [email])
       if (result.rows.length) {
         const { password: hashPassword } = result.rows[0]
         const isPasswordValid = bcrypt.compareSync(password + pepper, hashPassword)
         if (isPasswordValid) {
-          const userInfo = await connection.query(authenticateQ2, [email])
+          const userInfo = await connection.query(AUTHANTICATE2, [email])
           return userInfo.rows[0]
         }
       }
@@ -144,7 +155,7 @@ export class UsersModel {
   async getAllDeletedUsers(): Promise<User[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(getAllDeletedUsers)
+      const result = await connection.query(GETALLDELETEDUSERS)
       const user = result.rows
       connection.release()
       return user

@@ -12,6 +12,7 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
       email: req.body.email,
       password: req.body.password,
       admin_flag: req.body.admin_flag,
+      user_status: 'AVILABLE',
       created_date: new Date(),
       updated_date: new Date(),
       id: undefined as unknown as number
@@ -62,6 +63,7 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
       email: req.body.email,
       password: req.body.password,
       admin_flag: req.body.admin_flag,
+      user_status: 'AVILABLE',
       created_date: new Date(),
       updated_date: new Date()
     }
@@ -79,12 +81,20 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
 
 export const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const deletedUser = await library.delete(+req.params.id)
-    res.json({
-      status: 'success',
-      data: deletedUser,
-      message: 'User deleted successfully'
-    })
+    const deletedUser = await library.delete(+req.params.id, 'NOT AVILABLE', new Date())
+    if (deletedUser == null) {
+      return res.json({
+        status: 'success',
+        data: deletedUser,
+        message: 'User already deleted before'
+      })
+    } else {
+      return res.json({
+        status: 'success',
+        data: deletedUser,
+        message: 'User deleted successfully'
+      })
+    }
   } catch (error) {
     next(error)
   }
