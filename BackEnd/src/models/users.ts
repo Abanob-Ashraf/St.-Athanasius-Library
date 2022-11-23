@@ -160,7 +160,7 @@ export class UsersModel {
       connection.release()
       return user
     } catch (error) {
-      throw new Error(`Unable to get  deleted users ${(error as Error).message}`)
+      throw new Error(`Unable to get deleted users ${(error as Error).message}`)
     }
   }
 }

@@ -10,6 +10,7 @@ CREATE TABLE books (
     name_of_series VARCHAR(100),
     conclusion text,
     user_id integer REFERENCES users(id),
+    old_user integer REFERENCES users(id),
     shelf_id integer REFERENCES shelfs(id) NOT NULL,
     book_number_in_shelf integer NOT NULL,
     created_date TIMESTAMP NOT NULL,

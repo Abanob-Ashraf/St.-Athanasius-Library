@@ -22,7 +22,8 @@ export const DROPFKEY = 'ALTER TABLE Books DROP CONSTRAINT books_user_id_fkey'
 export const DELETEUSER =
   'UPDATE users SET user_status=($2), updated_date=($3) WHERE id=($1) RETURNING *'
 
-export const UPDATEBOOKAFTERDELETEUSER = 'UPDATE books SET user_id=NULL WHERE user_id=($1)'
+export const UPDATEBOOKAFTERDELETEUSER =
+  'UPDATE books SET user_id=NULL, old_user=($1) WHERE user_id=($1)'
 
 export const ADDFKEYCURRENTUSER =
   'ALTER TABLE Books ADD CONSTRAINT books_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id)'
@@ -34,5 +35,4 @@ export const AUTHANTICATE2 =
   'SELECT id, first_name, last_name, email, admin_flag FROM users WHERE email=($1)'
 
 //getAll Deleted Users
-export const GETALLDELETEDUSERS =
-  'SELECT id, first_name, last_name, email, admin_flag, created_date, updated_date FROM deleted_users'
+export const GETALLDELETEDUSERS = `SELECT * FROM users WHERE user_status = 'NOT AVILABLE'`
