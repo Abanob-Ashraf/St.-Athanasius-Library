@@ -13,11 +13,11 @@ const routes = Router()
 
 routes.route('/').post(authorize, createBook)
 
-routes.route('/').get(authorize, getAllBooks)
+routes.route('/').get(getAllBooks)
 
-routes.route('/name').get(authorize, getBookByName)
+routes.route('/name').get(getBookByName)
 
-routes.route('/:id').get(authorize, getBookById)
+routes.route('/:id').get(getBookById)
 
 routes.route('/:id').put(authorize, updateBook)
 

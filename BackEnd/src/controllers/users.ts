@@ -117,3 +117,16 @@ export const authenticateUser = async (req: Request, res: Response, next: NextFu
     return next(err)
   }
 }
+
+export const getAllDeletedUsers = async (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    const users = await library.getAllDeletedUsers()
+    res.json({
+      status: 'success',
+      data: users,
+      message: 'Deleted Users retrieved successfully'
+    })
+  } catch (error) {
+    next(error)
+  }
+}
