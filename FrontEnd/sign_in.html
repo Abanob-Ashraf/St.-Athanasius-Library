@@ -10,46 +10,40 @@
     <link rel="stylesheet" href="./css/sign_in.css">
     <!-- Rander Style Sheet -->
     <link rel="stylesheet" href="./css/normalize.css">
-    <!-- Google Fonta -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900;1000&display=swap" rel="stylesheet">
     <!-- Title Icon -->
     <link rel="icon" href="./IMGS/LOGO/Logo.png">
     <title>ST:Athanasius's Library | Sign-in</title>
 </head>
 <body>
-    <div class="container-con">
-        <div class="header">
-            <div class="container">
-                <img src="./IMGS/LOGO/Logo.png" alt="" width="100px">
-                <h3>مكتبه القديس اثناسيوس الرسولي</h3>
-            </div>
+    <div class="header">
+        <div class="container">
+            <img src="./IMGS/LOGO/Logo.png" alt="" width="100px">
+            <h3>مكتبه القديس اثناسيوس الرسولي</h3>
         </div>
-        <div class="forms-container">
-            <div class="signin">
-                <form action="#" class="sign-in-form">
-                    <h2 class="title">تسجيل الدخول</h2>
-                    <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="text" placeholder="اسم المستخدم" required name="User-name" id="user"/>
-                        <i class="fas fa-check-circle check"></i>
-                        <i class="fas fa-exclamation-circle exclamation"></i>
-                    </div>
-                    <small class="one"></small>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="كلمه المرور" name="Password" id="password"/>
-                        <i class="fas fa-check-circle check"></i>
-                        <i class="fas fa-exclamation-circle exclamation"></i>
-                    </div>
-                    <small class="two"></small>
-                    <div class="submit">
-                        <input type="submit" value="تسجيل الدخول" class="btn solid" required/>
-                        <a class="btn" href="./sign_up.html">انشاء حساب</a>
-                    </div>
-                </form>
-            </div>
+    </div>
+    <div class="page-container">
+        <div class="signin-form">
+            <form action="#" class="sign-in-form">
+                <h2 class="title">تسجيل الدخول</h2>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="اسم المستخدم" required name="User-name" id="user"/>
+                    <i class="fas fa-check-circle check"></i>
+                    <i class="fas fa-exclamation-circle exclamation"></i>
+                </div>
+                <small class="one"></small>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="كلمه المرور" name="Password" id="password"/>
+                    <i class="fas fa-check-circle check"></i>
+                    <i class="fas fa-exclamation-circle exclamation"></i>
+                </div>
+                <small class="two"></small>
+                <div class="submit">
+                    <input type="submit" value="تسجيل الدخول" class="btn solid" required/>
+                    <a class="btn" href="./sign_up.html">انشاء حساب</a>
+                </div>
+            </form>
         </div>
     </div>
     <script src="./js/sign_in.js"></script>

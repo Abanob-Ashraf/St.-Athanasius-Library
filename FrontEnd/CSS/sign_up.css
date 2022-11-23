@@ -1,4 +1,7 @@
 /* Global Rules */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900;1000&display=swap');
+
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -14,96 +17,110 @@ body{
     margin-left: auto;
     margin-right: auto;
 }
-
-/* Small Screen */
-@media (min-width:576px){
-    .container{
-        width: 540px;
-    }
-}
-
-/* Small Screen */
-@media (min-width:576px){
-    .container{
-        width: 540px;
-    }
-}
-
-/* Medium Screen */
-@media (min-width:768px){
-    .container{
-        width: 720px;
-    }
-}
-
-/* Larg Screen */
-@media (min-width:992px){
-    .container{
-        width: 960px;
-    }
-}
-
-/* XLarg Screen */
-@media (min-width:1200px){
-    .container{
-        width: 1140px;
-    }
-}
-
-/* XXLarg Screen */
-@media (min-width:1400px){
-    .container{
-        width: 1320px;
-    }
-}
 /* End Global Rules */
+
 /* Header */
 .header{
     position: absolute;
+    width: 100%;
+    z-index: 100;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
+
 .header .container{
+    width: 100%;
     display: flex;
     align-items: center;
 }
+
+@media (max-width: 820px){
+    .header .container{
+        color: #fff;
+        justify-content: center;
+        flex-direction: column;
+    }
+}
 /* End Header */
-.container-con{
+
+/* Page Container */
+.page-container{
     position: relative;
-    width: 100%;
     min-height: 100vh;
+    width: 100%;
     background-color: #fff;
     overflow: hidden;
 }
 
-.container-con:before {
+.page-container:before {
     content: "";
     position: absolute;
     height: 2000px;
     width: 2000px;
-    top: 150%;
-    left: 45%;
-    transform: translateY(-50%);
+    top: 20%;
+    left: 30%;
     background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
     transition: 1.8s ease-in-out;
     border-radius: 50%;
-    z-index: 6;
-}  
-
-.forms-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    transition: 1.8s ease-in-out;
+    -webkit-transition: 1.8s ease-in-out;
+    -moz-transition: 1.8s ease-in-out;
+    -ms-transition: 1.8s ease-in-out;
+    -o-transition: 1.8s ease-in-out;
 }
 
-.signup {
+@media (max-width: 820px){
+    .page-container:before {
+        content: "";
+        position: absolute;
+        height: 2000px;
+        width: 2000px;
+        top: -155%;
+        right: 45%;
+        background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
+        transform: translate(50%,-37%);
+        -webkit-transform: translate(50%,-37%);
+        -moz-transform: translate(50%,-37%);
+        -ms-transform: translate(50%,-37%);
+        -o-transform: translate(50%,-37%);
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+    }
+}
+/* End Page Container */
+
+/* SignUp Form */
+.signup-form{
     position: absolute;
     top: 50%;
-    transform: translate(-50%, -50%);
-    right: 25%;
+    left: 25%;
     width: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
 }
 
+@media (max-width: 820px){
+    .signup-form{
+        left: 50%;
+        transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
+        -moz-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        -o-transform: translate(-50%,-50%);
+        margin-top: 100px;
+    }
+}
+/* Form */
 form {
     display: flex;
     align-items: center;
@@ -112,12 +129,21 @@ form {
     padding: 0px 80px;
 }
 
-.title {
+.title{
     font-size: 35.2px;
     color: #444;
     margin-bottom: 10px;
 }
 
+@media (max-width: 820px){
+    .title{
+        font-size: 26px;
+        width: 350px;
+        text-align: center;
+    }
+}
+
+/* Input Field */
 .input-field{
     max-width: 380px;
     width: 100%;
@@ -128,38 +154,10 @@ form {
     justify-content: space-between;
 }
 
-.input-field.success input{
-    border-color: #2ecc71;
-    border-width: 2px;
-}
-
-.input-field.success i{
-    border-color: #2ecc71;
-    color: #2ecc71;
-    border-width: 2px;
-}
-
-.input-field.success .check{
-    visibility: visible;
-}
-
-.input-field.error input{
-    border-color: #e74c3c;
-    border-width: 2px;
-}
-
-.input-field.error + small{
-    display: block;
-}
-
-.input-field.error .exclamation{
-    visibility: visible;
-}
-
-.input-field.error i{
-    border-color: #e74c3c;
-    color: #e74c3c;
-    border-width: 2px;
+@media (max-width: 820px){
+    .input-field{
+        width: 350px;
+    }
 }
 
 .input-field i{
@@ -179,6 +177,7 @@ form {
     -ms-border-radius: 0px 10px 10px 0px;
     -o-border-radius: 0px 10px 10px 0px;
 }
+
 .input-field input{
     width: 85%;
     outline: none;
@@ -196,6 +195,7 @@ form {
     font-weight: 500;
 }
 
+/* Input Field Validtion */
 .input-field .check,
 .input-field .exclamation{
     position: absolute;
@@ -216,9 +216,55 @@ small{
     color: #e74c3c;
     display: none;
 }
+/* Success Valid */
+.input-field.success input{
+    border-color: #2ecc71;
+    border-width: 2px;
+}
+
+.input-field.success i{
+    border-color: #2ecc71;
+    color: #2ecc71;
+    border-width: 2px;
+}
+
+.input-field.success .check{
+    visibility: visible;
+}
+/* End Success Valid */
+
+/* Error Valid */
+.input-field.error input{
+    border-color: #e74c3c;
+    border-width: 2px;
+}
+
+.input-field.error + small{
+    display: block;
+}
+
+.input-field.error .exclamation{
+    visibility: visible;
+}
+
+.input-field.error i{
+    border-color: #e74c3c;
+    color: #e74c3c;
+    border-width: 2px;
+}
+/* End Error Valid */
+
+/* End Input Field Validtion */
+
+/* End Input Field */
+
+/* Submit Button */
+.submit{
+    display: flex;
+}
 
 .btn {
-    width: 200px;
+    width: 300px;
     background-color: #5995fd;
     border: none;
     outline: none;
@@ -233,8 +279,28 @@ small{
     margin: 10px 0;
     cursor: pointer;
     transition: 0.5s;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
 }
 
 .btn:hover {
     background-color: #4d84e2;
 }
+
+@media (max-width: 820px){
+    .submit{
+        width: 350px;
+        flex-direction: column;
+    }
+    .btn{
+        width: 100%;
+    }
+}
+/* End Submit Button */
+
+/* End Form */
+
+/* End SignUp Form */
