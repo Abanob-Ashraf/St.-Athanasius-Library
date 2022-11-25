@@ -32,13 +32,33 @@ body{
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+.header .container a{
+    display: flex;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+}
+.header i{
+    padding: 20px;
+    color: #d5b94e;
+}
+
+.header i:hover{
+    color: #e74c3c;
 }
 
 @media (max-width: 800px){
     .header .container{
-        color: #fff;
         justify-content: center;
         flex-direction: column;
+    }
+    .header .container a{
+        color: #fff;
+    }
+    .header i{
+        color: #fff;
     }
 }
 /* End Header */
@@ -59,18 +79,12 @@ body{
     width: 2000px;
     top: 20%;
     left: 30%;
-    background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
-    transition: 1.8s ease-in-out;
+    background-image: linear-gradient(-45deg, #d5b94e 0%, #dec465 100%);
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
-    transition: 1.8s ease-in-out;
-    -webkit-transition: 1.8s ease-in-out;
-    -moz-transition: 1.8s ease-in-out;
-    -ms-transition: 1.8s ease-in-out;
-    -o-transition: 1.8s ease-in-out;
 }
 
 @media (max-width: 800px){
@@ -79,19 +93,19 @@ body{
         position: absolute;
         height: 2000px;
         width: 2000px;
-        top: -162%;
-        right: 45%;
-        background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
-        transform: translate(50%,-37%);
-        -webkit-transform: translate(50%,-37%);
-        -moz-transform: translate(50%,-37%);
-        -ms-transform: translate(50%,-37%);
-        -o-transform: translate(50%,-37%);
+        top: -420%;
+        right: 50%;
+        background-image: linear-gradient(-45deg, #d5b94e 0%, #dec465 100%);
         border-radius: 50%;
         -webkit-border-radius: 50%;
         -moz-border-radius: 50%;
         -ms-border-radius: 50%;
         -o-border-radius: 50%;
+        transform: translate(50%,50%);
+        -webkit-transform: translate(50%,50%);
+        -moz-transform: translate(50%,50%);
+        -ms-transform: translate(50%,50%);
+        -o-transform: translate(50%,50%);
     }
 }
 /* End Page Container */
@@ -277,7 +291,7 @@ small{
 
 .btn {
     width: 100%;
-    background-color: #5995fd;
+    background-color: #d5b94e;
     border: none;
     outline: none;
     height: 50px;
@@ -299,7 +313,7 @@ small{
 }
 
 .btn:hover {
-    background-color: #4d84e2;
+    background-color: #d5b94e;
 }
 
 @media (max-width: 1000px){

@@ -47,32 +47,40 @@ function validateForm() {
     // firstName Validtion
     if(firstNameValue == ''){
         setError(firstName);
+        content[0].innerHTML = "الرجاء ادخال الاسم الاول"
     }else if(firstNameValue.length < 3 || firstNameValue.length > 10){
         setError(firstName);
+        content[0].innerHTML = "يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف"
     }else {
         setSuccess(firstName);
     }
     // lastName Validtion
     if(lastNameValue == ''){
         setError(lastName);
+        content[1].innerHTML = "الرجاء ادخال الاسم الاخير"
     }else if(lastNameValue.length < 3 || lastNameValue.length > 10){
         setError(lastName);
+        content[1].innerHTML = "يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف"
     }else {
         setSuccess(lastName);
     }
     // email Validtion
     if(emailValue == ''){
         setError(email);
+        content[2].innerHTML = "الرجاء ادخال البريد الالكتروني"
     }else if(isEmailValid(emailValue)){
         setSuccess(email);
     }else{
         setError(email);
+        content[2].innerHTML = "الرجاء ادخال البريد الالكتروني بالطريقه الصحيحه"
     }
     // password Validtion
     if(passwordValue == ''){
         setError(password);
+        content[3].innerHTML = "الرجاء ادخال كلمه المرور"
     }else if(passwordValue.length < 8 || passwordValue.length > 14){
         setError(password);
+        content[3].innerHTML = "يرجي ان لا تزيد الاحرف عن 14 او اقل من 8 احرف"
     }else {
         setSuccess(password);
     }
@@ -101,3 +109,21 @@ function isEmailValid(e){
     const reg =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     return reg.test(e);
 }
+
+// // Create Account Confirmation (Future)
+// function accountConfirmation(){
+// let signupForm = document.querySelector(".signup-form")
+
+//     let confirmeContainer = document.createElement("div");
+//     let confirmeFont = document.createElement("h2");
+//     let signin = document.createElement("a");
+//     let signinMsg = document.createTextNode("هنا");
+//     let confirmeMsg = document.createTextNode(`لقد تم تاكيد انشا حسابك سجل الدخول من ${signinMsg}`);
+
+//     confirmeContainer.setAttribute("class","confirme-container");
+
+//     signupForm.appendChild(confirmeContainer);
+//     confirmeContainer.appendChild(confirmeFont);
+//     confirmeFont.appendChild(confirmeMsg);
+//     signin.appendChild(signinMsg);
+// }

@@ -3,7 +3,6 @@ let inputFiled = document.querySelectorAll(".input-field");
 let content = document.querySelectorAll("small");
 let userName = document.getElementsByName("userName")[0];
 let password = document.getElementsByName("password")[0];
-
 // Rander The Validtion On Page
 document.addEventListener("click",() => {
     inputFiled.forEach((e) => {
@@ -43,16 +42,20 @@ function validateForm() {
     // userName Validtion
     if(userNameValue === ''){
         setError(userName);
-    }else if(userNameValue.length < 3 || userNameValue.length > 10){
+        content[0].innerHTML = "الرجاء ادخال اسم المستخدم"
+    }else if(userNameValue.length < 3 || userNameValue.length > 25){
         setError(userName);
+        content[0].innerHTML = "يرجي ان لا تزيد الاحرف عن 25 او اقل من 3 احرف"
     }else {
         setSuccess(userName);
     }
     // password Validtion
     if(passwordValue === ''){
         setError(password);
+        content[1].innerHTML = "الرجاء ادخال كلمه المرور"
     }else if(passwordValue.length < 8 || passwordValue.length > 14){
         setError(password);
+        content[1].innerHTML = "يرجي ان لا تزيد الاحرف عن 14 او اقل من 8 احرف"
     }else {
         setSuccess(password);
     }
