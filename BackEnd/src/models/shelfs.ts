@@ -18,7 +18,7 @@ export type Shelf = {
 
 export class ShelfsModel {
   // createShelf
-  async create(sh: Shelf): Promise<Shelf> {
+  async createShelf(sh: Shelf): Promise<Shelf> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(CREATESHELF, [
@@ -36,7 +36,7 @@ export class ShelfsModel {
     }
   }
 
-  // getAllShelfs
+  // getManyShelfs
   async getManyShelfs(): Promise<Shelf[]> {
     try {
       const connection = await Client.connect()
@@ -49,7 +49,7 @@ export class ShelfsModel {
     }
   }
 
-  // getShelf
+  // getOneShelf
   async getOneShelf(id: number): Promise<Shelf[]> {
     try {
       const connection = await Client.connect()
@@ -70,8 +70,8 @@ export class ShelfsModel {
   async updateShelf(sh: Shelf): Promise<Shelf> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(GETONESHELF, [sh.id])
-      if (result.rows.length) {
+      const test = await connection.query(GETONESHELF, [sh.id])
+      if (test.rows.length) {
         const result = await connection.query(UPDATESHELF, [
           sh.id,
           sh.shelf_number,
@@ -84,7 +84,7 @@ export class ShelfsModel {
         return shelf
       }
       connection.release()
-      return result.rows[0]
+      return test.rows[0]
     } catch (error) {
       throw new Error(`Unable to update ${sh.id}, ${(error as Error).message}`)
     }
@@ -94,16 +94,16 @@ export class ShelfsModel {
   async deleteShelf(id: number): Promise<Shelf> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(GETONESHELF, [id])
-      if (result.rows.length) {
+      const test = await connection.query(GETONESHELF, [id])
+      if (test.rows.length) {
         const result = await connection.query(DELETESHELF, [id])
         connection.release()
         return result.rows[0]
       }
       connection.release()
-      return result.rows[0]
+      return test.rows[0]
     } catch (error) {
-      throw new Error(`Unable to delete user ${id}, ${(error as Error).message}`)
+      throw new Error(`Unable to delete block ${id}, ${(error as Error).message}`)
     }
   }
 }

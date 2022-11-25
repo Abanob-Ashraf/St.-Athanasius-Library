@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import authorize from '../../middlewares/authantication'
 import {
-  getAllBlocks,
-  getBlock,
+  getManyBlocks,
+  getOneBlock,
   createBlock,
   updateBlock,
   deleteBlock
@@ -12,9 +12,9 @@ const routes = Router()
 
 routes.route('/').post(authorize, createBlock)
 
-routes.route('/').get(authorize, getAllBlocks)
+routes.route('/').get(authorize, getManyBlocks)
 
-routes.route('/:id').get(authorize, getBlock)
+routes.route('/:id').get(authorize, getOneBlock)
 
 routes.route('/:id').put(authorize, updateBlock)
 

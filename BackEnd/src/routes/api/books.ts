@@ -3,7 +3,7 @@ import authorize from '../../middlewares/authantication'
 import {
   createBook,
   deleteBook,
-  getAllBooks,
+  getManyBooks,
   getBookById,
   getBookByName,
   updateBook
@@ -13,7 +13,7 @@ const routes = Router()
 
 routes.route('/').post(authorize, createBook)
 
-routes.route('/').get(getAllBooks)
+routes.route('/').get(getManyBooks)
 
 routes.route('/name').get(getBookByName)
 

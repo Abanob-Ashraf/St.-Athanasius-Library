@@ -1,9 +1,10 @@
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response } from 'express'
 import { Book, BooksModel } from '../models/books'
 
 const library = new BooksModel()
 
-export const createBook = async (req: Request, res: Response, next: NextFunction) => {
+// createBook
+export const createBook = async (req: Request, res: Response) => {
   try {
     const book: Book = {
       book_code: req.body.book_code,
@@ -22,57 +23,50 @@ export const createBook = async (req: Request, res: Response, next: NextFunction
       id: undefined as unknown as number
     }
 
-    const newBook = await library.create(book)
-    res.json({
-      status: 'success',
-      data: { ...newBook },
-      message: 'Book created successfully'
-    })
+    const newBook = await library.createBook(book)
+    res.status(200).json(newBook)
   } catch (error) {
-    next(error)
+    res.status(400).json(error)
   }
 }
 
-export const getAllBooks = async (_req: Request, res: Response, next: NextFunction) => {
+// getManyShelfs
+export const getManyBooks = async (_req: Request, res: Response) => {
   try {
-    const books = await library.index()
-    res.json({
-      status: 'success',
-      data: books,
-      message: 'Books retrieved successfully'
-    })
+    const books = await library.getManyBooks()
+    res.status(200).json(books)
   } catch (error) {
-    next(error)
+    res.status(400).json(error)
   }
 }
 
-export const getBookById = async (req: Request, res: Response, next: NextFunction) => {
+export const getBookById = async (req: Request, res: Response) => {
   try {
-    const book = await library.showById(+req.params.id)
-    res.json({
-      status: 'success',
-      data: book,
-      message: 'Book retrieved successfully'
-    })
+    const book = await library.getOneBookById(+req.params.id)
+    if (book == null) {
+      return res.status(404).json('Book was not found')
+    } else {
+      return res.send(book)
+    }
   } catch (error) {
-    next(error)
+    res.status(401).json(error)
   }
 }
 
-export const getBookByName = async (req: Request, res: Response, next: NextFunction) => {
+export const getBookByName = async (req: Request, res: Response) => {
   try {
-    const book = await library.showByName(req.body.book_name)
-    res.json({
-      status: 'success',
-      data: book,
-      message: 'Book retrieved successfully'
-    })
+    const book = await library.getOneBookByName(req.body.book_name)
+    if (book == null) {
+      return res.status(404).json('Book was not found')
+    } else {
+      return res.send(book)
+    }
   } catch (error) {
-    next(error)
+    res.status(401).json(error)
   }
 }
 
-export const updateBook = async (req: Request, res: Response, next: NextFunction) => {
+export const updateBook = async (req: Request, res: Response) => {
   try {
     const book = {
       id: +req.params.id,
@@ -91,27 +85,26 @@ export const updateBook = async (req: Request, res: Response, next: NextFunction
       updated_date: new Date()
     }
 
-    const updated = await library.update(book)
-    // const token = jwt.sign(updated, process.env.TOKEN_SECRET as string)
-    res.json({
-      status: 'success',
-      data: updated,
-      message: 'Book updated successfully'
-    })
+    const updatedBook = await library.updateBook(book)
+    if (updatedBook == null) {
+      return res.status(404).json('Book was not found')
+    } else {
+      return res.send(updatedBook)
+    }
   } catch (error) {
-    next(error)
+    res.status(401).json(error)
   }
 }
 
-export const deleteBook = async (req: Request, res: Response, next: NextFunction) => {
+export const deleteBook = async (req: Request, res: Response) => {
   try {
-    const deletedBook = await library.delete(+req.params.id)
-    res.json({
-      status: 'success',
-      data: deletedBook,
-      message: 'Book deleted successfully'
-    })
+    const deletedBook = await library.deleteBook(+req.params.id)
+    if (deletedBook == null) {
+      return res.status(404).json('Book was not found')
+    } else {
+      return res.send(deletedBook)
+    }
   } catch (error) {
-    next(error)
+    res.status(401).json(error)
   }
 }

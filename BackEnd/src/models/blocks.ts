@@ -1,10 +1,10 @@
 import Client from '../database'
 import {
-  createBlock,
-  updateBlock,
-  getSingleBlockById,
-  deleteBlock,
-  getAllBlocks
+  CREATEBLOCK,
+  UPDATEBLOCK,
+  GETONEBLOCK,
+  DELETEBLOCK,
+  GETMANYBLOCKS
 } from '../sql-queries/blocks'
 
 export type Block = {
@@ -16,11 +16,11 @@ export type Block = {
 }
 
 export class BlocksModel {
-  //createBlock
-  async create(bl: Block): Promise<Block> {
+  // createBlock
+  async createBlock(bl: Block): Promise<Block> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(createBlock, [
+      const result = await connection.query(CREATEBLOCK, [
         bl.block_number,
         bl.block_name,
         bl.created_date,
@@ -34,11 +34,11 @@ export class BlocksModel {
     }
   }
 
-  //getAllBlocks
-  async index(): Promise<Block[]> {
+  // getManyBlocks
+  async getManyBlocks(): Promise<Block[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(getAllBlocks)
+      const result = await connection.query(GETMANYBLOCKS)
       const block = result.rows
       connection.release()
       return block
@@ -47,46 +47,60 @@ export class BlocksModel {
     }
   }
 
-  //getBlock
-  async show(id: number): Promise<Block[]> {
+  // getOneBlock
+  async getOneBlock(id: number): Promise<Block[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(getSingleBlockById, [id])
-      const block = { ...result.rows[0] }
+      const result = await connection.query(GETONEBLOCK, [id])
+      if (result.rows.length) {
+        const block = { ...result.rows[0] }
+        connection.release()
+        return block
+      }
       connection.release()
-      return block
+      return result.rows[0]
     } catch (error) {
       throw new Error(`Unable to get block ${id}, ${(error as Error).message}`)
     }
   }
 
-  //updateBlock
-  async update(bl: Block): Promise<Block> {
+  // updateBlock
+  async updateBlock(bl: Block): Promise<Block> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(updateBlock, [
-        bl.id,
-        bl.block_number,
-        bl.block_name,
-        bl.updated_date
-      ])
-      const block = result.rows[0]
+      const test = await connection.query(GETONEBLOCK, [bl.id])
+      if (test.rows.length) {
+        const result = await connection.query(UPDATEBLOCK, [
+          bl.id,
+          bl.block_number,
+          bl.block_name,
+          bl.updated_date
+        ])
+        const block = result.rows[0]
+        connection.release()
+        return block
+      }
       connection.release()
-      return block
+      return test.rows[0]
     } catch (error) {
       throw new Error(`Unable to update ${bl.id}, ${(error as Error).message}`)
     }
   }
 
-  //deleteBlock
-  async delete(id: number): Promise<Block> {
+  // deleteBlock
+  async deleteBlock(id: number): Promise<Block> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(deleteBlock, [id])
+      const test = await connection.query(GETONEBLOCK, [id])
+      if (test.rows.length) {
+        const result = await connection.query(DELETEBLOCK, [id])
+        connection.release()
+        return result.rows[0]
+      }
       connection.release()
-      return result.rows[0]
+      return test.rows[0]
     } catch (error) {
-      throw new Error(`Unable to delete user ${id}, ${(error as Error).message}`)
+      throw new Error(`Unable to delete block ${id}, ${(error as Error).message}`)
     }
   }
 }

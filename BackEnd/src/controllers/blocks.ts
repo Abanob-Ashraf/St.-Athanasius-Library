@@ -1,9 +1,10 @@
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response } from 'express'
 import { Block, BlocksModel } from '../models/blocks'
 
 const library = new BlocksModel()
 
-export const createBlock = async (req: Request, res: Response, next: NextFunction) => {
+// createBlock
+export const createBlock = async (req: Request, res: Response) => {
   try {
     const block: Block = {
       block_number: req.body.block_number,
@@ -13,44 +14,39 @@ export const createBlock = async (req: Request, res: Response, next: NextFunctio
       id: undefined as unknown as number
     }
 
-    const newBlock = await library.create(block)
-    res.json({
-      status: 'success',
-      data: { ...newBlock },
-      message: 'Block created successfully'
-    })
+    const newBlock = await library.createBlock(block)
+    res.status(200).json(newBlock)
   } catch (error) {
-    next(error)
+    res.status(400).json(error)
   }
 }
 
-export const getAllBlocks = async (_req: Request, res: Response, next: NextFunction) => {
+// getManyBlocks
+export const getManyBlocks = async (_req: Request, res: Response) => {
   try {
-    const blocks = await library.index()
-    res.json({
-      status: 'success',
-      data: blocks,
-      message: 'Blocks retrieved successfully'
-    })
+    const blocks = await library.getManyBlocks()
+    res.status(200).json(blocks)
   } catch (error) {
-    next(error)
+    res.status(400).json(error)
   }
 }
 
-export const getBlock = async (req: Request, res: Response, next: NextFunction) => {
+// getOneBlock
+export const getOneBlock = async (req: Request, res: Response) => {
   try {
-    const block = await library.show(+req.params.id)
-    res.json({
-      status: 'success',
-      data: block,
-      message: 'Block retrieved successfully'
-    })
+    const block = await library.getOneBlock(+req.params.id)
+    if (block == null) {
+      return res.status(404).json('block was not found')
+    } else {
+      return res.send(block)
+    }
   } catch (error) {
-    next(error)
+    res.status(401).json(error)
   }
 }
 
-export const updateBlock = async (req: Request, res: Response, next: NextFunction) => {
+// updateBlock
+export const updateBlock = async (req: Request, res: Response) => {
   try {
     const block = {
       id: +req.params.id,
@@ -60,26 +56,27 @@ export const updateBlock = async (req: Request, res: Response, next: NextFunctio
       updated_date: new Date()
     }
 
-    const updated = await library.update(block)
-    res.json({
-      status: 'success',
-      data: updated,
-      message: 'Block updated successfully'
-    })
+    const updatedBlock = await library.updateBlock(block)
+    if (updatedBlock == null) {
+      return res.status(404).json('block was not found')
+    } else {
+      return res.send(updatedBlock)
+    }
   } catch (error) {
-    next(error)
+    res.status(401).json(error)
   }
 }
 
-export const deleteBlock = async (req: Request, res: Response, next: NextFunction) => {
+// deleteBlock
+export const deleteBlock = async (req: Request, res: Response) => {
   try {
-    const deletedBlock = await library.delete(+req.params.id)
-    res.json({
-      status: 'success',
-      data: deletedBlock,
-      message: 'Block deleted successfully'
-    })
+    const deletedBlock = await library.deleteBlock(+req.params.id)
+    if (deletedBlock == null) {
+      return res.status(404).json('block was not found')
+    } else {
+      return res.send(deletedBlock)
+    }
   } catch (error) {
-    next(error)
+    res.status(401).json(error)
   }
 }

@@ -14,7 +14,7 @@ export const createShelf = async (req: Request, res: Response) => {
       updated_date: new Date(),
       id: undefined as unknown as number
     }
-    const newShelf = await library.create(shelf)
+    const newShelf = await library.createShelf(shelf)
     res.status(200).json(newShelf)
   } catch (error) {
     res.status(400).json(error)

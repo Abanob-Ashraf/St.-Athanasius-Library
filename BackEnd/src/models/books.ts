@@ -1,11 +1,11 @@
 import Client from '../database'
 import {
-  createBook,
-  updateBook,
-  getSingleBookById,
-  deleteBook,
-  getAllBooks,
-  getSingleBookByName
+  CREATEBOOK,
+  UPDATEBOOK,
+  GETONEBOOKBYID,
+  DELETEBOOK,
+  GETMANYBOOKS,
+  GETONEBOOKBYNAME
 } from '../sql-queries/books'
 
 export type Book = {
@@ -26,11 +26,11 @@ export type Book = {
 }
 
 export class BooksModel {
-  //createBook
-  async create(b: Book): Promise<Book> {
+  // createBook
+  async createBook(b: Book): Promise<Book> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(createBook, [
+      const result = await connection.query(CREATEBOOK, [
         b.book_code,
         b.book_name,
         b.author,
@@ -53,11 +53,11 @@ export class BooksModel {
     }
   }
 
-  //getAllBooks
-  async index(): Promise<Book[]> {
+  // getManyBooks
+  async getManyBooks(): Promise<Book[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(getAllBooks)
+      const result = await connection.query(GETMANYBOOKS)
       const book = result.rows
       connection.release()
       return book
@@ -66,37 +66,45 @@ export class BooksModel {
     }
   }
 
-  //getBookById
-  async showById(id: number): Promise<Book[]> {
+  // getOneBook
+  async getOneBookById(id: number): Promise<Book[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(getSingleBookById, [id])
-      const book = { ...result.rows[0] }
+      const result = await connection.query(GETONEBOOKBYID, [id])
+      if (result.rows.length) {
+        const book = { ...result.rows[0] }
+        connection.release()
+        return book
+      }
       connection.release()
-      return book
+      return result.rows[0]
     } catch (error) {
       throw new Error(`Unable to get book ${id}, ${(error as Error).message}`)
     }
   }
 
-  //getBookByName
-  async showByName(book_name: string): Promise<Book[]> {
+  // getOneBookByName
+  async getOneBookByName(book_name: string): Promise<Book[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(getSingleBookByName, [book_name])
-      const book = { ...result.rows[0] }
+      const result = await connection.query(GETONEBOOKBYNAME, [book_name])
+      if (result.rows.length) {
+        const book = { ...result.rows[0] }
+        connection.release()
+        return book
+      }
       connection.release()
-      return book
+      return result.rows[0]
     } catch (error) {
       throw new Error(`Unable to get book ${book_name}, ${(error as Error).message}`)
     }
   }
 
-  //updateBook
-  async update(b: Book): Promise<Book> {
+  // updateBook
+  async updateBook(b: Book): Promise<Book> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(updateBook, [
+      const result = await connection.query(UPDATEBOOK, [
         b.id,
         b.book_code,
         b.book_name,
@@ -119,15 +127,20 @@ export class BooksModel {
     }
   }
 
-  //deleteBook
-  async delete(id: number): Promise<Book> {
+  // deleteBook
+  async deleteBook(id: number): Promise<Book> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(deleteBook, [id])
+      const test = await connection.query(GETONEBOOKBYID, [id])
+      if (test.rows.length) {
+        const result = await connection.query(DELETEBOOK, [id])
+        connection.release()
+        return result.rows[0]
+      }
       connection.release()
-      return result.rows[0]
+      return test.rows[0]
     } catch (error) {
-      throw new Error(`Unable to delete user ${id}, ${(error as Error).message}`)
+      throw new Error(`Unable to delete Book ${id}, ${(error as Error).message}`)
     }
   }
 }
