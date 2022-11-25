@@ -4,6 +4,7 @@ import { User, UsersModel } from '../models/users'
 
 const library = new UsersModel()
 
+// createUser
 export const createUser = async (req: Request, res: Response) => {
   try {
     const user: User = {
@@ -21,10 +22,11 @@ export const createUser = async (req: Request, res: Response) => {
     const newUser = await library.create(user)
     res.status(200).json(newUser)
   } catch (error) {
-    res.status(404).json(error)
+    res.status(400).json(error)
   }
 }
 
+// getManyUsers
 export const getManyUsers = async (_req: Request, res: Response) => {
   try {
     const users = await library.getManyUsers()
@@ -34,11 +36,12 @@ export const getManyUsers = async (_req: Request, res: Response) => {
   }
 }
 
+// getOneUser
 export const getOneUser = async (req: Request, res: Response) => {
   try {
     const user = await library.getOneUser(+req.params.id)
     if (user == null) {
-      return res.status(404).json('user was not found')
+      return res.status(404).json('User was not found')
     } else {
       return res.send(user)
     }
@@ -46,6 +49,8 @@ export const getOneUser = async (req: Request, res: Response) => {
     res.status(401).json(error)
   }
 }
+
+// updateUser
 export const updateUser = async (req: Request, res: Response) => {
   try {
     const user = {
@@ -59,22 +64,23 @@ export const updateUser = async (req: Request, res: Response) => {
       created_date: new Date(),
       updated_date: new Date()
     }
-    const updated = await library.update(user)
-    if (updated == null) {
-      return res.status(404).json('user was not found')
+    const updateUser = await library.updateUser(user)
+    if (updateUser == null) {
+      return res.status(404).json('User was not found')
     } else {
-      return res.send(updated)
+      return res.send(updateUser)
     }
   } catch (error) {
     res.status(401).json(error)
   }
 }
 
+// deleteUser
 export const deleteUser = async (req: Request, res: Response) => {
   try {
-    const deletedUser = await library.delete(+req.params.id, 'NOT AVILABLE', new Date())
+    const deletedUser = await library.deleteUser(+req.params.id, 'NOT AVILABLE', new Date())
     if (deletedUser == null) {
-      return res.status(404).json('user was not found')
+      return res.status(404).json('User was not found')
     } else {
       return res.send(deletedUser)
     }
@@ -83,6 +89,7 @@ export const deleteUser = async (req: Request, res: Response) => {
   }
 }
 
+// authenticateUser
 export const authenticateUser = async (req: Request, res: Response) => {
   const { email, password } = req.body
   if (!email || !password) {
@@ -101,6 +108,7 @@ export const authenticateUser = async (req: Request, res: Response) => {
   }
 }
 
+// getAllDeletedUsers
 export const getAllDeletedUsers = async (_req: Request, res: Response) => {
   try {
     const users = await library.getAllDeletedUsers()

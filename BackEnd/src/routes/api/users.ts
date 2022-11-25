@@ -14,7 +14,7 @@ const routes = Router()
 
 routes.route('/').post(createUser)
 
-routes.route('/authenticate').get(authenticateUser)
+routes.route('/login').get(authenticateUser)
 
 routes.route('/deleted').get(authorize, getAllDeletedUsers)
 

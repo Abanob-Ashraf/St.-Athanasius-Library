@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import authorize from '../../middlewares/authantication'
 import {
-  getAllShelfs,
-  getShelf,
+  getManyShelfs,
+  getOneShelf,
   createShelf,
   updateShelf,
   deleteShelf
@@ -12,9 +12,9 @@ const routes = Router()
 
 routes.route('/').post(authorize, createShelf)
 
-routes.route('/').get(authorize, getAllShelfs)
+routes.route('/').get(authorize, getManyShelfs)
 
-routes.route('/:id').get(authorize, getShelf)
+routes.route('/:id').get(authorize, getOneShelf)
 
 routes.route('/:id').put(authorize, updateShelf)
 

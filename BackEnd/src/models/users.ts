@@ -29,7 +29,7 @@ export type User = {
 }
 
 export class UsersModel {
-  //createUser
+  // createUser
   async create(u: User): Promise<User> {
     try {
       const connection = await Client.connect()
@@ -52,7 +52,7 @@ export class UsersModel {
     }
   }
 
-  //getAllUsers
+  // getManyUsers
   async getManyUsers(): Promise<User[]> {
     try {
       const connection = await Client.connect()
@@ -65,7 +65,7 @@ export class UsersModel {
     }
   }
 
-  //getUser
+  // getOneUser
   async getOneUser(id: number): Promise<User[]> {
     try {
       const connection = await Client.connect()
@@ -82,8 +82,8 @@ export class UsersModel {
     }
   }
 
-  //updateUser
-  async update(u: User): Promise<User> {
+  // updateUser
+  async updateUser(u: User): Promise<User> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONEUSER, [u.id])
@@ -112,8 +112,8 @@ export class UsersModel {
     }
   }
 
-  //deleteUser
-  async delete(id: number, user_status: string, updated_date: Date): Promise<User> {
+  // deleteUser
+  async deleteUser(id: number, user_status: string, updated_date: Date): Promise<User> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONEUSER, [id])
@@ -138,7 +138,7 @@ export class UsersModel {
     }
   }
 
-  //authenticateUser
+  // authenticateUser
   async authenticate(email: string, password: string): Promise<User> {
     try {
       const connection = await Client.connect()
@@ -158,7 +158,7 @@ export class UsersModel {
     }
   }
 
-  //getAllDeletedUsers
+  // getAllDeletedUsers
   async getAllDeletedUsers(): Promise<User[]> {
     try {
       const connection = await Client.connect()

@@ -1,10 +1,10 @@
 import Client from '../database'
 import {
-  createShelf,
-  updateShelf,
-  getSingleShelfById,
-  deleteShelf,
-  getAllShelfs
+  CREATESHELF,
+  UPDATESHELF,
+  GETONESHELF,
+  DELETESHELF,
+  GETMANYSHELFS
 } from '../sql-queries/shelfs'
 
 export type Shelf = {
@@ -17,11 +17,11 @@ export type Shelf = {
 }
 
 export class ShelfsModel {
-  //createShelf
+  // createShelf
   async create(sh: Shelf): Promise<Shelf> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(createShelf, [
+      const result = await connection.query(CREATESHELF, [
         sh.shelf_number,
         sh.shelf_name,
         sh.block_id,
@@ -36,11 +36,11 @@ export class ShelfsModel {
     }
   }
 
-  //getAllShelfs
-  async index(): Promise<Shelf[]> {
+  // getAllShelfs
+  async getManyShelfs(): Promise<Shelf[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(getAllShelfs)
+      const result = await connection.query(GETMANYSHELFS)
       const shelf = result.rows
       connection.release()
       return shelf
@@ -49,43 +49,57 @@ export class ShelfsModel {
     }
   }
 
-  //getShelf
-  async show(id: number): Promise<Shelf[]> {
+  // getShelf
+  async getOneShelf(id: number): Promise<Shelf[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(getSingleShelfById, [id])
-      const shelf = { ...result.rows[0] }
+      const result = await connection.query(GETONESHELF, [id])
+      if (result.rows.length) {
+        const shelf = { ...result.rows[0] }
+        connection.release()
+        return shelf
+      }
       connection.release()
-      return shelf
+      return result.rows[0]
     } catch (error) {
       throw new Error(`Unable to get shelf ${id}, ${(error as Error).message}`)
     }
   }
 
-  //updateShelf
-  async update(sh: Shelf): Promise<Shelf> {
+  // updateShelf
+  async updateShelf(sh: Shelf): Promise<Shelf> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(updateShelf, [
-        sh.id,
-        sh.shelf_number,
-        sh.shelf_name,
-        sh.block_id,
-        sh.updated_date
-      ])
-      const shelf = result.rows[0]
+      const result = await connection.query(GETONESHELF, [sh.id])
+      if (result.rows.length) {
+        const result = await connection.query(UPDATESHELF, [
+          sh.id,
+          sh.shelf_number,
+          sh.shelf_name,
+          sh.block_id,
+          sh.updated_date
+        ])
+        const shelf = result.rows[0]
+        connection.release()
+        return shelf
+      }
       connection.release()
-      return shelf
+      return result.rows[0]
     } catch (error) {
       throw new Error(`Unable to update ${sh.id}, ${(error as Error).message}`)
     }
   }
 
-  //deleteShelf
-  async delete(id: number): Promise<Shelf> {
+  // deleteShelf
+  async deleteShelf(id: number): Promise<Shelf> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(deleteShelf, [id])
+      const result = await connection.query(GETONESHELF, [id])
+      if (result.rows.length) {
+        const result = await connection.query(DELETESHELF, [id])
+        connection.release()
+        return result.rows[0]
+      }
       connection.release()
       return result.rows[0]
     } catch (error) {

@@ -1,9 +1,10 @@
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response } from 'express'
 import { Shelf, ShelfsModel } from '../models/shelfs'
 
 const library = new ShelfsModel()
 
-export const createShelf = async (req: Request, res: Response, next: NextFunction) => {
+// createShelf
+export const createShelf = async (req: Request, res: Response) => {
   try {
     const shelf: Shelf = {
       shelf_number: req.body.shelf_number,
@@ -13,44 +14,39 @@ export const createShelf = async (req: Request, res: Response, next: NextFunctio
       updated_date: new Date(),
       id: undefined as unknown as number
     }
-
     const newShelf = await library.create(shelf)
-    res.json({
-      status: 'success',
-      data: { ...newShelf },
-      message: 'Shelf created successfully'
-    })
+    res.status(200).json(newShelf)
   } catch (error) {
-    next(error)
+    res.status(400).json(error)
   }
 }
 
-export const getAllShelfs = async (_req: Request, res: Response, next: NextFunction) => {
+// getManyShelfs
+export const getManyShelfs = async (_req: Request, res: Response) => {
   try {
-    const shelfs = await library.index()
-    res.json({
-      status: 'success',
-      data: shelfs,
-      message: 'Shelfs retrieved successfully'
-    })
+    const shelfs = await library.getManyShelfs()
+    res.status(200).json(shelfs)
   } catch (error) {
-    next(error)
+    res.status(401).json(error)
   }
 }
 
-export const getShelf = async (req: Request, res: Response, next: NextFunction) => {
+// getOneShelf
+export const getOneShelf = async (req: Request, res: Response) => {
   try {
-    const shelf = await library.show(+req.params.id)
-    res.json({
-      status: 'success',
-      data: shelf,
-      message: 'Shelf retrieved successfully'
-    })
+    const shelf = await library.getOneShelf(+req.params.id)
+    if (shelf == null) {
+      return res.status(404).json('Shelf was not found')
+    } else {
+      return res.send(shelf)
+    }
   } catch (error) {
-    next(error)
+    res.status(401).json(error)
   }
 }
-export const updateShelf = async (req: Request, res: Response, next: NextFunction) => {
+
+// updateShelf
+export const updateShelf = async (req: Request, res: Response) => {
   try {
     const shelf = {
       id: +req.params.id,
@@ -60,28 +56,27 @@ export const updateShelf = async (req: Request, res: Response, next: NextFunctio
       created_date: new Date(),
       updated_date: new Date()
     }
-
-    const updated = await library.update(shelf)
-    // const token = jwt.sign(updated, process.env.TOKEN_SECRET as string)
-    res.json({
-      status: 'success',
-      data: updated,
-      message: 'Sjelf updated successfully'
-    })
+    const updatedShelf = await library.updateShelf(shelf)
+    if (updatedShelf == null) {
+      return res.status(404).json('Shelf was not found')
+    } else {
+      return res.send(updatedShelf)
+    }
   } catch (error) {
-    next(error)
+    res.status(401).json(error)
   }
 }
 
-export const deleteShelf = async (req: Request, res: Response, next: NextFunction) => {
+// deleteShelf
+export const deleteShelf = async (req: Request, res: Response) => {
   try {
-    const deletedShelf = await library.delete(+req.params.id)
-    res.json({
-      status: 'success',
-      data: deletedShelf,
-      message: 'Shelf deleted successfully'
-    })
+    const deletedShelf = await library.deleteShelf(+req.params.id)
+    if (deletedShelf == null) {
+      return res.status(404).json('Shelf was not found')
+    } else {
+      return res.send(deletedShelf)
+    }
   } catch (error) {
-    next(error)
+    res.status(401).json(error)
   }
 }
