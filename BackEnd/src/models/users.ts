@@ -113,7 +113,7 @@ export class UsersModel {
   }
 
   //deleteUser
-  async delete(id: number, user_status: string, updated_date: Date): Promise<User | null> {
+  async delete(id: number, user_status: string, updated_date: Date): Promise<User> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONEUSER, [id])
@@ -128,7 +128,7 @@ export class UsersModel {
           return deleteUser.rows[0]
         } else {
           connection.release()
-          return null
+          return test.rows[0]
         }
       }
       connection.release()
@@ -139,7 +139,7 @@ export class UsersModel {
   }
 
   //authenticateUser
-  async authenticate(email: string, password: string): Promise<User | null> {
+  async authenticate(email: string, password: string): Promise<User> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(AUTHANTICATE, [email])
@@ -152,7 +152,7 @@ export class UsersModel {
         }
       }
       connection.release()
-      return null
+      return result.rows[0]
     } catch (error) {
       throw new Error(`Unable to login: ${(error as Error).message}`)
     }
