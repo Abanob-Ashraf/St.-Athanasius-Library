@@ -139,7 +139,7 @@ export class UsersModel {
   }
 
   // authenticateUser
-  async authenticate(email: string, password: string): Promise<User> {
+  async authenticate(email: string, password: string): Promise<User | null> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(AUTHANTICATE, [email])
@@ -152,7 +152,7 @@ export class UsersModel {
         }
       }
       connection.release()
-      return result.rows[0]
+      return null
     } catch (error) {
       throw new Error(`Unable to login: ${(error as Error).message}`)
     }
