@@ -95,13 +95,15 @@ export const authenticateUser = async (req: Request, res: Response) => {
   if (!email || !password) {
     return res.status(401).json('missing or malformed parameters. email, password required')
   }
-
   try {
     const user = await library.authenticate(email, password)
-    const token = jwt.sign({ user }, process.env.TOKEN_SECRET as unknown as string)
+    const token = jwt.sign({ user }, process.env.TOKEN_SECRET as unknown as string, {
+      expiresIn: process.env.JWT_EXPIRES_IN
+    })
     if (!user) {
       return res.status(401).json('the username and password do not match please try again')
     }
+    const id = user?.id
     return res.json({ ...user, token })
   } catch (error) {
     res.status(401).json(error)

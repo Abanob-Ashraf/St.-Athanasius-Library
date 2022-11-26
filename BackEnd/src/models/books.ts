@@ -104,24 +104,29 @@ export class BooksModel {
   async updateBook(b: Book): Promise<Book> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(UPDATEBOOK, [
-        b.id,
-        b.book_code,
-        b.book_name,
-        b.author,
-        b.number_of_copies,
-        b.number_of_pages,
-        b.number_of_parts,
-        b.name_of_series,
-        b.conclusion,
-        b.user_id,
-        b.shelf_id,
-        b.book_number_in_shelf,
-        b.updated_date
-      ])
-      const book = result.rows[0]
+      const test = await connection.query(GETONEBOOKBYID, [b.id])
+      if (test.rows.length) {
+        const result = await connection.query(UPDATEBOOK, [
+          b.id,
+          b.book_code,
+          b.book_name,
+          b.author,
+          b.number_of_copies,
+          b.number_of_pages,
+          b.number_of_parts,
+          b.name_of_series,
+          b.conclusion,
+          b.user_id,
+          b.shelf_id,
+          b.book_number_in_shelf,
+          b.updated_date
+        ])
+        const book = result.rows[0]
+        connection.release()
+        return book
+      }
       connection.release()
-      return book
+      return test.rows[0]
     } catch (error) {
       throw new Error(`Unable to update ${b.id}, ${(error as Error).message}`)
     }
