@@ -12,7 +12,7 @@ import {
 
 const routes = Router()
 
-routes.route('/').post(createUser)
+routes.route('/signup').post(createUser)
 
 routes.route('/login').get(authenticateUser)
 

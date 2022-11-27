@@ -21,6 +21,8 @@ const authorize = (req: Request, _res: Response, next: NextFunction) => {
       const token = authHeader.split(' ')[1]
       if (token && bearer === 'bearer') {
         const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string)
+        // var userId = decoded.user_data.user_id
+        // console.log(userId)
         if (decode) {
           next()
         } else {
