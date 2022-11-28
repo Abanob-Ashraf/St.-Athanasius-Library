@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
-// Token authantications
+// Token Authantications
 export const authorize = (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '') as string
@@ -17,7 +17,7 @@ export const authorize = (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-// admin verifications
+// Admin Verifications
 export const admin = (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '') as string
