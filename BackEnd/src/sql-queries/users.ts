@@ -21,7 +21,7 @@ export const DELETEUSER =
   'UPDATE users SET user_status=($2), updated_date=($3) WHERE id=($1) RETURNING *'
 
 export const UPDATEBOOKAFTERDELETEUSER =
-  'UPDATE books SET user_id=NULL, old_user=($1) WHERE user_id=($1)'
+  'UPDATE books SET user_id=($2), old_user=($1) WHERE user_id=($1)'
 
 //Sign in
 export const AUTHANTICATE = 'SELECT password FROM users WHERE email=($1)'

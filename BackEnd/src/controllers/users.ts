@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import { User, UsersModel } from '../models/users'
 
 const library = new UsersModel()
@@ -78,7 +78,18 @@ export const updateUser = async (req: Request, res: Response) => {
 // deleteUser
 export const deleteUser = async (req: Request, res: Response) => {
   try {
-    const deletedUser = await library.deleteUser(+req.params.id, 'NOT AVILABLE', new Date())
+    const token = req.header('Authorization')?.replace('Bearer ', '') as string
+    // console.log(token)
+    const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
+    const userId = decode.user.id
+    // const userRole = decode.user.admin_flag
+    // console.log(userId, userRole)
+    const deletedUser = await library.deleteUser(
+      +userId,
+      +req.params.id,
+      'NOT AVILABLE',
+      new Date()
+    )
     if (deletedUser == null) {
       return res.status(404).json('User was not found')
     } else {
@@ -103,7 +114,6 @@ export const authenticateUser = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(401).json('the username and password do not match please try again')
     }
-    const id = user?.id
     return res.json({ ...user, token })
   } catch (error) {
     res.status(401).json(error)

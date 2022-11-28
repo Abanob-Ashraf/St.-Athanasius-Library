@@ -113,7 +113,12 @@ export class UsersModel {
   }
 
   // deleteUser
-  async deleteUser(id: number, user_status: string, updated_date: Date): Promise<User> {
+  async deleteUser(
+    userId: number,
+    id: number,
+    user_status: string,
+    updated_date: Date
+  ): Promise<User> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONEUSER, [id])
@@ -123,7 +128,7 @@ export class UsersModel {
         const isStatusAVILABLE = status
         if (isStatusAVILABLE == 'AVILABLE') {
           const deleteUser = await connection.query(DELETEUSER, [id, user_status, updated_date])
-          await connection.query(UPDATEBOOKAFTERDELETEUSER, [id])
+          await connection.query(UPDATEBOOKAFTERDELETEUSER, [id, userId])
           connection.release()
           return deleteUser.rows[0]
         } else {
