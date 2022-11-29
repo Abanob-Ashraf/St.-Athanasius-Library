@@ -1,8 +1,6 @@
 import { Request, Response } from 'express'
 import jwt, { JwtPayload } from 'jsonwebtoken'
-import Client from '../database'
 import { Book, BooksModel } from '../models/books'
-import { CHECKUSER } from '../sql-queries/books'
 
 const library = new BooksModel()
 
@@ -80,14 +78,11 @@ export const updateBook = async (req: Request, res: Response) => {
     const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
     const userId = decode.user.id
 
-    // console.log(userId)
-    const connection = await Client.connect()
-    const checkUser = await connection.query(CHECKUSER, [req.params.id])
-    // console.log(checkUser.rows[0])
-    const { user_id: id } = checkUser.rows[0]
-    const isId = id
-    // console.log(isId)
-
+    const getUserBook = await library.getOneBookById(+req.params.id)
+    if (getUserBook == null) {
+      return res.status(404).json('Book was not found')
+    }
+    const isId = getUserBook['user_id']
     if (userId == isId) {
       const book = {
         id: +req.params.id,
@@ -108,12 +103,7 @@ export const updateBook = async (req: Request, res: Response) => {
       }
 
       const updatedBook = await library.updateBook(book)
-
-      if (updatedBook == null) {
-        return res.status(404).json('Book was not found')
-      } else {
-        return res.send(updatedBook)
-      }
+      return res.send(updatedBook)
     } else {
       return res.status(401).json('you cant edite this book')
     }

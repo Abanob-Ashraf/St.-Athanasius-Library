@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { authorize } from '../../middlewares/authantication_admin'
+import { admin, authorize } from '../../middlewares/authantication_admin'
 import {
   createBook,
   deleteBook,
@@ -21,6 +21,6 @@ routes.route('/:id').get(getBookById)
 
 routes.route('/:id').put(authorize, updateBook)
 
-routes.route('/:id').delete(authorize, deleteBook)
+routes.route('/:id').delete(authorize, admin, deleteBook)
 
 export default routes

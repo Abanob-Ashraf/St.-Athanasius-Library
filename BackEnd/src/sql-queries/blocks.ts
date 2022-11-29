@@ -3,7 +3,10 @@ export const CREATEBLOCK =
 
 export const GETMANYBLOCKS = 'SELECT * FROM blocks'
 
-export const GETONEBLOCK = 'SELECT * FROM blocks WHERE id=($1);'
+export const GETMANYSHELFS_BLOCKSID =
+  'SELECT shelfs.id, shelf_number FROM shelfs WHERE block_id =($1)'
+
+export const GETONEBLOCK = 'SELECT * FROM blocks WHERE id=($1)'
 
 export const UPDATEBLOCK =
   'UPDATE blocks SET block_number=($2), block_name=($3), updated_date=($4) WHERE id=($1) RETURNING *'

@@ -79,11 +79,8 @@ export const updateUser = async (req: Request, res: Response) => {
 export const deleteUser = async (req: Request, res: Response) => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '') as string
-    // console.log(token)
     const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
     const userId = decode.user.id
-    // const userRole = decode.user.admin_flag
-    // console.log(userId, userRole)
     const deletedUser = await library.deleteUser(
       +userId,
       +req.params.id,

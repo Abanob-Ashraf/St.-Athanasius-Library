@@ -11,6 +11,3 @@ export const UPDATEBOOK =
   'UPDATE books SET book_code=($2), book_name=($3), author=($4), number_of_copies=($5), number_of_pages=($6), number_of_parts=($7), name_of_series=($8), conclusion=($9), user_id=($10), old_user=($11) ,shelf_id=($12), book_number_in_shelf=($13), updated_date=($14) WHERE id=($1) RETURNING *'
 
 export const DELETEBOOK = 'DELETE FROM books WHERE id=($1) RETURNING *'
-
-export const CHECKUSER =
-  'SELECT user_Id FROM books INNER JOIN users ON users.id = books.user_id WHERE books.id = ($1)'

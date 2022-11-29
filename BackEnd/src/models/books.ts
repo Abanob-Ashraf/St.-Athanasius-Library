@@ -5,8 +5,7 @@ import {
   GETONEBOOKBYID,
   DELETEBOOK,
   GETMANYBOOKS,
-  GETONEBOOKBYNAME,
-  CHECKUSER
+  GETONEBOOKBYNAME
 } from '../sql-queries/books'
 
 export type Book = {
@@ -109,13 +108,6 @@ export class BooksModel {
       const connection = await Client.connect()
       const test = await connection.query(GETONEBOOKBYID, [b.id])
       if (test.rows.length) {
-        // const checkUser = await connection.query(CHECKUSER, [b.id])
-        // console.log(checkUser.rows[0])
-
-        // const { user_id: id } = checkUser.rows[0]
-        // const isId = id
-        // console.log(isId)
-
         const result = await connection.query(UPDATEBOOK, [
           b.id,
           b.book_code,
