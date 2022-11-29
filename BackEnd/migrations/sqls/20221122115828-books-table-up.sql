@@ -7,7 +7,7 @@ CREATE TABLE books (
     number_of_copies integer NOT NULL,
     number_of_pages integer NOT NULL,
     number_of_parts integer,
-    name_of_series VARCHAR(100),
+    name_of_series text,
     conclusion text,
     user_id integer REFERENCES users(id),
     old_user integer REFERENCES users(id),
