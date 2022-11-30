@@ -87,6 +87,7 @@ export const updateBook = async (req: Request, res: Response) => {
       return res.status(404).json('Book was not found')
     }
     const isId = getUserBook['user_id']
+
     if (userId == isId) {
       const book = {
         id: +req.params.id,
