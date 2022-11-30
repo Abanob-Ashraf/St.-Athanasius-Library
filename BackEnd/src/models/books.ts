@@ -5,7 +5,8 @@ import {
   GETONEBOOKBYID,
   DELETEBOOK,
   GETMANYBOOKS,
-  GETONEBOOKBYNAME
+  GETONEBOOKBYNAME,
+  CHECKIFBOOKINTHISSHELF
 } from '../sql-queries/books'
 
 export type Book = {
@@ -28,28 +29,36 @@ export type Book = {
 
 export class BooksModel {
   // createBook
-  async createBook(b: Book): Promise<Book> {
+  async createBook(b: Book): Promise<Book | null> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(CREATEBOOK, [
-        b.book_code,
-        b.book_name,
-        b.author,
-        b.number_of_copies,
-        b.number_of_pages,
-        b.number_of_parts,
-        b.name_of_series,
-        b.conclusion,
-        b.user_id,
-        b.old_user,
+      const test = await connection.query(CHECKIFBOOKINTHISSHELF, [
         b.shelf_id,
-        b.book_number_in_shelf,
-        b.created_date,
-        b.updated_date
+        b.book_number_in_shelf
       ])
-      const book = result.rows[0]
+      if (!test.rows.length) {
+        const result = await connection.query(CREATEBOOK, [
+          b.book_code,
+          b.book_name,
+          b.author,
+          b.number_of_copies,
+          b.number_of_pages,
+          b.number_of_parts,
+          b.name_of_series,
+          b.conclusion,
+          b.user_id,
+          b.old_user,
+          b.shelf_id,
+          b.book_number_in_shelf,
+          b.created_date,
+          b.updated_date
+        ])
+        const book = result.rows[0]
+        connection.release()
+        return book
+      }
       connection.release()
-      return book
+      return null
     } catch (error) {
       throw new Error(`Unable to create ${b.book_name}, ${(error as Error).message}`)
     }
@@ -106,6 +115,7 @@ export class BooksModel {
   async updateBook(b: Book): Promise<Book> {
     try {
       const connection = await Client.connect()
+
       const test = await connection.query(GETONEBOOKBYID, [b.id])
       if (test.rows.length) {
         const result = await connection.query(UPDATEBOOK, [

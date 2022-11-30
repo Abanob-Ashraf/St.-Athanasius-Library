@@ -30,7 +30,11 @@ export const createBook = async (req: Request, res: Response) => {
     }
 
     const newBook = await library.createBook(book)
-    res.status(200).json(newBook)
+    if (newBook == null) {
+      return res.status(404).json('Error you have a book in this rank')
+    } else {
+      return res.send(newBook)
+    }
   } catch (error) {
     res.status(400).json(error)
   }
