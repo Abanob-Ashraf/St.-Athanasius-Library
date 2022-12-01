@@ -50,6 +50,24 @@ export const getOneUser = async (req: Request, res: Response) => {
   }
 }
 
+// getOneUser
+export const getMine = async (req: Request, res: Response) => {
+  try {
+    const token = req.header('Authorization')?.replace('Bearer ', '') as string
+    const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
+    const userId = decode.user.id
+
+    const user = await library.getOneUser(+userId)
+    if (user == null) {
+      return res.status(404).json('User was not found')
+    } else {
+      return res.send(user)
+    }
+  } catch (error) {
+    res.status(401).json(error)
+  }
+}
+
 // updateUser
 export const updateUser = async (req: Request, res: Response) => {
   try {

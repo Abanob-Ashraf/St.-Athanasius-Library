@@ -7,7 +7,8 @@ import {
   authenticateUser,
   getManyUsers,
   getOneUser,
-  getAllDeletedUsers
+  getAllDeletedUsers,
+  getMine
 } from '../../controllers/users'
 
 const routes = Router()
@@ -19,6 +20,8 @@ routes.route('/login').get(authenticateUser)
 routes.route('/deleted').get(authorize, admin, getAllDeletedUsers)
 
 routes.route('/').get(authorize, admin, getManyUsers)
+
+routes.route('/me').get(authorize, getMine)
 
 routes.route('/:id').get(authorize, admin, getOneUser)
 
