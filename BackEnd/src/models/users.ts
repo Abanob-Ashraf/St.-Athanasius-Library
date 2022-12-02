@@ -5,7 +5,7 @@ import {
   AUTHANTICATE2,
   CREATEUSER,
   DELETEUSER,
-  GETALLDELETEDUSERS,
+  GETALLUNAVILABLEUSERS,
   GETMANYUSERS,
   GETONEUSER,
   SELECTSTATUS,
@@ -163,11 +163,11 @@ export class UsersModel {
     }
   }
 
-  // getAllDeletedUsers
-  async getAllDeletedUsers(): Promise<User[]> {
+  // getAllUnAvilableUsers
+  async getAllUnAvilableUsers(): Promise<User[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(GETALLDELETEDUSERS)
+      const result = await connection.query(GETALLUNAVILABLEUSERS)
       const user = result.rows
       connection.release()
       return user

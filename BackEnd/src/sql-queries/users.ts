@@ -30,4 +30,4 @@ export const AUTHANTICATE2 =
   'SELECT id, first_name, last_name, email, admin_flag FROM users WHERE email=($1)'
 
 //getAll Deleted Users
-export const GETALLDELETEDUSERS = `SELECT * FROM users WHERE user_status = 'NOT AVILABLE'`
+export const GETALLUNAVILABLEUSERS = `SELECT * FROM users WHERE user_status = 'NOT AVILABLE'`

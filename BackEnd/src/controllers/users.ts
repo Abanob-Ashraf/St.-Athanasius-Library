@@ -135,10 +135,10 @@ export const authenticateUser = async (req: Request, res: Response) => {
   }
 }
 
-// getAllDeletedUsers
-export const getAllDeletedUsers = async (_req: Request, res: Response) => {
+// getAllUnAvilableUsers
+export const getAllUnAvilableUsers = async (_req: Request, res: Response) => {
   try {
-    const users = await library.getAllDeletedUsers()
+    const users = await library.getAllUnAvilableUsers()
     return res.status(200).send(users)
   } catch (error) {
     res.status(401).json(error)

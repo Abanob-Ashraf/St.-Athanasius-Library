@@ -7,7 +7,7 @@ import {
   authenticateUser,
   getManyUsers,
   getOneUser,
-  getAllDeletedUsers,
+  getAllUnAvilableUsers,
   getMine
 } from '../../controllers/users'
 
@@ -17,7 +17,7 @@ routes.route('/signup').post(createUser)
 
 routes.route('/login').get(authenticateUser)
 
-routes.route('/deleted').get(authorize, admin, getAllDeletedUsers)
+routes.route('/unavilable').get(authorize, admin, getAllUnAvilableUsers)
 
 routes.route('/').get(authorize, admin, getManyUsers)
 
