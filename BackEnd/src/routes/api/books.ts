@@ -6,12 +6,15 @@ import {
   getManyBooks,
   getBookById,
   getBookByName,
-  updateBook
+  updateBook,
+  getUserBooks
 } from '../../controllers/books'
 
 const routes = Router()
 
 routes.route('/').post(authorize, createBook)
+
+routes.route('/mybooks').get(authorize, getUserBooks)
 
 routes.route('/').get(getManyBooks)
 

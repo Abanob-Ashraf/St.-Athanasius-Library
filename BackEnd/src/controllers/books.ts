@@ -76,17 +76,37 @@ export const getBookByName = async (req: Request, res: Response) => {
   }
 }
 
+export const getUserBooks = async (req: Request, res: Response) => {
+  try {
+    const token = req.header('Authorization')?.replace('Bearer ', '') as string
+    const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
+    const userId = decode.user.id
+    const book = await library.getUserBooks(userId)
+    if (book == null) {
+      return res.status(404).json('you have not books yet')
+    } else {
+      return res.send(book)
+    }
+  } catch (error) {
+    res.status(401).json(error)
+  }
+}
+
 export const updateBook = async (req: Request, res: Response) => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '') as string
     const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
     const userId = decode.user.id
+    const userRole = decode.user.admin_flag
 
     const getUserBook = await library.getOneBookById(+req.params.id)
     if (getUserBook == null) {
       return res.status(404).json('Book was not found')
     }
+    console.log(userId)
+    console.log(userRole)
     const isId = getUserBook['user_id']
+    console.log(isId)
 
     if (userId == isId) {
       const book = {
@@ -106,7 +126,27 @@ export const updateBook = async (req: Request, res: Response) => {
         created_date: new Date(),
         updated_date: new Date()
       }
-
+      const updatedBook = await library.updateBook(book)
+      return res.send(updatedBook)
+    }
+    if (userRole) {
+      const book = {
+        id: +req.params.id,
+        book_code: req.body.book_code,
+        book_name: req.body.book_name,
+        author: req.body.author,
+        number_of_copies: req.body.number_of_copies,
+        number_of_pages: req.body.number_of_pages,
+        number_of_parts: req.body.number_of_parts,
+        name_of_series: req.body.name_of_series,
+        conclusion: req.body.conclusion,
+        user_id: userId,
+        old_user: isId,
+        shelf_id: req.body.shelf_id,
+        book_number_in_shelf: req.body.book_number_in_shelf,
+        created_date: new Date(),
+        updated_date: new Date()
+      }
       const updatedBook = await library.updateBook(book)
       return res.send(updatedBook)
     } else {

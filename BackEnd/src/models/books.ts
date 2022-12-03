@@ -6,7 +6,8 @@ import {
   DELETEBOOK,
   GETMANYBOOKS,
   GETONEBOOKBYNAME,
-  CHECKIFBOOKINTHISSHELF
+  CHECKIFBOOKINTHISSHELF,
+  GETMYBOOKS
 } from '../sql-queries/books'
 
 export type Book = {
@@ -108,6 +109,23 @@ export class BooksModel {
       return result.rows[0]
     } catch (error) {
       throw new Error(`Unable to get book ${book_name}, ${(error as Error).message}`)
+    }
+  }
+
+  // getUserBooks
+  async getUserBooks(user_id: number): Promise<Book[] | null> {
+    try {
+      const connection = await Client.connect()
+      const result = await connection.query(GETMYBOOKS, [user_id])
+      if (result.rows.length) {
+        const book = result.rows
+        connection.release()
+        return book
+      }
+      connection.release()
+      return null
+    } catch (error) {
+      throw new Error(`Unable to get books, ${(error as Error).message}`)
     }
   }
 
