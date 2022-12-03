@@ -4,7 +4,9 @@ import {
   UPDATESHELF,
   GETONESHELF,
   DELETESHELF,
-  GETMANYSHELFS
+  GETMANYSHELFS,
+  GETMANYSHELFS_BLOCKSID,
+  CHECKIFSHELFINTHISBLOCK
 } from '../sql-queries/shelfs'
 
 export type Shelf = {
@@ -18,19 +20,24 @@ export type Shelf = {
 
 export class ShelfsModel {
   // createShelf
-  async createShelf(sh: Shelf): Promise<Shelf> {
+  async createShelf(sh: Shelf): Promise<Shelf | null> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(CREATESHELF, [
-        sh.shelf_number,
-        sh.shelf_name,
-        sh.block_id,
-        sh.created_date,
-        sh.updated_date
-      ])
-      const shelf = result.rows[0]
+      const test = await connection.query(CHECKIFSHELFINTHISBLOCK, [sh.shelf_number, sh.block_id])
+      if (!test.rows.length) {
+        const result = await connection.query(CREATESHELF, [
+          sh.shelf_number,
+          sh.shelf_name,
+          sh.block_id,
+          sh.created_date,
+          sh.updated_date
+        ])
+        const shelf = result.rows[0]
+        connection.release()
+        return shelf
+      }
       connection.release()
-      return shelf
+      return null
     } catch (error) {
       throw new Error(`Unable to create ${sh.shelf_number}, ${(error as Error).message}`)
     }
@@ -63,6 +70,23 @@ export class ShelfsModel {
       return result.rows[0]
     } catch (error) {
       throw new Error(`Unable to get shelf ${id}, ${(error as Error).message}`)
+    }
+  }
+
+  // GETMANYSHELFS_BLOCKSID
+  async getShelfsWithBlockId(id: number): Promise<Shelf[] | null> {
+    try {
+      const connection = await Client.connect()
+      const result = await connection.query(GETMANYSHELFS_BLOCKSID, [id])
+      if (result.rows.length) {
+        const shelf = result.rows
+        connection.release()
+        return shelf
+      }
+      connection.release()
+      return null
+    } catch (error) {
+      throw new Error(`Unable to get shelfs, ${(error as Error).message}`)
     }
   }
 

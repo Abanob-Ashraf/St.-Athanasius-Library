@@ -3,9 +3,6 @@ export const CREATEBLOCK =
 
 export const GETMANYBLOCKS = 'SELECT * FROM blocks'
 
-export const GETMANYSHELFS_BLOCKSID =
-  'SELECT shelfs.id, shelf_number FROM shelfs WHERE block_id =($1)'
-
 export const GETONEBLOCK = 'SELECT * FROM blocks WHERE id=($1)'
 
 export const UPDATEBLOCK =

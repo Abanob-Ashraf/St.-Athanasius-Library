@@ -15,7 +15,11 @@ export const createShelf = async (req: Request, res: Response) => {
       id: undefined as unknown as number
     }
     const newShelf = await library.createShelf(shelf)
-    res.status(200).json(newShelf)
+    if (newShelf == null) {
+      return res.status(404).json('Error you have this shelf in this block')
+    } else {
+      return res.send(newShelf)
+    }
   } catch (error) {
     res.status(400).json(error)
   }
@@ -37,6 +41,20 @@ export const getOneShelf = async (req: Request, res: Response) => {
     const shelf = await library.getOneShelf(+req.params.id)
     if (shelf == null) {
       return res.status(404).json('Shelf was not found')
+    } else {
+      return res.send(shelf)
+    }
+  } catch (error) {
+    res.status(401).json(error)
+  }
+}
+
+// getOneShelf
+export const getShelfsWithBlockId = async (req: Request, res: Response) => {
+  try {
+    const shelf = await library.getShelfsWithBlockId(+req.params.id)
+    if (shelf == null) {
+      return res.status(404).json('this block was not found')
     } else {
       return res.send(shelf)
     }
