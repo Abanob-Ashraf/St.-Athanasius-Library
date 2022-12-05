@@ -10,29 +10,32 @@ For example: `http://localhost:port:3000`
 
 #### Root
 
-| - FUNCTIONS | - Methos | - Routes | - Description            | Token Required |
-| :---------: | :------: | -------- | ------------------------ | :------------: |
-|    -----    |   GET    | /        | Welcome Message for user |     FALSE      |
+| - FUNCTIONS | - Methos | - Routes |      - Description       | Token Required |
+| :---------: | :------: | :------: | :----------------------: | :------------: |
+|    -----    |   GET    | /library | Welcome Message for user |     FALSE      |
 
 #### Users
 
-| - FUNCTIONS | - Methos | - Routes   | - Description               | Token Required |
-| :---------: | :------: | ---------- | --------------------------- | :------------: |
-|    Index    |   GET    | /users     | Show all users              |      TRUE      |
-|    Show     |   GET    | /users/:id | Search for one user with ID |      TRUE      |
-|   Create    |   POST   | /users     | Create new user             |     FALSE      |
-|   Update    |   PUT    | /users/:id | Update a user with ID       |      TRUE      |
-|   Delete    |  DELETE  | /users/:id | Delete a user with ID       |      TRUE      |
+|      - FUNCTIONS      | - Methos |     - Routes      |        - Description        | Token Required | Admin Required |
+| :-------------------: | :------: | :---------------: | :-------------------------: | :------------: | :------------: |
+|      createUser       |   POST   |   /users/signup   |       Create new user       |     FALSE      |     FALSE      |
+|   authenticateUser    |   GET    |   /users/login    |        login a user         |     FALSE      |     FALSE      |
+|        getMine        |   GET    |     /users/me     |     Show my information     |      TRUE      |     FALSE      |
+|     getManyUsers      |   GET    |      /users       |       Show all users        |      TRUE      |      TRUE      |
+|      getOneUser       |   GET    |    /users/:id     | Search for one user with ID |      TRUE      |      TRUE      |
+|      updateUser       |   PUT    |    /users/:id     |    Update a user with ID    |      TRUE      |     FALSE      |
+|      deleteUser       |  DELETE  |    /users/:id     |    Delete a user with ID    |      TRUE      |      TRUE      |
+| getAllUnAvilableUsers |   GET    | /users/unavilable |  Get all unavilable users   |      TRUE      |      TRUE      |
 
 #### Blocks
 
-| - FUNCTIONS | - Methos | - Routes    | - Description                | Token Required |
-| :---------: | :------: | ----------- | ---------------------------- | :------------: |
-|    Index    |   GET    | /blocks     | Show all blocks              |      TRUE      |
+| - FUNCTIONS | - Methos |  - Routes   |        - Description         | Token Required | Admin Required |
+| :---------: | :------: | :---------: | :--------------------------: | :------------: | :------------: |
+|    Index    |   GET    |   /blocks   |       Show all blocks        |      TRUE      |
 |    Show     |   GET    | /blocks/:id | Search for one block with ID |      TRUE      |
-|   Create    |   POST   | /blocks     | Create new block             |      TRUE      |
-|   Update    |   PUT    | /blocks/:id | Update a block with ID       |      TRUE      |
-|   Delete    |  DELETE  | /blocks/:id | Delete a block with ID       |      TRUE      |
+|   Create    |   POST   |   /blocks   |       Create new block       |      TRUE      |
+|   Update    |   PUT    | /blocks/:id |    Update a block with ID    |      TRUE      |
+|   Delete    |  DELETE  | /blocks/:id |    Delete a block with ID    |      TRUE      |
 
 #### Shelfs
 

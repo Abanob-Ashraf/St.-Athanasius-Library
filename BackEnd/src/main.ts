@@ -33,13 +33,6 @@ app.use(
   })
 )
 
-// add routing for / path
-app.get('/', (_req: Request, res: Response) => {
-  res.json({
-    message: 'Hello To my library 🌍'
-  })
-})
-
 app.use('/library', routes)
 
 app.use((_: Request, res: Response) => {

@@ -17,15 +17,15 @@ routes.route('/signup').post(createUser)
 
 routes.route('/login').get(authenticateUser)
 
+routes.route('/me').get(authorize, getMine)
+
 routes.route('/unavilable').get(authorize, admin, getAllUnAvilableUsers)
 
 routes.route('/').get(authorize, admin, getManyUsers)
 
-routes.route('/me').get(authorize, getMine)
-
 routes.route('/:id').get(authorize, admin, getOneUser)
 
-routes.route('/:id').put(authorize, admin, updateUser)
+routes.route('/:id').put(authorize, updateUser)
 
 routes.route('/:id').delete(authorize, admin, deleteUser)
 
