@@ -26,8 +26,8 @@ npm install
 
 ```sh
 # create Database
-CREATE DATABASE storefrontbackend; 
-CREATE DATABASE storefrontbackend_test;
+CREATE DATABASE librarydb; 
+CREATE DATABASE librarydb_test;
 ```
 
 #### Database Migrations
@@ -50,19 +50,20 @@ db-migrate create books-table --sql-file
 ### 3. Environmental Variables (.env file contents)
 
 ```sh
-POSTGRES_HOST=127.0.0.1
-DB_PORT=5432
-POSTGRES_DB=librarydb
-POSTGRES_DB_TEST=librarydb_test
-POSTGRES_USER=abano
-POSTGRES_PASSWORD=abanob
-ENV=dev
-
 PORT=3000
-
+ENV=dev
+# Set your database connection information here
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_NAME=librarydb
+DB_NAME_TEST=librarydb_test
+DB_USER=abano
+DB_PASSWORD=abanob
+# authentication
 BCRYPT_PASSWORD=your-secret-password
 SALT_ROUND=10
 TOKEN_SECRET=your-secret-token
+JWT_EXPIRES_IN=24h
 ```
 
 ### 4. Build Project
@@ -98,7 +99,7 @@ Here, test cases to test the project and also check that the code respects all t
 ```sh
 # 1. Linting
 
-npm run lint
+npm run lint:fix
 
 # 2. prettiering
 
