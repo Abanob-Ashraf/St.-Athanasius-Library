@@ -12,7 +12,7 @@ export const createUser = async (req: Request, res: Response) => {
       last_name: req.body.last_name,
       email: req.body.email,
       password: req.body.password,
-      admin_flag: req.body.admin_flag,
+      admin_flag: req.body.admin_flag || 'false',
       user_status: 'AVILABLE',
       created_date: new Date(),
       updated_date: new Date(),

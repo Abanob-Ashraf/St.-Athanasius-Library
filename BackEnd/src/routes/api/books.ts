@@ -14,7 +14,7 @@ const routes = Router()
 
 routes.route('/').post(authorize, createBook)
 
-routes.route('/mybooks').get(authorize, getUserBooks)
+routes.route('/user/mybooks').get(authorize, getUserBooks)
 
 routes.route('/').get(getManyBooks)
 

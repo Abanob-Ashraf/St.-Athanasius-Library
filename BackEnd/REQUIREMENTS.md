@@ -10,53 +10,55 @@ For example: `http://localhost:port:3000`
 
 #### Root
 
-| - FUNCTIONS | - Methos | - Routes |      - Description       | Token Required |
-| :---------: | :------: | :------: | :----------------------: | :------------: |
-|    -----    |   GET    | /library | Welcome Message for user |     FALSE      |
+| - FUNCTIONS | - Methos | - Routes |      - Description       | - Token Required | - Admin Required |
+| :---------: | :------: | :------: | :----------------------: | :--------------: | :--------------: |
+|    -----    |   GET    | /library | Welcome Message for user |      FALSE       |      FALSE       |
 
 #### Users
 
-|      - FUNCTIONS      | - Methos |     - Routes      |        - Description        | Token Required | Admin Required |
-| :-------------------: | :------: | :---------------: | :-------------------------: | :------------: | :------------: |
-|      createUser       |   POST   |   /users/signup   |       Create new user       |     FALSE      |     FALSE      |
-|   authenticateUser    |   GET    |   /users/login    |        login a user         |     FALSE      |     FALSE      |
-|        getMine        |   GET    |     /users/me     |     Show my information     |      TRUE      |     FALSE      |
-|     getManyUsers      |   GET    |      /users       |       Show all users        |      TRUE      |      TRUE      |
-|      getOneUser       |   GET    |    /users/:id     | Search for one user with ID |      TRUE      |      TRUE      |
-|      updateUser       |   PUT    |    /users/:id     |    Update a user with ID    |      TRUE      |     FALSE      |
-|      deleteUser       |  DELETE  |    /users/:id     |    Delete a user with ID    |      TRUE      |      TRUE      |
-| getAllUnAvilableUsers |   GET    | /users/unavilable |  Get all unavilable users   |      TRUE      |      TRUE      |
+|      - FUNCTIONS      | - Methos |     - Routes      |        - Description        | - Token Required | - Admin Required |
+| :-------------------: | :------: | :---------------: | :-------------------------: | :--------------: | :--------------: |
+|      createUser       |   POST   |   /users/signup   |       Create new user       |      FALSE       |      FALSE       |
+|   authenticateUser    |   GET    |   /users/login    |        login a user         |      FALSE       |      FALSE       |
+|        getMine        |   GET    |     /users/me     |     Show my information     |       TRUE       |      FALSE       |
+|     getManyUsers      |   GET    |      /users       |       Show all users        |       TRUE       |       TRUE       |
+|      getOneUser       |   GET    |    /users/:id     | Search for one user with ID |       TRUE       |       TRUE       |
+|      updateUser       |   PUT    |    /users/:id     |    Update a user with ID    |       TRUE       |      FALSE       |
+|      deleteUser       |  DELETE  |    /users/:id     |    Delete a user with ID    |       TRUE       |       TRUE       |
+| getAllUnAvilableUsers |   GET    | /users/unavilable |  Get all unavilable users   |       TRUE       |       TRUE       |
 
 #### Blocks
 
-| - FUNCTIONS | - Methos |  - Routes   |        - Description         | Token Required | Admin Required |
-| :---------: | :------: | :---------: | :--------------------------: | :------------: | :------------: |
-|    Index    |   GET    |   /blocks   |       Show all blocks        |      TRUE      |
-|    Show     |   GET    | /blocks/:id | Search for one block with ID |      TRUE      |
-|   Create    |   POST   |   /blocks   |       Create new block       |      TRUE      |
-|   Update    |   PUT    | /blocks/:id |    Update a block with ID    |      TRUE      |
-|   Delete    |  DELETE  | /blocks/:id |    Delete a block with ID    |      TRUE      |
+|  - FUNCTIONS  | - Methos |  - Routes   |        - Description         | - Token Required | Admin Required |
+| :-----------: | :------: | :---------: | :--------------------------: | :--------------: | :------------: |
+|  createBlock  |   POST   |   /blocks   |       Create new block       |       TRUE       |      TRUE      |
+| getManyBlocks |   GET    |   /blocks   |       Show all blocks        |       TRUE       |     FALSE      |
+|  getOneBlock  |   GET    | /blocks/:id | Search for one block with ID |       TRUE       |     FALSE      |
+|  updateBlock  |   PUT    | /blocks/:id |    Update a block with ID    |       TRUE       |      TRUE      |
+|  deleteBlock  |  DELETE  | /blocks/:id |    Delete a block with ID    |       TRUE       |      TRUE      |
 
 #### Shelfs
 
-| - FUNCTIONS | - Methos | - Routes    | - Description                | Token Required |
-| :---------: | :------: | ----------- | ---------------------------- | :------------: |
-|    Index    |   GET    | /shelfs     | Show all shelfs              |      TRUE      |
-|    Show     |   GET    | /shelfs/:id | Search for one shelf with ID |      TRUE      |
-|   Create    |   POST   | /shelfs     | Create new shelf             |      TRUE      |
-|   Update    |   PUT    | /shelfs/:id | Update a shelf with ID       |      TRUE      |
-|   Delete    |  DELETE  | /shelfs/:id | Delete a shelf with ID       |      TRUE      |
+|     - FUNCTIONS      | - Methos |     - Routes      |           - Description            | - Token Required | Admin Required |
+| :------------------: | :------: | :---------------: | :--------------------------------: | :--------------: | :------------: |
+|     createShelf      |   POST   |      /shelfs      |          Create new shelf          |       TRUE       |      TRUE      |
+|    getManyShelfs     |   GET    |      /shelfs      |          Show all shelfs           |       TRUE       |     FALSE      |
+|     getOneShelf      |   GET    |    /shelfs/:id    |    Search for one shelf with ID    |       TRUE       |     FALSE      |
+| getShelfsWithBlockId |   GET    | /shelfs/block/:id | Search for one shelf with block ID |       TRUE       |     FALSE      |
+|     updateShelf      |   PUT    |    /shelfs/:id    |       Update a shelf with ID       |       TRUE       |      TRUE      |
+|     deleteShelf      |  DELETE  |    /shelfs/:id    |       Delete a shelf with ID       |       TRUE       |      TRUE      |
 
 #### Books
 
-| - FUNCTIONS | - Methos | - Routes    | - Description                 | Token Required |
-| :---------: | :------: | ----------- | ----------------------------- | :------------: |
-|    Index    |   GET    | /books      | Show all books                |      TRUE      |
-| ShowByname  |   GET    | /books/name | Search for one book with Name |      TRUE      |
-|    Show     |   GET    | /books/:id  | Search for one book with ID   |      TRUE      |
-|   Create    |   POST   | /books      | Create new book               |      TRUE      |
-|   Update    |   PUT    | /books/:id  | Update a book with ID         |      TRUE      |
-|   Delete    |  DELETE  | /books/:id  | Delete a book with ID         |      TRUE      |
+|  - FUNCTIONS  | - Methos |      - Routes       |         - Description         | - Token Required | Admin Required |
+| :-----------: | :------: | :-----------------: | :---------------------------: | :--------------: | :------------: |
+|  createBook   |   POST   |       /books        |        Create new book        |       TRUE       |     FALSE      |
+| getManyBooks  |   GET    |       /books        |        Show all books         |      FALSE       |     FALSE      |
+| getUserBooks  |   GET    | /books/user/mybooks |         Show my books         |       TRUE       |     FALSE      |
+| getBookByName |   GET    |     /books/name     | Search for one book with Name |      FALSE       |     FALSE      |
+|  getBookById  |   GET    |     /books/:id      |  Search for one book with ID  |      FALSE       |     FALSE      |
+|  updateBook   |   PUT    |     /books/:id      |     Update a book with ID     |       TRUE       |     FALSE      |
+|  deleteBook   |  DELETE  |     /books/:id      |     Delete a book with ID     |       TRUE       |      TRUE      |
 
 ## Data Shapes
 
