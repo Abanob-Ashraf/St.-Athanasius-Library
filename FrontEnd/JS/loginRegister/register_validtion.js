@@ -18,13 +18,13 @@ form.addEventListener('submit', (e) => {
     validateForm();
     console.log(isFormValid());
     if(isFormValid () == true){
-        form.submit(send({
+        e.preventDefault()
+        send({
             first_name: firstName.value,
             last_name: lastName.value,
             email: email.value,
             password: password.value,
-            admin_flag: true
-        }))
+        })
     } else {
         e.preventDefault()
     }
