@@ -20,7 +20,9 @@
   "author": "Abanob Ashraf",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.13",
     "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "db-migrate": "^0.11.13",
     "db-migrate-pg": "^1.2.2",

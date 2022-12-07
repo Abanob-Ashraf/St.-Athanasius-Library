@@ -3,6 +3,7 @@ import morgan from 'morgan'
 import helmet from 'helmet'
 import rateLimit from 'express-rate-limit'
 import * as dotenv from 'dotenv'
+import cors from 'cors'
 
 import routes from './routes/main'
 
@@ -21,6 +22,7 @@ app.use(helmet())
 
 // middeewane to parse incoming requests
 app.use(express.json())
+app.use(cors())
 
 // Apply the rate limiting middleware to all requests
 app.use(
