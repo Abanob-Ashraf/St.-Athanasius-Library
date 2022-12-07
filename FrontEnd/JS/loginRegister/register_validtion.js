@@ -121,6 +121,7 @@ function send(data) {
     fetch('http://localhost:3000/library/users/signup',
         {
             method: 'POST',
+            // mode: "cors",
             headers: new Headers({'Content-Type': 'application/json'}),
             body: JSON.stringify(data)
         }).then(res => res.json())

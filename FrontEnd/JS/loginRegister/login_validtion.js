@@ -15,7 +15,11 @@ form.addEventListener('submit', (e) => {
     validateForm();
     console.log(isFormValid());
     if(isFormValid () == true){
-        form.submit();
+        e.preventDefault()
+        get({
+            email:userName.value,
+            password:password.value
+        })
     }else {
         e.preventDefault();
     }
@@ -80,8 +84,8 @@ function setSuccess(eValue){
 }
 
 // get UserData To Login
-function send(data) {
-    fetch('http://localhost:3000/library/users/signin',
+function get(data) {
+    fetch('http://localhost:3000/library/users/login',
         {
             method: 'GET',
             headers: new Headers({'Content-Type': 'application/json'}),

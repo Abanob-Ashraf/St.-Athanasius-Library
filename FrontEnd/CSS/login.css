@@ -87,7 +87,7 @@ a{
     align-items: center;
     color: var(--blackColor);
 }
-@media (max-width: 800px){
+@media (max-width:767px){
     .header{
         position: absolute;
         z-index: 100;
@@ -125,7 +125,7 @@ a{
     -o-border-radius: 50%;
 }
 
-@media (max-width: 800px){
+@media (max-width:767px){
     .page-container{
         min-height: 100vh;
     }
@@ -164,7 +164,7 @@ a{
     -o-transform: translate(-50%,-50%);
 }
 
-@media (max-width: 800px){
+@media (max-width:767px){
     .signin-form{
         width: 110%;
         left: 50%;
@@ -191,7 +191,7 @@ form {
     margin-bottom: 10px;
 }
 
-@media (max-width: 800px){
+@media (max-width:767px){
     .title{
         font-size: 26px;
         width: 350px;
@@ -210,11 +210,11 @@ form {
     justify-content: space-between;
 }
 
-    @media (max-width: 800px){
-        .input-field{
+@media (max-width:767px){
+    .input-field{
             width: 350px;
-        }
     }
+}
 
 .input-field i{
     width: 15%;
@@ -349,7 +349,7 @@ small{
     background-color: var(--secondColor);
 }
 
-@media (max-width: 1000px){
+@media (max-width:767px){
     .submit{
         width: 350px;
         flex-direction: column;
