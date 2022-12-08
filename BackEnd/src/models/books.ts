@@ -164,6 +164,31 @@ export class BooksModel {
           connection.release()
           return book
         }
+
+        const bookId = testBookinThisRank.rows[0]
+        const currentBook = bookId['id']
+        if (testBookinThisRank.rows.length && b.id === currentBook) {
+          const result = await connection.query(UPDATEBOOK, [
+            b.id,
+            b.book_code,
+            b.book_name,
+            b.author,
+            b.number_of_copies,
+            b.number_of_pages,
+            b.number_of_parts,
+            b.name_of_series,
+            b.conclusion,
+            b.currrent_user,
+            b.old_user,
+            b.shelf_id,
+            b.book_number_in_shelf,
+            b.who_edited,
+            b.updated_date
+          ])
+          const book = result.rows[0]
+          connection.release()
+          return book
+        }
         connection.release()
         return null
       }
