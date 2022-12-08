@@ -17,8 +17,7 @@ document.addEventListener("click",() => {
 form.addEventListener('submit', (e) => {
     validateForm();
     console.log(isFormValid());
-    if(isFormValid () == true){
-        e.preventDefault()
+    if(isFormValid() == true){
         send({
             first_name: firstName.value,
             last_name: lastName.value,

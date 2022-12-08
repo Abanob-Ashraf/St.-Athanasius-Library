@@ -1,8 +1,9 @@
 let form = document.forms[0];
 let inputFiled = document.querySelectorAll(".input-field");
 let content = document.querySelectorAll("small");
-let userName = document.getElementsByName("userName")[0];
+let email = document.getElementsByName("email")[0];
 let password = document.getElementsByName("password")[0];
+
 // Rander The Validtion On Page
 document.addEventListener("click",() => {
     inputFiled.forEach((e) => {
@@ -14,14 +15,11 @@ document.addEventListener("click",() => {
 form.addEventListener('submit', (e) => {
     validateForm();
     console.log(isFormValid());
-    if(isFormValid () == true){
+    if(isFormValid() == true){
         e.preventDefault()
-        get({
-            email:userName.value,
-            password:password.value
-        })
-    }else {
-        e.preventDefault();
+        get()
+    } else {
+        e.preventDefault()
     }
 
 });
@@ -40,21 +38,21 @@ function isFormValid(){
 
 // Validate Oprators
 function validateForm() {
-    let userNameValue = userName.value.trim();
+    let emailValue = email.value.trim();
     let passwordValue = password.value.trim();
 
-    // userName Validtion
-    if(userNameValue === ''){
-        setError(userName);
-        content[0].innerHTML = "الرجاء ادخال اسم المستخدم"
-    }else if(userNameValue.length < 3 || userNameValue.length > 25){
-        setError(userName);
-        content[0].innerHTML = "يرجي ان لا تزيد الاحرف عن 25 او اقل من 3 احرف"
-    }else {
-        setSuccess(userName);
+    // email Validtion
+    if(emailValue == ''){
+        setError(email);
+        content[0].innerHTML = "الرجاء ادخال البريد الالكتروني"
+    }else if(isEmailValid(emailValue)){
+        setSuccess(email);
+    }else{
+        setError(email);
+        content[0].innerHTML = "الرجاء ادخال البريد الالكتروني بالطريقه الصحيحه"
     }
     // password Validtion
-    if(passwordValue === ''){
+    if(passwordValue == ''){
         setError(password);
         content[1].innerHTML = "الرجاء ادخال كلمه المرور"
     }else if(passwordValue.length < 8 || passwordValue.length > 14){
@@ -83,13 +81,19 @@ function setSuccess(eValue){
     parentOfElement.classList.add('success');
 }
 
-// get UserData To Login
-function get(data) {
+// Email Regular Expretion Test (Valdition)
+function isEmailValid(e){
+    const reg =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    return reg.test(e);
+}
+
+// Send UserData
+function get() {
     fetch('http://localhost:3000/library/users/login',
         {
             method: 'GET',
+            // mode: "cors",
             headers: new Headers({'Content-Type': 'application/json'}),
-            body: JSON.stringify(data)
         }).then(res => res.json())
         .catch(e => console.log(e))
 }
