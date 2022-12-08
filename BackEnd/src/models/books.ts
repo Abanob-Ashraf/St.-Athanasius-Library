@@ -20,10 +20,11 @@ export type Book = {
   number_of_parts: number
   name_of_series: number
   conclusion: string
-  user_id: number
+  currrent_user: number
   old_user: null
   shelf_id: number
   book_number_in_shelf: number
+  who_edited: number
   created_date: Date
   updated_date: Date
 }
@@ -47,10 +48,11 @@ export class BooksModel {
           b.number_of_parts,
           b.name_of_series,
           b.conclusion,
-          b.user_id,
+          b.currrent_user,
           b.old_user,
           b.shelf_id,
           b.book_number_in_shelf,
+          b.who_edited,
           b.created_date,
           b.updated_date
         ])
@@ -130,34 +132,43 @@ export class BooksModel {
   }
 
   // updateBook
-  async updateBook(b: Book): Promise<Book> {
+  async updateBook(b: Book): Promise<Book | null> {
     try {
       const connection = await Client.connect()
 
-      const test = await connection.query(GETONEBOOKBYID, [b.id])
-      if (test.rows.length) {
-        const result = await connection.query(UPDATEBOOK, [
-          b.id,
-          b.book_code,
-          b.book_name,
-          b.author,
-          b.number_of_copies,
-          b.number_of_pages,
-          b.number_of_parts,
-          b.name_of_series,
-          b.conclusion,
-          b.user_id,
-          b.old_user,
+      const testBookNotFound = await connection.query(GETONEBOOKBYID, [b.id])
+      if (testBookNotFound.rows.length) {
+        const testBookinThisRank = await connection.query(CHECKIFBOOKINTHISSHELF, [
           b.shelf_id,
-          b.book_number_in_shelf,
-          b.updated_date
+          b.book_number_in_shelf
         ])
-        const book = result.rows[0]
+        if (!testBookinThisRank.rows.length) {
+          const result = await connection.query(UPDATEBOOK, [
+            b.id,
+            b.book_code,
+            b.book_name,
+            b.author,
+            b.number_of_copies,
+            b.number_of_pages,
+            b.number_of_parts,
+            b.name_of_series,
+            b.conclusion,
+            b.currrent_user,
+            b.old_user,
+            b.shelf_id,
+            b.book_number_in_shelf,
+            b.who_edited,
+            b.updated_date
+          ])
+          const book = result.rows[0]
+          connection.release()
+          return book
+        }
         connection.release()
-        return book
+        return null
       }
       connection.release()
-      return test.rows[0]
+      return testBookNotFound.rows[0]
     } catch (error) {
       throw new Error(`Unable to update ${b.id}, ${(error as Error).message}`)
     }

@@ -18,7 +18,6 @@ export const createUser = async (req: Request, res: Response) => {
       updated_date: new Date(),
       id: undefined as unknown as number
     }
-
     const newUser = await library.create(user)
     res.status(200).json(newUser)
   } catch (error) {

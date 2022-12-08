@@ -20,10 +20,11 @@ export const createBook = async (req: Request, res: Response) => {
       number_of_parts: req.body.number_of_parts,
       name_of_series: req.body.name_of_series,
       conclusion: req.body.conclusion,
-      user_id: userId,
+      currrent_user: userId,
       old_user: req.body.user_id,
       shelf_id: req.body.shelf_id,
       book_number_in_shelf: req.body.book_number_in_shelf,
+      who_edited: req.body.who_edited,
       created_date: new Date(),
       updated_date: new Date(),
       id: undefined as unknown as number
@@ -96,19 +97,16 @@ export const updateBook = async (req: Request, res: Response) => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '') as string
     const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
-    const userId = decode.user.id
-    const userRole = decode.user.admin_flag
+    const userWhoLoged = decode.user.id
+    const adminRole = decode.user.admin_flag
 
     const getUserBook = await library.getOneBookById(+req.params.id)
     if (getUserBook == null) {
       return res.status(404).json('Book was not found')
     }
-    console.log(userId)
-    console.log(userRole)
-    const isId = getUserBook['user_id']
-    console.log(isId)
+    const currentUser = getUserBook['currrent_user']
 
-    if (userId == isId) {
+    if (userWhoLoged == currentUser) {
       const book = {
         id: +req.params.id,
         book_code: req.body.book_code,
@@ -119,17 +117,22 @@ export const updateBook = async (req: Request, res: Response) => {
         number_of_parts: req.body.number_of_parts,
         name_of_series: req.body.name_of_series,
         conclusion: req.body.conclusion,
-        user_id: userId,
+        currrent_user: userWhoLoged,
         old_user: req.body.old_user,
         shelf_id: req.body.shelf_id,
         book_number_in_shelf: req.body.book_number_in_shelf,
+        who_edited: userWhoLoged,
         created_date: new Date(),
         updated_date: new Date()
       }
       const updatedBook = await library.updateBook(book)
-      return res.send(updatedBook)
+      if (updatedBook == null) {
+        return res.status(404).json('Error you have a book in this rank')
+      } else {
+        return res.send(updatedBook)
+      }
     }
-    if (userRole) {
+    if (adminRole) {
       const book = {
         id: +req.params.id,
         book_code: req.body.book_code,
@@ -140,15 +143,20 @@ export const updateBook = async (req: Request, res: Response) => {
         number_of_parts: req.body.number_of_parts,
         name_of_series: req.body.name_of_series,
         conclusion: req.body.conclusion,
-        user_id: userId,
-        old_user: isId,
+        currrent_user: currentUser,
+        old_user: req.body.old_user,
         shelf_id: req.body.shelf_id,
         book_number_in_shelf: req.body.book_number_in_shelf,
+        who_edited: userWhoLoged,
         created_date: new Date(),
         updated_date: new Date()
       }
       const updatedBook = await library.updateBook(book)
-      return res.send(updatedBook)
+      if (updatedBook == null) {
+        return res.status(404).json('Error you have a book in this rank')
+      } else {
+        return res.send(updatedBook)
+      }
     } else {
       return res.status(401).json('you cant edite this book')
     }
