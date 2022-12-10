@@ -91,9 +91,16 @@ function isEmailValid(e){
 function get() {
     fetch('http://localhost:3000/library/users/login',
         {
-            method: 'GET',
+            method: 'POST',
             // mode: "cors",
             headers: new Headers({'Content-Type': 'application/json'}),
+            body: JSON.stringify({
+                email: email.value,
+                password: password.value
+            })
         }).then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
         .catch(e => console.log(e))
 }

@@ -18,12 +18,8 @@ form.addEventListener('submit', (e) => {
     validateForm();
     console.log(isFormValid());
     if(isFormValid() == true){
-        send({
-            first_name: firstName.value,
-            last_name: lastName.value,
-            email: email.value,
-            password: password.value,
-        })
+        e.preventDefault()
+        send()
     } else {
         e.preventDefault()
     }
@@ -122,7 +118,12 @@ function send(data) {
             method: 'POST',
             // mode: "cors",
             headers: new Headers({'Content-Type': 'application/json'}),
-            body: JSON.stringify(data)
+            body: JSON.stringify({
+                first_name: firstName.value,
+                last_name: lastName.value,
+                email: email.value,
+                password: password.value,
+            })
         }).then(res => res.json())
         .catch(e => console.log(e))
 }

@@ -15,7 +15,7 @@ const routes = Router()
 
 routes.route('/signup').post(createUser)
 
-routes.route('/login').get(authenticateUser)
+routes.route('/login').post(authenticateUser)
 
 routes.route('/me').get(authorize, getMine)
 
