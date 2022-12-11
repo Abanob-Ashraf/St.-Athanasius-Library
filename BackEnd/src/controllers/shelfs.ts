@@ -49,7 +49,7 @@ export const getOneShelf = async (req: Request, res: Response) => {
   }
 }
 
-// getOneShelf
+// getShelfsWithBlockId
 export const getShelfsWithBlockId = async (req: Request, res: Response) => {
   try {
     const shelf = await library.getShelfsWithBlockId(+req.params.id)
