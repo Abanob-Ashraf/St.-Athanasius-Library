@@ -27,7 +27,7 @@ export const UPDATEBOOKAFTERDELETEUSER =
 export const AUTHANTICATE = 'SELECT password FROM users WHERE email=($1)'
 
 export const AUTHANTICATE2 =
-  'SELECT id, first_name, last_name, email, admin_flag FROM users WHERE email=($1)'
+  'SELECT id, first_name, last_name, email, admin_flag, user_status FROM users WHERE email=($1)'
 
 //getAll Deleted Users
 export const GETALLUNAVILABLEUSERS = `SELECT * FROM users WHERE user_status = 'NOT AVILABLE'`
