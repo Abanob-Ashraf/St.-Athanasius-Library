@@ -63,13 +63,16 @@ function validateForm() {
 
 // Validate Oprators From Data Base
 function validateFromDataBase(data){
-    if(email.value != data){
+    if(email.value != data.email){
         setError(email);
         setError(password);
         content[0].innerHTML = "البريد الالكتروني غير موجود"
         content[1].innerHTML = "او كلمه المرور غير صحيحه"
     }else{
-        console.log(data)
+        sessionStorage.setItem("name",`${data.first_name} ${data.last_name}`)
+        sessionStorage.setItem("email",data.email)
+        sessionStorage.setItem("token",data.token)
+        location.href = "/index.html"
     }
 }
 
@@ -110,7 +113,7 @@ function get() {
             })
         }).then(res => res.json())
         .then(res => {
-            validateFromDataBase(res.email)
+            validateFromDataBase(res)
         })
         .catch(e => console.log(e))
 }
