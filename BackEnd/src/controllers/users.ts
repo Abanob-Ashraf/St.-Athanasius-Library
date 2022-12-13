@@ -128,6 +128,9 @@ export const authenticateUser = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(401).json('the username and password do not match please try again')
     }
+    if (user['user_status'] == 'NOT AVILABLE') {
+      return res.status(401).json('you can not login contact with admin')
+    }
     return res.json({ ...user, token })
   } catch (error) {
     res.status(401).json(error)
