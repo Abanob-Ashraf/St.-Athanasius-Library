@@ -5,12 +5,14 @@ let firstName = document.getElementsByName("firstName")[0];
 let lastName = document.getElementsByName("lastName")[0];
 let email = document.getElementsByName("email")[0];
 let password = document.getElementsByName("password")[0];
+let successMsg = document.querySelector(".success-register")
 
 // Rander The Validtion On Page
 document.addEventListener("click",() => {
     inputFiled.forEach((e) => {
         e.classList.remove("success","error");
     });
+    successMsg.style.display = "none"
 });
 
 // Submit Form
@@ -18,8 +20,8 @@ form.addEventListener('submit', (e) => {
     validateForm();
     console.log(isFormValid());
     if(isFormValid() == true){
-        e.preventDefault()
         send()
+        successMsg.style.display = "block"
     } else {
         e.preventDefault()
     }
@@ -112,8 +114,8 @@ function isEmailValid(e){
 }
 
 // Send UserData
-function send(data) {
-    fetch('http://localhost:3000/library/users/signup',
+function send() {
+     fetch('http://localhost:3000/library/users/signup',
         {
             method: 'POST',
             // mode: "cors",

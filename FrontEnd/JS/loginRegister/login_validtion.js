@@ -47,7 +47,8 @@ function validateForm() {
         content[0].innerHTML = "الرجاء ادخال البريد الالكتروني"
     }else if(isEmailValid(emailValue)){
         setSuccess(email);
-    }else{
+    }
+    else{
         setError(email);
         content[0].innerHTML = "الرجاء ادخال البريد الالكتروني بالطريقه الصحيحه"
     }
@@ -55,11 +56,20 @@ function validateForm() {
     if(passwordValue == ''){
         setError(password);
         content[1].innerHTML = "الرجاء ادخال كلمه المرور"
-    }else if(passwordValue.length < 8 || passwordValue.length > 14){
-        setError(password);
-        content[1].innerHTML = "يرجي ان لا تزيد الاحرف عن 14 او اقل من 8 احرف"
     }else {
         setSuccess(password);
+    }
+}
+
+// Validate Oprators From Data Base
+function validateFromDataBase(data){
+    if(email.value != data){
+        setError(email);
+        setError(password);
+        content[0].innerHTML = "البريد الالكتروني غير موجود"
+        content[1].innerHTML = "او كلمه المرور غير صحيحه"
+    }else{
+        console.log(data)
     }
 }
 
@@ -87,7 +97,7 @@ function isEmailValid(e){
     return reg.test(e);
 }
 
-// Send UserData
+// Get UserData
 function get() {
     fetch('http://localhost:3000/library/users/login',
         {
@@ -99,8 +109,8 @@ function get() {
                 password: password.value
             })
         }).then(res => res.json())
-        .then(data => {
-            console.log(data)
+        .then(res => {
+            validateFromDataBase(res.email)
         })
         .catch(e => console.log(e))
 }

@@ -87,7 +87,7 @@ a{
     align-items: center;
     color: var(--blackColor);
 }
-@media (max-width:767px){
+@media (max-width:1000px){
     .header{
         position: absolute;
         z-index: 100;
@@ -124,8 +124,7 @@ a{
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
 }
-
-@media (max-width:767px){
+@media (min-height:700px) and (max-width:1000px){
     .page-container{
         min-height: 100vh;
     }
@@ -134,7 +133,31 @@ a{
         position: absolute;
         height: 2000px;
         width: 2000px;
-        top: -420%;
+        top: -357%;
+        right: 50%;
+        background-image: linear-gradient(-45deg, var(--mainColor) 0%, var(--secondColor) 100%);
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        transform: translate(50%,50%);
+        -webkit-transform: translate(50%,50%);
+        -moz-transform: translate(50%,50%);
+        -ms-transform: translate(50%,50%);
+        -o-transform: translate(50%,50%);
+    }
+}
+@media (max-height:750px) and (min-width:300px){
+    .page-container{
+        min-height: 100vh;
+    }
+    .page-container:before {
+        content: "";
+        position: absolute;
+        height: 2000px;
+        width: 2000px;
+        top: -396%;
         right: 50%;
         background-image: linear-gradient(-45deg, var(--mainColor) 0%, var(--secondColor) 100%);
         border-radius: 50%;
@@ -164,7 +187,7 @@ a{
     -o-transform: translate(-50%,-50%);
 }
 
-@media (max-width:767px){
+@media (max-width:1000px){
     .signup-form{
         width: 115%;
         left: 50%;
@@ -177,6 +200,40 @@ a{
     }
 }
 /* Form */
+
+/* Success Register */
+.success-register{
+    position: absolute;
+    border: 2px solid var(--mainColor);
+    background-color: var(--whiteColor);
+    padding: 10px 20px;
+    top: -10%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    font-size: 18px;
+    font-weight: 600;
+    display: none;
+}
+.success-register a{
+    color: var(--successColor);
+}
+@media (max-width:1000px){
+    .success-register{
+        top: -14%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
+        -moz-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        -o-transform: translate(-50%,-50%);
+    }
+}
+/* End Success Register */
+
 form {
     display: flex;
     align-items: center;
@@ -191,7 +248,7 @@ form {
     margin-bottom: 10px;
 }
 
-@media (max-width:767px){
+@media (max-width:1000px){
     .title{
         font-size: 26px;
         width: 350px;
@@ -210,7 +267,7 @@ form {
     justify-content: space-between;
 }
 
-@media (max-width:767px){
+@media (max-width:1000px){
     .input-field{
             width: 350px;
     }
@@ -349,7 +406,7 @@ small{
     background-color: var(--secondColor);
 }
 
-@media (max-width:767px){
+@media (max-width:1000px){
     .submit{
         width: 350px;
         flex-direction: column;

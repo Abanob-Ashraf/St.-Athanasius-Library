@@ -80,6 +80,7 @@ ul{
     padding-bottom: 5px;
     height: 100px;
     background-color: var(--whiteColor);
+    /* border-bottom: 1px solid var(--mainColor); */
 }
 .header .container{
     display: flex;
@@ -162,6 +163,9 @@ ul{
     display: flex;
     align-items: center;
 }
+.header .container .collection-of-links .click i{
+  margin-right: 5px;
+}
 .header .container .collections a{
     padding: 2px 10px;
     font-weight: bold;
@@ -213,19 +217,56 @@ ul{
     padding: 15px;
     font-size: 18px;
     font-weight: bold;
+    border-bottom: 1px solid var(--secondBlackColor);
   }
 }
 /* Menu Links */
 .header .container .collections .menu{
     position: absolute;
-    width: 100%;
+    width: 20%;
     top: 0;
-    left: 0;
-    background-color: var(--whiteColor);
+    left: 10%;
     z-index: -1;
     display: flex;
     opacity: 0;
-    border-bottom: 3px solid var(--mainColor);
+    background-color: var(--whiteColor);
+    border-top: 3px solid var(--fourthBlackColor);
+    border-bottom: 5px solid var(--fourthBlackColor);
+    border-left: 1px solid var(--fourthBlackColor);
+    border-right: 1px solid var(--fourthBlackColor);
+    border-radius: 0 0 10px 10px;
+    -webkit-border-radius: 0 0 10px 10px;
+    -moz-border-radius: 0 0 10px 10px;
+    -ms-border-radius: 0 0 10px 10px;
+    -o-border-radius: 0 0 10px 10px;
+}
+.header .container .collections .menu::after{
+  content: "";
+  left: 70%;
+  top: -28px;
+  width: 0;
+  height: 0;
+  border-width: 13px;
+  border-style: solid;
+  border-color: transparent transparent var(--fourthBlackColor) transparent;
+  position: absolute;
+}
+  @media (max-width:1200px){
+    .header .container .collections .menu{
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background-color: var(--whiteColor);
+      z-index: -1;
+      display: flex;
+      opacity: 0;
+      border: 0;
+    }
+    .header .container .collections .menu::after{
+      content: "";
+      border: 0;
+    }
   }
   .header .container .collections .visable{
     opacity: 1;
@@ -249,17 +290,15 @@ ul{
   .header .container .collections .menu .links li:hover{
     background-color: var(--thirdColor);
   }
-  @media (max-width:1200px){
-    .header .container .collections .menu .links:first-of-type li:last-child{
-      border-bottom: 1px solid var(--thirdColor);
-    }
-  }
   .header .container .collections .menu .links li a{
     color: var(--fourthBlackColor);
     display: block;
     padding: 15px;
     font-size: 18px;
     font-weight: bold;
+  }
+  .header .container .collections .menu .links li a:hover{
+    margin-right: 10px;
   }
   .header .container .collections .menu .links li a i{
     margin-right: 10px;
