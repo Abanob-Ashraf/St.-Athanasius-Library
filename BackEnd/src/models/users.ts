@@ -153,10 +153,9 @@ export class UsersModel {
         const isPasswordValid = bcrypt.compareSync(password + pepper, hashPassword)
         if (isPasswordValid) {
           const userInfo = await connection.query(AUTHANTICATE2, [email])
-          // console.log(userInfo.rows[0])
           const user = userInfo.rows[0]
           const userStatus = user['user_status']
-          console.log(userStatus)
+          // console.log(userStatus)
           if (userStatus == 'AVILABLE') {
             return userInfo.rows[0]
           }
