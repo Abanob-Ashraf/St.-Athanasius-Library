@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { User, UsersModel } from '../models/users'
+import { body, validationResult } from 'express-validator'
 
 const library = new UsersModel()
 
