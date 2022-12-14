@@ -1,13 +1,18 @@
 import { Request, Response } from 'express'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { User, UsersModel } from '../models/users'
-import { body, validationResult } from 'express-validator'
+import { validationResult } from 'express-validator'
 
 const library = new UsersModel()
 
 // createUser
 export const createUser = async (req: Request, res: Response) => {
   try {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() })
+    }
     const user: User = {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
@@ -117,6 +122,11 @@ export const deleteUser = async (req: Request, res: Response) => {
 
 // authenticateUser
 export const authenticateUser = async (req: Request, res: Response) => {
+  // Finds the validation errors in this request and wraps them in an object with handy functions
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
   const { email, password } = req.body
   if (!email || !password) {
     return res.status(401).json('missing or malformed parameters. email, password required')

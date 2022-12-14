@@ -10,12 +10,27 @@ import {
   getAllUnAvilableUsers,
   getMine
 } from '../../controllers/users'
+import { body } from 'express-validator'
 
 const routes = Router()
 
-routes.route('/signup').post(createUser)
+routes.route('/signup').post(
+  // username must be an email
+  body('email').isEmail(),
+  // password must be at least 5 chars long
+  body('password').isLength({ min: 5 }),
 
-routes.route('/login').post(authenticateUser)
+  createUser
+)
+
+routes.route('/login').post(
+  // username must be an email
+  body('email').isEmail(),
+  // password must be at least 5 chars long
+  body('password').isLength({ min: 5 }),
+
+  authenticateUser
+)
 
 routes.route('/me').get(authorize, getMine)
 
