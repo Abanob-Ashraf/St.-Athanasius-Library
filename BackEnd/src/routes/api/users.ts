@@ -18,7 +18,7 @@ routes.route('/signup').post(
   // username must be an email
   body('email').isEmail(),
   // password must be at least 5 chars long
-  body('password').isLength({ min: 5 }),
+  body('password').isLength({ min: 8 }),
 
   createUser
 )
@@ -27,7 +27,7 @@ routes.route('/login').post(
   // username must be an email
   body('email').isEmail(),
   // password must be at least 5 chars long
-  body('password').isLength({ min: 5 }),
+  body('password').isLength({ min: 8 }),
 
   authenticateUser
 )
