@@ -77,6 +77,11 @@ export const getMine = async (req: Request, res: Response) => {
 // updateUser
 export const updateUser = async (req: Request, res: Response) => {
   try {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() })
+    }
     const user = {
       id: +req.params.id,
       first_name: req.body.first_name,

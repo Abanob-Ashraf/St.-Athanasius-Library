@@ -40,7 +40,13 @@ routes.route('/').get(authorize, admin, getManyUsers)
 
 routes.route('/:id').get(authorize, admin, getOneUser)
 
-routes.route('/:id').put(authorize, updateUser)
+routes
+  .route('/:id')
+  .put(
+    authorize,
+    body('phone_number').isLength({ min: 11, max: 11 }).optional({ nullable: true }),
+    updateUser
+  )
 
 routes.route('/:id').delete(authorize, admin, deleteUser)
 

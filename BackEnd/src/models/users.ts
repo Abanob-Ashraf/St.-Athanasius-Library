@@ -121,7 +121,7 @@ export class UsersModel {
     id: number,
     user_status: string,
     updated_date: Date
-  ): Promise<User> {
+  ): Promise<User | null> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONEUSER, [id])
@@ -136,7 +136,7 @@ export class UsersModel {
           return deleteUser.rows[0]
         } else {
           connection.release()
-          return test.rows[0]
+          return null
         }
       }
       connection.release()
