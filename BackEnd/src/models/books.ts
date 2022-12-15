@@ -98,10 +98,10 @@ export class BooksModel {
   }
 
   // getOneBookByName
-  async getOneBookByName(book_name: string): Promise<Book[]> {
+  async getOneBookByName(book_name: string, author: string): Promise<Book[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(GETONEBOOKBYNAME, [book_name])
+      const result = await connection.query(GETONEBOOKBYNAME, [book_name, author])
       if (result.rows.length) {
         const book = { ...result.rows[0] }
         connection.release()
