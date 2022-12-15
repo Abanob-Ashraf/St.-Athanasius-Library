@@ -42,8 +42,10 @@ routes.route('/:id').get(authorize, admin, getOneUser)
 
 routes.route('/:id').put(
   authorize,
+
   // phone_number must be equal 11 number and accept null
   body('phone_number').isLength({ min: 11, max: 11 }).optional({ nullable: true }),
+
   updateUser
 )
 
