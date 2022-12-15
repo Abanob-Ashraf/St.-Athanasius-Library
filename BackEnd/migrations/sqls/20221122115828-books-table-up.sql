@@ -1,9 +1,10 @@
 CREATE TABLE books (
     id SERIAL PRIMARY KEY,
-    book_code VARCHAR(100) UNIQUE,
-    book_name VARCHAR(100) UNIQUE NOT NULL,
-    author VARCHAR(100) NOT NULL,
-    -- date_of_printing VARCHAR(100),
+    book_code VARCHAR(100) UNIQUE NOT NULL,
+    book_name VARCHAR(100) NOT NULL,
+    author VARCHAR(100),
+    publisher VARCHAR(100),
+    topic VARCHAR(100) NOT NULL,
     number_of_copies integer NOT NULL,
     number_of_pages integer NOT NULL,
     number_of_parts integer,
@@ -14,6 +15,7 @@ CREATE TABLE books (
     shelf_id integer REFERENCES shelfs(id) NOT NULL,
     book_number_in_shelf integer NOT NULL,
     who_edited integer REFERENCES users(id),
+    -- date_of_printing VARCHAR(100),
     created_date TIMESTAMP NOT NULL,
     updated_date TIMESTAMP NOT NULL
 );
