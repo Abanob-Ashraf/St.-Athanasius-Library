@@ -15,6 +15,8 @@ export const createBook = async (req: Request, res: Response) => {
       book_code: req.body.book_code,
       book_name: req.body.book_name,
       author: req.body.author,
+      publisher: req.body.publisher,
+      topic: req.body.topic,
       number_of_copies: req.body.number_of_copies,
       number_of_pages: req.body.number_of_pages,
       number_of_parts: req.body.number_of_parts,
@@ -66,7 +68,13 @@ export const getBookById = async (req: Request, res: Response) => {
 
 export const getBookByName = async (req: Request, res: Response) => {
   try {
-    const book = await library.getOneBookByName(req.body.book_name, req.body.author)
+    const book = await library.searchForBook(
+      +req.body.id,
+      req.body.book_name,
+      req.body.author,
+      req.body.publisher,
+      req.body.topic
+    )
     if (book == null) {
       return res.status(404).json('Book was not found')
     } else {
@@ -112,6 +120,8 @@ export const updateBook = async (req: Request, res: Response) => {
         book_code: req.body.book_code,
         book_name: req.body.book_name,
         author: req.body.author,
+        publisher: req.body.publisher,
+        topic: req.body.topic,
         number_of_copies: req.body.number_of_copies,
         number_of_pages: req.body.number_of_pages,
         number_of_parts: req.body.number_of_parts,
@@ -138,6 +148,8 @@ export const updateBook = async (req: Request, res: Response) => {
         book_code: req.body.book_code,
         book_name: req.body.book_name,
         author: req.body.author,
+        publisher: req.body.publisher,
+        topic: req.body.topic,
         number_of_copies: req.body.number_of_copies,
         number_of_pages: req.body.number_of_pages,
         number_of_parts: req.body.number_of_parts,

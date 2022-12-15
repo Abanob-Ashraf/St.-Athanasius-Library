@@ -5,7 +5,7 @@ import {
   GETONEBOOKBYID,
   DELETEBOOK,
   GETMANYBOOKS,
-  GETONEBOOKBYNAME,
+  SEARCHFORBOOK,
   CHECKIFBOOKINTHISSHELF,
   GETMYBOOKS
 } from '../sql-queries/books'
@@ -15,6 +15,8 @@ export type Book = {
   book_code: string
   book_name: string
   author: string
+  publisher: string
+  topic: string
   number_of_copies: number
   number_of_pages: number
   number_of_parts: number
@@ -43,6 +45,8 @@ export class BooksModel {
           b.book_code,
           b.book_name,
           b.author,
+          b.publisher,
+          b.topic,
           b.number_of_copies,
           b.number_of_pages,
           b.number_of_parts,
@@ -98,10 +102,22 @@ export class BooksModel {
   }
 
   // getOneBookByName
-  async getOneBookByName(book_name: string, author: string): Promise<Book[]> {
+  async searchForBook(
+    id: number,
+    book_name: string,
+    author: string,
+    publisher: string,
+    topic: string
+  ): Promise<Book[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(GETONEBOOKBYNAME, [book_name, author])
+      const result = await connection.query(SEARCHFORBOOK, [
+        id,
+        book_name,
+        author,
+        publisher,
+        topic
+      ])
       if (result.rows.length) {
         const book = { ...result.rows[0] }
         connection.release()
@@ -148,6 +164,8 @@ export class BooksModel {
             b.book_code,
             b.book_name,
             b.author,
+            b.publisher,
+            b.topic,
             b.number_of_copies,
             b.number_of_pages,
             b.number_of_parts,
@@ -173,6 +191,8 @@ export class BooksModel {
             b.book_code,
             b.book_name,
             b.author,
+            b.publisher,
+            b.topic,
             b.number_of_copies,
             b.number_of_pages,
             b.number_of_parts,
