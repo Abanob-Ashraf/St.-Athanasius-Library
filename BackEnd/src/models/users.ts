@@ -22,6 +22,7 @@ export type User = {
   last_name: string
   email: string
   password: string
+  phone_number: string
   admin_flag: boolean
   user_status: string
   created_date: Date
@@ -39,6 +40,7 @@ export class UsersModel {
         u.last_name,
         u.email,
         hashing,
+        u.phone_number,
         u.admin_flag,
         u.user_status,
         u.created_date,
@@ -95,6 +97,7 @@ export class UsersModel {
           u.last_name,
           u.email,
           hashing,
+          u.phone_number,
           u.admin_flag,
           u.user_status,
           u.updated_date
