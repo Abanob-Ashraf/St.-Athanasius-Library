@@ -4,9 +4,9 @@ let navICon = document.querySelector(".header .container > i");
 let collectionOfLinks = document.querySelector(".collection-of-links");
 
 click.addEventListener("click", ()=>{
-    menu.classList.toggle("visable")
+    menu.classList.toggle("on")
 })
 
 navICon.addEventListener("click", ()=>{
-    collectionOfLinks.classList.toggle("block")
+    collectionOfLinks.classList.toggle("list-on")
 })
