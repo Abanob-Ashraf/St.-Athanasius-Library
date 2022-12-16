@@ -167,15 +167,18 @@ export class UsersModel {
   }
 
   // getAllUnAvilableUsers
-  async getAllUnAvilableUsers(): Promise<User[]> {
+  async getAllUnAvilableUsers(): Promise<User[] | null> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETALLUNAVILABLEUSERS)
-      const user = result.rows
-      connection.release()
-      return user
+      if (result.rows.length) {
+        const user = result.rows
+        connection.release()
+        return user
+      }
+      return null
     } catch (error) {
-      throw new Error(`Unable to get deleted users ${(error as Error).message}`)
+      throw new Error(`Unable to get UnAvilableUsers users ${(error as Error).message}`)
     }
   }
 }
