@@ -5,7 +5,7 @@ import {
   deleteBook,
   getManyBooks,
   getBookById,
-  getBookByName,
+  searchForBook,
   updateBook,
   getUserBooks
 } from '../../controllers/books'
@@ -18,7 +18,7 @@ routes.route('/user/mybooks').get(authorize, getUserBooks)
 
 routes.route('/').get(getManyBooks)
 
-routes.route('/name').get(getBookByName)
+routes.route('/name').get(searchForBook)
 
 routes.route('/:id').get(getBookById)
 

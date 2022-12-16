@@ -15,18 +15,18 @@ import { body } from 'express-validator'
 const routes = Router()
 
 routes.route('/signup').post(
-  // username must be an email
+  // email must be an email
   body('email').isEmail(),
-  // password must be at least 5 chars long
+  // password must be at least 8 chars long
   body('password').isLength({ min: 8 }),
 
   createUser
 )
 
 routes.route('/login').post(
-  // username must be an email
+  // email must be an email
   body('email').isEmail(),
-  // password must be at least 5 chars long
+  // password must be at least 8 chars long
   body('password').isLength({ min: 8 }),
 
   authenticateUser
@@ -43,6 +43,10 @@ routes.route('/:id').get(authorize, admin, getOneUser)
 routes.route('/:id').put(
   authorize,
 
+  // email must be an email
+  body('email').isEmail(),
+  // password must be at least 8 chars long
+  body('password').isLength({ min: 8 }),
   // phone_number must be equal 11 number and accept null
   body('phone_number').isLength({ min: 11, max: 11 }).optional({ nullable: true }),
 

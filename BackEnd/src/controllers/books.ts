@@ -66,10 +66,9 @@ export const getBookById = async (req: Request, res: Response) => {
   }
 }
 
-export const getBookByName = async (req: Request, res: Response) => {
+export const searchForBook = async (req: Request, res: Response) => {
   try {
     const book = await library.searchForBook(
-      +req.body.id,
       req.body.book_name,
       req.body.author,
       req.body.publisher,
@@ -81,6 +80,8 @@ export const getBookByName = async (req: Request, res: Response) => {
       return res.send(book)
     }
   } catch (error) {
+    console.log(error)
+
     res.status(401).json(error)
   }
 }
