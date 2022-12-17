@@ -18,7 +18,7 @@ routes.route('/user/mybooks').get(authorize, getUserBooks)
 
 routes.route('/').get(getManyBooks)
 
-routes.route('/name').get(searchForBook)
+routes.route('/search').get(searchForBook)
 
 routes.route('/:id').get(getBookById)
 
