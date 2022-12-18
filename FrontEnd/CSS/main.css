@@ -257,19 +257,34 @@ ul{
 .landing-page{
   height: calc(100vh - 100px);
   position: relative;
+  background-color: var(--thirdColor);
+}
+.landing-page .container{
+  height: 100%;
+  position: relative;
+}
+.landing-page .container h1{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--whiteColor);
+  width: 60%;
+}
+.landing-page .container h1 span{
+  color: var(--mainBlackColor);
 }
 .landing-page .search{
   position: absolute;
   display: flex;
-  width: 80%;
-  top: 60%;
+  width: 100%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
   -webkit-transform: translate(-50%,-50%);
   -moz-transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
   -o-transform: translate(-50%,-50%);
-  box-shadow: 0 0 10px var(--mainBlackColor);
 }
 .landing-page .search i{
   display: flex;
