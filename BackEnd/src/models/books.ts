@@ -103,7 +103,6 @@ export class BooksModel {
 
   // getOneBookByName
   async searchForBook(
-    id: number,
     book_name: string,
     author: string,
     publisher: string,
@@ -111,13 +110,7 @@ export class BooksModel {
   ): Promise<Book[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(SEARCHFORBOOK, [
-        id,
-        book_name,
-        author,
-        publisher,
-        topic
-      ])
+      const result = await connection.query(SEARCHFORBOOK, [book_name, author, publisher, topic])
       if (result.rows.length) {
         const book = { ...result.rows[0] }
         connection.release()

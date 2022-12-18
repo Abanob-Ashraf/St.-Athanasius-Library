@@ -28,7 +28,9 @@ export const createUser = async (req: Request, res: Response) => {
     const newUser = await library.create(user)
     res.status(200).json(newUser)
   } catch (error) {
-    res.status(400).json(error)
+    return res
+      .status(400)
+      .json('this email already existe if you have troble in login contact with admin')
   }
 }
 
@@ -159,7 +161,10 @@ export const authenticateUser = async (req: Request, res: Response) => {
 export const getAllUnAvilableUsers = async (_req: Request, res: Response) => {
   try {
     const users = await library.getAllUnAvilableUsers()
-    return res.status(200).send(users)
+    if (users == null) {
+      return res.status(404).json('no users UnAvilable')
+    }
+    return res.status(200).json(users)
   } catch (error) {
     res.status(401).json(error)
   }
