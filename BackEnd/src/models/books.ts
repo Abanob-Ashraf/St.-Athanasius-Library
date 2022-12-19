@@ -7,7 +7,8 @@ import {
   GETMANYBOOKS,
   SEARCHFORBOOK,
   CHECKIFBOOKINTHISSHELF,
-  GETMYBOOKS
+  GETMYBOOKS,
+  GETLATESTBOOKS
 } from '../sql-queries/books'
 
 export type Book = {
@@ -76,6 +77,19 @@ export class BooksModel {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMANYBOOKS)
+      const book = result.rows
+      connection.release()
+      return book
+    } catch (error) {
+      throw new Error(`Unable to get books, ${(error as Error).message}`)
+    }
+  }
+
+  // getLatestBooks
+  async getLatestBooks(): Promise<Book[]> {
+    try {
+      const connection = await Client.connect()
+      const result = await connection.query(GETLATESTBOOKS)
       const book = result.rows
       connection.release()
       return book

@@ -3,6 +3,8 @@ export const CREATEBOOK =
 
 export const GETMANYBOOKS = 'SELECT * FROM books'
 
+export const GETLATESTBOOKS = 'SELECT * FROM books ORDER BY created_date DESC LIMIT 10'
+
 export const GETONEBOOKBYID = 'SELECT * FROM books WHERE id=($1)'
 
 export const SEARCHFORBOOK =

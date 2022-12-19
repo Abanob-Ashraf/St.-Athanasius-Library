@@ -10,6 +10,7 @@ export const GETMANYUSERS =
 export const GETONEUSER =
   'SELECT id, first_name, last_name, email, phone_number, admin_flag, user_status, created_date, updated_date FROM users WHERE id=($1)'
 
+//search for User
 export const SEARCHFORUSER =
   'SELECT id, first_name, last_name, email, phone_number, admin_flag, user_status, created_date, updated_date FROM users WHERE first_name=($1) AND last_name=($2) OR email=($3)'
 

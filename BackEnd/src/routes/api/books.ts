@@ -7,7 +7,8 @@ import {
   getBookById,
   searchForBook,
   updateBook,
-  getUserBooks
+  getUserBooks,
+  getLatestBooks
 } from '../../controllers/books'
 
 const routes = Router()
@@ -19,6 +20,8 @@ routes.route('/user/mybooks').get(authorize, getUserBooks)
 routes.route('/').get(getManyBooks)
 
 routes.route('/search').get(searchForBook)
+
+routes.route('/latestBooks').get(getLatestBooks)
 
 routes.route('/:id').get(getBookById)
 

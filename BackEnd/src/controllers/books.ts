@@ -43,10 +43,20 @@ export const createBook = async (req: Request, res: Response) => {
   }
 }
 
-// getManyShelfs
+// getManyBooks
 export const getManyBooks = async (_req: Request, res: Response) => {
   try {
     const books = await library.getManyBooks()
+    res.status(200).json(books)
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}
+
+// getLatestBooks
+export const getLatestBooks = async (_req: Request, res: Response) => {
+  try {
+    const books = await library.getLatestBooks()
     res.status(200).json(books)
   } catch (error) {
     res.status(400).json(error)
