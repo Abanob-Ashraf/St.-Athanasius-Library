@@ -29,6 +29,16 @@
     padding: 0;
     font-family: 'Cairo', sans-serif;
 }
+*::-webkit-scrollbar{
+    width: 20px;
+}
+*::-webkit-scrollbar-track{
+    background-color: var(--whiteColor);
+}
+*::-webkit-scrollbar-thumb{
+    width: 100%;
+    background-color: var(--mainBlackColor);
+}
 body{
     direction: rtl;
 }
@@ -141,15 +151,15 @@ ul{
     padding-top: 15px;
     padding-bottom: 15px;
 }
-.profile-landing .container .grid-layout{
+.profile-landing .container{
     height: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(400px,1fr));
+    grid-template-columns: repeat(auto-fill,minmax(450px,1fr));
     gap: 20px;
 }
-@media (max-width:400px){
-    .profile-landing .container .grid-layout{
-        grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+@media (max-width:767px){
+    .profile-landing .container{
+        grid-template-columns: minmax(200px,1fr);
     }
 }
 /* Profile */
@@ -209,7 +219,6 @@ ul{
     font-size: 20px;
     font-weight: bold;
     margin-top: 5px;
-    margin-bottom: 5px;
     color: var(--mainBlackColor);
 }
 .profile-landing .container .profile.general-info .job{
@@ -220,14 +229,12 @@ ul{
 .profile-landing .container .profile.general-info .id{
     font-size: 18px;
     font-weight: bold;
-    color: var(--whiteColor);
-    padding: 0px 10px;
-    background-color: var(--dangerColor);
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+    color: var(--darkBlackColor);
+}
+.profile-landing .container .profile.general-info .admin-flag{
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--dangerColor);
 }
 /* End general Information */
 
@@ -291,7 +298,7 @@ ul{
     border: none;
     width: 100%;
     outline: none;
-    padding: 5px;
+    padding: 8px;
     font-weight: bold;
     color: var(--lightBlackColor);
 }
@@ -403,6 +410,50 @@ ul{
 }
 /* End Latest Book Information */
 
+/* User Search */
+.profile-landing .container .profile.search-user .search{
+    position: relative;
+}
+.profile-landing .container .profile.search-user .search .search-form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+}
+.profile-landing .container .profile.search-user .search .search-form .search-container{
+    margin-top: 15px;
+    width: 80%;
+    padding: 10px;
+    background-color: var(--thirdColor);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.profile-landing .container .profile.search-user .search .search-form #search{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.profile-landing .container .profile.search-user .search{
+}
+/* End User Search */
+.profile-landing .container .profile.search-user .user-info{
+    display: none;
+}
 /* End Profile */
 
 /* End Profile Landing */
