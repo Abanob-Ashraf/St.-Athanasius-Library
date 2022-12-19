@@ -1,12 +1,14 @@
-let menu = document.querySelector(".menu");
-let click = document.querySelector(".click");
-let navICon = document.querySelector(".header .container > i");
-let collectionOfLinks = document.querySelector(".collection-of-links");
+let userInfo = document.querySelector(".profile-landing .container .profile.user .user-info");
+let userInfoEdit = document.querySelector(".profile-landing .container .profile.user .user-info .edit");
+let userEdit = document.querySelector(".profile-landing .container .profile.user .edit-info");
+let userEditBack = document.querySelector(".profile-landing .container .profile.user .edit-info .back")
 
-click.addEventListener("click", ()=>{
-    menu.classList.toggle("on")
+userEditBack.addEventListener("click",()=>{
+    userInfo.style.display = "block"
+    userEdit.style.display = "none"
 })
 
-navICon.addEventListener("click", ()=>{
-    collectionOfLinks.classList.toggle("list-on")
+userInfoEdit.addEventListener("click",()=>{
+    userInfo.style.display = "none"
+    userEdit.style.display = "block"
 })

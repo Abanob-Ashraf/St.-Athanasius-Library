@@ -19,16 +19,6 @@
                 <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
                 <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
             </a>
-            <form action="" class="search">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="search" name="book" id="book" placeholder="البحث عن الكتاب حسب">
-                <select name="subject" id="subject">
-                    <option value="name">الاسم</option>
-                    <option value="author">الكاتب</option>
-                    <option value="topic">الموضوع</option>
-                    <option value="publisher">الناشر</option>
-                </select>
-            </form>
             <div class="user-login">
                 <div class="profile-pic"></div>
                 <i class="fa-solid fa-caret-down fa-1x"></i>
@@ -38,51 +28,61 @@
     <div class="profile-landing">
         <div class="container">
             <!-- Start Profile -->
-            <div class="profile">
+            <div class="profile general-info">
+                <div class="id">22</div>
+                <div class="pic"></div>
+                <div class="name">كيرلس رضا</div>
+                <div class="job">مساعد خادم</div>
+            </div>
+            <!-- End Profile -->
+
+            <!-- Start Profile -->
+            <div class="profile user">
                 <div class="user-info">
-                    <div class="main-info">
-                        <div class="pic"></div>
-                        <p>كيرلس رضا مكرم ثابت <span>مساعد خادم</span></p>
-                    </div>
+                    <div class="special-title">المعلومات الشخصيه</div>
                     <hr>
-                    <div class="personal-info">
-                        <div class="special-title">معلومات شخصيه :</div>
+                    <div class="first-name">
+                        <p>الاسم الاول :</p>
+                        <span>كيرلس</span>
+                    </div>
+                    <div class="last-name">
+                        <p>الاسم الاخير :</p>
+                        <span>رضا</span>
+                    </div>
+                    <div class="email">
+                        <p>البريد الالكتروني :</p>
+                        <span>elfanan2003@gmail.com</span>
+                    </div>
+                    <div class="phone">
+                        <p>رقم الهاتف :</p>
+                        <span>0128322309</span>
+                    </div>
+                    <button class="edit">اتود تعديل البيانات ؟</button>
+                </div>
+                <div class="edit-info">
+                    <div class="special-title">تعديل المعلومات الشخصيه</div>
+                    <hr>
+                    <form action="">
+                        <div class="first-name">
+                            <input type="text" placeholder="الاسم الاول">
+                        </div>
+                        <div class="last-name">
+                            <input type="text" placeholder="الاسم الاخير">
+                        </div>
                         <div class="email">
-                            <p>البريد الالكتروني :</p>
-                            <a href="mailto:">elfanan2003@gmail.com</a>
+                            <input type="email" placeholder="البريد الالكتروني">
                         </div>
                         <div class="phone">
-                            <p>رقم الهاتف :</p>
-                            <a href="tele:">01282332039</a>
+                            <input type="text" placeholder="رقم الهاتف">
                         </div>
-                    </div>
-                    <hr>
-                    <div class="other-info">
-                        <div class="special-title">معلومات اخري :</div>
-                        <div class="block-name">
-                            <p>الوحده :</p>
-                            <span>9</span>
+                        <div class="dubel-div">
+                            <input class="edit" type="submit" value="حفظ البيانات">
+                            <p class="back">الرجوع</p>
                         </div>
-                        <div class="books-number">
-                            <p>عدد الكتب :</p>
-                            <span>200</span>
-                        </div>
-                        <div class="classification-of-books">
-                            <p>تصنيف الكتب :</p>
-                            <div class="collaction">
-                                <span>خدمات</span>
-                                <span>اسقفيه الشباب</span>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="need-edit">
-                        <button>تعديل معلوماتي</button>
-                    </div>
+                    </form>
                 </div>
             </div>
             <!-- End Profile -->
-            <div class="profile"></div>
         </div>
     </div>
     <script src="./JS/profile/profile.js"></script>
