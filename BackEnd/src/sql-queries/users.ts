@@ -10,6 +10,9 @@ export const GETMANYUSERS =
 export const GETONEUSER =
   'SELECT id, first_name, last_name, email, phone_number, admin_flag, user_status, created_date, updated_date FROM users WHERE id=($1)'
 
+export const SEARCHFORUSER =
+  'SELECT id, first_name, last_name, email, phone_number, admin_flag, user_status, created_date, updated_date FROM users WHERE first_name=($1) AND last_name=($2) OR email=($3)'
+
 //Update User
 export const UPDATEUSER =
   'UPDATE users SET first_name=($2), last_name=($3), email=($4), password=($5), phone_number=($6), admin_flag=($7), user_status=($8), updated_date=($9) WHERE id=($1) RETURNING id, first_name, last_name, email, phone_number, admin_flag, updated_date, created_date'

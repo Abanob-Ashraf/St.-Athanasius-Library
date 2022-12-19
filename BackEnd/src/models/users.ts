@@ -8,6 +8,7 @@ import {
   GETALLUNAVILABLEUSERS,
   GETMANYUSERS,
   GETONEUSER,
+  SEARCHFORUSER,
   SELECTSTATUS,
   UPDATEBOOKAFTERDELETEUSER,
   UPDATEUSER
@@ -81,6 +82,23 @@ export class UsersModel {
       return result.rows[0]
     } catch (error) {
       throw new Error(`Unable to get user ${id}, ${(error as Error).message}`)
+    }
+  }
+
+  // searchForUser
+  async searchForUser(first_name: string, last_name: string, email: string): Promise<User[]> {
+    try {
+      const connection = await Client.connect()
+      const result = await connection.query(SEARCHFORUSER, [first_name, last_name, email])
+      if (result.rows.length) {
+        const user = { ...result.rows[0] }
+        connection.release()
+        return user
+      }
+      connection.release()
+      return result.rows[0]
+    } catch (error) {
+      throw new Error(`Unable to get user ${first_name},${last_name} ${(error as Error).message}`)
     }
   }
 

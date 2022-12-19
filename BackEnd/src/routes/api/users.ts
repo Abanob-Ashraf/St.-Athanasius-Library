@@ -8,7 +8,8 @@ import {
   getManyUsers,
   getOneUser,
   getAllUnAvilableUsers,
-  getMine
+  getMine,
+  searchForUser
 } from '../../controllers/users'
 import { body } from 'express-validator'
 
@@ -37,6 +38,8 @@ routes.route('/me').get(authorize, getMine)
 routes.route('/unavilable').get(authorize, admin, getAllUnAvilableUsers)
 
 routes.route('/').get(authorize, admin, getManyUsers)
+
+routes.route('/search').get(authorize, admin, searchForUser)
 
 routes.route('/:id').get(authorize, admin, getOneUser)
 

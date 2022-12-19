@@ -58,6 +58,23 @@ export const getOneUser = async (req: Request, res: Response) => {
   }
 }
 
+export const searchForUser = async (req: Request, res: Response) => {
+  try {
+    const user = await library.searchForUser(
+      req.body.first_name,
+      req.body.last_name,
+      req.body.email
+    )
+    if (user == null) {
+      return res.status(404).json('user was not found')
+    } else {
+      return res.send(user)
+    }
+  } catch (error) {
+    res.status(401).json(error)
+  }
+}
+
 // getOneUser
 export const getMine = async (req: Request, res: Response) => {
   try {
