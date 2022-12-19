@@ -411,29 +411,49 @@ ul{
 /* End Latest Book Information */
 
 /* User Search */
-.profile-landing .container .profile.search-user .search{
+.profile-landing .container .profile.search-user{
     position: relative;
 }
-.profile-landing .container .profile.search-user .search .search-form{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%);
-    -moz-transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-    -o-transform: translate(-50%,-50%);
+@media (max-width:992px){
+    .profile-landing .container .profile.search-user{
+        height: 600px;
+    }
 }
-.profile-landing .container .profile.search-user .search .search-form .search-container{
+.profile-landing .container .profile.search-user .search{
+}
+.profile-landing .container .profile.search-user .search .note{
+    padding: 0 8px;
+    width: fit-content;
     margin-top: 15px;
-    width: 80%;
-    padding: 10px;
-    background-color: var(--thirdColor);
+    background-color: var(--dangerColor);
+    font-weight: bold;
+    color: var(--whiteColor);
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+}
+.profile-landing .container .profile.search-user .search .search-form{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 80%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+}
+.profile-landing .container .profile.search-user .search .search-form .search-container{
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--thirdColor);
+    border-radius: 5px 0 0px 5px;
+    -webkit-border-radius: 5px 0 0px 5px;
+    -moz-border-radius: 5px 0 0px 5px;
+    -ms-border-radius: 5px 0 0px 5px;
+    -o-border-radius: 5px 0 0px 5px;
 }
 .profile-landing .container .profile.search-user .search .search-form #search{
     width: 100%;
@@ -448,12 +468,142 @@ ul{
     font-size: 16px;
     font-weight: bold;
 }
-.profile-landing .container .profile.search-user .search{
+.profile-landing .container .profile.search-user .search .error-text{
+    position: absolute;
+    left: 50%;
+    top: 65%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+}
+.profile-landing .container .profile.search-user .search .error-text small{
+    font-size: 18px;
+    color: var(--dangerColor);
+    font-weight: bold;
 }
 /* End User Search */
+
+/* Other User Information */
 .profile-landing .container .profile.search-user .user-info{
     display: none;
 }
+.profile-landing .container .profile.search-user .user-info div:not(.special-title,:last-child){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: var(--thirdColor);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.profile-landing .container .profile.search-user .user-info div p{
+    font-weight: bold;
+    color: var(--mainBlackColor);
+}
+.profile-landing .container .profile.search-user .user-info div span{
+    font-weight: bold;
+    color: var(--lightBlackColor);
+}
+.profile-landing .container .profile.search-user .user-info .duble-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.profile-landing .container .profile.search-user .user-info .edit{
+    font-weight: bold;
+    color: var(--whiteColor);
+    background-color: var(--dangerColor);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+.profile-landing .container .profile.search-user .user-info .delete{
+    font-weight: bold;
+    color: var(--whiteColor);
+    background-color: var(--dangerColor);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+.profile-landing .container .profile.search-user .user-info .back{
+    font-weight: bold;
+    color: var(--dangerColor);
+    padding: 5px 15px;
+    cursor: pointer;
+}
+/* End Other User Information */
+
+/* Other User Information And Edit */
+.profile-landing .container .profile.search-user .edit-info{
+    display: none;
+}
+.profile-landing .container .profile.search-user .edit-info div:not(.special-title,:last-child){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background-color: var(--thirdColor);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.profile-landing .container .profile.search-user .edit-info div input{
+    border: none;
+    width: 100%;
+    outline: none;
+    padding: 8px;
+    font-weight: bold;
+    color: var(--lightBlackColor);
+}
+
+.profile-landing .container .profile.search-user .edit-info .dubel-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.profile-landing .container .profile.search-user .edit-info .edit{
+    width: inherit;
+    font-weight: bold;
+    color: var(--whiteColor);
+    background-color: var(--dangerColor);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+.profile-landing .container .profile.search-user .edit-info .back{
+    font-weight: bold;
+    color: var(--dangerColor);
+    padding: 5px 15px;
+    cursor: pointer;
+}
+/* End Other User Information And Edit */
+
 /* End Profile */
 
 /* End Profile Landing */

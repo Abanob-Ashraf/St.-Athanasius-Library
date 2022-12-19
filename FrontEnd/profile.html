@@ -157,15 +157,15 @@
                 <div class="search">
                     <div class="special-title">البحث عن مستخدم</div>
                     <hr>
-                    <div class="note">
-                        <p>للمديرين فقط</p>
-                    </div>
+                    <p  class="note">للمديرين فقط</p>
                     <form action="" class="search-form">
                         <div class="search-container">
                             <input type="search" name="المستخدم:" id="search" placeholder="البحث عن مستخدم">
                         </div>
-                        <small></small>
                     </form>
+                    <div class="error-text">
+                        <small>ليس لديك صلاحيه المدير</small>
+                    </div>
                 </div>
                 <div class="user-info">
                     <div class="special-title">معلومات المستخدم</div>
@@ -190,6 +190,39 @@
                         <p>رقم الهاتف :</p>
                         <span>0128322309</span>
                     </div>
+                    <div class="duble-div">
+                        <button class="edit">تعديل البيانات</button>
+                        <button class="delete">حذف البيانات</button>
+                        <p class="back">الرجوع</p>
+                    </div>
+                </div>
+                <div class="edit-info">
+                    <div class="special-title">تعديل المعلومات الشخصيه للمستخدم</div>
+                    <hr>
+                    <form action="">
+                        <div class="first-name">
+                            <input type="text" placeholder="الاسم الاول" name="الاسم الاول:">
+                        </div>
+                        <div class="last-name">
+                            <input type="text" placeholder="الاسم الاخير" name="الاسم الاخير:">
+                        </div>
+                        <div class="job">
+                            <input type="text" placeholder="دور الخادم" name="دور الخادم:">
+                        </div>
+                        <div class="email">
+                            <input type="email" placeholder="البريد الالكتروني" name="البريد الالكتروني:">
+                        </div>
+                        <div class="phone">
+                            <input type="text" placeholder="رقم الهاتف" name="رقم الهاتف:">
+                        </div>
+                        <div class="admin-flag">
+                            <input type="text" placeholder="هل تود تعينه كا مدير" name="التعين:">
+                        </div>
+                        <div class="dubel-div">
+                            <input class="edit" type="submit" value="حفظ البيانات">
+                            <p class="back">الرجوع</p>
+                        </div>
+                    </form>
                 </div>
             </div>
             <!-- End Profile -->
