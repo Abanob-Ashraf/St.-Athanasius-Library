@@ -141,12 +141,16 @@ ul{
     padding-top: 15px;
     padding-bottom: 15px;
 }
-.profile-landing .container{
+.profile-landing .container .grid-layout{
     height: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(500px,1fr));
-    grid-template-rows: repeat(auto-fill,minmax(300px,1fr));
+    grid-template-columns: repeat(auto-fill,minmax(400px,1fr));
     gap: 20px;
+}
+@media (max-width:400px){
+    .profile-landing .container .grid-layout{
+        grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+    }
 }
 /* Profile */
 .profile-landing .container .profile{
@@ -161,7 +165,6 @@ ul{
 
 /* general Information */
 .profile-landing .container .profile.general-info{
-    grid-column: span 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -229,10 +232,6 @@ ul{
 /* End general Information */
 
 /* User Information*/
-.profile-landing .container .profile.user .user-info{
-    width: 100%;
-    height: 100%;
-}
 .profile-landing .container .profile.user .user-info div:not(.special-title){
     display: flex;
     justify-content: space-between;
@@ -272,15 +271,13 @@ ul{
 
 /* Edit User Information*/
 .profile-landing .container .profile.user .edit-info{
-    width: 100%;
-    height: 100%;
     display: none;
 }
 .profile-landing .container .profile.user .edit-info div:not(.special-title,:last-child){
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px;
+    padding: 5px;
     background-color: var(--thirdColor);
     margin-top: 15px;
     margin-bottom: 15px;
@@ -294,7 +291,7 @@ ul{
     border: none;
     width: 100%;
     outline: none;
-    padding: 8px;
+    padding: 5px;
     font-weight: bold;
     color: var(--lightBlackColor);
 }
@@ -325,6 +322,86 @@ ul{
     cursor: pointer;
 }
 /* End Edit User Information */
+
+/* Latest Books */
+.profile-landing .container .profile.latest-books .latest-book div:not(.special-title){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: var(--thirdColor);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.profile-landing .container .profile.latest-books .latest-book div p{
+    padding: 0 8px;
+    background-color: var(--dangerColor);
+    font-weight: bold;
+    color: var(--whiteColor);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+.profile-landing .container .profile.latest-books .latest-book div span{
+    font-weight: bold;
+    color: var(--lightBlackColor);
+}
+/* End Latest Books */
+
+/* Latest Book Information */
+.profile-landing .container .profile.latest-books .latest-book-info{
+    display: none;
+}
+.profile-landing .container .profile.latest-books .latest-book-info div:not(.special-title,:last-child){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: var(--thirdColor);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.profile-landing .container .profile.latest-books .latest-book-info div p{
+    font-weight: bold;
+    color: var(--mainBlackColor);
+}
+.profile-landing .container .profile.latest-books .latest-book-info div span{
+    padding: 0 8px;
+    background-color: var(--dangerColor);
+    font-weight: bold;
+    color: var(--whiteColor);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.profile-landing .container .profile.latest-books .latest-book-info .dubel-div{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.profile-landing .container .profile.latest-books .latest-book-info .back{
+    font-weight: bold;
+    color: var(--dangerColor);
+    padding: 5px 15px;
+    cursor: pointer;
+}
+/* End Latest Book Information */
 
 /* End Profile */
 
