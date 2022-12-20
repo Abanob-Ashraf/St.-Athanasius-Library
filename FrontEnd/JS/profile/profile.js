@@ -1,3 +1,13 @@
+function header(){
+    let userLogin = document.querySelector(".header .container .user-login")
+    let hiddenMenu = document.querySelector(".header .container .menu")
+    userLogin.addEventListener("click",()=>{
+        hiddenMenu.classList.toggle("clicked")
+    })
+}
+header()
+
+
 function userInfo(){
     let userInfo = document.querySelector(".profile-landing .container .profile.user .user-info");
     let userInfoEdit = document.querySelector(".profile-landing .container .profile.user .user-info .edit");

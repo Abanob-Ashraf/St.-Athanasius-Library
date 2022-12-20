@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="./css/profile.css">
     <!-- Title Icon -->
     <link rel="icon" href="./IMGS/LOGO/Logo.png">
-    <title>مكتبه القديس اثناسيوس | الصفحه الرئيسيه</title>
+    <title>مكتبه القديس اثناسيوس | الصفحه الشخصيه</title>
 </head>
 <body>
+    <!-- Header -->
     <div class="header">
         <div class="container">
-            <a href="#" class="logo">
+            <a href="./index.html" class="logo">
                 <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
                 <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
             </a>
@@ -23,210 +24,286 @@
                 <div class="profile-pic"></div>
                 <i class="fa-solid fa-caret-down fa-1x"></i>
             </div>
+            <ul class="menu">
+                <li><a>مرحبا !<span>كيرلس رضا</span></a></li>
+                <hr>
+                <li><a href="./profile.html">الصفحه الشخصيه</a></li>
+                <li><a href="./index.html">الصفحه الرئيسيه</a></li>
+                <li><a href="#services">تسجيل الكتب</a></li>
+                <li><a href="#services">تصفح الكتب</a></li>
+                <hr>
+                <li><a id="logout">تسجيل الخروج</a></li>
+            </ul>
         </div>
     </div>
+    <!-- End Header -->
+
+    <!-- Profile Landing -->
     <div class="profile-landing">
         <div class="container">
-            <!-- Start Profile -->
-            <div class="profile general-info">
-                <div class="admin-flag">المدير</div>
-                <div class="pic"></div>
-                <div class="name">كيرلس رضا</div>
-                <div class="job">مساعد خادم</div>
-                <div class="id">#id:</div>
-            </div>
-            <!-- End Profile -->
-
-            <!-- Start Profile -->
-            <div class="profile user">
-                <div class="user-info">
-                    <div class="special-title">المعلومات الشخصيه</div>
-                    <hr>
-                    <div class="first-name">
-                        <p>الاسم الاول :</p>
-                        <span>كيرلس</span>
-                    </div>
-                    <div class="last-name">
-                        <p>الاسم الاخير :</p>
-                        <span>رضا</span>
-                    </div>
-                    <div class="job">
-                        <p>دور الخادم :</p>
-                        <span>مساعد خادم</span>
-                    </div>
-                    <div class="email">
-                        <p>البريد الالكتروني :</p>
-                        <span>elfanan2003@gmail.com</span>
-                    </div>
-                    <div class="phone">
-                        <p>رقم الهاتف :</p>
-                        <span>0128322309</span>
-                    </div>
-                    <button class="edit">اتود تعديل البيانات ؟</button>
+            <!-- Grid Layout One -->
+            <div class="grid-layout-one">
+                <!-- Start Profile -->
+                <div class="profile general-info">
+                    <div class="admin-flag">المدير</div>
+                    <div class="pic"></div>
+                    <div class="name">كيرلس رضا</div>
+                    <div class="job">مساعد خادم</div>
+                    <div class="id">#id:</div>
                 </div>
-                <div class="edit-info">
-                    <div class="special-title">تعديل المعلومات الشخصيه</div>
-                    <hr>
-                    <form action="">
+                <!-- End Profile -->
+
+                <!-- Start Profile -->
+                <div class="profile user">
+                    <div class="user-info">
+                        <div class="special-title">المعلومات الشخصيه</div>
+                        <hr>
                         <div class="first-name">
-                            <input type="text" placeholder="الاسم الاول" name="الاسم الاول:">
+                            <p>الاسم الاول :</p>
+                            <span>كيرلس</span>
                         </div>
                         <div class="last-name">
-                            <input type="text" placeholder="الاسم الاخير" name="الاسم الاخير:">
+                            <p>الاسم الاخير :</p>
+                            <span>رضا</span>
                         </div>
                         <div class="job">
-                            <input type="text" placeholder="دور الخادم" name="دور الخادم:">
+                            <p>دور الخادم :</p>
+                            <span>مساعد خادم</span>
                         </div>
                         <div class="email">
-                            <input type="email" placeholder="البريد الالكتروني" name="البريد الالكتروني:">
+                            <p>البريد الالكتروني :</p>
+                            <span>elfanan2003@gmail.com</span>
                         </div>
                         <div class="phone">
-                            <input type="text" placeholder="رقم الهاتف" name="رقم الهاتف:">
+                            <p>رقم الهاتف :</p>
+                            <span>0128322309</span>
+                        </div>
+                        <div class="created-time">
+                            <p>تاريخ الانشاء :</p>
+                            <span>15/12/2003</span>
+                        </div>
+                        <button class="edit">اتود تعديل البيانات ؟</button>
+                    </div>
+                    <div class="edit-info">
+                        <div class="special-title">تعديل المعلومات الشخصيه</div>
+                        <hr>
+                        <form action="">
+                            <div class="first-name">
+                                <input type="text" placeholder="الاسم الاول" name="الاسم الاول:">
+                            </div>
+                            <div class="last-name">
+                                <input type="text" placeholder="الاسم الاخير" name="الاسم الاخير:">
+                            </div>
+                            <div class="job">
+                                <input type="text" placeholder="دور الخادم" name="دور الخادم:">
+                            </div>
+                            <div class="email">
+                                <input type="email" placeholder="البريد الالكتروني" name="البريد الالكتروني:">
+                            </div>
+                            <div class="phone">
+                                <input type="text" placeholder="رقم الهاتف" name="رقم الهاتف:">
+                            </div>
+                            <div class="dubel-div">
+                                <input class="edit" type="submit" value="حفظ البيانات">
+                                <p class="back">الرجوع</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End Profile -->
+
+                <!-- Start Profile -->
+                <div class="profile latest-books">
+                    <div class="latest-book">
+                        <div class="special-title">اخر الكتب المضافه</div>
+                        <hr>
+                        <div class="book">
+                            <p>شارلوك هولمز</p>
+                            <span>10/12/2003</span>
+                        </div>
+                        <div class="book">
+                            <p>شارلوك هولمز</p>
+                            <span>10/12/2003</span>
+                        </div>
+                        <div class="book">
+                            <p>شارلوك هولمز</p>
+                            <span>10/12/2003</span>
+                        </div>
+                        <div class="book">
+                            <p>شارلوك هولمز</p>
+                            <span>10/12/2003</span>
+                        </div>
+                        <div class="book">
+                            <p>شارلوك هولمز</p>
+                            <span>10/12/2003</span>
+                        </div>
+                    </div>
+                    <div class="latest-book-info">
+                        <div class="special-title">معلومات الكتاب</div>
+                        <hr>
+                        <div class="book">
+                            <p>اسم الكتاب :</p>
+                            <span>شارلوك هولمز</span>
+                        </div>
+                        <div class="book">
+                            <p>اسم المؤلف :</p>
+                            <span>رضا البحراوي</span>
+                        </div>
+                        <div class="book">
+                            <p>كود الكتاب :</p>
+                            <span>11-22-33</span>
+                        </div>
+                        <div class="book">
+                            <p>عدد الاجزاء :</p>
+                            <span>9</span>
+                        </div>
+                        <div class="book">
+                            <p>التصنيف :</p>
+                            <span>هنا</span>
+                        </div>
+                        <div class="book">
+                            <p>تاريخ الانشاء :</p>
+                            <span>10/12/2003</span>
                         </div>
                         <div class="dubel-div">
-                            <input class="edit" type="submit" value="حفظ البيانات">
                             <p class="back">الرجوع</p>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <!-- End Profile -->
+                <!-- End Profile -->
 
-            <!-- Start Profile -->
-            <div class="profile latest-books">
-                <div class="latest-book">
-                    <div class="special-title">اخر الكتب المضافه</div>
-                    <hr>
-                    <div class="book">
-                        <p>شارلوك هولمز</p>
-                        <span>10/12/2003</span>
-                    </div>
-                    <div class="book">
-                        <p>شارلوك هولمز</p>
-                        <span>10/12/2003</span>
-                    </div>
-                    <div class="book">
-                        <p>شارلوك هولمز</p>
-                        <span>10/12/2003</span>
-                    </div>
-                    <div class="book">
-                        <p>شارلوك هولمز</p>
-                        <span>10/12/2003</span>
-                    </div>
-                    <div class="book">
-                        <p>شارلوك هولمز</p>
-                        <span>10/12/2003</span>
-                    </div>
-                    <div class="book">
-                        <p>شارلوك هولمز</p>
-                        <span>10/12/2003</span>
-                    </div>
-                </div>
-                <div class="latest-book-info">
-                    <div class="special-title">معلومات الكتاب</div>
-                    <hr>
-                    <div class="book">
-                        <p>اسم الكتاب :</p>
-                        <span>شارلوك هولمز</span>
-                    </div>
-                    <div class="book">
-                        <p>اسم المؤلف :</p>
-                        <span>رضا البحراوي</span>
-                    </div>
-                    <div class="book">
-                        <p>عدد الاجزاء :</p>
-                        <span>9</span>
-                    </div>
-                    <div class="book">
-                        <p>التصنيف :</p>
-                        <span>هنا</span>
-                    </div>
-                    <div class="book">
-                        <p>وقت الاضافه :</p>
-                        <span>10/12/2003</span>
-                    </div>
-                    <div class="dubel-div">
-                        <p class="back">الرجوع</p>
-                    </div>
-                </div>
-            </div>
-            <!-- End Profile -->
-
-            <!-- Start Profile -->
-            <div class="profile search-user">
-                <div class="search">
-                    <div class="special-title">البحث عن مستخدم</div>
-                    <hr>
-                    <p  class="note">للمديرين فقط</p>
-                    <form action="" class="search-form">
-                        <div class="search-container">
-                            <input type="search" name="المستخدم:" id="search" placeholder="البحث عن مستخدم">
+                <!-- Start Profile -->
+                <div class="profile search-user">
+                    <div class="search">
+                        <div class="special-title">البحث عن مستخدم</div>
+                        <hr>
+                        <p  class="note">للمديرين فقط</p>
+                        <form action="" class="search-form">
+                            <div class="search-container">
+                                <input type="search" name="المستخدم:" id="search" placeholder="البحث عن مستخدم">
+                            </div>
+                        </form>
+                        <div class="error-text">
+                            <small>ليس لديك صلاحيه المدير</small>
                         </div>
-                    </form>
-                    <div class="error-text">
-                        <small>ليس لديك صلاحيه المدير</small>
                     </div>
-                </div>
-                <div class="user-info">
-                    <div class="special-title">معلومات المستخدم</div>
-                    <hr>
-                    <div class="first-name">
-                        <p>الاسم الاول :</p>
-                        <span>كيرلس</span>
-                    </div>
-                    <div class="last-name">
-                        <p>الاسم الاخير :</p>
-                        <span>رضا</span>
-                    </div>
-                    <div class="job">
-                        <p>دور الخادم :</p>
-                        <span>مساعد خادم</span>
-                    </div>
-                    <div class="email">
-                        <p>البريد الالكتروني :</p>
-                        <span>elfanan2003@gmail.com</span>
-                    </div>
-                    <div class="phone">
-                        <p>رقم الهاتف :</p>
-                        <span>0128322309</span>
-                    </div>
-                    <div class="duble-div">
-                        <button class="edit">تعديل البيانات</button>
-                        <button class="delete">حذف البيانات</button>
-                        <p class="back">الرجوع</p>
-                    </div>
-                </div>
-                <div class="edit-info">
-                    <div class="special-title">تعديل المعلومات الشخصيه للمستخدم</div>
-                    <hr>
-                    <form action="">
+                    <div class="user-info">
+                        <div class="special-title">معلومات المستخدم</div>
+                        <hr>
                         <div class="first-name">
-                            <input type="text" placeholder="الاسم الاول" name="الاسم الاول:">
+                            <p>الاسم الاول :</p>
+                            <span>كيرلس</span>
                         </div>
                         <div class="last-name">
-                            <input type="text" placeholder="الاسم الاخير" name="الاسم الاخير:">
+                            <p>الاسم الاخير :</p>
+                            <span>رضا</span>
                         </div>
                         <div class="job">
-                            <input type="text" placeholder="دور الخادم" name="دور الخادم:">
+                            <p>دور الخادم :</p>
+                            <span>مساعد خادم</span>
                         </div>
                         <div class="email">
-                            <input type="email" placeholder="البريد الالكتروني" name="البريد الالكتروني:">
+                            <p>البريد الالكتروني :</p>
+                            <span>elfanan2003@gmail.com</span>
                         </div>
                         <div class="phone">
-                            <input type="text" placeholder="رقم الهاتف" name="رقم الهاتف:">
+                            <p>رقم الهاتف :</p>
+                            <span>0128322309</span>
                         </div>
-                        <div class="admin-flag">
-                            <input type="text" placeholder="هل تود تعينه كا مدير" name="التعين:">
+                        <div class="created-time">
+                            <p>تاريخ الانشاء :</p>
+                            <span>15/12/2003</span>
                         </div>
-                        <div class="dubel-div">
-                            <input class="edit" type="submit" value="حفظ البيانات">
+                        <div class="duble-div">
+                            <button class="edit">تعديل البيانات</button>
+                            <button class="delete">حذف المستخدم</button>
                             <p class="back">الرجوع</p>
                         </div>
-                    </form>
+                    </div>
+                    <div class="edit-info">
+                        <div class="special-title">تعديل المعلومات الشخصيه للمستخدم</div>
+                        <hr>
+                        <form action="">
+                            <div class="first-name">
+                                <input type="text" placeholder="الاسم الاول" name="الاسم الاول:">
+                            </div>
+                            <div class="last-name">
+                                <input type="text" placeholder="الاسم الاخير" name="الاسم الاخير:">
+                            </div>
+                            <div class="job">
+                                <input type="text" placeholder="دور الخادم" name="دور الخادم:">
+                            </div>
+                            <div class="email">
+                                <input type="email" placeholder="البريد الالكتروني" name="البريد الالكتروني:">
+                            </div>
+                            <div class="phone">
+                                <input type="text" placeholder="رقم الهاتف" name="رقم الهاتف:">
+                            </div>
+                            <div class="admin-flag">
+                                <input type="text" placeholder="هل تود تعينه كا مدير" name="التعين:">
+                            </div>
+                            <div class="dubel-div">
+                                <input class="edit" type="submit" value="حفظ البيانات">
+                                <p class="back">الرجوع</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End Profile -->
+            </div>
+            <!-- End Grid Layout One -->
+
+            <!-- Profile -->
+            <div class="profile search-books">
+                <form action="" class="search-form">
+                    <div class="search-container">
+                        <input type="search" name="book" id="book" placeholder="البحث عن الكتاب حسب">
+                        <select name="subject" id="subject">
+                            <option value="name">الاسم</option>
+                            <option value="author">الكاتب</option>
+                            <option value="topic">الموضوع</option>
+                            <option value="publisher">الناشر</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="profile books">
+                    <table class="the-books">
+                        <tr>
+                            <th>اسم الكتاب</th>
+                            <th>المؤلف</th>
+                            <th>الموضوع</th>
+                            <th>التصنيف</th>
+                            <th>عدد النسخ</th>
+                            <th>عدد الصفحات</th>
+                            <th>كود الكتاب</th>
+                            <th>تاريخ الانشاء</th>
+                        </tr>
+                        <tr>
+                            <td>تجسد الكلمه</td>
+                            <td>البابا اثناسيوس</td>
+                            <td>تجسد الرب يسوع المسيح</td>
+                            <td>عقيده</td>
+                            <td>2</td>
+                            <td>180</td>
+                            <td>1-1-1</td>
+                            <td>15/12/2022</td>
+                        </tr>
+                        <tr>
+                            <td>تجسد الكلمه</td>
+                            <td>البابا اثناسيوس</td>
+                            <td>تجسد الرب يسوع المسيح</td>
+                            <td>عقيده</td>
+                            <td>2</td>
+                            <td>180</td>
+                            <td>1-1-1</td>
+                            <td>15/12/2022</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- End Profile -->
         </div>
+    <!-- Profile Landing -->
     </div>
     <script src="./JS/profile/profile.js"></script>
 </body>
