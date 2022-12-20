@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import session from 'express-session'
 import { authorize, admin } from '../../middlewares/authantication_admin'
 import {
   createUser,
@@ -57,5 +58,14 @@ routes.route('/:id').put(
 )
 
 routes.route('/:id').delete(authorize, admin, deleteUser)
+
+// routes.route('/logout').get(async (request, response) => {
+//   if (request.session.userId) {
+//     delete request.session.userId
+//     response.json({ result: 'SUCCESS' })
+//   } else {
+//     response.json({ result: 'ERROR', message: 'User is not logged in.' })
+//   }
+// })
 
 export default routes
