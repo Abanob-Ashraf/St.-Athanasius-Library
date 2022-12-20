@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import session from 'express-session'
+// import session from 'express-session'
 import { authorize, admin } from '../../middlewares/authantication_admin'
 import {
   createUser,
