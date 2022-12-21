@@ -69,10 +69,8 @@ function validateFromDataBase(data){
         content[0].innerHTML = "البريد الالكتروني غير موجود"
         content[1].innerHTML = "او كلمه المرور غير صحيحه"
     }else{
-        sessionStorage.setItem("name",`${data.first_name} ${data.last_name}`)
-        sessionStorage.setItem("email",data.email)
-        sessionStorage.setItem("token",data.token)
-        location.href = "/index.html"
+        sessionStorage.setItem("token" , JSON.stringify(data.token))
+        location.href = "../../profile.html"
     }
 }
 
@@ -101,11 +99,15 @@ function isEmailValid(e){
 }
 
 // Get UserData
+
 function get() {
-    fetch('http://localhost:3000/library/users/login',
+    if (sessionStorage.getItem("token")){
+        console.log("token exiset");
+        token = JSON.parse(sessionStorage.getItem("token"))
+    } else {
+        fetch('http://localhost:3000/library/users/login',
         {
             method: 'POST',
-            // mode: "cors",
             headers: new Headers({'Content-Type': 'application/json'}),
             body: JSON.stringify({
                 email: email.value,
@@ -116,4 +118,5 @@ function get() {
             validateFromDataBase(res)
         })
         .catch(e => console.log(e))
+    }
 }

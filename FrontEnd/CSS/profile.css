@@ -7,8 +7,6 @@
 
 /* Variables */
 :root{
-    --mainColor: #d5b94e;
-    --secondColor: #dec465;
     --dangerColor: #e74c3c;
     --secondDangerColor: rgb(231, 76, 60, 0.50);
     --successColor: #2ecc71;
@@ -100,8 +98,7 @@ ul{
     top: 0;
     height: 100px;
     z-index: 1;
-    border-bottom: 1px solid var(--thirdColor);
-    background-color: var(--whiteColor);
+    background-color: var(--mainBlackColor);
 }
 .header .container{
     position: relative;
@@ -115,7 +112,7 @@ ul{
 .header .container a{
   display: flex;
   align-items: center;
-  color: var(--blackColor);
+  color: var(--whiteColor);
 }
 .header .container .user-login{
     display: flex;
@@ -124,7 +121,7 @@ ul{
 .header .container .profile-pic{
     width: 60px;
     height: 60px;
-    border: 5px solid var(--mainBlackColor);
+    border: 5px solid var(--thirdColor);
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -136,15 +133,18 @@ ul{
     margin-left: 5px;
 }
 .header .container .user-login i{
-    color: var(--mainBlackColor);
+    color: var(--thirdColor);
 }
 .header .container .menu{
     display: none;
 }
+.header .container .menu #logout{
+    cursor: pointer;
+}
 .header .container .menu.clicked{
     display: block;
     position: absolute;
-    top: 100px;
+    top: 110px;
     left: 0;
     background-color: var(--mainBlackColor);
     color: var(--thirdColor);
@@ -187,7 +187,8 @@ ul{
 @media (max-width:991px){
     .header{
         background-color: var(--mainBlackColor);
-    }  .header .container .logo h3{
+    }
+    .header .container .logo h3{
         display: none;
     }
     .header .container .profile-pic{
@@ -197,6 +198,8 @@ ul{
         color: var(--thirdColor);
     }
     .header .container .menu.clicked{
+        border-top: 1px solid var(--thirdColor);
+        top: 100px;
         width: 100%;
         border-radius: 0 0 5px 5px;
         -webkit-border-radius: 0 0 5px 5px;

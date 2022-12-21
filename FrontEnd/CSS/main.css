@@ -82,7 +82,7 @@ ul{
     top: 0;
     height: 100px;
     z-index: 1;
-    border-bottom: 1px solid var(--thirdColor);
+    background-color: var(--mainBlackColor);
 }
 .header .container{
     display: flex;
@@ -258,6 +258,8 @@ ul{
   height: calc(100vh - 100px);
   position: relative;
   background-color: var(--thirdColor);
+  background-image: url("../IMGS/l.jpg");
+  background-size: cover;
 }
 .landing-page .container{
   height: 100%;
