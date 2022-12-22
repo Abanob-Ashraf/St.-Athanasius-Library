@@ -1,6 +1,6 @@
 //create user
 export const CREATEUSER =
-  'INSERT INTO users (first_name, last_name, email, password, phone_number, jop, admin_flag, user_status, created_date, updated_date) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id, first_name, last_name, email, job, admin_flag, user_status, updated_date, created_date'
+  'INSERT INTO users (first_name, last_name, email, password, phone_number, job, admin_flag, user_status, created_date, updated_date) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id, first_name, last_name, email, job, admin_flag, user_status, updated_date, created_date'
 
 //getAll Users
 export const GETMANYUSERS =
