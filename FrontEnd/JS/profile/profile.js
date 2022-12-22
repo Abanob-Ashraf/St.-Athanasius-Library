@@ -120,7 +120,7 @@ function editInfo(){
 
 }
 
-// Latest Books
+// Latest Books Function
 function latestBook(){
     function AuthorizationThree(data){
         for (let i = 0 ; i <= data.length; i++){
@@ -170,7 +170,7 @@ function latestBook(){
         }
     }
 
-    function userI() {
+    function latestB() {
         let token = JSON.parse( sessionStorage.getItem("token"));
         fetch('http://localhost:3000/library/books/latestBooks',
             {
@@ -182,11 +182,81 @@ function latestBook(){
             })
             .catch(e => console.log(e))
     }
-    userI()
+    latestB()
 }
 
+// Search Users Function
+function searchUsers() {
+    function AuthorizationFour(data){
+        let userinfoBack = document.querySelector(".profile-landing .container .profile.search-user .user-info .back")
+        let userEditBack = document.querySelector(".profile-landing .container .profile.search-user .edit-info .back")
+        let userSearchedEdit = document.querySelector(".profile-landing .container .profile.search-user .edit-info")
+        let userSearchedInfo = document.querySelector(".profile-landing .container .profile.search-user .user-info")
+        let search = document.querySelector(".profile-landing .container .profile.search-user .search")
+        let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
+        let searchUserVlidtion = document.querySelector(".profile-landing .container .profile.search-user .search .error-text small")
+        let firstName = document.querySelector(".profile-landing .container .profile.user .user-info .first-name span");
+        let lastName = document.querySelector(".profile-landing .container .profile.user .user-info .last-name span");
+        let email = document.querySelector(".profile-landing .container .profile.user .user-info .email span");
+        let phone = document.querySelector(".profile-landing .container .profile.user .user-info .phone span");
+        let created = document.querySelector(".profile-landing .container .profile.user .user-info .created-time span");
 
 
+        userEditBack.addEventListener("click",()=>{
+            userSearchedInfo.style.display = "none"
+            search.style.display = "block"
+            userSearchedEdit.style.display = "none"
+        })
+
+        userinfoBack.addEventListener("click",()=>{
+            userSearchedInfo.style.display = "none"
+            search.style.display = "block"
+            userSearchedEdit.style.display = "none"
+        })
+
+        if (searchUser.value == data.email ){
+            userSearchedInfo.style.display = "block"
+            search.style.display = "none"
+            userSearchedEdit.style.display = "none"
+        }else{
+            searchUserVlidtion.textContent = "لا يوجد هذا المستخدم"
+            setTimeout(()=>{
+                searchUserVlidtion.textContent = ""
+            },5000)
+        }
+
+        if (searchUser.value == `${data.first_name} ${data.last_name}`){
+            userSearchedInfo.style.display = "block"
+            search.style.display = "none"
+            userSearchedEdit.style.display = "none"
+        }
+        
+    }
+
+    function searchU() {
+        let token = JSON.parse( sessionStorage.getItem("token"));
+        let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
+        fetch('http://localhost:3000/library/users/search',
+            {
+                method: 'POST',
+                headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
+                body: JSON.stringify({
+                    email: searchUser.value,
+                })
+            }).then(res => res.json())
+            .then(res => {
+                AuthorizationFour(res)
+            })
+            .catch(e => console.log(e))
+    }
+    searchU()
+}
+
+let searchUserForm = document.querySelector(".profile-landing .container .profile.search-user .search form")
+searchUserForm.onsubmit = function(e){
+    e.preventDefault()
+    searchUsers()
+}
 
 
 userInfo()
