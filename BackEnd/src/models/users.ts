@@ -24,6 +24,7 @@ export type User = {
   email: string
   password: string
   phone_number: string
+  job: string
   admin_flag: boolean
   user_status: string
   created_date: Date
@@ -42,6 +43,7 @@ export class UsersModel {
         u.email,
         hashing,
         u.phone_number,
+        u.job,
         u.admin_flag,
         u.user_status,
         u.created_date,
@@ -86,10 +88,15 @@ export class UsersModel {
   }
 
   // searchForUser
-  async searchForUser(first_name: string, last_name: string, email: string): Promise<User[]> {
+  async searchForUser(
+    first_name: string,
+    last_name: string,
+    email: string,
+    job: string
+  ): Promise<User[]> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(SEARCHFORUSER, [first_name, last_name, email])
+      const result = await connection.query(SEARCHFORUSER, [first_name, last_name, email, job])
       if (result.rows.length) {
         const user = { ...result.rows[0] }
         connection.release()
@@ -116,6 +123,7 @@ export class UsersModel {
           u.email,
           hashing,
           u.phone_number,
+          u.job,
           u.admin_flag,
           u.user_status,
           u.updated_date

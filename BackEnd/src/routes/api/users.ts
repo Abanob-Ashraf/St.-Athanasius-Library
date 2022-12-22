@@ -15,11 +15,15 @@ import { body } from 'express-validator'
 
 const routes = Router()
 
-routes.route('/signup').post(
+routes.route('/createNewUser').post(
+  authorize,
+  admin,
   // email must be an email
   body('email').isEmail(),
   // password must be at least 8 chars long
   body('password').isLength({ min: 8 }),
+  // phone_number must be equal 11 number and accept null
+  body('phone_number').isLength({ min: 11, max: 11 }).optional({ nullable: true }),
 
   createUser
 )
@@ -39,7 +43,15 @@ routes.route('/unavilable').get(authorize, admin, getAllUnAvilableUsers)
 
 routes.route('/').get(authorize, admin, getManyUsers)
 
-routes.route('/search').post(authorize, admin, searchForUser)
+routes.route('/search').post(
+  authorize,
+  admin,
+
+  // email must be an email
+  body('email').isEmail().optional({ nullable: true }),
+
+  searchForUser
+)
 
 routes.route('/:id').get(authorize, admin, getOneUser)
 

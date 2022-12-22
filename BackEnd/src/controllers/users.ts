@@ -19,6 +19,7 @@ export const createUser = async (req: Request, res: Response) => {
       email: req.body.email,
       password: req.body.password,
       phone_number: req.body.phone_number,
+      job: req.body.job,
       admin_flag: req.body.admin_flag || 'false',
       user_status: 'AVILABLE',
       created_date: new Date(),
@@ -63,7 +64,8 @@ export const searchForUser = async (req: Request, res: Response) => {
     const user = await library.searchForUser(
       req.body.first_name,
       req.body.last_name,
-      req.body.email
+      req.body.email,
+      req.body.job
     )
     if (user == null) {
       return res.status(404).json('user was not found')
@@ -108,6 +110,7 @@ export const updateUser = async (req: Request, res: Response) => {
       email: req.body.email,
       password: req.body.password,
       phone_number: req.body.phone_number,
+      job: req.body.job,
       admin_flag: req.body.admin_flag,
       user_status: 'AVILABLE',
       created_date: new Date(),
