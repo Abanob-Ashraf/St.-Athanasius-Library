@@ -103,26 +103,38 @@ export const updateUser = async (req: Request, res: Response) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() })
     }
-    const user = {
-      id: +req.params.id,
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      email: req.body.email,
-      password: req.body.password,
-      phone_number: req.body.phone_number,
-      job: req.body.job,
-      admin_flag: req.body.admin_flag,
-      user_status: 'AVILABLE',
-      created_date: new Date(),
-      updated_date: new Date()
-    }
-    const updateUser = await library.updateUser(user)
-    if (updateUser == null) {
-      return res.status(404).json('User was not found')
+    const token = req.header('Authorization')?.replace('Bearer ', '') as string
+    const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
+    const userId = decode.user.id
+    const userRole = decode.user.admin_flag
+
+    if (userId == +req.params.id || userRole == true) {
+      const user = {
+        id: +req.params.id,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: req.body.email,
+        password: req.body.password,
+        phone_number: req.body.phone_number,
+        job: req.body.job,
+        admin_flag: req.body.admin_flag,
+        user_status: 'AVILABLE',
+        created_date: new Date(),
+        updated_date: new Date()
+      }
+
+      const updateUser = await library.updateUser(user)
+      if (updateUser == null) {
+        return res.status(404).json('User was not found')
+      } else {
+        return res.send(updateUser)
+      }
     } else {
-      return res.send(updateUser)
+      return res.status(404).json('you havnot the role')
     }
   } catch (error) {
+    console.log(error)
+
     res.status(401).json(error)
   }
 }
