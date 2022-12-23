@@ -48,7 +48,7 @@
                     <div class="admin-flag"></div>
                     <div class="pic"></div>
                     <div class="name"></div>
-                    <div class="job">مساعد خادم</div>
+                    <div class="job"></div>
                     <div class="id"></div>
                 </div>
                 <!-- End Profile -->
@@ -68,7 +68,7 @@
                         </div>
                         <div class="job">
                             <p>دور الخادم :</p>
-                            <span>مساعد خادم</span>
+                            <span></span>
                         </div>
                         <div class="email">
                             <p>البريد الالكتروني :</p>
@@ -93,9 +93,6 @@
                             </div>
                             <div class="last-name">
                                 <input type="text" placeholder="الاسم الاخير" name="الاسم الاخير:">
-                            </div>
-                            <div class="job">
-                                <input type="text" placeholder="دور الخادم" name="دور الخادم:">
                             </div>
                             <div class="email">
                                 <input type="email" placeholder="البريد الالكتروني" name="البريد الالكتروني:">
@@ -250,11 +247,15 @@
                     </div>
                 </div>
                 <!-- End Profile -->
+
+
             </div>
             <!-- End Grid Layout One -->
 
             <!-- Profile -->
             <div class="profile search-books">
+                <div class="special-title">البحث عن الكتاب</div>
+                <hr>
                 <form action="" class="search-form">
                     <div class="search-container">
                         <input type="search" name="book" id="book" placeholder="البحث عن الكتاب حسب">
@@ -271,19 +272,23 @@
                         <tr>
                             <th>اسم الكتاب</th>
                             <th>المؤلف</th>
+                            <th>الناشر</th>
                             <th>الموضوع</th>
                             <th>التصنيف</th>
                             <th>عدد النسخ</th>
+                            <th>عدد الاجزاء</th>
                             <th>عدد الصفحات</th>
                             <th>كود الكتاب</th>
-                            <th>تاريخ الانشاء</th>
+                            <th>تاريخ التسجيل</th>
                         </tr>
                         <tr>
                             <td>تجسد الكلمه</td>
                             <td>البابا اثناسيوس</td>
+                            <td>اسقفيه الشباب</td>
                             <td>تجسد الرب يسوع المسيح</td>
                             <td>عقيده</td>
                             <td>2</td>
+                            <td>4</td>
                             <td>180</td>
                             <td>1-1-1</td>
                             <td>15/12/2022</td>
@@ -291,14 +296,67 @@
                         <tr>
                             <td>تجسد الكلمه</td>
                             <td>البابا اثناسيوس</td>
+                            <td>اسقفيه الشباب</td>
                             <td>تجسد الرب يسوع المسيح</td>
                             <td>عقيده</td>
                             <td>2</td>
+                            <td>4</td>
                             <td>180</td>
                             <td>1-1-1</td>
                             <td>15/12/2022</td>
                         </tr>
                     </table>
+                </div>
+            </div>
+            <!-- End Profile -->
+
+            <!-- Profile -->
+            <div class="profile create-user">
+                <div class="special-title">انشاء المستخدم</div>
+                <hr>
+                <div class="head">
+                    <p  class="note">للمديرين فقط</p>
+                    <div class="flag">
+                        <input type="checkbox" name="admin-flag" id="admin-flag">
+                        <label for="admin-flag">هل تود جعله مدير؟</label>
+                    </div>
+                </div>
+                <form action="#" class="create-user-form" method="dialog">
+                    <div class="input-field">
+                        <input type="text" placeholder="الاسم الاول" required name="firstName" class="first-name"/>
+                        <input type="text" placeholder="الاسم الاخير" required name="lastName" class="last-name"/>
+                        <input type="text" placeholder="دور الخادم" required name="job" class="job"/>
+                        <input type="email" placeholder="البريد الالكتروني" required name="email" class="email"/>
+                        <input type="password" placeholder="كلمه المرور" required name="password" class="password"/>
+                        <input type="submit" value="انشاء مستخدم" class="submit" />
+                    </div>
+                </form>
+                <div class="profile errors">
+                    <div class="first-name-msg">
+                        <i class="fas fa-check-circle check"></i>
+                        <i class="fas fa-exclamation-circle exclamation"></i>
+                        <p></p>
+                    </div>
+                    <div class="last-name-msg">
+                        <i class="fas fa-check-circle check"></i>
+                        <i class="fas fa-exclamation-circle exclamation"></i>
+                        <p></p>
+                    </div>
+                    <div class="job-msg">
+                        <i class="fas fa-check-circle check"></i>
+                        <i class="fas fa-exclamation-circle exclamation"></i>
+                        <p></p>
+                    </div>
+                    <div class="email-msg">
+                        <i class="fas fa-check-circle check"></i>
+                        <i class="fas fa-exclamation-circle exclamation"></i>
+                        <p></p>
+                    </div>
+                    <div class="password-msg">
+                        <i class="fas fa-check-circle check"></i>
+                        <i class="fas fa-exclamation-circle exclamation"></i>
+                        <p></p>
+                    </div>
                 </div>
             </div>
             <!-- End Profile -->

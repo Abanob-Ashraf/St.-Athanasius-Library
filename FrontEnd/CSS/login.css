@@ -76,7 +76,7 @@ body{
 /* Header */
 .header{
     height: 100px;
-    background-color: var(--whiteColor);
+    background-color: var(--mainBlackColor);
 }
 
 .header .container{
@@ -87,13 +87,13 @@ body{
 .header .container a{
     display: flex;
     align-items: center;
-    color: var(--mainBlackColor);
 }
 .header .container .logo h3{
     font-size: 17px;
+    color: var(--whiteColor);
 }
 .header .container i{
-    color: var(--mainBlackColor);
+    color: var(--whiteColor);
 }
 @media (max-width:991px){
     .header{

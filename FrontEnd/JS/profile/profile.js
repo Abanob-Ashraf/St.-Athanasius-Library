@@ -25,7 +25,7 @@ function header(){
 
     logout.addEventListener("click",()=>{
         sessionStorage.removeItem("token")
-        location.href = "../../index.html"
+        location.href = "../../login.html"
     })
 }
 
@@ -35,10 +35,12 @@ function userGeneral(){
         let name = document.querySelector(".profile-landing .container .profile.general-info .name");
         let adminFlag = document.querySelector(".profile-landing .container .profile.general-info .admin-flag");
         let id = document.querySelector(".profile-landing .container .profile.general-info .id");
+        let job = document.querySelector(".profile-landing .container .profile.general-info .job");
 
         
         name.textContent = `${data.first_name} ${data.last_name}`
         id.textContent = `#${data.id}`
+        job.textContent = data.job
         if (data.admin_flag == true) {
             adminFlag.textContent = `مدير`
         } else if (data.admin_flag == false){
@@ -85,12 +87,14 @@ function userInfo(){
         let firstName = document.querySelector(".profile-landing .container .profile.user .user-info .first-name span");
         let lastName = document.querySelector(".profile-landing .container .profile.user .user-info .last-name span");
         let email = document.querySelector(".profile-landing .container .profile.user .user-info .email span");
+        let job = document.querySelector(".profile-landing .container .profile.user .user-info .job span");
         let phone = document.querySelector(".profile-landing .container .profile.user .user-info .phone span");
         let created = document.querySelector(".profile-landing .container .profile.user .user-info .created-time span");
 
         firstName.textContent = data.first_name
         lastName.textContent = data.last_name
         email.textContent = data.email
+        job.textContent = data.job
         created.textContent = data.created_date
         if (data.phone_number == null) {
             phone.textContent = `لا يوجد`
@@ -252,13 +256,168 @@ function searchUsers() {
     searchU()
 }
 
+// Create User Function
+function CreateUser(){
+    function AuthorizationFive(){    
+        // First Name Validation Function
+        function firstName(){
+            let firstName = document.querySelector(".profile-landing .container .create-user-form .input-field .first-name")
+            let firstNameMsg = document.querySelector(".profile-landing .container .profile.errors .first-name-msg p")
+            let firstNameValue = firstName.value.trim()
+            
+            if (firstNameValue ==  ""){
+                firstNameMsg.textContent = 'لا تترك الحقل فارغ'
+                setError(firstNameMsg)
+            }else if(firstNameValue.length < 3 || firstNameValue.length > 10){
+                firstNameMsg.textContent = `يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف`
+                setError(firstNameMsg)
+            }else {
+                firstNameMsg.textContent = `تم التاكيد`
+                setSuccess(firstNameMsg)
+            }
+        }
+
+        // last Name Validation Function
+        function lastName(){
+            let lastName = document.querySelector(".profile-landing .container .create-user-form .input-field .last-name")
+            let lastNameMsg = document.querySelector(".profile-landing .container .profile.errors .last-name-msg p")
+            let lastNameValue = lastName.value.trim()
+            
+            if (lastNameValue ==  ""){
+                lastNameMsg.textContent = 'لا تترك الحقل فارغ'
+                setError(lastNameMsg)
+            }else if(lastNameValue.length < 3 || lastNameValue.length > 10){
+                lastNameMsg.textContent = `يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف`
+                setError(lastNameMsg)
+            }else {
+                lastNameMsg.textContent = `تم التاكيد`
+                setSuccess(lastNameMsg)
+            }
+        }
+    
+        // Job Validation Function
+        function job(){
+            let job = document.querySelector(".profile-landing .container .create-user-form .input-field .job")
+            let jobMsg = document.querySelector(".profile-landing .container .profile.errors .job-msg p")
+            let jobValue = job.value.trim()
+
+            if (jobValue == ""){
+                jobMsg.textContent = 'لا تترك الحقل فارغ'
+                setError(jobMsg)
+            }else if (jobValue == "مساعد خادم" || jobValue == "امين السكرتاريه" || jobValue == "امين الميديا" || jobValue == "امين المكتبه" || jobValue == "سكرتاريه" || jobValue == "ميديا" || jobValue == "مكتبه الطفل" || jobValue == "امين مكتبه الطفل"){
+                jobMsg.textContent = `تم التاكيد`
+                setSuccess(jobMsg)   
+            }else {
+                jobMsg.textContent = 'لا توجد تلك الخدمه'
+                setError(jobMsg)
+            }
+        }    
+    
+        // Email Validation Function
+        function email(){
+            let email = document.querySelector(".profile-landing .container .create-user-form .input-field .email")
+            let emailMsg = document.querySelector(".profile-landing .container .profile.errors .email-msg p")
+            let emailValue = email.value.trim()
+
+            if (emailValue ==  ""){
+                emailMsg.textContent = 'لا تترك الحقل فارغ'
+                setError(emailMsg)
+            }else if(isEmailValid(emailValue)){
+                emailMsg.textContent = `تم التاكيد`
+                setSuccess(emailMsg)   
+            }else{
+                setError(emailMsg)
+            }
+
+            // Email Regular Expretion Test (Valdition)
+            function isEmailValid(e){
+                const reg =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+                return reg.test(e);
+            }
+        }
+    
+        // password Validation Function
+        function password(){
+            let password = document.querySelector(".profile-landing .container .create-user-form .input-field .password")
+            let passwordMsg = document.querySelector(".profile-landing .container .profile.errors .password-msg p")
+            let passwordValue = password.value.trim()
+
+            if (passwordValue ==  ""){
+                passwordMsg.textContent = 'لا تترك الحقل فارغ'
+                setError(passwordMsg)
+            }else if(passwordValue.length < 8 || passwordValue.length > 14){
+                passwordMsg.textContent = `يرجي ان لا تزيد الاحرف عن 14 او اقل من 8 احرف`
+                setError(passwordMsg)
+            }else {
+                passwordMsg.textContent = `تم التاكيد`
+                setSuccess(passwordMsg)   
+            }
+        }
+
+        // Set Error Validate
+        function setError(eValue) {
+            let parentOfElement = eValue.parentElement;
+            if(parentOfElement.classList.contains('success')){
+                parentOfElement.classList.remove('success');
+            }
+            parentOfElement.classList.add('error');
+        }
+
+        // Set Success Validate
+        function setSuccess(eValue){
+            let parentOfElement = eValue.parentElement;
+            if(parentOfElement.classList.contains('error')){
+                parentOfElement.classList.remove('error');
+            }
+            parentOfElement.classList.add('success');
+        }
+
+        firstName()
+        lastName()
+        job()
+        email()
+        password()
+    }
+
+
+    function createU() {
+        let firstName = document.querySelector(".profile-landing .container .create-user-form .input-field .first-name")
+        let lastName = document.querySelector(".profile-landing .container .create-user-form .input-field .last-name")
+        let job = document.querySelector(".profile-landing .container .create-user-form .input-field .job")
+        let email = document.querySelector(".profile-landing .container .create-user-form .input-field .email")
+        let password = document.querySelector(".profile-landing .container .create-user-form .input-field .password")
+        let token = JSON.parse( sessionStorage.getItem("token"));
+         fetch('http://localhost:3000/library/users/createNewUser',
+            {
+                method: 'POST',
+                headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json' }),
+                body: JSON.stringify({
+                    first_name: firstName.value,
+                    last_name: lastName.value,
+                    email: email.value,
+                    password: password.value,
+                    job: job.value,
+                    // admin_flag:
+                })
+            }).then(res => res.json())
+            .then(
+                AuthorizationFive()
+            )
+            .catch(e => console.log(e))
+    }
+    createU()
+}
+
 let searchUserForm = document.querySelector(".profile-landing .container .profile.search-user .search form")
 searchUserForm.onsubmit = function(e){
     e.preventDefault()
     searchUsers()
 }
-
-
+let createUserForm = document.querySelector(".profile-landing .container .create-user-form");
+createUserForm.onsubmit = function(e){
+    e.preventDefault()
+    CreateUser()
+}
 userInfo()
 userGeneral()
 latestBook()

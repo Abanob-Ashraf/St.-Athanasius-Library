@@ -8,6 +8,7 @@
 /* Variables */
 :root{
     --dangerColor: #e74c3c;
+    --blueColor: #0075ff;
     --secondDangerColor: rgb(231, 76, 60, 0.50);
     --successColor: #2ecc71;
     --secondSuccessColor: rgb(46, 204, 113, 0.2);
@@ -87,8 +88,11 @@ ul{
     font-size: 18px;
     font-weight: bold;
     color: var(--dangerColor);
-    margin-bottom: 15px;
     text-align: center;
+}
+hr{
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 /* End Global Rules */
 
@@ -183,6 +187,11 @@ ul{
 .header .container .menu.clicked li:not(:first-child):hover{
     color: var(--whiteColor);
     background-color: var(--mediumBlackColor);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 @media (max-width:991px){
     .header{
@@ -465,7 +474,7 @@ ul{
 
 /* User Search */
 .profile-landing .container .profile.search-user .search .note{
-    padding: 0 8px;
+    padding: 2px 8px;
     width: fit-content;
     margin-top: 15px;
     background-color: var(--dangerColor);
@@ -649,7 +658,7 @@ ul{
 }
 .profile-landing .container .profile.search-books .search-container #book{
     width: 100%;
-    padding: 15px 10px;
+    padding: 8px;
     border-radius: 0 5px 5px 0;
     -webkit-border-radius: 0 5px 5px 0;
     -moz-border-radius: 0 5px 5px 0;
@@ -673,6 +682,7 @@ ul{
 
 /* Show Books */
 .profile-landing .container .profile.books{
+    padding: 0;
     margin-top: 15px;
     background-color: var(--whiteColor);
 }
@@ -692,7 +702,7 @@ ul{
 }
 .profile-landing .container .the-books th{
     background-color: var(--whiteColor);
-    padding: 10px;
+    padding: 8px;
     color: var(--dangerColor);
 }
 .profile-landing .container .the-books th:not(:last-child){
@@ -700,7 +710,7 @@ ul{
 }
 .profile-landing .container .the-books td{
     background-color: var(--whiteColor);
-    padding: 10px;
+    padding: 8px;
     text-align: center;
     color: var(--mainBlackColor);
     font-weight: bold;
@@ -720,6 +730,211 @@ ul{
     }
 }
 /* End Show Books */
+
+/* create User */
+.profile-landing .container .profile.create-user .head{
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.profile-landing .container .profile.create-user .head .note{
+    padding: 2px 8px;
+    width: fit-content;
+    background-color: var(--dangerColor);
+    font-weight: bold;
+    font-size: 15px;
+    color: var(--whiteColor);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.profile-landing .container .profile.create-user .head .flag{
+    width: fit-content;
+    padding: 2px 8px;
+    background-color: var(--dangerColor);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    color: var(--whiteColor);
+    font-size: 15px;
+    font-weight: bold;
+}
+.profile-landing .container .profile.create-user .head .flag label{
+    padding-right: 30px;
+    cursor: pointer;
+    position: relative;
+}
+.profile-landing .container .profile.create-user .head .flag label::before{
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -9px;
+    border-radius: 4px;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--whiteColor);
+    background-color: var(--whiteColor);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+.profile-landing .container .profile.create-user .head .flag label:hover::before{
+    border-color: var(--blueColor);
+}
+.profile-landing .container .profile.create-user .head .flag label::after{
+    font-family: "Font Awesome 6 Free";
+    content: "\f00c";
+    font-weight: 900;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -9px;
+    background-color: var(--blueColor);
+    color: var(--whiteColor);
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+.profile-landing .container .profile.create-user .head .flag input[type="checkbox"]:checked + label::after{
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+}
+.profile-landing .container .profile.create-user .head .flag input{
+    appearance: none;
+    --webkit-appearance: none;
+    display: none;
+}
+.profile-landing .container .profile.create-user{
+    margin-top: 15px;
+    background-color: var(--whiteColor);
+}
+.profile-landing .container .create-user-form .input-field{
+    margin-bottom: 15px;
+    width: 100%;
+}
+.profile-landing .container .create-user-form .input-field{
+    background-color: var(--thirdColor);
+    padding: 8px;
+    display: flex;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.profile-landing .container .create-user-form .input-field input{
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 8px;
+}
+.profile-landing .container .create-user-form .input-field input:not(.submit){
+    border-left: 8px solid var(--thirdColor);
+}
+.profile-landing .container .create-user-form .input-field input::placeholder{
+    color: var(--mainBlackColor);
+    font-size: 14px;
+    font-weight: bold;
+}
+.profile-landing .container .create-user-form .input-field .submit{
+    background-color: var(--dangerColor);
+    color: var(--whiteColor);
+    font-size: 14px;
+    font-weight: bold;
+}
+@media (max-width:992px){
+    .profile-landing .container .create-user-form .input-field{
+        flex-direction: column;
+        text-align: center;
+    }
+    .profile-landing .container .create-user-form .input-field input{
+        border: none;
+    }
+    .profile-landing .container .create-user-form .input-field input:not(.submit){
+        margin-bottom: 8px;
+        border: none;
+    }
+}
+/* End create User */
+
+/*Error Massege */
+.profile-landing .container .profile.errors{
+    margin-top: 15px;
+    background-color: var(--thirdColor);
+    padding: 8px;
+}
+.profile-landing .container .profile.errors div{
+    background-color: var(--whiteColor);
+    padding: 8px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.profile-landing .container .profile.errors div p{
+    display: inline;
+    margin-right: 5px;
+}
+.profile-landing .container .profile.errors div i{
+    color: var(--successColor);
+    display: none;
+}
+.profile-landing .container .profile.errors div.success .check{
+    color: var(--successColor);
+    display: inline;
+}
+.profile-landing .container .profile.errors div.error .exclamation{
+    color: var(--dangerColor);
+    display: inline;
+}
+.profile-landing .container .profile.errors div:not(:last-child){
+    margin-bottom: 8px;
+}
+.profile-landing .container .profile.errors div.success{
+    border: 2px solid var(--successColor);
+}
+.profile-landing .container .profile.errors div.success p{
+    color: var(--successColor);
+    font-weight: bold;
+}
+.profile-landing .container .profile.errors div.error{
+    border: 2px solid var(--dangerColor);
+}
+.profile-landing .container .profile.errors div.error p{
+    color: var(--dangerColor);
+    font-weight: bold;
+}
+
+/* End Error Massege */
 
 /* End Profile */
 
