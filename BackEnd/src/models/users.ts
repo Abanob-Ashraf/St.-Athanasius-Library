@@ -155,11 +155,13 @@ export class UsersModel {
         const result = await connection.query(SELECTSTATUS, [id])
         const { user_status: status } = result.rows[0]
         const isStatusAVILABLE = status
-        if (isStatusAVILABLE == 'AVILABLE') {
-          const deleteUser = await connection.query(DELETEUSER, [id, user_status, updated_date])
-          await connection.query(UPDATEBOOKAFTERDELETEUSER, [id, userId])
-          connection.release()
-          return deleteUser.rows[0]
+        if (userId != id) {
+          if (isStatusAVILABLE == 'AVILABLE') {
+            const deleteUser = await connection.query(DELETEUSER, [id, user_status, updated_date])
+            await connection.query(UPDATEBOOKAFTERDELETEUSER, [id, userId])
+            connection.release()
+            return deleteUser.rows[0]
+          }
         } else {
           connection.release()
           return null

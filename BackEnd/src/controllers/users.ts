@@ -149,6 +149,9 @@ export const deleteUser = async (req: Request, res: Response) => {
       'NOT AVILABLE',
       new Date()
     )
+    if (+userId == +req.params.id) {
+      return res.status(404).json('you can not delete yourself')
+    }
     if (deletedUser == null) {
       return res.status(404).json('User was not found')
     } else {
