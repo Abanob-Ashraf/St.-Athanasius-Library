@@ -133,8 +133,6 @@ export const updateUser = async (req: Request, res: Response) => {
       return res.status(404).json('you havnot the role')
     }
   } catch (error) {
-    console.log(error)
-
     res.status(401).json(error)
   }
 }
