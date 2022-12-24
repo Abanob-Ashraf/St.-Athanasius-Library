@@ -92,18 +92,12 @@ body{
     font-size: 17px;
     color: var(--whiteColor);
 }
-.header .container i{
-    color: var(--whiteColor);
-}
 @media (max-width:991px){
     .header{
         background-color: var(--mainBlackColor);
     }
     .header .container .logo h3{
         display: none;
-    }
-    .header .container i{
-        color: var(--whiteColor);
     }
 }
 /* End Header */

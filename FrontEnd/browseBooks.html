@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awsome 5 Free -->
+    <link rel="stylesheet" href="./css/all.min.css">
+    <!-- Login Style Sheet -->
+    <link rel="stylesheet" href="./css/browseBooks.css">
+    <!-- Title Icon -->
+    <link rel="icon" href="./IMGS/LOGO/Logo.png">
+    <title>مكتبه القديس اثناسيوس | تصفح الكتب</title>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="container">
+            <a href="./index.html" class="logo">
+                <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
+                <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
+            </a>
+            <div class="user-login">
+                <div class="profile-pic"></div>
+                <i class="fa-solid fa-caret-down fa-1x"></i>
+            </div>
+            <ul class="menu">
+                <li><a>مرحبا !<span class="welcome"></span></a></li>
+                <hr>
+                <li><a href="./profile.html">الصفحه الشخصيه</a></li>
+                <li><a href="./index.html">الصفحه الرئيسيه</a></li>
+                <li><a href="#services">تسجيل الكتب</a></li>
+                <li><a href="./browseBooks.html">تصفح الكتب</a></li>
+                <hr>
+                <li><a id="logout">تسجيل الخروج</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- End Header -->
+
+    <!-- Browse Books Landing -->
+    <div class="browse-books-landing">
+        <div class="container">
+            <!-- Profile -->
+            <div class="profile search-books">
+                <div class="special-title">البحث عن الكتاب</div>
+                <hr>
+                <form action="" class="search-form">
+                    <div class="search-container">
+                        <input type="search" name="book" id="book" placeholder="البحث عن الكتاب حسب">
+                        <select name="subject" id="subject">
+                            <option value="name">الاسم</option>
+                            <option value="author">الكاتب</option>
+                            <option value="topic">الموضوع</option>
+                            <option value="publisher">الناشر</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="profile books">
+                    <table class="the-books">
+                        <tr>
+                            <th>اسم الكتاب</th>
+                            <th>المؤلف</th>
+                            <th>الناشر</th>
+                            <th>الموضوع</th>
+                            <th>التصنيف</th>
+                            <th>عدد النسخ</th>
+                            <th>عدد الاجزاء</th>
+                            <th>عدد الصفحات</th>
+                            <th>كود الكتاب</th>
+                            <th>تاريخ التسجيل</th>
+                        </tr>
+                        <tr>
+                            <td>تجسد الكلمه</td>
+                            <td>البابا اثناسيوس</td>
+                            <td>اسقفيه الشباب</td>
+                            <td>تجسد الرب يسوع المسيح</td>
+                            <td>عقيده</td>
+                            <td>2</td>
+                            <td>4</td>
+                            <td>180</td>
+                            <td>1-1-1</td>
+                            <td>15/12/2022</td>
+                        </tr>
+                        <tr>
+                            <td>تجسد الكلمه</td>
+                            <td>البابا اثناسيوس</td>
+                            <td>اسقفيه الشباب</td>
+                            <td>تجسد الرب يسوع المسيح</td>
+                            <td>عقيده</td>
+                            <td>2</td>
+                            <td>4</td>
+                            <td>180</td>
+                            <td>1-1-1</td>
+                            <td>15/12/2022</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- End Profile -->
+        </div>
+    </div>
+    <!-- End Browse Books Landing -->
+    <script src="./JS/browseBooks/browseBooks.js"></script>
+</body>
+</html>

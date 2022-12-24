@@ -1,23 +1,75 @@
+let token = JSON.parse(sessionStorage.getItem("token"));
+
+// Me Fetch Function
+function me(){
+    fetch('http://localhost:3000/library/users/me',
+    {
+        method: 'GET',
+        headers: new Headers({"Authorization": `Bearer ${token}`}),
+    }).then(res => res.json())
+    .then(res => {
+        header(res)
+        userGeneral(res)
+        userInfo(res)
+    })
+    .catch(e => console.log(e))
+}
+me()
+
+// EditById Fetch Function
+function editbyid(){
+    let firstNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .first-name input");
+    let lastNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .last-name input");
+    let emailEI = document.querySelector(".profile-landing .container .profile.user .edit-info .email input");
+    let phoneEI = document.querySelector(".profile-landing .container .profile.user .edit-info .phone input");
+    let resetPasswordEI = document.querySelector(".profile-landing .container .profile.user .edit-info .reset-password input");
+
+    fetch(`http://localhost:3000/library/users/16`,
+    {
+        method: 'PUT',
+        headers: new Headers({"Authorization": `Bearer ${token}`}),
+        body: JSON.stringify({
+            first_name: firstNameEI.value,
+            last_name: lastNameEI.value,
+            email: emailEI.value,
+            phone_number: phoneEI.value,
+            password: resetPasswordEI.value
+        })
+    }).then(res => res.json())
+    .then(res => {
+        console.log(res)
+        let submit = document.querySelector(".profile-landing .container .profile.user .edit-info form");
+        submit.addEventListener("submit",()=>{
+            res
+        })
+            })
+    .catch(e => console.log(e))    
+}
+editbyid()
+
+// LatestBooks Fetch Function
+function latestBooks(){
+    fetch('http://localhost:3000/library/books/latestBooks',
+    {
+        method: 'GET',
+        headers: new Headers({"Authorization": `Bearer ${token}`}),
+    }).then(res => res.json())
+    .then(res => {
+        latestBook(res)
+    })
+    .catch(e => console.log(e))
+}
+latestBooks()
+
+
 // Header Function
-function header(){
+function header(data){
     let logout = document.querySelector(".header .container .menu #logout")
     let userLogin = document.querySelector(".header .container .user-login")
     let hiddenMenu = document.querySelector(".header .container .menu")
+    let welcome = document.querySelector(".header .container .menu .welcome")
 
-    function header() {
-        let token = JSON.parse( sessionStorage.getItem("token"));
-        fetch('http://localhost:3000/library/users/me',
-            {
-                method: 'GET',
-                headers: new Headers({"Authorization": `Bearer ${token}`}),
-            }).then(res => res.json())
-            .then(res => {
-                let welcome = document.querySelector(".header .container .menu .welcome")
-                welcome.textContent = `${res.first_name} ${res.last_name}`
-            })
-            .catch(e => console.log(e))
-    }
-    header()
+    welcome.textContent = `${data.first_name} ${data.last_name}`
 
     userLogin.addEventListener("click",()=>{
         hiddenMenu.classList.toggle("clicked")
@@ -30,47 +82,36 @@ function header(){
 }
 
 // UserGeneral Profile Function
-function userGeneral(){
-    function AuthorizationOne(data){
-        let name = document.querySelector(".profile-landing .container .profile.general-info .name");
-        let adminFlag = document.querySelector(".profile-landing .container .profile.general-info .admin-flag");
-        let id = document.querySelector(".profile-landing .container .profile.general-info .id");
-        let job = document.querySelector(".profile-landing .container .profile.general-info .job");
+function userGeneral(data){
+    let name = document.querySelector(".profile-landing .container .profile.general-info .name");
+    let adminFlag = document.querySelector(".profile-landing .container .profile.general-info .admin-flag");
+    let id = document.querySelector(".profile-landing .container .profile.general-info .id");
+    let job = document.querySelector(".profile-landing .container .profile.general-info .job");
 
-        
-        name.textContent = `${data.first_name} ${data.last_name}`
-        id.textContent = `#${data.id}`
-        job.textContent = data.job
-        if (data.admin_flag == true) {
-            adminFlag.textContent = `مدير`
-        } else if (data.admin_flag == false){
-            adminFlag.textContent = `مستخدم`
-        }
+    name.textContent = `${data.first_name} ${data.last_name}`
+    id.textContent = `#${data.id}`
+    job.textContent = data.job
+    if (data.admin_flag == true) {
+        adminFlag.textContent = `مدير`
+    } else if (data.admin_flag == false){
+        adminFlag.textContent = `مستخدم`
     }
-
-    
-    function userG() {
-        let token = JSON.parse( sessionStorage.getItem("token"));
-        fetch('http://localhost:3000/library/users/me',
-            {
-                method: 'GET',
-                headers: new Headers({"Authorization": `Bearer ${token}`}),
-            }).then(res => res.json())
-            .then(res => {
-                AuthorizationOne(res)
-            })
-            .catch(e => console.log(e))
-    }
-    userG()
 }
 
 
 // userInfo Profile Function
-function userInfo(){
+function userInfo(data){
     let userInfo = document.querySelector(".profile-landing .container .profile.user .user-info");
     let userInfoEdit = document.querySelector(".profile-landing .container .profile.user .user-info .edit");
     let userEdit = document.querySelector(".profile-landing .container .profile.user .edit-info");
     let userEditBack = document.querySelector(".profile-landing .container .profile.user .edit-info .back")
+    let firstName = document.querySelector(".profile-landing .container .profile.user .user-info .first-name span");
+    let lastName = document.querySelector(".profile-landing .container .profile.user .user-info .last-name span");
+    let email = document.querySelector(".profile-landing .container .profile.user .user-info .email span");
+    let job = document.querySelector(".profile-landing .container .profile.user .user-info .job span");
+    let phone = document.querySelector(".profile-landing .container .profile.user .user-info .phone span");
+    let created = document.querySelector(".profile-landing .container .profile.user .user-info .created-time span");
+
 
     userEditBack.addEventListener("click",()=>{
         userInfo.style.display = "block"
@@ -82,111 +123,64 @@ function userInfo(){
         userEdit.style.display = "block"
     })
 
-
-    function AuthorizationTwo(data){
-        let firstName = document.querySelector(".profile-landing .container .profile.user .user-info .first-name span");
-        let lastName = document.querySelector(".profile-landing .container .profile.user .user-info .last-name span");
-        let email = document.querySelector(".profile-landing .container .profile.user .user-info .email span");
-        let job = document.querySelector(".profile-landing .container .profile.user .user-info .job span");
-        let phone = document.querySelector(".profile-landing .container .profile.user .user-info .phone span");
-        let created = document.querySelector(".profile-landing .container .profile.user .user-info .created-time span");
-
-        firstName.textContent = data.first_name
-        lastName.textContent = data.last_name
-        email.textContent = data.email
-        job.textContent = data.job
-        created.textContent = data.created_date
-        if (data.phone_number == null) {
-            phone.textContent = `لا يوجد`
-        } else {
-            phone.textContent = data.phone_number
-        }
+    firstName.textContent = data.first_name
+    lastName.textContent = data.last_name
+    email.textContent = data.email
+    job.textContent = data.job
+    created.textContent = data.created_date
+    if (data.phone_number == null) {
+        phone.textContent = `لا يوجد`
+    } else {
+        phone.textContent = data.phone_number
     }
-
-    function userI() {
-        let token = JSON.parse( sessionStorage.getItem("token"));
-        fetch('http://localhost:3000/library/users/me',
-            {
-                method: 'GET',
-                headers: new Headers({"Authorization": `Bearer ${token}`}),
-            }).then(res => res.json())
-            .then(res => {
-                AuthorizationTwo(res)
-            })
-            .catch(e => console.log(e))
-    }
-    userI()
-
-}
-
-// EditInfo Profile Function
-function editInfo(){
-
 }
 
 // Latest Books Function
-function latestBook(){
-    function AuthorizationThree(data){
-        for (let i = 0 ; i <= data.length; i++){
-            let booksName = document.querySelectorAll(".profile-landing .container .profile.latest-books .latest-book div p");
-            let booksCreatedTime = document.querySelectorAll(".profile-landing .container .profile.latest-books .latest-book div span");
-            let latestBook = document.querySelector(".profile-landing .container .profile.latest-books .latest-book");
-            let latestBookCLick = document.querySelectorAll(".profile-landing .container .profile.latest-books .latest-book div p");
-            let latestBookInfo = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info");
-            let userEditBack = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .back")
-            let bookName = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-name span")
-            let bookAuthor = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-author span")
-            let bookApublisher = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .publisher span")
-            let bookCode = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-code span")
-            let bookCopies = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-copies span")
-            let bookCreated = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-created span")
+function latestBook(data){
+    for (let i = 0 ; i <= data.length; i++){
+        let booksName = document.querySelectorAll(".profile-landing .container .profile.latest-books .latest-book div p");
+        let booksCreatedTime = document.querySelectorAll(".profile-landing .container .profile.latest-books .latest-book div span");
+        let latestBook = document.querySelector(".profile-landing .container .profile.latest-books .latest-book");
+        let latestBookCLick = document.querySelectorAll(".profile-landing .container .profile.latest-books .latest-book div p");
+        let latestBookInfo = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info");
+        let userEditBack = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .back")
+        let bookName = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-name span")
+        let bookAuthor = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-author span")
+        let bookApublisher = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .publisher span")
+        let bookCode = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-code span")
+        let bookCopies = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-copies span")
+        let bookCreated = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-created span")
 
-            booksName[i].textContent = data[i].book_name
-            booksCreatedTime[i].textContent = data[i].created_date
+        booksName[i].textContent = data[i].book_name
+        booksCreatedTime[i].textContent = data[i].created_date
 
-            userEditBack.addEventListener("click",()=>{
-                latestBook.style.display = "block"
-                latestBookInfo.style.display = "none"
-            })
-        
-            latestBookCLick.forEach((e)=>{
-                e.addEventListener("click",()=>{
-                    if (e.textContent == data[i].book_name){
-                        latestBook.style.display = "none"
-                        latestBookInfo.style.display = "block"
-                        bookName.textContent = data[i].book_name
-                        bookAuthor.textContent = data[i].author
-                        bookApublisher.textContent = data[i].publisher
-                        bookCode.textContent = data[i].book_code
-                        bookCopies.textContent = data[i].number_of_copies
-                        bookCreated.textContent = data[i].created_date
-
-                        if (data[i].author == null){
-                            bookAuthor.textContent = `لا يوجد`
-                        }
-                        if (data[i].publisher == null){
-                            bookApublisher.textContent = `لا يوجد`
-                        }
-                    }
-                })
-            })
+        userEditBack.addEventListener("click",()=>{
+            latestBook.style.display = "block"
+            latestBookInfo.style.display = "none"
+        })
     
-        }
-    }
+        latestBookCLick.forEach((e)=>{
+            e.addEventListener("click",()=>{
+                if (e.textContent == data[i].book_name){
+                    latestBook.style.display = "none"
+                    latestBookInfo.style.display = "block"
+                    bookName.textContent = data[i].book_name
+                    bookAuthor.textContent = data[i].author
+                    bookApublisher.textContent = data[i].publisher
+                    bookCode.textContent = data[i].book_code
+                    bookCopies.textContent = data[i].number_of_copies
+                    bookCreated.textContent = data[i].created_date
 
-    function latestB() {
-        let token = JSON.parse( sessionStorage.getItem("token"));
-        fetch('http://localhost:3000/library/books/latestBooks',
-            {
-                method: 'GET',
-                headers: new Headers({"Authorization": `Bearer ${token}`}),
-            }).then(res => res.json())
-            .then(res => {
-                AuthorizationThree(res)
+                    if (data[i].author == null){
+                        bookAuthor.textContent = `لا يوجد`
+                    }
+                    if (data[i].publisher == null){
+                        bookApublisher.textContent = `لا يوجد`
+                    }
+                }
             })
-            .catch(e => console.log(e))
+        })
     }
-    latestB()
 }
 
 // Search Users Function
@@ -229,16 +223,20 @@ function searchUsers() {
             },5000)
         }
 
-        if (searchUser.value == `${data.first_name} ${data.last_name}`){
+        if (searchUser.value == full_Name){
             userSearchedInfo.style.display = "block"
             search.style.display = "none"
             userSearchedEdit.style.display = "none"
+            firstName.textContent = data.first_name
+            lastName.textContent = data.last_name
+            email.textContent = data.email
+            phone.textContent = data.phone_number
+            created.textContent = data.created_date
         }
         
     }
 
     function searchU() {
-        let token = JSON.parse( sessionStorage.getItem("token"));
         let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
         fetch('http://localhost:3000/library/users/search',
             {
@@ -246,6 +244,8 @@ function searchUsers() {
                 headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
                 body: JSON.stringify({
                     email: searchUser.value,
+                    first_name: searchUser.value,
+                    last_name: searchUser.value
                 })
             }).then(res => res.json())
             .then(res => {
@@ -266,13 +266,13 @@ function CreateUser(){
             let firstNameValue = firstName.value.trim()
             
             if (firstNameValue ==  ""){
-                firstNameMsg.textContent = 'لا تترك الحقل فارغ'
+                firstNameMsg.textContent = 'الاسم الاول=> لا تترك الحقل فارغ'
                 setError(firstNameMsg)
             }else if(firstNameValue.length < 3 || firstNameValue.length > 10){
-                firstNameMsg.textContent = `يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف`
+                firstNameMsg.textContent = `الاسم الاول=> يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف`
                 setError(firstNameMsg)
             }else {
-                firstNameMsg.textContent = `تم التاكيد`
+                firstNameMsg.textContent = `الاسم الاول=> تم التاكيد`
                 setSuccess(firstNameMsg)
             }
         }
@@ -284,13 +284,13 @@ function CreateUser(){
             let lastNameValue = lastName.value.trim()
             
             if (lastNameValue ==  ""){
-                lastNameMsg.textContent = 'لا تترك الحقل فارغ'
+                lastNameMsg.textContent = 'الاسم الاخير=> لا تترك الحقل فارغ'
                 setError(lastNameMsg)
             }else if(lastNameValue.length < 3 || lastNameValue.length > 10){
-                lastNameMsg.textContent = `يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف`
+                lastNameMsg.textContent = `الاسم الاخير=> يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف`
                 setError(lastNameMsg)
             }else {
-                lastNameMsg.textContent = `تم التاكيد`
+                lastNameMsg.textContent = `الاسم الاخير=> تم التاكيد`
                 setSuccess(lastNameMsg)
             }
         }
@@ -302,13 +302,10 @@ function CreateUser(){
             let jobValue = job.value.trim()
 
             if (jobValue == ""){
-                jobMsg.textContent = 'لا تترك الحقل فارغ'
+                jobMsg.textContent = 'دور الخادم=> لا تترك الحقل فارغ'
                 setError(jobMsg)
-            }else if (jobValue == "مساعد خادم" || jobValue == "امين السكرتاريه" || jobValue == "امين الميديا" || jobValue == "امين المكتبه" || jobValue == "سكرتاريه" || jobValue == "ميديا" || jobValue == "مكتبه الطفل" || jobValue == "امين مكتبه الطفل"){
-                jobMsg.textContent = `تم التاكيد`
-                setSuccess(jobMsg)   
             }else {
-                jobMsg.textContent = 'لا توجد تلك الخدمه'
+                jobMsg.textContent = 'دور الخادم=> لا توجد تلك الخدمه'
                 setError(jobMsg)
             }
         }    
@@ -320,10 +317,10 @@ function CreateUser(){
             let emailValue = email.value.trim()
 
             if (emailValue ==  ""){
-                emailMsg.textContent = 'لا تترك الحقل فارغ'
+                emailMsg.textContent = 'البريد الالكتروني=> لا تترك الحقل فارغ'
                 setError(emailMsg)
             }else if(isEmailValid(emailValue)){
-                emailMsg.textContent = `تم التاكيد`
+                emailMsg.textContent = `البريد الالكتروني=> تم التاكيد`
                 setSuccess(emailMsg)   
             }else{
                 setError(emailMsg)
@@ -343,13 +340,13 @@ function CreateUser(){
             let passwordValue = password.value.trim()
 
             if (passwordValue ==  ""){
-                passwordMsg.textContent = 'لا تترك الحقل فارغ'
+                passwordMsg.textContent = 'كلمه المرور=> لا تترك الحقل فارغ'
                 setError(passwordMsg)
             }else if(passwordValue.length < 8 || passwordValue.length > 14){
-                passwordMsg.textContent = `يرجي ان لا تزيد الاحرف عن 14 او اقل من 8 احرف`
+                passwordMsg.textContent = `كلمه المرور=> يرجي ان لا تزيد الاحرف عن 14 او اقل من 8 احرف`
                 setError(passwordMsg)
             }else {
-                passwordMsg.textContent = `تم التاكيد`
+                passwordMsg.textContent = `كلمه المرور=> تم التاكيد`
                 setSuccess(passwordMsg)   
             }
         }
@@ -386,7 +383,6 @@ function CreateUser(){
         let job = document.querySelector(".profile-landing .container .create-user-form .input-field .job")
         let email = document.querySelector(".profile-landing .container .create-user-form .input-field .email")
         let password = document.querySelector(".profile-landing .container .create-user-form .input-field .password")
-        let token = JSON.parse( sessionStorage.getItem("token"));
          fetch('http://localhost:3000/library/users/createNewUser',
             {
                 method: 'POST',
@@ -397,7 +393,6 @@ function CreateUser(){
                     email: email.value,
                     password: password.value,
                     job: job.value,
-                    // admin_flag:
                 })
             }).then(res => res.json())
             .then(
@@ -418,7 +413,3 @@ createUserForm.onsubmit = function(e){
     e.preventDefault()
     CreateUser()
 }
-userInfo()
-userGeneral()
-latestBook()
-header()
