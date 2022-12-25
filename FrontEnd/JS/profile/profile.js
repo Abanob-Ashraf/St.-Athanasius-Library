@@ -157,27 +157,27 @@ function searchUsers(data){
     })
 
     // With Email
-    if (searchUser.value == data.email){
+    if (searchUser.value == data[0].email){
         userSearchedInfo.style.display = "block"
         search.style.display = "none"
         userSearchedEdit.style.display = "none"
-        id.textContent = data.id
-        firstName.textContent = data.first_name
-        lastName.textContent = data.last_name
-        job.textContent = data.job
-        email.textContent = data.email
-        phone.textContent = data.phone_number
-        if (data.admin_flag == true){
+        id.textContent = data[0].id
+        firstName.textContent = data[0].first_name
+        lastName.textContent = data[0].last_name
+        job.textContent = data[0].job
+        email.textContent = data[0].email
+        phone.textContent = data[0].phone_number
+        if (data[0].admin_flag == true){
             adminFlag.textContent = `نعم`
         }else{
             adminFlag.textContent = `لا`
         }
-        if (data.user_status == "AVILABLE"){
+        if (data[0].user_status == "AVILABLE"){
             status.textContent = "متاح"
         }else{
             status.textContent = "غير متاح"
         }
-        created.textContent = data.created_date
+        created.textContent = data[0].created_date
     }else{
         searchUserVlidtion.textContent = "لا يوجد هذا المستخدم"
         setTimeout(()=>{
@@ -408,8 +408,6 @@ function search(){
             headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
             body: JSON.stringify({
                 email: searchUser.value,
-                first_name: searchUser.value,
-                last_name: searchUser.value
             })
         }).then(res => res.json())
         .then(res => {
