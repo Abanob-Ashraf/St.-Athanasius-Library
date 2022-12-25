@@ -98,7 +98,7 @@ export class UsersModel {
       const connection = await Client.connect()
       const result = await connection.query(SEARCHFORUSER, [first_name, last_name, email, job])
       if (result.rows.length) {
-        const user = { ...result.rows[0] }
+        const user = result.rows
         connection.release()
         return user
       }
