@@ -239,7 +239,7 @@ form {
 }
 
 .input-field.success i{
-    background-color: var(--whiteColor);
+    background-color: transparent;
     border-color: var(--successColor);
     color: var(--successColor);
     border-width: 2px;
@@ -271,7 +271,7 @@ small{
 }
 
 .input-field.error i{
-    background-color: var(--whiteColor);
+    background-color: transparent;
     border-color: var(--dangerColor);
     color: var(--dangerColor);
     border-width: 2px;
@@ -319,16 +319,6 @@ small{
     }
 }
 /* End Submit Buttons */
-
-/* note */
-.note p{
-    font-weight: bold;
-}
-.note p a{
-    color: var(--dangerColor);
-    margin-right: 5px;
-}
-/* End note */
 
 /* End Form */
 
