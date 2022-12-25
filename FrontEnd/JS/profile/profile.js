@@ -1,67 +1,5 @@
 let token = JSON.parse(sessionStorage.getItem("token"));
 
-// Me Fetch Function
-function me(){
-    fetch('http://localhost:3000/library/users/me',
-    {
-        method: 'GET',
-        headers: new Headers({"Authorization": `Bearer ${token}`}),
-    }).then(res => res.json())
-    .then(res => {
-        header(res)
-        userGeneral(res)
-        userInfo(res)
-    })
-    .catch(e => console.log(e))
-}
-me()
-
-// EditById Fetch Function
-function editbyid(){
-    let firstNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .first-name input");
-    let lastNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .last-name input");
-    let emailEI = document.querySelector(".profile-landing .container .profile.user .edit-info .email input");
-    let phoneEI = document.querySelector(".profile-landing .container .profile.user .edit-info .phone input");
-    let resetPasswordEI = document.querySelector(".profile-landing .container .profile.user .edit-info .reset-password input");
-
-    fetch(`http://localhost:3000/library/users/16`,
-    {
-        method: 'PUT',
-        headers: new Headers({"Authorization": `Bearer ${token}`}),
-        body: JSON.stringify({
-            first_name: firstNameEI.value,
-            last_name: lastNameEI.value,
-            email: emailEI.value,
-            phone_number: phoneEI.value,
-            password: resetPasswordEI.value
-        })
-    }).then(res => res.json())
-    .then(res => {
-        console.log(res)
-        let submit = document.querySelector(".profile-landing .container .profile.user .edit-info form");
-        submit.addEventListener("submit",()=>{
-            res
-        })
-            })
-    .catch(e => console.log(e))    
-}
-editbyid()
-
-// LatestBooks Fetch Function
-function latestBooks(){
-    fetch('http://localhost:3000/library/books/latestBooks',
-    {
-        method: 'GET',
-        headers: new Headers({"Authorization": `Bearer ${token}`}),
-    }).then(res => res.json())
-    .then(res => {
-        latestBook(res)
-    })
-    .catch(e => console.log(e))
-}
-latestBooks()
-
-
 // Header Function
 function header(data){
     let logout = document.querySelector(".header .container .menu #logout")
@@ -171,6 +109,9 @@ function latestBook(data){
                     bookCopies.textContent = data[i].number_of_copies
                     bookCreated.textContent = data[i].created_date
 
+                    if (data[i].who_edited == null){
+                        bookAuthor.textContent = `لا يوجد`
+                    }
                     if (data[i].author == null){
                         bookAuthor.textContent = `لا يوجد`
                     }
@@ -184,76 +125,94 @@ function latestBook(data){
 }
 
 // Search Users Function
-function searchUsers() {
-    function AuthorizationFour(data){
-        let userinfoBack = document.querySelector(".profile-landing .container .profile.search-user .user-info .back")
-        let userEditBack = document.querySelector(".profile-landing .container .profile.search-user .edit-info .back")
-        let userSearchedEdit = document.querySelector(".profile-landing .container .profile.search-user .edit-info")
-        let userSearchedInfo = document.querySelector(".profile-landing .container .profile.search-user .user-info")
-        let search = document.querySelector(".profile-landing .container .profile.search-user .search")
-        let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
-        let searchUserVlidtion = document.querySelector(".profile-landing .container .profile.search-user .search .error-text small")
-        let firstName = document.querySelector(".profile-landing .container .profile.user .user-info .first-name span");
-        let lastName = document.querySelector(".profile-landing .container .profile.user .user-info .last-name span");
-        let email = document.querySelector(".profile-landing .container .profile.user .user-info .email span");
-        let phone = document.querySelector(".profile-landing .container .profile.user .user-info .phone span");
-        let created = document.querySelector(".profile-landing .container .profile.user .user-info .created-time span");
+function searchUsers(data){
+    let userinfoBack = document.querySelector(".profile-landing .container .profile.search-user .user-info .back")
+    let userEditBack = document.querySelector(".profile-landing .container .profile.search-user .edit-info .back")
+    let userSearchedEdit = document.querySelector(".profile-landing .container .profile.search-user .edit-info")
+    let userSearchedInfo = document.querySelector(".profile-landing .container .profile.search-user .user-info")
+    let search = document.querySelector(".profile-landing .container .profile.search-user .search")
+    let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
+    let searchUserVlidtion = document.querySelector(".profile-landing .container .profile.search-user .search .error-text small")
+    let id = document.querySelector(".profile-landing .container .profile.search-user .user-info .id span");
+    let firstName = document.querySelector(".profile-landing .container .profile.search-user .user-info .first-name span");
+    let lastName = document.querySelector(".profile-landing .container .profile.search-user .user-info .last-name span");
+    let job = document.querySelector(".profile-landing .container .profile.search-user .user-info .job span");
+    let email = document.querySelector(".profile-landing .container .profile.search-user .user-info .email span");
+    let phone = document.querySelector(".profile-landing .container .profile.search-user .user-info .phone span");
+    let adminFlag = document.querySelector(".profile-landing .container .profile.search-user .user-info .flag span");
+    let status = document.querySelector(".profile-landing .container .profile.search-user .user-info .status span");
+    let created = document.querySelector(".profile-landing .container .profile.search-user .user-info .created-time span");
 
 
-        userEditBack.addEventListener("click",()=>{
-            userSearchedInfo.style.display = "none"
-            search.style.display = "block"
-            userSearchedEdit.style.display = "none"
-        })
+    userEditBack.addEventListener("click",()=>{
+        userSearchedInfo.style.display = "none"
+        search.style.display = "block"
+        userSearchedEdit.style.display = "none"
+    })
 
-        userinfoBack.addEventListener("click",()=>{
-            userSearchedInfo.style.display = "none"
-            search.style.display = "block"
-            userSearchedEdit.style.display = "none"
-        })
+    userinfoBack.addEventListener("click",()=>{
+        userSearchedInfo.style.display = "none"
+        search.style.display = "block"
+        userSearchedEdit.style.display = "none"
+    })
 
-        if (searchUser.value == data.email ){
-            userSearchedInfo.style.display = "block"
-            search.style.display = "none"
-            userSearchedEdit.style.display = "none"
+    // With Email
+    if (searchUser.value == data.email){
+        userSearchedInfo.style.display = "block"
+        search.style.display = "none"
+        userSearchedEdit.style.display = "none"
+        id.textContent = data.id
+        firstName.textContent = data.first_name
+        lastName.textContent = data.last_name
+        job.textContent = data.job
+        email.textContent = data.email
+        phone.textContent = data.phone_number
+        if (data.admin_flag == true){
+            adminFlag.textContent = `نعم`
         }else{
-            searchUserVlidtion.textContent = "لا يوجد هذا المستخدم"
-            setTimeout(()=>{
-                searchUserVlidtion.textContent = ""
-            },5000)
+            adminFlag.textContent = `لا`
         }
-
-        if (searchUser.value == full_Name){
-            userSearchedInfo.style.display = "block"
-            search.style.display = "none"
-            userSearchedEdit.style.display = "none"
-            firstName.textContent = data.first_name
-            lastName.textContent = data.last_name
-            email.textContent = data.email
-            phone.textContent = data.phone_number
-            created.textContent = data.created_date
+        if (data.user_status == "AVILABLE"){
+            status.textContent = "متاح"
+        }else{
+            status.textContent = "غير متاح"
         }
-        
+        created.textContent = data.created_date
+    }else{
+        searchUserVlidtion.textContent = "لا يوجد هذا المستخدم"
+        setTimeout(()=>{
+            searchUserVlidtion.textContent = ""
+        },5000)
     }
 
-    function searchU() {
-        let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
-        fetch('http://localhost:3000/library/users/search',
-            {
-                method: 'POST',
-                headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
-                body: JSON.stringify({
-                    email: searchUser.value,
-                    first_name: searchUser.value,
-                    last_name: searchUser.value
-                })
-            }).then(res => res.json())
-            .then(res => {
-                AuthorizationFour(res)
-            })
-            .catch(e => console.log(e))
-    }
-    searchU()
+    // With FullName
+    // if (searchUser.value == data.first_name + data.last_name){
+    //     userSearchedInfo.style.display = "block"
+    //     search.style.display = "none"
+    //     userSearchedEdit.style.display = "none"
+    //     id.textContent = data.id
+    //     firstName.textContent = data.first_name
+    //     lastName.textContent = data.last_name
+    //     job.textContent = data.job
+    //     email.textContent = data.email
+    //     phone.textContent = data.phone_number
+    //     if (data.admin_flag == true){
+    //         adminFlag.textContent = `نعم`
+    //     }else{
+    //         adminFlag.textContent = `لا`
+    //     }
+    //     if (data.user_status == "AVILABLE"){
+    //         status.textContent = "متاح"
+    //     }else{
+    //         status.textContent = "غير متاح"
+    //     }
+    //     created.textContent = data.created_date
+    // }else{
+    //     searchUserVlidtion.textContent = "لا يوجد هذا المستخدم"
+    //     setTimeout(()=>{
+    //         searchUserVlidtion.textContent = ""
+    //     },5000)
+    // }
 }
 
 // Create User Function
@@ -402,14 +361,93 @@ function CreateUser(){
     }
     createU()
 }
-
-let searchUserForm = document.querySelector(".profile-landing .container .profile.search-user .search form")
-searchUserForm.onsubmit = function(e){
-    e.preventDefault()
-    searchUsers()
-}
 let createUserForm = document.querySelector(".profile-landing .container .create-user-form");
 createUserForm.onsubmit = function(e){
     e.preventDefault()
     CreateUser()
+}
+
+// Me Fetch Function
+function me(){
+    fetch('http://localhost:3000/library/users/me',
+    {
+        method: 'GET',
+        headers: new Headers({"Authorization": `Bearer ${token}`}),
+    }).then(res => res.json())
+    .then(res => {
+        header(res)
+        userGeneral(res)
+        userInfo(res)
+    })
+    .catch(e => console.log(e))
+}
+me()
+
+// EditById Fetch Function
+function editbyid(){
+    let firstNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .first-name input");
+    let lastNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .last-name input");
+    let emailEI = document.querySelector(".profile-landing .container .profile.user .edit-info .email input");
+    let phoneEI = document.querySelector(".profile-landing .container .profile.user .edit-info .phone input");
+    let resetPasswordEI = document.querySelector(".profile-landing .container .profile.user .edit-info .reset-password input");
+
+
+    fetch(`http://localhost:3000/library/users/16`,
+    {
+        method: 'PUT',
+        headers: new Headers({"Authorization": `Bearer ${token}`}),
+        body: JSON.stringify({
+            first_name: firstNameEI.value,
+            last_name: lastNameEI.value,
+            email: emailEI.value,
+            phone_number: phoneEI.value,
+            password: resetPasswordEI.value
+        })
+    }).then(res => res.json())
+    .then(res => console.log(res))
+    .catch(e => console.log(e))    
+}
+let submit = document.querySelector(".profile-landing .container .profile.user .edit-info form");
+submit.onsubmit = function(e){
+    e.preventDefault()
+    editbyid()
+}
+
+// LatestBooks Fetch Function
+function latestBooks(){
+    fetch('http://localhost:3000/library/books/latestBooks',
+    {
+        method: 'GET',
+        headers: new Headers({"Authorization": `Bearer ${token}`}),
+    }).then(res => res.json())
+    .then(res => {
+        latestBook(res)
+    })
+    .catch(e => console.log(e))
+}
+latestBooks()
+
+// search Fetch Function
+function search(){
+    let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
+
+    fetch('http://localhost:3000/library/users/search',
+        {
+            method: 'POST',
+            headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
+            body: JSON.stringify({
+                email: searchUser.value,
+                first_name: searchUser.value,
+                last_name: searchUser.value
+            })
+        }).then(res => res.json())
+        .then(res => {
+            searchUsers(res)
+        })
+        .catch(e => console.log(e))
+}
+let searchUserForm = document.querySelector(".profile-landing .container .profile.search-user .search form")
+searchUserForm.onsubmit = function(e){
+    e.preventDefault()
+    search()    
 }

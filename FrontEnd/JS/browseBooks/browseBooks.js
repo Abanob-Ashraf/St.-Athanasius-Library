@@ -1,3 +1,5 @@
+let token = JSON.parse(sessionStorage.getItem("token"));
+
 // Me Fetch Function
 function me(){
     fetch('http://localhost:3000/library/users/me',
