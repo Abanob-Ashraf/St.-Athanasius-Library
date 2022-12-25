@@ -184,35 +184,6 @@ function searchUsers(data){
             searchUserVlidtion.textContent = ""
         },5000)
     }
-
-    // With FullName
-    // if (searchUser.value == data.first_name + data.last_name){
-    //     userSearchedInfo.style.display = "block"
-    //     search.style.display = "none"
-    //     userSearchedEdit.style.display = "none"
-    //     id.textContent = data.id
-    //     firstName.textContent = data.first_name
-    //     lastName.textContent = data.last_name
-    //     job.textContent = data.job
-    //     email.textContent = data.email
-    //     phone.textContent = data.phone_number
-    //     if (data.admin_flag == true){
-    //         adminFlag.textContent = `نعم`
-    //     }else{
-    //         adminFlag.textContent = `لا`
-    //     }
-    //     if (data.user_status == "AVILABLE"){
-    //         status.textContent = "متاح"
-    //     }else{
-    //         status.textContent = "غير متاح"
-    //     }
-    //     created.textContent = data.created_date
-    // }else{
-    //     searchUserVlidtion.textContent = "لا يوجد هذا المستخدم"
-    //     setTimeout(()=>{
-    //         searchUserVlidtion.textContent = ""
-    //     },5000)
-    // }
 }
 
 // Create User Function
