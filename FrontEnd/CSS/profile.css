@@ -158,7 +158,7 @@ hr{
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
-    width: 150px;
+    width: 200px;
 }
 .header .container .menu.clicked::after{
     content: "";
@@ -527,7 +527,7 @@ hr{
 .profile-landing .container .profile.search-user .user-info{
     display: none;
 }
-.profile-landing .container .profile.search-user .user-info div:not(.special-title,:last-child){
+.profile-landing .container .profile.search-user .user-info .info-group div{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -541,13 +541,23 @@ hr{
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
-.profile-landing .container .profile.search-user .user-info div p{
+.profile-landing .container .profile.search-user .user-info .info-group div p{
     font-weight: bold;
     color: var(--mainBlackColor);
 }
-.profile-landing .container .profile.search-user .user-info div span{
+.profile-landing .container .profile.search-user .user-info .info-group div span{
     font-weight: bold;
     color: var(--lightBlackColor);
+}
+.profile-landing .container .profile.search-user .user-info .arrows{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.profile-landing .container .profile.search-user .user-info .arrows i{
+    color: var(--dangerColor);
+    cursor: pointer;
 }
 .profile-landing .container .profile.search-user .user-info .duble-div{
     display: flex;

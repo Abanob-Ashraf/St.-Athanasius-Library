@@ -70,6 +70,7 @@ function validateFromDataBase(data){
         content[1].innerHTML = "او كلمه المرور غير صحيحه"
     }else{
         sessionStorage.setItem("token" , JSON.stringify(data.token))
+        sessionStorage.setItem("id" , JSON.stringify(data.id))
         location.href = "../../profile.html"
     }
 }
