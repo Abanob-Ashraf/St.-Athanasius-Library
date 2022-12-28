@@ -1,18 +1,10 @@
 let token = JSON.parse(sessionStorage.getItem("token"));
 
-// Me Fetch Function
-function me(){
-    fetch('http://localhost:3000/library/users/me',
-    {
-        method: 'GET',
-        headers: new Headers({"Authorization": `Bearer ${token}`}),
-    }).then(res => res.json())
-    .then(res => {
-        header(res)
-    })
-    .catch(e => console.log(e))
+window.onload = function(){
+    if (window.sessionStorage.getItem("token") == undefined){
+        location.replace("/login.html")
+    }
 }
-me()
 
 // Header Function
 function header(data){
@@ -29,7 +21,20 @@ function header(data){
 
     logout.addEventListener("click",()=>{
         sessionStorage.removeItem("token")
-        location.href = "../../login.html"
+        location.href = "/login.html"
     })
 }
 
+// Me Fetch Function
+function me(){
+    fetch('http://localhost:3000/library/users/me',
+    {
+        method: 'GET',
+        headers: new Headers({"Authorization": `Bearer ${token}`}),
+    }).then(res => res.json())
+    .then(res => {
+        header(res)
+    })
+    .catch(e => console.log(e))
+}
+me()

@@ -1,5 +1,5 @@
 window.onload = function(){
-    if (sessionStorage.getItem("token") == false){
+    if (window.sessionStorage.getItem("token") == undefined){
         location.replace("/login.html")
     }
 }
@@ -133,24 +133,13 @@ function latestBook(data){
 // Search Users Function
 function searchUsers(data){
     let userinfoBack = document.querySelector(".profile-landing .container .profile.search-user .user-info .back")
-    let userEditBack = document.querySelector(".profile-landing .container .profile.search-user .edit-info .back")
+    // let userEditBack = document.querySelector(".profile-landing .container .profile.search-user .edit-info .back")
     let userSearchedEdit = document.querySelector(".profile-landing .container .profile.search-user .edit-info")
     let userSearchedInfo = document.querySelector(".profile-landing .container .profile.search-user .user-info")
     let search = document.querySelector(".profile-landing .container .profile.search-user .search")
     let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
     let searchUserVlidtion = document.querySelector(".profile-landing .container .profile.search-user .search .error-text small")
 
-    userEditBack.addEventListener("click",()=>{
-        userSearchedInfo.style.display = "none"
-        search.style.display = "block"
-        userSearchedEdit.style.display = "none"
-    })
-
-    userinfoBack.addEventListener("click",()=>{
-        userSearchedInfo.style.display = "none"
-        search.style.display = "block"
-        userSearchedEdit.style.display = "none"
-    })
 
     if (searchUser.value == data[0].first_name || searchUser.value == data[0].email){
         userSearchedInfo.style.display = "block"
@@ -291,6 +280,13 @@ function searchUsers(data){
             createdP.appendChild(createdPText)
             created.appendChild(createdSpan)
             createdSpan.appendChild(createdSpanText)
+
+            userinfoBack.addEventListener("click",()=>{
+                userSearchedInfo.style.display = "none"
+                search.style.display = "block"
+                userSearchedEdit.style.display = "none"
+                infoGroup.remove()
+            })
         }
     }else{
         searchUserVlidtion.textContent = "لا يوجد هذا المستخدم"
@@ -298,6 +294,7 @@ function searchUsers(data){
             searchUserVlidtion.textContent = ""
         },5000)
     }
+
 }
 
 // Create User Function
