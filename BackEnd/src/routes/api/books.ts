@@ -19,7 +19,7 @@ routes.route('/user/mybooks').get(authorize, getUserBooks)
 
 routes.route('/').get(getManyBooks)
 
-routes.route('/search').post(searchForBook)
+routes.route('/search').get(searchForBook)
 
 routes.route('/latestBooks').get(getLatestBooks)
 

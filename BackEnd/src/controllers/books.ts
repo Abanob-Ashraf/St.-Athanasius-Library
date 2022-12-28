@@ -79,10 +79,10 @@ export const getBookById = async (req: Request, res: Response) => {
 export const searchForBook = async (req: Request, res: Response) => {
   try {
     const book = await library.searchForBook(
-      req.body.book_name,
-      req.body.author,
-      req.body.publisher,
-      req.body.topic
+      req.query.book_name as string,
+      req.query.author as string,
+      req.query.publisher as string,
+      req.query.topic as string
     )
     if (book == null) {
       return res.status(404).json('Book was not found')

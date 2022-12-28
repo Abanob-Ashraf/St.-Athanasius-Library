@@ -43,7 +43,7 @@ routes.route('/unavilable').get(authorize, admin, getAllUnAvilableUsers)
 
 routes.route('/').get(authorize, admin, getManyUsers)
 
-routes.route('/search').post(
+routes.route('/search').get(
   authorize,
   admin,
 
