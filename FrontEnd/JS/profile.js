@@ -416,15 +416,14 @@ submit.onsubmit = function(){
 // search Fetch Function
 function search(){
     let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
-
-    fetch('http://localhost:3000/library/users/search',
+    let params = new URLSearchParams({
+        email: searchUser.value,
+        first_name: searchUser.value
+    })
+    fetch(`http://localhost:3000/library/users/search?${params.toString()}`,
         {
-            method: 'POST',
+            method: 'GET',
             headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
-            body: JSON.stringify({
-                email: searchUser.value,
-                first_name: searchUser.value,
-            })
         }).then(res => res.json())
         .then(res => {
             searchUsers(res)

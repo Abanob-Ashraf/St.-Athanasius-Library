@@ -73,7 +73,7 @@ function validateFromDataBase(data){
         sessionStorage.setItem("id" , JSON.stringify(data.id))
         sessionStorage.setItem("admin" , JSON.stringify(data.admin_flag))
         sessionStorage.setItem("job" , JSON.stringify(data.job))
-        location.href = "../../profile.html"
+        location.href = "/profile.html"
     }
 }
 
