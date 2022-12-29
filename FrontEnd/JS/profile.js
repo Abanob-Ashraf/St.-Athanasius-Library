@@ -3,8 +3,8 @@ window.onload = function(){
         location.replace("/login.html")
     }
 }
+
 let token = JSON.parse(sessionStorage.getItem("token"));
-let id = JSON.parse(sessionStorage.getItem("id"));
 
 // Header Function
 function header(data){
@@ -79,61 +79,9 @@ function userInfo(data){
     }
 }
 
-// Latest Books Function
-function latestBook(data){
-    for (let i = 0 ; i <= data.length; i++){
-        let booksName = document.querySelectorAll(".profile-landing .container .profile.latest-books .latest-book div p");
-        let booksCreatedTime = document.querySelectorAll(".profile-landing .container .profile.latest-books .latest-book div span");
-        let latestBook = document.querySelector(".profile-landing .container .profile.latest-books .latest-book");
-        let latestBookCLick = document.querySelectorAll(".profile-landing .container .profile.latest-books .latest-book div p");
-        let latestBookInfo = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info");
-        let userEditBack = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .back")
-        let bookName = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-name span")
-        let bookAuthor = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-author span")
-        let bookApublisher = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .publisher span")
-        let bookCode = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-code span")
-        let bookCopies = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-copies span")
-        let bookCreated = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-created span")
-
-        booksName[i].textContent = data[i].book_name
-        booksCreatedTime[i].textContent = data[i].created_date
-
-        userEditBack.addEventListener("click",()=>{
-            latestBook.style.display = "block"
-            latestBookInfo.style.display = "none"
-        })
-
-        latestBookCLick.forEach((e)=>{
-            e.addEventListener("click",()=>{
-                if (e.textContent == data[i].book_name){
-                    latestBook.style.display = "none"
-                    latestBookInfo.style.display = "block"
-                    bookName.textContent = data[i].book_name
-                    bookAuthor.textContent = data[i].author
-                    bookApublisher.textContent = data[i].publisher
-                    bookCode.textContent = data[i].book_code
-                    bookCopies.textContent = data[i].number_of_copies
-                    bookCreated.textContent = data[i].created_date
-
-                    if (data[i].who_edited == null){
-                        bookAuthor.textContent = `لا يوجد`
-                    }
-                    if (data[i].author == null){
-                        bookAuthor.textContent = `لا يوجد`
-                    }
-                    if (data[i].publisher == null){
-                        bookApublisher.textContent = `لا يوجد`
-                    }
-                }
-            })
-        })
-    }
-}
-
 // Search Users Function
 function searchUsers(data){
     let userinfoBack = document.querySelector(".profile-landing .container .profile.search-user .user-info .back")
-    // let userEditBack = document.querySelector(".profile-landing .container .profile.search-user .edit-info .back")
     let userSearchedEdit = document.querySelector(".profile-landing .container .profile.search-user .edit-info")
     let userSearchedInfo = document.querySelector(".profile-landing .container .profile.search-user .user-info")
     let search = document.querySelector(".profile-landing .container .profile.search-user .search")
@@ -432,8 +380,11 @@ function me(){
 }
 me()
 
-// EditById Fetch Function
-function editbyid(){
+// EditByIdForMe Fetch Function
+function editbyidForMe(){
+    let id = JSON.parse(sessionStorage.getItem("id"));
+    let admin = JSON.parse(sessionStorage.getItem("admin"));
+    let job = JSON.parse(sessionStorage.getItem("job"));
     let firstNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .first-name input");
     let lastNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .last-name input");
     let emailEI = document.querySelector(".profile-landing .container .profile.user .edit-info .email input");
@@ -450,30 +401,17 @@ function editbyid(){
             last_name: lastNameEI.value,
             email: emailEI.value,
             password: resetPasswordEI.value,
-            phone_number: phoneEI.value
+            phone_number: phoneEI.value,
+            job: job,
+            admin_flag: admin
         })
     }).then(res => res.json())
     .catch(e => console.log(e))    
 }
 let submit = document.querySelector(".profile-landing .container .profile.user .edit-info form");
-submit.onsubmit = function(e){
-    e.preventDefault()
-    editbyid()
+submit.onsubmit = function(){
+    editbyidForMe()
 }
-
-// LatestBooks Fetch Function
-function latestBooks(){
-    fetch('http://localhost:3000/library/books/latestBooks',
-    {
-        method: 'GET',
-        headers: new Headers({"Authorization": `Bearer ${token}`}),
-    }).then(res => res.json())
-    .then(res => {
-        latestBook(res)
-    })
-    .catch(e => console.log(e))
-}
-latestBooks()
 
 // search Fetch Function
 function search(){
@@ -489,7 +427,6 @@ function search(){
             })
         }).then(res => res.json())
         .then(res => {
-            console.log(res)
             searchUsers(res)
         })
         .catch(e => console.log(e))
