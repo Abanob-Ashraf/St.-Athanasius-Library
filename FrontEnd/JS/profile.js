@@ -1,10 +1,13 @@
+let token = JSON.parse(sessionStorage.getItem("token"));
+let id = JSON.parse(sessionStorage.getItem("id"));
+let admin = JSON.parse(sessionStorage.getItem("admin"));
+let job = JSON.parse(sessionStorage.getItem("job"));
+
 window.onload = function(){
     if (window.sessionStorage.getItem("token") == undefined){
         location.replace("/login.html")
     }
 }
-
-let token = JSON.parse(sessionStorage.getItem("token"));
 
 // Header Function
 function header(data){
@@ -236,6 +239,11 @@ function searchUsers(data){
                 infoGroup.remove()
             })
         }
+    }else if(admin == false){
+        searchUserVlidtion.textContent = "ليس لديك صلاحيات المدير"
+        setTimeout(()=>{
+            searchUserVlidtion.textContent = ""
+        },5000)
     }else{
         searchUserVlidtion.textContent = "لا يوجد هذا المستخدم"
         setTimeout(()=>{
@@ -243,126 +251,160 @@ function searchUsers(data){
         },5000)
     }
 
+    // Browse User Information
+    function browse(){
+        let allInfoGroup = document.querySelectorAll(".profile-landing .container .profile.search-user .user-info .info-group");
+        let rightArrow = document.querySelector(".profile-landing .container .profile.search-user .user-info .right");
+        let leftArrow = document.querySelector(".profile-landing .container .profile.search-user .user-info .left");
+
+        // Consts
+        for (let i = 0 ; i < allInfoGroup.length ; i++){
+            allInfoGroup[i].style.display = "none"
+        }
+        let indexValue = 1;
+        allInfoGroup[indexValue-1].style.display = "block"
+
+        // Move Right
+        rightArrow.addEventListener("click",()=>{
+            indexValue++
+            allInfoGroup[indexValue-1].style.display = "block"
+            allInfoGroup[indexValue-1].previousElementSibling.style.display = "none"
+        })
+
+        // Move Left
+        leftArrow.addEventListener("click",()=>{
+            indexValue--
+            allInfoGroup[indexValue-1].style.display = "block"
+            allInfoGroup[indexValue-1].nextElementSibling.style.display = "none"
+        })
+    }
+    browse()
+
+    // Delete User Information
+    function Delete(){
+
+    }
+    Delete()
 }
 
-// Create User Function
-function create(data){    
-    // First Name Validation Function
-    function firstName(){
-        let firstName = document.querySelector(".profile-landing .container .create-user-form .input-field .first-name")
-        let firstNameMsg = document.querySelector(".profile-landing .container .profile.errors .first-name-msg p")
-        let firstNameValue = firstName.value.trim()
+// // Create User Function
+// function create(data){    
+//     // First Name Validation Function
+//     function firstName(){
+//         let firstName = document.querySelector(".profile-landing .container .create-user-form .input-field .first-name")
+//         let firstNameMsg = document.querySelector(".profile-landing .container .profile.errors .first-name-msg p")
+//         let firstNameValue = firstName.value.trim()
         
-        if (firstNameValue ==  ""){
-            firstNameMsg.textContent = 'الاسم الاول=> لا تترك الحقل فارغ'
-            setError(firstNameMsg)
-        }else if(firstNameValue.length < 3 || firstNameValue.length > 10){
-            firstNameMsg.textContent = `الاسم الاول=> يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف`
-            setError(firstNameMsg)
-        }else {
-            firstNameMsg.textContent = `الاسم الاول=> تم التاكيد`
-            setSuccess(firstNameMsg)
-        }
-    }
+//         if (firstNameValue ==  ""){
+//             firstNameMsg.textContent = 'الاسم الاول=> لا تترك الحقل فارغ'
+//             setError(firstNameMsg)
+//         }else if(firstNameValue.length < 3 || firstNameValue.length > 10){
+//             firstNameMsg.textContent = `الاسم الاول=> يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف`
+//             setError(firstNameMsg)
+//         }else {
+//             firstNameMsg.textContent = `الاسم الاول=> تم التاكيد`
+//             setSuccess(firstNameMsg)
+//         }
+//     }
 
-    // last Name Validation Function
-    function lastName(){
-        let lastName = document.querySelector(".profile-landing .container .create-user-form .input-field .last-name")
-        let lastNameMsg = document.querySelector(".profile-landing .container .profile.errors .last-name-msg p")
-        let lastNameValue = lastName.value.trim()
+//     // last Name Validation Function
+//     function lastName(){
+//         let lastName = document.querySelector(".profile-landing .container .create-user-form .input-field .last-name")
+//         let lastNameMsg = document.querySelector(".profile-landing .container .profile.errors .last-name-msg p")
+//         let lastNameValue = lastName.value.trim()
         
-        if (lastNameValue ==  ""){
-            lastNameMsg.textContent = 'الاسم الاخير=> لا تترك الحقل فارغ'
-            setError(lastNameMsg)
-        }else if(lastNameValue.length < 3 || lastNameValue.length > 10){
-            lastNameMsg.textContent = `الاسم الاخير=> يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف`
-            setError(lastNameMsg)
-        }else {
-            lastNameMsg.textContent = `الاسم الاخير=> تم التاكيد`
-            setSuccess(lastNameMsg)
-        }
-    }
+//         if (lastNameValue ==  ""){
+//             lastNameMsg.textContent = 'الاسم الاخير=> لا تترك الحقل فارغ'
+//             setError(lastNameMsg)
+//         }else if(lastNameValue.length < 3 || lastNameValue.length > 10){
+//             lastNameMsg.textContent = `الاسم الاخير=> يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف`
+//             setError(lastNameMsg)
+//         }else {
+//             lastNameMsg.textContent = `الاسم الاخير=> تم التاكيد`
+//             setSuccess(lastNameMsg)
+//         }
+//     }
 
-    // Job Validation Function
-    function job(){
-        let job = document.querySelector(".profile-landing .container .create-user-form .input-field .job")
-        let jobMsg = document.querySelector(".profile-landing .container .profile.errors .job-msg p")
-        let jobValue = job.value.trim()
+//     // Job Validation Function
+//     function job(){
+//         let job = document.querySelector(".profile-landing .container .create-user-form .input-field .job")
+//         let jobMsg = document.querySelector(".profile-landing .container .profile.errors .job-msg p")
+//         let jobValue = job.value.trim()
 
-        if (jobValue == ""){
-            jobMsg.textContent = 'دور الخادم=> لا تترك الحقل فارغ'
-            setError(jobMsg)
-        }else {
-            jobMsg.textContent = 'دور الخادم=> تم التاكيد'
-            setSuccess(jobMsg)
-        }
-    }    
+//         if (jobValue == ""){
+//             jobMsg.textContent = 'دور الخادم=> لا تترك الحقل فارغ'
+//             setError(jobMsg)
+//         }else {
+//             jobMsg.textContent = 'دور الخادم=> تم التاكيد'
+//             setSuccess(jobMsg)
+//         }
+//     }    
 
-    // Email Validation Function
-    function email(data){
-        let email = document.querySelector(".profile-landing .container .create-user-form .input-field .email")
-        let emailMsg = document.querySelector(".profile-landing .container .profile.errors .email-msg p")
-        let emailValue = email.value.trim()
+//     // Email Validation Function
+//     function email(data){
+//         let email = document.querySelector(".profile-landing .container .create-user-form .input-field .email")
+//         let emailMsg = document.querySelector(".profile-landing .container .profile.errors .email-msg p")
+//         let emailValue = email.value.trim()
 
-        if (emailValue ==  ""){
-            emailMsg.textContent = 'البريد الالكتروني=> لا تترك الحقل فارغ'
-            setError(emailMsg)
-        }else if (emailValue == data.email){
-            emailMsg.textContent = 'البريد الالكتروني=> هذا الحساب مستخدم بالفعل'
-            setError(emailMsg)   
-        }else if(isEmailValid(emailValue)){
-            emailMsg.textContent = `البريد الالكتروني=> تم التاكيد`
-            setSuccess(emailMsg)   
-        }
-        // Email Regular Expretion Test (Valdition)
-        function isEmailValid(e){
-            const reg =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-            return reg.test(e);
-        }
-    }
+//         if (emailValue ==  ""){
+//             emailMsg.textContent = 'البريد الالكتروني=> لا تترك الحقل فارغ'
+//             setError(emailMsg)
+//         }else if (emailValue == data.email){
+//             emailMsg.textContent = 'البريد الالكتروني=> هذا الحساب مستخدم بالفعل'
+//             setError(emailMsg)   
+//         }else if(isEmailValid(emailValue)){
+//             emailMsg.textContent = `البريد الالكتروني=> تم التاكيد`
+//             setSuccess(emailMsg)   
+//         }
+//         // Email Regular Expretion Test (Valdition)
+//         function isEmailValid(e){
+//             const reg =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+//             return reg.test(e);
+//         }
+//     }
 
-    // password Validation Function
-    function password(){
-        let password = document.querySelector(".profile-landing .container .create-user-form .input-field .password")
-        let passwordMsg = document.querySelector(".profile-landing .container .profile.errors .password-msg p")
-        let passwordValue = password.value.trim()
+//     // password Validation Function
+//     function password(){
+//         let password = document.querySelector(".profile-landing .container .create-user-form .input-field .password")
+//         let passwordMsg = document.querySelector(".profile-landing .container .profile.errors .password-msg p")
+//         let passwordValue = password.value.trim()
 
-        if (passwordValue ==  ""){
-            passwordMsg.textContent = 'كلمه المرور=> لا تترك الحقل فارغ'
-            setError(passwordMsg)
-        }else if(passwordValue.length < 8 || passwordValue.length > 14){
-            passwordMsg.textContent = `كلمه المرور=> يرجي ان لا تزيد الاحرف عن 14 او اقل من 8 احرف`
-            setError(passwordMsg)
-        }else {
-            passwordMsg.textContent = `كلمه المرور=> تم التاكيد`
-            setSuccess(passwordMsg)   
-        }
-    }
+//         if (passwordValue ==  ""){
+//             passwordMsg.textContent = 'كلمه المرور=> لا تترك الحقل فارغ'
+//             setError(passwordMsg)
+//         }else if(passwordValue.length < 8 || passwordValue.length > 14){
+//             passwordMsg.textContent = `كلمه المرور=> يرجي ان لا تزيد الاحرف عن 14 او اقل من 8 احرف`
+//             setError(passwordMsg)
+//         }else {
+//             passwordMsg.textContent = `كلمه المرور=> تم التاكيد`
+//             setSuccess(passwordMsg)   
+//         }
+//     }
 
-    // Set Error Validate
-    function setError(eValue) {
-        let parentOfElement = eValue.parentElement;
-        if(parentOfElement.classList.contains('success')){
-            parentOfElement.classList.remove('success');
-        }
-        parentOfElement.classList.add('error');
-    }
+//     // Set Error Validate
+//     function setError(eValue) {
+//         let parentOfElement = eValue.parentElement;
+//         if(parentOfElement.classList.contains('success')){
+//             parentOfElement.classList.remove('success');
+//         }
+//         parentOfElement.classList.add('error');
+//     }
 
-    // Set Success Validate
-    function setSuccess(eValue){
-        let parentOfElement = eValue.parentElement;
-        if(parentOfElement.classList.contains('error')){
-            parentOfElement.classList.remove('error');
-        }
-        parentOfElement.classList.add('success');
-    }
+//     // Set Success Validate
+//     function setSuccess(eValue){
+//         let parentOfElement = eValue.parentElement;
+//         if(parentOfElement.classList.contains('error')){
+//             parentOfElement.classList.remove('error');
+//         }
+//         parentOfElement.classList.add('success');
+//     }
 
-    firstName()
-    lastName()
-    job()
-    email(data)
-    password()
-}
+//     firstName()
+//     lastName()
+//     job()
+//     email(data)
+//     password()
+// }
 
 // Me Fetch Function
 function me(){
@@ -382,9 +424,6 @@ me()
 
 // EditByIdForMe Fetch Function
 function editbyidForMe(){
-    let id = JSON.parse(sessionStorage.getItem("id"));
-    let admin = JSON.parse(sessionStorage.getItem("admin"));
-    let job = JSON.parse(sessionStorage.getItem("job"));
     let firstNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .first-name input");
     let lastNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .last-name input");
     let emailEI = document.querySelector(".profile-landing .container .profile.user .edit-info .email input");

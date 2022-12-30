@@ -1,8 +1,4 @@
-let form = document.forms[0];
 let inputFiled = document.querySelectorAll(".input-field");
-let content = document.querySelectorAll("small");
-let email = document.getElementsByName("email")[0];
-let password = document.getElementsByName("password")[0];
 
 // Rander The Validtion On Page
 document.addEventListener("click",() => {
@@ -11,99 +7,78 @@ document.addEventListener("click",() => {
     });
 });
 
-// Submit Form
-form.addEventListener('submit', (e) => {
-    validateForm();
-    console.log(isFormValid());
-    if(isFormValid() == true){
-        e.preventDefault()
-        get()
-    } else {
-        e.preventDefault()
-    }
-
-});
-
-// Test Validton
-function isFormValid(){
-    let inputFiled = document.querySelectorAll(".input-field");
-    let result = true;
-    inputFiled.forEach((e)=>{
-        if(e.classList.contains('error')){
-            result = false;
-        }
-    });
-    return result;
-}
-
-// Validate Oprators
-function validateForm() {
-    let emailValue = email.value.trim();
-    let passwordValue = password.value.trim();
-
-    // email Validtion
-    if(emailValue == ''){
-        setError(email);
-        content[0].innerHTML = "الرجاء ادخال البريد الالكتروني"
-    }else if(isEmailValid(emailValue)){
-        setSuccess(email);
-    }
-    else{
-        setError(email);
-        content[0].innerHTML = "الرجاء ادخال البريد الالكتروني بالطريقه الصحيحه"
-    }
-    // password Validtion
-    if(passwordValue == ''){
-        setError(password);
-        content[1].innerHTML = "الرجاء ادخال كلمه المرور"
-    }else {
-        setSuccess(password);
-    }
-}
-
 // Validate Oprators From Data Base
 function validateFromDataBase(data){
-    if(email.value != data.email){
-        setError(email);
-        setError(password);
-        content[0].innerHTML = "البريد الالكتروني غير موجود"
-        content[1].innerHTML = "او كلمه المرور غير صحيحه"
-    }else{
-        sessionStorage.setItem("token" , JSON.stringify(data.token))
-        sessionStorage.setItem("id" , JSON.stringify(data.id))
-        sessionStorage.setItem("admin" , JSON.stringify(data.admin_flag))
-        sessionStorage.setItem("job" , JSON.stringify(data.job))
-        location.href = "/profile.html"
+    // Declare Email Variables
+    let email = document.getElementsByName("email")[0];
+    let emailMsg = document.querySelectorAll("small")[0];
+    let emailValue = email.value.trim();
+
+    // Declare Password Variables
+    let password = document.getElementsByName("password")[0];
+    let passwordMsg = document.querySelectorAll("small")[1]
+    let passwordValue = password.value.trim()
+
+    // Email Validation Function
+    function emailF(){
+        if (emailValue ==  ""){
+            emailMsg.textContent = 'لا تترك الحقل فارغ'
+            setError(email)
+        }else if(emailValue != data.email){
+            setError(email);
+            setError(password);
+            emailMsg.textContent = "البريد الالكتروني غير موجود"
+            passwordMsg.textContent = "او كلمه المرور غير صحيحه"
+        }else{
+            setSuccess(email)   
+            sessionStorage.setItem("token" , JSON.stringify(data.token))
+            sessionStorage.setItem("id" , JSON.stringify(data.id))
+            sessionStorage.setItem("admin" , JSON.stringify(data.admin_flag))
+            sessionStorage.setItem("job" , JSON.stringify(data.job))
+            location.href = "/profile.html"
+        }
     }
-}
 
-// Set Error Validate
-function setError(eValue) {
-    let parentOfElement = eValue.parentElement;
-    if(parentOfElement.classList.contains('success')){
-        parentOfElement.classList.remove('success');
+    // password Validation Function
+    function passwordF(){
+        if (passwordValue ==  ""){
+            passwordMsg.textContent = 'لا تترك الحقل فارغ'
+            setError(password)
+        }else if(passwordValue.length < 8 || passwordValue.length > 14){
+            passwordMsg.textContent = `يرجي ان لا تزيد الاحرف عن 14 او اقل من 8 احرف`
+            setError(password)
+        }else {
+            setSuccess(password)   
+        }
     }
-    parentOfElement.classList.add('error');
-}
 
-// Set Success Validate
-function setSuccess(eValue){
-    let parentOfElement = eValue.parentElement;
-    if(parentOfElement.classList.contains('error')){
-        parentOfElement.classList.remove('error');
+    // Set Error Validate
+    function setError(eValue) {
+        let parentOfElement = eValue.parentElement;
+        if(parentOfElement.classList.contains('success')){
+            parentOfElement.classList.remove('success');
+        }
+        parentOfElement.classList.add('error');
     }
-    parentOfElement.classList.add('success');
+
+    // Set Success Validate
+    function setSuccess(eValue){
+        let parentOfElement = eValue.parentElement;
+        if(parentOfElement.classList.contains('error')){
+            parentOfElement.classList.remove('error');
+        }
+        parentOfElement.classList.add('success');
+    }
+
+    passwordF()
+    emailF()
 }
 
-// Email Regular Expretion Test (Valdition)
-function isEmailValid(e){
-    const reg =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    return reg.test(e);
-}
+// Login Fetch Function
+function login() {
+    let email = document.getElementsByName("email")[0];
+    let password = document.getElementsByName("password")[0];
 
-// Get UserData
-
-function get() {
     if (sessionStorage.getItem("token")){
         console.log("token exiset");
         token = JSON.parse(sessionStorage.getItem("token"))
@@ -123,3 +98,25 @@ function get() {
         .catch(e => console.log(e))
     }
 }
+// Test Validton
+function isFormValid(){
+    let inputFiled = document.querySelectorAll(".input-field");
+    let result = true;
+    inputFiled.forEach((e)=>{
+        if(e.classList.contains('error')){
+            result = false;
+        }
+    });
+    return result;
+}
+// Submit Form
+let form = document.forms[0];
+form.addEventListener('submit', (e) => {
+    console.log(isFormValid());
+    if(isFormValid() == true){
+        e.preventDefault()
+        login()
+    } else {
+        e.preventDefault()
+    }
+});

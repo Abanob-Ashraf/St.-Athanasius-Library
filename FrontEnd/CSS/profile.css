@@ -443,7 +443,7 @@ hr{
 }
 /* End User Search */
 
-/* Other User Information */
+/* Other User Informations*/
 .profile-landing .container .profile.search-user .user-info{
     display: none;
 }
@@ -518,9 +518,9 @@ hr{
     padding: 5px 15px;
     cursor: pointer;
 }
-/* End Other User Information */
+/* End Other User Informations*/
 
-/* Other User Information And Edit */
+/* Other User Informations And Edit */
 .profile-landing .container .profile.search-user .edit-info{
     display: none;
 }
@@ -572,7 +572,131 @@ hr{
     padding: 5px 15px;
     cursor: pointer;
 }
-/* End Other User Information And Edit */
+/* End Other User Informations And Edit */
+
+/* Deleted Users */
+.profile-landing .container .deleted-users .show{
+}
+.profile-landing .container .deleted-users .show .note{
+    padding: 2px 8px;
+    width: fit-content;
+    margin-top: 15px;
+    background-color: var(--dangerColor);
+    font-weight: bold;
+    color: var(--whiteColor);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.profile-landing .container .deleted-users .show .show-deleted-users{
+    text-align: centerzz;
+    border: none;
+    font-size: 18px;
+    padding: 8px;
+    width: 100%;
+    margin-top: 15px;
+    background-color: var(--dangerColor);
+    font-weight: 700;
+    color: var(--whiteColor);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+}
+.profile-landing .container .deleted-users .show .show-deleted-users:hover{
+    background-color: var(--secondDangerColor);
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+}
+/* End Deleted Users */
+
+/* Deleted Users informations*/
+.profile-landing .container .deleted-users .info-show{
+    display: none;
+}
+.profile-landing .container .deleted-users .info-show .info-group div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: var(--thirdColor);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.profile-landing .container .deleted-users .info-show .info-group div p{
+    font-weight: bold;
+    color: var(--mainBlackColor);
+}
+.profile-landing .container .deleted-users .info-show .info-group div span{
+    font-weight: bold;
+    color: var(--lightBlackColor);
+}
+.profile-landing .container .deleted-users .info-show .arrows{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.profile-landing .container .deleted-users .info-show .arrows i{
+    color: var(--dangerColor);
+    cursor: pointer;
+}
+.profile-landing .container .deleted-users .info-show .duble-div{
+    display: flex;
+    align-items: center;
+}
+.profile-landing .container .deleted-users .info-show .duble-div button{
+    margin-left: 15px;
+}
+.profile-landing .container .deleted-users .info-show .edit{
+    font-weight: bold;
+    color: var(--whiteColor);
+    background-color: var(--dangerColor);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+.profile-landing .container .deleted-users .info-show .add{
+    font-weight: bold;
+    color: var(--whiteColor);
+    background-color: var(--dangerColor);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+.profile-landing .container .deleted-users .info-show .back{
+    font-weight: bold;
+    color: var(--dangerColor);
+    padding: 5px 15px;
+    cursor: pointer;
+}
+/* End Deleted Users informations*/
 
 /* create User */
 .profile-landing .container .profile.create-user .head{
@@ -729,53 +853,6 @@ hr{
 /* End create User */
 
 /*Error Massege */
-.profile-landing .container .profile.errors{
-    margin-top: 15px;
-    background-color: var(--thirdColor);
-    padding: 8px;
-}
-.profile-landing .container .profile.errors div{
-    background-color: var(--whiteColor);
-    padding: 8px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-}
-.profile-landing .container .profile.errors div p{
-    display: inline;
-    margin-right: 5px;
-}
-.profile-landing .container .profile.errors div i{
-    color: var(--successColor);
-    display: none;
-}
-.profile-landing .container .profile.errors div.success .check{
-    color: var(--successColor);
-    display: inline;
-}
-.profile-landing .container .profile.errors div.error .exclamation{
-    color: var(--dangerColor);
-    display: inline;
-}
-.profile-landing .container .profile.errors div:not(:last-child){
-    margin-bottom: 8px;
-}
-.profile-landing .container .profile.errors div.success{
-    border: 2px solid var(--successColor);
-}
-.profile-landing .container .profile.errors div.success p{
-    color: var(--successColor);
-    font-weight: bold;
-}
-.profile-landing .container .profile.errors div.error{
-    border: 2px solid var(--dangerColor);
-}
-.profile-landing .container .profile.errors div.error p{
-    color: var(--dangerColor);
-    font-weight: bold;
-}
 
 /* End Error Massege */
 

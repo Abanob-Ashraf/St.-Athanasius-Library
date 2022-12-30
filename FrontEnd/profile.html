@@ -132,13 +132,13 @@
                         <hr>
                         <div class="scroll-container"></div>
                         <div class="arrows">
-                            <i class="fa-sharp fa-solid fa-angles-right fa-2x"></i>
+                            <i class="fa-sharp fa-solid fa-angles-right fa-2x right"></i>
                             <div class="duble-div">
                                 <button class="edit">تعديل البيانات</button>
                                 <button class="delete">حذف المستخدم</button>
                                 <p class="back">الرجوع</p>
                             </div>
-                            <i class="fa-sharp fa-solid fa-angles-left fa-2x"></i>
+                            <i class="fa-sharp fa-solid fa-angles-left fa-2x left"></i>
                         </div>
                     </div>
                     <div class="edit-info">
@@ -190,8 +190,7 @@
                         <div class="arrows">
                             <i class="fa-sharp fa-solid fa-angles-right fa-2x"></i>
                             <div class="duble-div">
-                                <button class="edit">تعديل البيانات</button>
-                                <button class="delete">حذف المستخدم</button>
+                                <button class="add">ارجاع المستخدم</button>
                                 <p class="back">الرجوع</p>
                             </div>
                             <i class="fa-sharp fa-solid fa-angles-left fa-2x"></i>
@@ -217,39 +216,23 @@
                     <div class="input-field">
                         <input type="text" placeholder="الاسم الاول" required name="firstName" class="first-name"/>
                         <input type="text" placeholder="الاسم الاخير" required name="lastName" class="last-name"/>
+                        <select name="job" id="job">
+                            <option value="مساعد خادم">مساعد خادم</option>
+                            <option value="امين المكتبه">امين المكتبه</option>
+                            <option value="امين السكرتاريه">امين السكرتاريه</option>
+                            <option value="امين الميديا">امين الميديا</option>
+                            <option value="امين مساعدين الخدام">امين مساعدين الخدام</option>
+                            <option value="امين مكتبه الطفل">امين مكتبه الطفل</option>
+                            <option value="خدمه مكتبه الطفل">خدمه مكتبه الطفل</option>
+                            <option value="خدمه السكرتاريه">خدمه السكرتاريه</option>
+                            <option value="خدمه الميديا">خدمه الميديا</option>
+                        </select>
                         <input type="text" placeholder="دور الخادم" required name="job" class="job"/>
                         <input type="email" placeholder="البريد الالكتروني" required name="email" class="email"/>
                         <input type="password" placeholder="كلمه المرور" required name="password" class="password"/>
                         <input type="submit" value="انشاء مستخدم" class="submit" />
                     </div>
                 </form>
-                <div class="profile errors">
-                    <div class="first-name-msg">
-                        <i class="fas fa-check-circle check"></i>
-                        <i class="fas fa-exclamation-circle exclamation"></i>
-                        <p></p>
-                    </div>
-                    <div class="last-name-msg">
-                        <i class="fas fa-check-circle check"></i>
-                        <i class="fas fa-exclamation-circle exclamation"></i>
-                        <p></p>
-                    </div>
-                    <div class="job-msg">
-                        <i class="fas fa-check-circle check"></i>
-                        <i class="fas fa-exclamation-circle exclamation"></i>
-                        <p></p>
-                    </div>
-                    <div class="email-msg">
-                        <i class="fas fa-check-circle check"></i>
-                        <i class="fas fa-exclamation-circle exclamation"></i>
-                        <p></p>
-                    </div>
-                    <div class="password-msg">
-                        <i class="fas fa-check-circle check"></i>
-                        <i class="fas fa-exclamation-circle exclamation"></i>
-                        <p></p>
-                    </div>
-                </div>
             </div>
             <!-- End Profile -->
         </div>
