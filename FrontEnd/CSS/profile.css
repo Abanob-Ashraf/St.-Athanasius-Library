@@ -53,6 +53,10 @@ ul{
     margin-left: auto;
     margin-right: auto;
 }
+small{
+    color: var(--dangerColor);
+    font-weight: bold;
+}
 /* Small */
 @media (min-width: 576px) {
     .container {
@@ -90,9 +94,82 @@ ul{
     color: var(--dangerColor);
     text-align: center;
 }
+.note{
+    padding: 2px 8px;
+    width: fit-content;
+    background-color: var(--dangerColor);
+    font-weight: bold;
+    font-size: 15px;
+    color: var(--whiteColor);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
 hr{
     margin-top: 15px;
     margin-bottom: 15px;
+}
+.double-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.edit{
+    font-weight: bold;
+    color: var(--whiteColor);
+    background-color: var(--dangerColor);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+.back{
+    font-weight: bold;
+    color: var(--dangerColor);
+    padding: 5px 15px;
+    cursor: pointer;
+}
+.delete{
+    font-weight: bold;
+    color: var(--whiteColor);
+    background-color: var(--dangerColor);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+.add{
+    font-weight: bold;
+    color: var(--whiteColor);
+    background-color: var(--dangerColor);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+.arrows{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.arrows i{
+    color: var(--dangerColor);
+    cursor: pointer;
 }
 /* End Global Rules */
 
@@ -323,19 +400,6 @@ hr{
     font-weight: bold;
     color: var(--lightBlackColor);
 }
-.profile-landing .container .profile.user .user-info .edit{
-    font-weight: bold;
-    color: var(--whiteColor);
-    background-color: var(--dangerColor);
-    border: none;
-    padding: 5px 15px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    cursor: pointer;
-}
 /* End User Information */
 
 /* Edit User Information*/
@@ -364,48 +428,22 @@ hr{
     font-weight: bold;
     color: var(--lightBlackColor);
 }
-
-.profile-landing .container .profile.user .edit-info .dubel-div{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 .profile-landing .container .profile.user .edit-info .edit{
-    width: inherit;
     font-weight: bold;
     color: var(--whiteColor);
     background-color: var(--dangerColor);
     border: none;
-    padding: 5px 15px;
+    padding: 8px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
-    cursor: pointer;
-}
-.profile-landing .container .profile.user .edit-info .back{
-    font-weight: bold;
-    color: var(--dangerColor);
-    padding: 5px 15px;
     cursor: pointer;
 }
 /* End Edit User Information */
 
 /* User Search */
-.profile-landing .container .profile.search-user .search .note{
-    padding: 2px 8px;
-    width: fit-content;
-    margin-top: 15px;
-    background-color: var(--dangerColor);
-    font-weight: bold;
-    color: var(--whiteColor);
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-}
 .profile-landing .container .profile.search-user .search .search-form .search-container{
     position: relative;
     right: -16px;
@@ -447,7 +485,7 @@ hr{
 .profile-landing .container .profile.search-user .user-info{
     display: none;
 }
-.profile-landing .container .profile.search-user .user-info .info-group div{
+.profile-landing .container .profile.search-user .user-info .info-group div:not(:last-child){
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -469,58 +507,9 @@ hr{
     font-weight: bold;
     color: var(--lightBlackColor);
 }
-.profile-landing .container .profile.search-user .user-info .arrows{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-.profile-landing .container .profile.search-user .user-info .arrows i{
-    color: var(--dangerColor);
-    cursor: pointer;
-}
-.profile-landing .container .profile.search-user .user-info .duble-div{
-    display: flex;
-    align-items: center;
-}
-.profile-landing .container .profile.search-user .user-info .duble-div button{
-    margin-left: 15px;
-}
-.profile-landing .container .profile.search-user .user-info .edit{
-    font-weight: bold;
-    color: var(--whiteColor);
-    background-color: var(--dangerColor);
-    border: none;
-    padding: 5px 15px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    cursor: pointer;
-}
-.profile-landing .container .profile.search-user .user-info .delete{
-    font-weight: bold;
-    color: var(--whiteColor);
-    background-color: var(--dangerColor);
-    border: none;
-    padding: 5px 15px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    cursor: pointer;
-}
-.profile-landing .container .profile.search-user .user-info .back{
-    font-weight: bold;
-    color: var(--dangerColor);
-    padding: 5px 15px;
-    cursor: pointer;
-}
 /* End Other User Informations*/
 
-/* Other User Informations And Edit */
+/* Other User Informations Edit */
 .profile-landing .container .profile.search-user .edit-info{
     display: none;
 }
@@ -544,51 +533,91 @@ hr{
     outline: none;
     padding: 8px;
     font-weight: bold;
-    color: var(--lightBlackColor);
 }
-
-.profile-landing .container .profile.search-user .edit-info .dubel-div{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.profile-landing .container .profile.search-user .edit-info .edit{
-    width: inherit;
-    font-weight: bold;
+.profile-landing .container .profile.search-user .edit-info .flag{
+    width: fit-content;
+    padding: 2px 8px !important;
+    background-color: var(--dangerColor) !important;
+    border-radius: 5px !important;
+    -webkit-border-radius: 5px !important;
+    -moz-border-radius: 5px !important;
+    -ms-border-radius: 5px !important;
+    -o-border-radius: 5px !important;
     color: var(--whiteColor);
-    background-color: var(--dangerColor);
-    border: none;
-    padding: 5px 15px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    cursor: pointer;
+    font-size: 15px !important;
+    font-weight: bold !important;
 }
-.profile-landing .container .profile.search-user .edit-info .back{
-    font-weight: bold;
-    color: var(--dangerColor);
-    padding: 5px 15px;
+.profile-landing .container .profile.search-user .edit-info .flag label{
+    padding-right: 30px;
     cursor: pointer;
+    position: relative;
 }
-/* End Other User Informations And Edit */
+.profile-landing .container .profile.search-user .edit-info .flag label::before{
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -9px;
+    border-radius: 4px;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--whiteColor);
+    background-color: var(--whiteColor);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+.profile-landing .container .profile.search-user .edit-info .flag label:hover::before{
+    border-color: var(--blueColor);
+}
+.profile-landing .container .profile.search-user .edit-info .flag label::after{
+    font-family: "Font Awesome 6 Free";
+    content: "\f00c";
+    font-weight: 900;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -9px;
+    background-color: var(--blueColor);
+    color: var(--whiteColor);
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+.profile-landing .container .profile.search-user .edit-info .flag input[type="checkbox"]:checked + label::after{
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+}
+.profile-landing .container .profile.search-user .edit-info .flag input{
+    appearance: none;
+    --webkit-appearance: none;
+    display: none;
+}
+/* End Other User Informations Edit */
 
 /* Deleted Users */
 .profile-landing .container .deleted-users .show{
-}
-.profile-landing .container .deleted-users .show .note{
-    padding: 2px 8px;
-    width: fit-content;
-    margin-top: 15px;
-    background-color: var(--dangerColor);
-    font-weight: bold;
-    color: var(--whiteColor);
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
 }
 .profile-landing .container .deleted-users .show .show-deleted-users{
     text-align: centerzz;
@@ -647,55 +676,6 @@ hr{
     font-weight: bold;
     color: var(--lightBlackColor);
 }
-.profile-landing .container .deleted-users .info-show .arrows{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-.profile-landing .container .deleted-users .info-show .arrows i{
-    color: var(--dangerColor);
-    cursor: pointer;
-}
-.profile-landing .container .deleted-users .info-show .duble-div{
-    display: flex;
-    align-items: center;
-}
-.profile-landing .container .deleted-users .info-show .duble-div button{
-    margin-left: 15px;
-}
-.profile-landing .container .deleted-users .info-show .edit{
-    font-weight: bold;
-    color: var(--whiteColor);
-    background-color: var(--dangerColor);
-    border: none;
-    padding: 5px 15px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    cursor: pointer;
-}
-.profile-landing .container .deleted-users .info-show .add{
-    font-weight: bold;
-    color: var(--whiteColor);
-    background-color: var(--dangerColor);
-    border: none;
-    padding: 5px 15px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    cursor: pointer;
-}
-.profile-landing .container .deleted-users .info-show .back{
-    font-weight: bold;
-    color: var(--dangerColor);
-    padding: 5px 15px;
-    cursor: pointer;
-}
 /* End Deleted Users informations*/
 
 /* create User */
@@ -704,19 +684,6 @@ hr{
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.profile-landing .container .profile.create-user .head .note{
-    padding: 2px 8px;
-    width: fit-content;
-    background-color: var(--dangerColor);
-    font-weight: bold;
-    font-size: 15px;
-    color: var(--whiteColor);
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
 }
 .profile-landing .container .profile.create-user .head .flag{
     width: fit-content;

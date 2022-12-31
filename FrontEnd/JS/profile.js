@@ -1,3 +1,4 @@
+// ==================================================== Global ==================================================== //
 let token = JSON.parse(sessionStorage.getItem("token"));
 let id = JSON.parse(sessionStorage.getItem("id"));
 let admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -8,7 +9,13 @@ window.onload = function(){
         location.replace("/login.html")
     }
 }
+// ==================================================== Global ==================================================== //
 
+
+
+
+
+// ==================================================== Header & User Information & General Information Partions ==================================================== //
 // Header Function
 function header(data){
     let logout = document.querySelector(".header .container .menu #logout")
@@ -27,7 +34,6 @@ function header(data){
         location.href = "/login.html"
     })
 }
-
 // UserGeneral Profile Function
 function userGeneral(data){
     let name = document.querySelector(".profile-landing .container .profile.general-info .name");
@@ -44,8 +50,6 @@ function userGeneral(data){
         adminFlag.textContent = `مستخدم`
     }
 }
-
-
 // userInfo Profile Function
 function userInfo(data){
     let userInfo = document.querySelector(".profile-landing .container .profile.user .user-info");
@@ -81,10 +85,63 @@ function userInfo(data){
         phone.textContent = data.phone_number
     }
 }
+// Me Fetch Function
+function me(){
+    fetch('http://localhost:3000/library/users/me',
+    {
+        method: 'GET',
+        headers: new Headers({"Authorization": `Bearer ${token}`}),
+    }).then(res => res.json())
+    .then(res => {
+        header(res)
+        userGeneral(res)
+        userInfo(res)
+    })
+    .catch(e => console.log(e))
+}
+me()
+// EditByIdForMe Fetch Function
+function editbyidForMe(){
+    let firstNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .first-name input");
+    let lastNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .last-name input");
+    let emailEI = document.querySelector(".profile-landing .container .profile.user .edit-info .email input");
+    let phoneEI = document.querySelector(".profile-landing .container .profile.user .edit-info .phone input");
+    let resetPasswordEI = document.querySelector(".profile-landing .container .profile.user .edit-info .reset-password input");
+    let emailEISmall = document.querySelector(".profile-landing .container .profile.search-user .edit-info .email + small");
+    let phoneEISmall = document.querySelector(".profile-landing .container .profile.search-user .edit-info .phone + small");
+    
+    fetch(`http://localhost:3000/library/users/${id}`,
+    {
+        method: 'PUT',
+        headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
+        body: JSON.stringify({
+            first_name: firstNameEI.value,
+            last_name: lastNameEI.value,
+            email: data.email == undefined ? emailEISmall.textContent = "هذا الحساب مستخدم بالفعل" : emailEI.value ,
+            password: resetPasswordEI.value,
+            phone_number: data.phone == undefined ? phoneEISmall.textContent = "هذا رقم الهاتف مستخدم بالفعل" : phoneEI.value ,
+            job: job,
+            admin_flag: admin
+        })
+    }).then(res => res.json())
+    .catch(e => console.log(e))    
+}
+let submit = document.querySelector(".profile-landing .container .profile.user .edit-info form");
+submit.onsubmit = function(){
+    editbyidForMe()
+}
+// ==================================================== Header & User Information & General Information Partions ==================================================== //
 
+
+
+
+
+// ==================================================== Search Partion ==================================================== //
 // Search Users Function
 function searchUsers(data){
     let userinfoBack = document.querySelector(".profile-landing .container .profile.search-user .user-info .back")
+    let editinfoBack = document.querySelector(".profile-landing .container .profile.search-user .edit-info  .back")
+    let editinfosubmit = document.querySelector(".profile-landing .container .profile.search-user .edit-info  .edit")
     let userSearchedEdit = document.querySelector(".profile-landing .container .profile.search-user .edit-info")
     let userSearchedInfo = document.querySelector(".profile-landing .container .profile.search-user .user-info")
     let search = document.querySelector(".profile-landing .container .profile.search-user .search")
@@ -99,6 +156,9 @@ function searchUsers(data){
         for (let i = 0 ; i < data.length ; i++){
             // Divs
             let userInfo = document.querySelector(".profile-landing .container .profile.search-user .user-info .scroll-container")
+            let doubleDiv = document.createElement("div")
+            let edit = document.createElement("button")
+            let del = document.createElement("button")
             let infoGroup = document.createElement("div");
             let id = document.createElement("div")
             let firstName = document.createElement("div")
@@ -132,6 +192,10 @@ function searchUsers(data){
             let statusSpan = document.createElement("span")
             let createdSpan = document.createElement("span")
 
+            // ButtonTexts
+            let editText = document.createTextNode("تعديل البيانات")
+            let delText = document.createTextNode("حذف المستخدم")
+
             // PTexts
             let idPText = document.createTextNode("id :")
             let firstNamePText = document.createTextNode("الاسم الاول :")
@@ -157,6 +221,9 @@ function searchUsers(data){
     
             // Classes
             infoGroup.className = "info-group"
+            doubleDiv.className = "double-div"
+            edit.className = "edit"
+            del.className = "delete"
             id.className = "id"
             firstName.className = "first-name"
             lastName.className = "last-name"
@@ -232,11 +299,74 @@ function searchUsers(data){
             created.appendChild(createdSpan)
             createdSpan.appendChild(createdSpanText)
 
+            // Double Div
+            infoGroup.appendChild(doubleDiv)
+            doubleDiv.appendChild(edit)
+            edit.appendChild(editText)
+            doubleDiv.appendChild(del)
+            del.appendChild(delText)
+
+            // Show Search Partion On Click UserInfoBack
             userinfoBack.addEventListener("click",()=>{
                 userSearchedInfo.style.display = "none"
                 search.style.display = "block"
                 userSearchedEdit.style.display = "none"
                 infoGroup.remove()
+            })
+
+            // Show Search Partion On Click EditInfoBack
+            editinfoBack.addEventListener("click",()=>{
+                userSearchedInfo.style.display = "block"
+                search.style.display = "none"
+                userSearchedEdit.style.display = "none"
+            })
+
+            // Show Edit Partion On Click Edit
+            edit.addEventListener("click",()=>{
+                userSearchedInfo.style.display = "none"
+                search.style.display = "none"
+                userSearchedEdit.style.display = "block"
+
+                // EditCurrentUser On Click editinfosubmit
+                editinfosubmit.addEventListener("click",(e)=>{
+                    e.preventDefault()
+                    let firstNameEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .first-name input");
+                    let lastNameEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .last-name input");
+                    let emailEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .email input");
+                    let emailEISmall = document.querySelector(".profile-landing .container .profile.search-user .edit-info .email + small");
+                    let jobEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .job input");
+                    let adminEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .falg input");
+                    let phoneEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .phone input");
+                    let phoneEISmall = document.querySelector(".profile-landing .container .profile.search-user .edit-info .phone + small");
+                    let resetPasswordEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .reset-password input");
+                
+                    fetch(`http://localhost:3000/library/users/${parseInt(idSpanText.textContent)}`,
+                    {
+                        method: 'PUT',
+                        headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
+                        body: JSON.stringify({
+                            first_name: firstNameEI.value,
+                            last_name: lastNameEI.value,
+                            email: data.email == undefined ? emailEISmall.textContent = "هذا الحساب مستخدم بالفعل" : emailEI.value ,
+                            password: resetPasswordEI.value,
+                            phone_number: data.phone == undefined ? phoneEISmall.textContent = "هذا رقم الهاتف مستخدم بالفعل" : phoneEI.value ,
+                            job: jobEI.value,
+                            admin_flag: adminEI == "on" ? false : true
+                        })
+                    }).then(res => res.json())
+                    .catch(e => console.log(e))    
+                })
+            })
+
+            // delete Fetch Function On Click Del
+            del.addEventListener("click",()=>{
+                fetch(`http://localhost:3000/library/users/${parseInt(idSpanText.textContent)}`,
+                {
+                    method: 'DELETE',
+                    headers: new Headers({"Authorization": `Bearer ${token}`}),
+                }).then(res => res.json())
+                .catch(e => console.log(e))
+                window.location.reload()
             })
         }
     }else if(admin == false){
@@ -250,7 +380,7 @@ function searchUsers(data){
             searchUserVlidtion.textContent = ""
         },5000)
     }
-
+    
     // Browse User Information
     function browse(){
         let allInfoGroup = document.querySelectorAll(".profile-landing .container .profile.search-user .user-info .info-group");
@@ -280,179 +410,8 @@ function searchUsers(data){
     }
     browse()
 
-    // Delete User Information
-    function Delete(){
-
-    }
-    Delete()
 }
-
-// // Create User Function
-// function create(data){    
-//     // First Name Validation Function
-//     function firstName(){
-//         let firstName = document.querySelector(".profile-landing .container .create-user-form .input-field .first-name")
-//         let firstNameMsg = document.querySelector(".profile-landing .container .profile.errors .first-name-msg p")
-//         let firstNameValue = firstName.value.trim()
-        
-//         if (firstNameValue ==  ""){
-//             firstNameMsg.textContent = 'الاسم الاول=> لا تترك الحقل فارغ'
-//             setError(firstNameMsg)
-//         }else if(firstNameValue.length < 3 || firstNameValue.length > 10){
-//             firstNameMsg.textContent = `الاسم الاول=> يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف`
-//             setError(firstNameMsg)
-//         }else {
-//             firstNameMsg.textContent = `الاسم الاول=> تم التاكيد`
-//             setSuccess(firstNameMsg)
-//         }
-//     }
-
-//     // last Name Validation Function
-//     function lastName(){
-//         let lastName = document.querySelector(".profile-landing .container .create-user-form .input-field .last-name")
-//         let lastNameMsg = document.querySelector(".profile-landing .container .profile.errors .last-name-msg p")
-//         let lastNameValue = lastName.value.trim()
-        
-//         if (lastNameValue ==  ""){
-//             lastNameMsg.textContent = 'الاسم الاخير=> لا تترك الحقل فارغ'
-//             setError(lastNameMsg)
-//         }else if(lastNameValue.length < 3 || lastNameValue.length > 10){
-//             lastNameMsg.textContent = `الاسم الاخير=> يرجي ان لا تزيد الاحرف عن 10 او اقل من 3 احرف`
-//             setError(lastNameMsg)
-//         }else {
-//             lastNameMsg.textContent = `الاسم الاخير=> تم التاكيد`
-//             setSuccess(lastNameMsg)
-//         }
-//     }
-
-//     // Job Validation Function
-//     function job(){
-//         let job = document.querySelector(".profile-landing .container .create-user-form .input-field .job")
-//         let jobMsg = document.querySelector(".profile-landing .container .profile.errors .job-msg p")
-//         let jobValue = job.value.trim()
-
-//         if (jobValue == ""){
-//             jobMsg.textContent = 'دور الخادم=> لا تترك الحقل فارغ'
-//             setError(jobMsg)
-//         }else {
-//             jobMsg.textContent = 'دور الخادم=> تم التاكيد'
-//             setSuccess(jobMsg)
-//         }
-//     }    
-
-//     // Email Validation Function
-//     function email(data){
-//         let email = document.querySelector(".profile-landing .container .create-user-form .input-field .email")
-//         let emailMsg = document.querySelector(".profile-landing .container .profile.errors .email-msg p")
-//         let emailValue = email.value.trim()
-
-//         if (emailValue ==  ""){
-//             emailMsg.textContent = 'البريد الالكتروني=> لا تترك الحقل فارغ'
-//             setError(emailMsg)
-//         }else if (emailValue == data.email){
-//             emailMsg.textContent = 'البريد الالكتروني=> هذا الحساب مستخدم بالفعل'
-//             setError(emailMsg)   
-//         }else if(isEmailValid(emailValue)){
-//             emailMsg.textContent = `البريد الالكتروني=> تم التاكيد`
-//             setSuccess(emailMsg)   
-//         }
-//         // Email Regular Expretion Test (Valdition)
-//         function isEmailValid(e){
-//             const reg =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-//             return reg.test(e);
-//         }
-//     }
-
-//     // password Validation Function
-//     function password(){
-//         let password = document.querySelector(".profile-landing .container .create-user-form .input-field .password")
-//         let passwordMsg = document.querySelector(".profile-landing .container .profile.errors .password-msg p")
-//         let passwordValue = password.value.trim()
-
-//         if (passwordValue ==  ""){
-//             passwordMsg.textContent = 'كلمه المرور=> لا تترك الحقل فارغ'
-//             setError(passwordMsg)
-//         }else if(passwordValue.length < 8 || passwordValue.length > 14){
-//             passwordMsg.textContent = `كلمه المرور=> يرجي ان لا تزيد الاحرف عن 14 او اقل من 8 احرف`
-//             setError(passwordMsg)
-//         }else {
-//             passwordMsg.textContent = `كلمه المرور=> تم التاكيد`
-//             setSuccess(passwordMsg)   
-//         }
-//     }
-
-//     // Set Error Validate
-//     function setError(eValue) {
-//         let parentOfElement = eValue.parentElement;
-//         if(parentOfElement.classList.contains('success')){
-//             parentOfElement.classList.remove('success');
-//         }
-//         parentOfElement.classList.add('error');
-//     }
-
-//     // Set Success Validate
-//     function setSuccess(eValue){
-//         let parentOfElement = eValue.parentElement;
-//         if(parentOfElement.classList.contains('error')){
-//             parentOfElement.classList.remove('error');
-//         }
-//         parentOfElement.classList.add('success');
-//     }
-
-//     firstName()
-//     lastName()
-//     job()
-//     email(data)
-//     password()
-// }
-
-// Me Fetch Function
-function me(){
-    fetch('http://localhost:3000/library/users/me',
-    {
-        method: 'GET',
-        headers: new Headers({"Authorization": `Bearer ${token}`}),
-    }).then(res => res.json())
-    .then(res => {
-        header(res)
-        userGeneral(res)
-        userInfo(res)
-    })
-    .catch(e => console.log(e))
-}
-me()
-
-// EditByIdForMe Fetch Function
-function editbyidForMe(){
-    let firstNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .first-name input");
-    let lastNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .last-name input");
-    let emailEI = document.querySelector(".profile-landing .container .profile.user .edit-info .email input");
-    let phoneEI = document.querySelector(".profile-landing .container .profile.user .edit-info .phone input");
-    let resetPasswordEI = document.querySelector(".profile-landing .container .profile.user .edit-info .reset-password input");
-
-
-    fetch(`http://localhost:3000/library/users/${id}`,
-    {
-        method: 'PUT',
-        headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
-        body: JSON.stringify({
-            first_name: firstNameEI.value,
-            last_name: lastNameEI.value,
-            email: emailEI.value,
-            password: resetPasswordEI.value,
-            phone_number: phoneEI.value,
-            job: job,
-            admin_flag: admin
-        })
-    }).then(res => res.json())
-    .catch(e => console.log(e))    
-}
-let submit = document.querySelector(".profile-landing .container .profile.user .edit-info form");
-submit.onsubmit = function(){
-    editbyidForMe()
-}
-
-// search Fetch Function
+// search Fetch With Params Function
 function search(){
     let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
     let params = new URLSearchParams({
@@ -473,6 +432,16 @@ let searchUserForm = document.querySelector(".profile-landing .container .profil
 searchUserForm.onsubmit = function(e){
     e.preventDefault()
     search()    
+}
+// ==================================================== End Search Partion ==================================================== //
+
+
+
+
+
+// ==================================================== Global ==================================================== //
+function DeletedUsers(data){
+
 }
 
 // Create User Fetch Function
