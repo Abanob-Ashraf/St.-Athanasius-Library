@@ -150,6 +150,7 @@ hr{
     cursor: pointer;
 }
 .add{
+    margin-bottom: 15px;
     font-weight: bold;
     color: var(--whiteColor);
     background-color: var(--dangerColor);
@@ -617,10 +618,8 @@ hr{
 /* End Other User Informations Edit */
 
 /* Deleted Users */
-.profile-landing .container .deleted-users .show{
-}
 .profile-landing .container .deleted-users .show .show-deleted-users{
-    text-align: centerzz;
+    text-align: center;
     border: none;
     font-size: 18px;
     padding: 8px;
