@@ -1,4 +1,6 @@
 // ==================================================== Global ==================================================== //
+let first_name = JSON.parse(sessionStorage.getItem("first_name"));
+let last_name = JSON.parse(sessionStorage.getItem("last_name"));
 let token = JSON.parse(sessionStorage.getItem("token"));
 let id = JSON.parse(sessionStorage.getItem("id"));
 let admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -101,7 +103,7 @@ function me(){
 }
 me()
 // EditByIdForMe Fetch Function
-function editbyidForMe(data){
+function editbyidForMe(){
     let firstNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .first-name input");
     let lastNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .last-name input");
     let emailEI = document.querySelector(".profile-landing .container .profile.user .edit-info .email input");
@@ -113,21 +115,19 @@ function editbyidForMe(data){
         method: 'PUT',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
         body: JSON.stringify({
-            first_name: firstNameEI.value,
-            last_name: lastNameEI.value,
+            first_name: firstNameEI.value == "" ? first_name : firstNameEI.value,
+            last_name: lastNameEI.value == "" ? last_name : lastNameEI.value,
             email: emailEI.value,
             password: resetPasswordEI.value,
-            phone_number: phoneEI.value ,
+            phone_number: phoneEI.value,
             job: job,
             admin_flag: admin
         })
     }).then(res => res.json())
-    .then(res => console.log(res))
     .catch(e => console.log(e))    
 }
 let submit = document.querySelector(".profile-landing .container .profile.user .edit-info form");
 submit.onsubmit = function(e){
-    e.preventDefault()
     editbyidForMe()
 }
 // ==================================================== Header & User Information & General Information Partions ==================================================== //
@@ -316,9 +316,10 @@ function searchUsers(data){
 
             // Show Search Partion On Click EditInfoBack
             editinfoBack.addEventListener("click",()=>{
-                userSearchedInfo.style.display = "block"
-                search.style.display = "none"
+                userSearchedInfo.style.display = "none"
+                search.style.display = "block"
                 userSearchedEdit.style.display = "none"
+                infoGroup.remove()
             })
 
             // Show Edit Partion On Click Edit
@@ -329,27 +330,24 @@ function searchUsers(data){
 
                 // EditCurrentUser On Click editinfosubmit
                 editinfosubmit.addEventListener("click",(e)=>{
-                    e.preventDefault()
-                    let firstNameEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .first-name input");
-                    let lastNameEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .last-name input");
-                    let emailEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .email input");
-                    let emailEISmall = document.querySelector(".profile-landing .container .profile.search-user .edit-info .email + small");
-                    let jobEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .job input");
-                    let adminEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .falg input");
-                    let phoneEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .phone input");
-                    let phoneEISmall = document.querySelector(".profile-landing .container .profile.search-user .edit-info .phone + small");
-                    let resetPasswordEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .reset-password input");
+                    let firstNameEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .first-name .input");
+                    let lastNameEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .last-name .input");
+                    let emailEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .email .input");
+                    let jobEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .job .input");
+                    let adminEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .falg .input");
+                    let phoneEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .phone .input");
+                    let resetPasswordEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .reset-password .input");
                 
                     fetch(`http://localhost:3000/library/users/${parseInt(idSpanText.textContent)}`,
                     {
                         method: 'PUT',
                         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
                         body: JSON.stringify({
-                            first_name: firstNameEI.value,
+                            first_name: firstNameEI.value ,
                             last_name: lastNameEI.value,
-                            email: data.email == undefined ? emailEISmall.textContent = "هذا الحساب مستخدم بالفعل" : emailEI.value ,
+                            email: emailEI.value,
                             password: resetPasswordEI.value,
-                            phone_number: data.phone == undefined ? phoneEISmall.textContent = "هذا رقم الهاتف مستخدم بالفعل" : phoneEI.value ,
+                            phone_number: phoneEI.value,
                             job: jobEI.value,
                             admin_flag: adminEI == "on" ? false : true
                         })
@@ -443,197 +441,192 @@ searchUserForm.onsubmit = function(e){
 // Search Users Function
 function deletedUser(data){
     let deletedUser = document.querySelector(".profile-landing .container .deleted-users .show")
+    let deletedUserError = document.querySelector(".profile-landing .container .deleted-users .show small")
     let userDeletedInfo = document.querySelector(".profile-landing .container .deleted-users .info-show")
     let userDeletedInfoBack = document.querySelector(".profile-landing .container .deleted-users .info-show .back")
     let ShowdeletedUser = document.querySelector(".profile-landing .container .deleted-users .show .show-deleted-users")
 
-
     ShowdeletedUser.addEventListener("click",()=>{
-        deletedUser.style.display = "none"
-        userDeletedInfo.style.display = "block"
-        for (let i = 0 ; i < data.length ; i++){
-            // Divs
-            let userInfo = document.querySelector(".profile-landing .container .deleted-users .info-show .scroll-container")
-            let add = document.createElement("button")
-            let infoGroup = document.createElement("div");
-            let id = document.createElement("div")
-            let firstName = document.createElement("div")
-            let lastName = document.createElement("div")
-            let job = document.createElement("div")
-            let email = document.createElement("div")
-            let phone = document.createElement("div")
-            let adminFlag = document.createElement("div")
-            let status = document.createElement("div")
-            let created = document.createElement("div")
-
-            // P 
-            let idP = document.createElement("p")
-            let firstNameP = document.createElement("p")
-            let lastNameP = document.createElement("p")
-            let jobP = document.createElement("p")
-            let emailP = document.createElement("p")
-            let phoneP = document.createElement("p")
-            let adminFlagP = document.createElement("p")
-            let statusP = document.createElement("p")
-            let createdP = document.createElement("p")
-
-            // span
-            let idSpan = document.createElement("span")
-            let firstNameSpan = document.createElement("span")
-            let lastNameSpan = document.createElement("span")
-            let jobSpan = document.createElement("span")
-            let emailSpan = document.createElement("span")
-            let phoneSpan = document.createElement("span")
-            let adminFlagSpan = document.createElement("span")
-            let statusSpan = document.createElement("span")
-            let createdSpan = document.createElement("span")
-
-            // ButtonTexts
-            let addText = document.createTextNode("اضافه المستخدم")
-
-            // PTexts
-            let idPText = document.createTextNode("id :")
-            let firstNamePText = document.createTextNode("الاسم الاول :")
-            let lastNamePText = document.createTextNode("الاسم الثاني :")
-            let jobPText = document.createTextNode("دور الخادم :")
-            let emailPText = document.createTextNode("البريد الالكتروني :")
-            let phonePText = document.createTextNode("رقم الهاتف :")
-            let adminFlagPText = document.createTextNode("هل هو مدير :")
-            let statusPText = document.createTextNode("حاله المستخدم :")
-            let createdPText = document.createTextNode("تاريخ الانشاء :")
+        if (admin == false){
+            deletedUserError.textContent = "ليس لديك صلاحيات المدير"
+            setTimeout(()=>{
+                deletedUserError.textContent = ""
+            },5000)
+        }else{
+            deletedUser.style.display = "none"
+            userDeletedInfo.style.display = "block"
+            for (let i = 0 ; i < data.length ; i++){
+                // Divs
+                let userInfo = document.querySelector(".profile-landing .container .deleted-users .info-show .scroll-container")
+                let infoGroup = document.createElement("div");
+                let id = document.createElement("div")
+                let firstName = document.createElement("div")
+                let lastName = document.createElement("div")
+                let job = document.createElement("div")
+                let email = document.createElement("div")
+                let phone = document.createElement("div")
+                let adminFlag = document.createElement("div")
+                let status = document.createElement("div")
+                let created = document.createElement("div")
     
-
-            // spanTexts
-            let idSpanText = document.createTextNode(data[i].id)
-            let firstNameSpanText = document.createTextNode(data[i].first_name)
-            let lastNameSpanText = document.createTextNode(data[i].last_name)
-            let jobSpanText = document.createTextNode(data[i].job)
-            let emailSpanText = document.createTextNode(data[i].email)
-            let phoneSpanText = document.createTextNode(data[i].phone_number == null ? "لا يوجد" : data[i].phone_number)
-            let adminFlagSpanText = document.createTextNode(data[i].admin_flag == true ? "نعم" : "لا")
-            let statusSpanText = document.createTextNode(data[i].user_status == "AVILABLE" ? "متاح" : "غير متاح")
-            let createdSpanText = document.createTextNode(data[i].created_date)
+                // P 
+                let idP = document.createElement("p")
+                let firstNameP = document.createElement("p")
+                let lastNameP = document.createElement("p")
+                let jobP = document.createElement("p")
+                let emailP = document.createElement("p")
+                let phoneP = document.createElement("p")
+                let adminFlagP = document.createElement("p")
+                let statusP = document.createElement("p")
+                let createdP = document.createElement("p")
     
-            // Classes
-            infoGroup.className = "info-group"
-            add.className = "add"
-            id.className = "id"
-            firstName.className = "first-name"
-            lastName.className = "last-name"
-            job.className = "job"
-            email.className = "email"
-            phone.className = "phone"
-            adminFlag.className = "flag"
-            status.className = "status"
-            created.className = "created-time"
+                // span
+                let idSpan = document.createElement("span")
+                let firstNameSpan = document.createElement("span")
+                let lastNameSpan = document.createElement("span")
+                let jobSpan = document.createElement("span")
+                let emailSpan = document.createElement("span")
+                let phoneSpan = document.createElement("span")
+                let adminFlagSpan = document.createElement("span")
+                let statusSpan = document.createElement("span")
+                let createdSpan = document.createElement("span")
     
-            // Appends
-            userInfo.appendChild(infoGroup)
-            // ID
-            infoGroup.appendChild(id)
-            id.appendChild(idP)
-            idP.appendChild(idPText)
-            id.appendChild(idSpan)
-            idSpan.appendChild(idSpanText)
-
-            // First Name
-            infoGroup.appendChild(firstName)
-            firstName.appendChild(firstNameP)
-            firstNameP.appendChild(firstNamePText)
-            firstName.appendChild(firstNameSpan)
-            firstNameSpan.appendChild(firstNameSpanText)
-
-            // Last Names
-            infoGroup.appendChild(lastName)
-            lastName.appendChild(lastNameP)
-            lastNameP.appendChild(lastNamePText)
-            lastName.appendChild(lastNameSpan)
-            lastNameSpan.appendChild(lastNameSpanText)
-
-            // Job
-            infoGroup.appendChild(job)
-            job.appendChild(jobP)
-            jobP.appendChild(jobPText)
-            job.appendChild(jobSpan)
-            jobSpan.appendChild(jobSpanText)
-
-            // Email
-            infoGroup.appendChild(email)
-            email.appendChild(emailP)
-            emailP.appendChild(emailPText)
-            email.appendChild(emailSpan)
-            emailSpan.appendChild(emailSpanText)
-
-            // Phone Number
-            infoGroup.appendChild(phone)
-            phone.appendChild(phoneP)
-            phoneP.appendChild(phonePText)
-            phone.appendChild(phoneSpan)
-            phoneSpan.appendChild(phoneSpanText)
-
-            // Admin Flag
-            infoGroup.appendChild(adminFlag)
-            adminFlag.appendChild(adminFlagP)
-            adminFlagP.appendChild(adminFlagPText)
-            adminFlag.appendChild(adminFlagSpan)
-            adminFlagSpan.appendChild(adminFlagSpanText)
-
-            // User Status
-            infoGroup.appendChild(status)
-            status.appendChild(statusP)
-            statusP.appendChild(statusPText)
-            status.appendChild(statusSpan)
-            statusSpan.appendChild(statusSpanText)
-
-            // Created Date
-            infoGroup.appendChild(created)
-            created.appendChild(createdP)
-            createdP.appendChild(createdPText)
-            created.appendChild(createdSpan)
-            createdSpan.appendChild(createdSpanText)
-
-            // Double Div
-            infoGroup.appendChild(add)
-            add.appendChild(addText)
-
-            add.addEventListener("click", ()=>{
-                data[i].user_status == "NOT AVILABLE"
-            })
+                // PTexts
+                let idPText = document.createTextNode("id :")
+                let firstNamePText = document.createTextNode("الاسم الاول :")
+                let lastNamePText = document.createTextNode("الاسم الثاني :")
+                let jobPText = document.createTextNode("دور الخادم :")
+                let emailPText = document.createTextNode("البريد الالكتروني :")
+                let phonePText = document.createTextNode("رقم الهاتف :")
+                let adminFlagPText = document.createTextNode("هل هو مدير :")
+                let statusPText = document.createTextNode("حاله المستخدم :")
+                let createdPText = document.createTextNode("تاريخ الانشاء :")
+        
+    
+                // spanTexts
+                let idSpanText = document.createTextNode(data[i].id)
+                let firstNameSpanText = document.createTextNode(data[i].first_name)
+                let lastNameSpanText = document.createTextNode(data[i].last_name)
+                let jobSpanText = document.createTextNode(data[i].job)
+                let emailSpanText = document.createTextNode(data[i].email)
+                let phoneSpanText = document.createTextNode(data[i].phone_number == null ? "لا يوجد" : data[i].phone_number)
+                let adminFlagSpanText = document.createTextNode(data[i].admin_flag == true ? "نعم" : "لا")
+                let statusSpanText = document.createTextNode(data[i].user_status == "AVILABLE" ? "متاح" : "غير متاح")
+                let createdSpanText = document.createTextNode(data[i].created_date)
+        
+                // Classes
+                infoGroup.className = "info-group"
+                id.className = "id"
+                firstName.className = "first-name"
+                lastName.className = "last-name"
+                job.className = "job"
+                email.className = "email"
+                phone.className = "phone"
+                adminFlag.className = "flag"
+                status.className = "status"
+                created.className = "created-time"
+        
+                // Appends
+                userInfo.appendChild(infoGroup)
+                // ID
+                infoGroup.appendChild(id)
+                id.appendChild(idP)
+                idP.appendChild(idPText)
+                id.appendChild(idSpan)
+                idSpan.appendChild(idSpanText)
+    
+                // First Name
+                infoGroup.appendChild(firstName)
+                firstName.appendChild(firstNameP)
+                firstNameP.appendChild(firstNamePText)
+                firstName.appendChild(firstNameSpan)
+                firstNameSpan.appendChild(firstNameSpanText)
+    
+                // Last Names
+                infoGroup.appendChild(lastName)
+                lastName.appendChild(lastNameP)
+                lastNameP.appendChild(lastNamePText)
+                lastName.appendChild(lastNameSpan)
+                lastNameSpan.appendChild(lastNameSpanText)
+    
+                // Job
+                infoGroup.appendChild(job)
+                job.appendChild(jobP)
+                jobP.appendChild(jobPText)
+                job.appendChild(jobSpan)
+                jobSpan.appendChild(jobSpanText)
+    
+                // Email
+                infoGroup.appendChild(email)
+                email.appendChild(emailP)
+                emailP.appendChild(emailPText)
+                email.appendChild(emailSpan)
+                emailSpan.appendChild(emailSpanText)
+    
+                // Phone Number
+                infoGroup.appendChild(phone)
+                phone.appendChild(phoneP)
+                phoneP.appendChild(phonePText)
+                phone.appendChild(phoneSpan)
+                phoneSpan.appendChild(phoneSpanText)
+    
+                // Admin Flag
+                infoGroup.appendChild(adminFlag)
+                adminFlag.appendChild(adminFlagP)
+                adminFlagP.appendChild(adminFlagPText)
+                adminFlag.appendChild(adminFlagSpan)
+                adminFlagSpan.appendChild(adminFlagSpanText)
+    
+                // User Status
+                infoGroup.appendChild(status)
+                status.appendChild(statusP)
+                statusP.appendChild(statusPText)
+                status.appendChild(statusSpan)
+                statusSpan.appendChild(statusSpanText)
+    
+                // Created Date
+                infoGroup.appendChild(created)
+                created.appendChild(createdP)
+                createdP.appendChild(createdPText)
+                created.appendChild(createdSpan)
+                createdSpan.appendChild(createdSpanText)
+    
+    
+                userDeletedInfoBack.addEventListener("click",()=>{
+                    deletedUser.style.display = "block"
+                    userDeletedInfo.style.display = "none"
+                    infoGroup.remove()
+                })
+            }
+            // Browse User Information
+            function browseTwo(){
+                let allInfoGroup = document.querySelectorAll(".profile-landing .container .deleted-users .info-show .info-group");
+                let rightArrow = document.querySelector(".profile-landing .container .deleted-users .info-show .right");
+                let leftArrow = document.querySelector(".profile-landing .container .deleted-users .info-show .left");
+    
+                // Consts
+                for (let i = 0 ; i < allInfoGroup.length ; i++){
+                    allInfoGroup[i].style.display = "none"
+                }
+                let indexValue = 1;
+                allInfoGroup[indexValue-1].style.display = "block"
+                // Move Right
+                rightArrow.addEventListener("click",()=>{
+                    indexValue++
+                    allInfoGroup[indexValue-1].style.display = "block"
+                    allInfoGroup[indexValue-1].previousElementSibling.style.display = "none"
+                })
+    
+                // Move Left
+                leftArrow.addEventListener("click",()=>{
+                    indexValue--
+                    allInfoGroup[indexValue-1].style.display = "block"
+                    allInfoGroup[indexValue-1].nextElementSibling.style.display = "none"
+                })
+            }
+            browseTwo()
         }
     })
-
-    userDeletedInfoBack.addEventListener("click",()=>{
-        deletedUser.style.display = "block"
-        userDeletedInfo.style.display = "none"
-    })
-    // Browse User Information
-    function browseTwo(){
-        let allInfoGroup = document.querySelectorAll(".profile-landing .container .deleted-users .info-show .info-group");
-        let rightArrow = document.querySelector(".profile-landing .container .deleted-users .info-show .right");
-        let leftArrow = document.querySelector(".profile-landing .container .deleted-users .info-show .left");
-
-        // Consts
-        for (let i = 0 ; i < allInfoGroup.length ; i++){
-            allInfoGroup[i].style.display = "none"
-        }
-        let indexValue = 1;
-        allInfoGroup[indexValue-1].style.display = "block"
-
-        // Move Right
-        rightArrow.addEventListener("click",()=>{
-            indexValue++
-            allInfoGroup[indexValue-1].style.display = "block"
-            allInfoGroup[indexValue-1].previousElementSibling.style.display = "none"
-        })
-
-        // Move Left
-        leftArrow.addEventListener("click",()=>{
-            indexValue--
-            allInfoGroup[indexValue-1].style.display = "block"
-            allInfoGroup[indexValue-1].nextElementSibling.style.display = "none"
-        })
-    }
-    browseTwo()
 }
 // deletedUsers Show Fetch Function
 function deleted(){
@@ -643,7 +636,6 @@ function deleted(){
             headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
         }).then(res => res.json())
         .then(res => {
-            console.log(res)
             deletedUser(res)
         })
         .catch(e => console.log(e))
@@ -651,6 +643,21 @@ function deleted(){
 deleted()    
 // ==================================================== End Deleted User Partion ==================================================== //
 
+
+
+
+
+// ==================================================== Create User Partion ==================================================== //
+function create(data){
+    let email = document.querySelector(".profile-landing .container .create-user-form .input-field .email")
+    let small = document.querySelector(".profile-landing .container .create-user-form small")
+
+    if(email.value == data.email){
+        small.textContent = "يوجد هذا المستخدم بالفعل"
+    }else{
+        small.textContent = "تم تسجيل المستخدم"
+    }
+}
 // Create User Fetch Function
 function createUser(){
     let firstName = document.querySelector(".profile-landing .container .create-user-form .input-field .first-name")
@@ -658,6 +665,7 @@ function createUser(){
     let job = document.querySelector(".profile-landing .container .create-user-form .input-field .job")
     let email = document.querySelector(".profile-landing .container .create-user-form .input-field .email")
     let password = document.querySelector(".profile-landing .container .create-user-form .input-field .password")
+    let admin = document.querySelector(".profile-landing .container .create-user-form .head .flag input")
 
     fetch('http://localhost:3000/library/users/createNewUser',
     {
@@ -669,13 +677,12 @@ function createUser(){
             email: email.value,
             password: password.value,
             job: job.value,
+            admin_flag: admin == "on" ? false : true
         })
     }).then(res => res.json())
     .then(res => {
-        console.log(res.email)
         create(res)
-    }
-    )
+    })
     .catch(e => console.log(e))
 }
 let createUserForm = document.querySelector(".profile-landing .container .create-user-form");
@@ -683,3 +690,4 @@ createUserForm.onsubmit = function(e){
     e.preventDefault()
     createUser()
 }
+// ==================================================== End Create User Partion ==================================================== //

@@ -30,7 +30,9 @@ function validateFromDataBase(data){
             emailMsg.textContent = "البريد الالكتروني غير موجود"
             passwordMsg.textContent = "او كلمه المرور غير صحيحه"
         }else{
-            setSuccess(email)   
+            setSuccess(email) 
+            sessionStorage.setItem("first_name" , JSON.stringify(data.first_name))
+            sessionStorage.setItem("last_name" , JSON.stringify(data.last_name))
             sessionStorage.setItem("token" , JSON.stringify(data.token))
             sessionStorage.setItem("id" , JSON.stringify(data.id))
             sessionStorage.setItem("admin" , JSON.stringify(data.admin_flag))

@@ -142,27 +142,36 @@
                         <hr>
                         <form action="">
                             <div class="first-name">
-                                <input type="text" placeholder="الاسم الاول" name="الاسم الاول:">
+                                <input type="text" placeholder="الاسم الاول" name="الاسم الاول:" class="input">
                             </div>
                             <div class="last-name">
-                                <input type="text" placeholder="الاسم الاخير" name="الاسم الاخير:">
+                                <input type="text" placeholder="الاسم الاخير" name="الاسم الاخير:" class="input">
                             </div>
                             <div class="job">
-                                <input type="text" placeholder="دور الخادم" name="دور الخادم:">
+                                <select name="job" class="input">
+                                    <optgroup label="دور الخادم"></optgroup>
+                                    <option value="مساعد خادم">مساعد خادم</option>
+                                    <option value="امين المكتبه">امين المكتبه</option>
+                                    <option value="امين السكرتاريه">امين السكرتاريه</option>
+                                    <option value="امين الميديا">امين الميديا</option>
+                                    <option value="امين مساعدين الخدام">امين مساعدين الخدام</option>
+                                    <option value="امين مكتبه الطفل">امين مكتبه الطفل</option>
+                                    <option value="خدمه مكتبه الطفل">خدمه مكتبه الطفل</option>
+                                    <option value="خدمه السكرتاريه">خدمه السكرتاريه</option>
+                                    <option value="خدمه الميديا">خدمه الميديا</option>
+                                </select>
                             </div>
                             <div class="email">
-                                <input type="email" placeholder="البريد الالكتروني" name="البريد الالكتروني:">
+                                <input type="email" placeholder="البريد الالكتروني" name="البريد الالكتروني:" class="input">
                             </div>
-                            <small></small>
                             <div class="phone">
-                                <input type="text" placeholder="رقم الهاتف" name="رقم الهاتف:">
+                                <input type="text" placeholder="رقم الهاتف" name="رقم الهاتف:" class="input">
                             </div>
-                            <small></small>
                             <div class="reset-password">
-                                <input type="password" placeholder="تغير كلمه المرور" name="password">
+                                <input type="password" placeholder="تغير كلمه المرور" name="password" class="input">
                             </div>
                             <div class="flag">
-                                <input type="checkbox" name="admin-flag" id="admin-flag">
+                                <input type="checkbox" name="admin-flag" id="admin-flag" class="input">
                                 <label for="admin-flag">هل تود جعله مدير؟</label>
                             </div>
                             <div class="double-div">
@@ -190,9 +199,9 @@
                         <hr>
                         <div class="scroll-container"></div>
                         <div class="arrows">
-                            <i class="fa-sharp fa-solid fa-angles-right fa-2x"></i>
+                            <i class="fa-sharp fa-solid fa-angles-right fa-2x right"></i>
                             <p class="back">الرجوع</p>
-                            <i class="fa-sharp fa-solid fa-angles-left fa-2x"></i>
+                            <i class="fa-sharp fa-solid fa-angles-left fa-2x left"></i>
                         </div>
                     </div>
                 </div>
@@ -207,15 +216,16 @@
                 <div class="head">
                     <p  class="note">للمديرين فقط</p>
                     <div class="flag">
-                        <input type="checkbox" name="admin-flag" id="admin-flag">
-                        <label for="admin-flag">هل تود جعله مدير؟</label>
+                        <input type="checkbox" name="admin-flag" id="flag-admin">
+                        <label for="flag-admin">هل تود جعله مدير؟</label>
                     </div>
                 </div>
-                <form action="#" class="create-user-form" method="dialog">
+                <form action="" class="create-user-form">
                     <div class="input-field">
-                        <input type="text" placeholder="الاسم الاول" required name="firstName" class="first-name"/>
-                        <input type="text" placeholder="الاسم الاخير" required name="lastName" class="last-name"/>
-                        <select name="job" id="job">
+                        <input type="text" placeholder="الاسم الاول" required name="firstName" class="first-name input"/>
+                        <input type="text" placeholder="الاسم الاخير" required name="lastName" class="last-name input"/>
+                        <select name="job" class="job input">
+                            <optgroup label="دور الخادم"></optgroup>
                             <option value="مساعد خادم">مساعد خادم</option>
                             <option value="امين المكتبه">امين المكتبه</option>
                             <option value="امين السكرتاريه">امين السكرتاريه</option>
@@ -226,12 +236,12 @@
                             <option value="خدمه السكرتاريه">خدمه السكرتاريه</option>
                             <option value="خدمه الميديا">خدمه الميديا</option>
                         </select>
-                        <input type="text" placeholder="دور الخادم" required name="job" class="job"/>
-                        <input type="email" placeholder="البريد الالكتروني" required name="email" class="email"/>
-                        <input type="password" placeholder="كلمه المرور" required name="password" class="password"/>
+                        <input type="email" placeholder="البريد الالكتروني" required name="email" class="email input"/>
+                        <input type="password" placeholder="كلمه المرور" required name="password" class="password input"/>
                         <input type="submit" value="انشاء مستخدم" class="submit" />
                     </div>
                 </form>
+                <small></small>
             </div>
             <!-- End Profile -->
         </div>
