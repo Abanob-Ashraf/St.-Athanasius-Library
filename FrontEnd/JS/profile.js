@@ -64,6 +64,11 @@ function userInfo(data){
     let job = document.querySelector(".profile-landing .container .profile.user .user-info .job span");
     let phone = document.querySelector(".profile-landing .container .profile.user .user-info .phone span");
     let created = document.querySelector(".profile-landing .container .profile.user .user-info .created-time span");
+    let firstNamePH = document.querySelector(".profile-landing .container .profile.user .edit-info .first-name input");
+    let lastNamePH = document.querySelector(".profile-landing .container .profile.user .edit-info .last-name input");
+    let emailPH = document.querySelector(".profile-landing .container .profile.user .edit-info .email input");
+    let phonePH = document.querySelector(".profile-landing .container .profile.user .edit-info .phone input");
+    
 
 
     userEditBack.addEventListener("click",()=>{
@@ -86,6 +91,11 @@ function userInfo(data){
     } else {
         phone.textContent = data.phone_number
     }
+
+    firstNamePH.setAttribute("placeholder", data.first_name)
+    lastNamePH.setAttribute("placeholder", data.last_name)
+    emailPH.setAttribute("placeholder", data.email)
+    phonePH.setAttribute("placeholder", data.phone_number)
 }
 // Me Fetch Function
 function me(){
@@ -665,8 +675,7 @@ function createUser(){
     let job = document.querySelector(".profile-landing .container .create-user-form .input-field .job")
     let email = document.querySelector(".profile-landing .container .create-user-form .input-field .email")
     let password = document.querySelector(".profile-landing .container .create-user-form .input-field .password")
-    let admin = document.querySelector(".profile-landing .container .create-user-form .head .flag input")
-
+    let admin = document.getElementById("flag-admin")
     fetch('http://localhost:3000/library/users/createNewUser',
     {
         method: 'POST',
@@ -677,7 +686,7 @@ function createUser(){
             email: email.value,
             password: password.value,
             job: job.value,
-            admin_flag: admin == "on" ? false : true
+            admin_flag: admin.value == "on" ? console.log("false") : console.log("true")
         })
     }).then(res => res.json())
     .then(res => {
