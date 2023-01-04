@@ -359,7 +359,7 @@ function searchUsers(data){
                             password: resetPasswordEI.value,
                             phone_number: phoneEI.value,
                             job: jobEI.value,
-                            admin_flag: adminEI == "on" ? false : true
+                            admin_flag: adminEI.checked
                         })
                     }).then(res => res.json())
                     .catch(e => console.log(e))    
@@ -686,7 +686,7 @@ function createUser(){
             email: email.value,
             password: password.value,
             job: job.value,
-            admin_flag: admin.value == "on" ? console.log("false") : console.log("true")
+            admin_flag: admin.checked
         })
     }).then(res => res.json())
     .then(res => {
