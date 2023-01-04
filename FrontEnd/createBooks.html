@@ -7,7 +7,7 @@
     <!-- Font Awsome 5 Free -->
     <link rel="stylesheet" href="./css/all.min.css">
     <!-- Login Style Sheet -->
-    <link rel="stylesheet" href="./css/browseBooks.css">
+    <link rel="stylesheet" href="./css/createBooks.css">
     <!-- Title Icon -->
     <link rel="icon" href="./IMGS/LOGO/Logo.png">
     <title>مكتبه القديس اثناسيوس | تسجيل الكتب</title>
@@ -34,6 +34,52 @@
                 <hr>
                 <li><a id="logout">تسجيل الخروج</a></li>
             </ul>
+        </div>
+    </div>
+    <div class="createBooks-landing">
+        <div class="container">
+            <div class="create-book createBooks">
+                <div class="special-title">تسجيل الكتب</div>
+                <hr>
+                <form action="">
+                    <div class="input-field">
+                        <div class="flex">
+                            <input type="text" placeholder="اسم الكتاب" required name="bookName" class="input"/>
+                            <input type="text" placeholder="اسم المؤلف" required name="authorName" class="input"/>
+                            <select name="publisher" class="input">
+                                <optgroup label="اسم الناشر"></optgroup>
+                                <option value="مساعد خادم">مساعد خادم</option>
+                                <option value="امين المكتبه">امين المكتبه</option>
+                                <option value="امين السكرتاريه">امين السكرتاريه</option>
+                                <option value="امين الميديا">امين الميديا</option>
+                                <option value="امين مساعدين الخدام">امين مساعدين الخدام</option>
+                                <option value="امين مكتبه الطفل">امين مكتبه الطفل</option>
+                                <option value="خدمه مكتبه الطفل">خدمه مكتبه الطفل</option>
+                                <option value="خدمه السكرتاريه">خدمه السكرتاريه</option>
+                                <option value="خدمه الميديا">خدمه الميديا</option>
+                            </select>
+                        </div>
+                        <select name="job" class="job input">
+                            <optgroup label="دور الخادم"></optgroup>
+                            <option value="مساعد خادم">مساعد خادم</option>
+                            <option value="امين المكتبه">امين المكتبه</option>
+                            <option value="امين السكرتاريه">امين السكرتاريه</option>
+                            <option value="امين الميديا">امين الميديا</option>
+                            <option value="امين مساعدين الخدام">امين مساعدين الخدام</option>
+                            <option value="امين مكتبه الطفل">امين مكتبه الطفل</option>
+                            <option value="خدمه مكتبه الطفل">خدمه مكتبه الطفل</option>
+                            <option value="خدمه السكرتاريه">خدمه السكرتاريه</option>
+                            <option value="خدمه الميديا">خدمه الميديا</option>
+                        </select>
+                        <input type="email" placeholder="البريد الالكتروني" required name="email" class="email input"/>
+                        <input type="password" placeholder="كلمه المرور" required name="password" class="password input"/>
+                        <input type="submit" value="انشاء مستخدم" class="submit" />
+                    </div>
+                </form>
+                <div class="show-created-book createBooks">
+    
+                </div>
+            </div>
         </div>
     </div>
     <!-- End Header -->

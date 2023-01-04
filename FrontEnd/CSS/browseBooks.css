@@ -94,6 +94,12 @@ hr{
     margin-top: 15px;
     margin-bottom: 15px;
 }
+.delete{
+    font-weight: bold !important;
+    color: var(--whiteColor) !important;
+    background-color: var(--dangerColor) !important;
+    cursor: pointer  !important;
+}
 /* End Global Rules */
 
 /* Header */

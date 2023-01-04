@@ -49,7 +49,7 @@
                     <div class="search-container">
                         <input type="search" name="book" id="book" placeholder="البحث عن الكتاب حسب">
                         <select name="subject" id="subject">
-                            <option value="name">الاسم</option>
+                            <option value="book_name">الاسم</option>
                             <option value="author">الكاتب</option>
                             <option value="topic">الموضوع</option>
                             <option value="publisher">الناشر</option>
@@ -69,6 +69,7 @@
                             <th>عدد الصفحات</th>
                             <th>كود الكتاب</th>
                             <th>تاريخ التسجيل</th>
+                            <th></th>
                         </tr>
                         <tr>
                             <td>تجسد الكلمه</td>
@@ -81,18 +82,7 @@
                             <td>180</td>
                             <td>1-1-1</td>
                             <td>15/12/2022</td>
-                        </tr>
-                        <tr>
-                            <td>تجسد الكلمه</td>
-                            <td>البابا اثناسيوس</td>
-                            <td>اسقفيه الشباب</td>
-                            <td>تجسد الرب يسوع المسيح</td>
-                            <td>عقيده</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>180</td>
-                            <td>1-1-1</td>
-                            <td>15/12/2022</td>
+                            <td class="delete">حذف الكتاب</td>
                         </tr>
                     </table>
                 </div>
@@ -100,7 +90,7 @@
             <!-- End Profile -->
 
             <!-- Start Profile -->
-            <div class="profile latest-books">
+            <div class="profile latest-books" style="margin-top: 15px;">
                 <div class="latest-book">
                     <div class="special-title">اخر الكتب المضافه</div>
                     <hr>

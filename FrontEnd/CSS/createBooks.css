@@ -90,9 +90,83 @@ ul{
     color: var(--dangerColor);
     text-align: center;
 }
+.note{
+    padding: 2px 8px;
+    width: fit-content;
+    background-color: var(--dangerColor);
+    font-weight: bold;
+    font-size: 15px;
+    color: var(--whiteColor);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
 hr{
     margin-top: 15px;
     margin-bottom: 15px;
+}
+.double-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.edit{
+    font-weight: bold;
+    color: var(--whiteColor);
+    background-color: var(--dangerColor);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+.back{
+    font-weight: bold;
+    color: var(--dangerColor);
+    padding: 5px 15px;
+    cursor: pointer;
+}
+.delete{
+    font-weight: bold;
+    color: var(--whiteColor);
+    background-color: var(--dangerColor);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+.add{
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: var(--whiteColor);
+    background-color: var(--dangerColor);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+.arrows{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.arrows i{
+    color: var(--dangerColor);
+    cursor: pointer;
 }
 /* End Global Rules */
 
@@ -221,3 +295,75 @@ hr{
     }
 }
 /* End Header */
+
+.createBooks-landing{
+    min-height: calc(100vh - 100px);
+    background-color: var(--thirdColor);
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.createBooks-landing .container{
+    height: 100%;
+}
+/* Profile */
+.createBooks-landing .container .createBooks{
+    background-color: var(--whiteColor);
+    padding: 15px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
+.createBooks-landing .container .show-created-book{
+    background-color: var(--thirdColor);
+}
+.createBooks-landing .container .input-field{
+    margin-bottom: 15px;
+    width: 100%;
+}
+.createBooks-landing .container .input-field .flex{
+    display: flex;
+}
+.createBooks-landing .container .input-field .flex .input{
+    border-bottom: 8px solid var(--thirdColor);
+}
+.createBooks-landing .container .input-field .flex .input:not(:last-child){
+    border-left: 8px solid var(--thirdColor);
+}
+.createBooks-landing .container .input-field{
+    background-color: var(--thirdColor);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.createBooks-landing .container .input-field .input{
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 8px;
+}
+.createBooks-landing .container .input-field .input{
+    border-bottom: 8px solid var(--thirdColor);
+}
+.createBooks-landing .container .input-field .input::placeholder{
+    color: var(--mainBlackColor);
+    font-size: 14px;
+    font-weight: bold;
+}
+.createBooks-landing .container .input-field .submit{
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 8px;
+    background-color: var(--dangerColor);
+    color: var(--whiteColor);
+    font-size: 14px;
+    font-weight: bold;
+}
