@@ -8,7 +8,7 @@ export const GETMANYUSERS =
 
 //getOne User
 export const GETONEUSER =
-  'SELECT id, first_name, last_name, email, phone_number, job, admin_flag, user_status, created_date, updated_date FROM users WHERE id=($1)'
+  'SELECT id, first_name, last_name, email, password, phone_number, job, admin_flag, user_status, created_date, updated_date FROM users WHERE id=($1)'
 
 //search for User
 export const SEARCHFORUSER =

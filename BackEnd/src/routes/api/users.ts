@@ -61,7 +61,7 @@ routes.route('/:id').put(
   // email must be an email
   body('email').isEmail(),
   // password must be at least 8 chars long
-  body('password').isLength({ min: 8 }),
+  body('password').isLength({ min: 8 }).optional({ nullable: true }),
   // phone_number must be equal 11 number and accept null
   body('phone_number').isLength({ min: 11, max: 11 }).optional({ nullable: true }),
 

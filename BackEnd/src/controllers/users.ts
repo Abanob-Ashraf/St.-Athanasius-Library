@@ -117,7 +117,7 @@ export const updateUser = async (req: Request, res: Response) => {
         password: req.body.password,
         phone_number: req.body.phone_number,
         job: req.body.job,
-        admin_flag: req.body.admin_flag,
+        admin_flag: req.body.admin_flag || 'false',
         user_status: 'AVILABLE',
         created_date: new Date(),
         updated_date: new Date()
