@@ -37,6 +37,8 @@ function validateFromDataBase(data){
             sessionStorage.setItem("id" , JSON.stringify(data.id))
             sessionStorage.setItem("admin" , JSON.stringify(data.admin_flag))
             sessionStorage.setItem("job" , JSON.stringify(data.job))
+            sessionStorage.setItem("email" , JSON.stringify(data.email))
+            sessionStorage.setItem("phone_number" , JSON.stringify(data.phone_number))
             location.href = "/profile.html"
         }
     }
@@ -114,6 +116,7 @@ function isFormValid(){
 // Submit Form
 let form = document.forms[0];
 form.addEventListener('submit', (e) => {
+    e.preventDefault()
     console.log(isFormValid());
     if(isFormValid() == true){
         e.preventDefault()

@@ -5,6 +5,8 @@ let token = JSON.parse(sessionStorage.getItem("token"));
 let id = JSON.parse(sessionStorage.getItem("id"));
 let admin = JSON.parse(sessionStorage.getItem("admin"));
 let job = JSON.parse(sessionStorage.getItem("job"));
+let email = JSON.parse(sessionStorage.getItem("email"));
+let phone_number = JSON.parse(sessionStorage.getItem("phone_number"));
 
 window.onload = function(){
     if (window.sessionStorage.getItem("token") == undefined){
@@ -96,6 +98,11 @@ function userInfo(data){
     lastNamePH.setAttribute("placeholder", data.last_name)
     emailPH.setAttribute("placeholder", data.email)
     phonePH.setAttribute("placeholder", data.phone_number)
+    if (data.phone_number == null) {
+        phonePH.setAttribute("placeholder", "لا يوجد")
+    } else {
+        phonePH.setAttribute("placeholder", data.phone_number)
+    }
 }
 // Me Fetch Function
 function me(){
@@ -125,11 +132,11 @@ function editbyidForMe(){
         method: 'PUT',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
         body: JSON.stringify({
-            first_name: firstNameEI.value == "" ? first_name : firstNameEI.value,
-            last_name: lastNameEI.value == "" ? last_name : lastNameEI.value,
-            email: emailEI.value,
+            first_name: firstNameEI.value.trim() == "" ? first_name : firstNameEI.value.trim(),
+            last_name: lastNameEI.value.trim() == "" ? last_name : lastNameEI.value.trim(),
+            email: emailEI.value.trim() == "" ? email : emailEI.value.trim(),
             password: resetPasswordEI.value,
-            phone_number: phoneEI.value,
+            phone_number: phoneEI.value.trim() == "" ? phone_number : phoneEI.value.trim(),
             job: job,
             admin_flag: admin
         })
@@ -137,8 +144,19 @@ function editbyidForMe(){
     .catch(e => console.log(e))    
 }
 let submit = document.querySelector(".profile-landing .container .profile.user .edit-info form");
+let resetPasswordEI = document.querySelector(".profile-landing .container .profile.user .edit-info .reset-password input");
+let resetPasswordEISmall = document.querySelector(".profile-landing .container .profile.user .edit-info .reset-password small");
 submit.onsubmit = function(e){
-    editbyidForMe()
+    if(resetPasswordEI.value.trim() == ""){
+        e.preventDefault()
+        resetPasswordEISmall.style.display = "inline"
+        resetPasswordEISmall.textContent = "الرجاء ادخال كلمه المرور"
+        setTimeout(()=>{
+            resetPasswordEISmall.style.display = "none"
+        },5000)
+    }else {
+        editbyidForMe()
+    }
 }
 // ==================================================== Header & User Information & General Information Partions ==================================================== //
 
@@ -156,7 +174,7 @@ function searchUsers(data){
     let userSearchedInfo = document.querySelector(".profile-landing .container .profile.search-user .user-info")
     let search = document.querySelector(".profile-landing .container .profile.search-user .search")
     let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
-    let searchUserVlidtion = document.querySelector(".profile-landing .container .profile.search-user .search .error-text small")
+    let searchUserVlidtion = document.querySelector(".profile-landing .container .profile.search-user .search-form  small")
 
 
     if (searchUser.value == data[0].first_name || searchUser.value == data[0].email){
@@ -337,27 +355,33 @@ function searchUsers(data){
                 userSearchedInfo.style.display = "none"
                 search.style.display = "none"
                 userSearchedEdit.style.display = "block"
+                let firstNameEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .first-name .input");
+                let lastNameEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .last-name .input");
+                let emailEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .email .input");
+                let phoneEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .phone .input");
+                firstNameEI.setAttribute("placeholder", firstNameSpanText.textContent)
+                lastNameEI.setAttribute("placeholder", lastNameSpanText.textContent)
+                emailEI.setAttribute("placeholder", emailSpanText.textContent)
+                phoneEI.setAttribute("placeholder", phoneSpanText.textContent)
 
                 // EditCurrentUser On Click editinfosubmit
-                editinfosubmit.addEventListener("click",(e)=>{
+                editinfosubmit.addEventListener("click",()=>{
                     let firstNameEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .first-name .input");
                     let lastNameEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .last-name .input");
                     let emailEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .email .input");
                     let jobEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .job .input");
-                    let adminEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .falg .input");
+                    let adminEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info #admin-flag");
                     let phoneEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .phone .input");
-                    let resetPasswordEI = document.querySelector(".profile-landing .container .profile.search-user .edit-info .reset-password .input");
                 
                     fetch(`http://localhost:3000/library/users/${parseInt(idSpanText.textContent)}`,
                     {
                         method: 'PUT',
                         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
                         body: JSON.stringify({
-                            first_name: firstNameEI.value ,
-                            last_name: lastNameEI.value,
-                            email: emailEI.value,
-                            password: resetPasswordEI.value,
-                            phone_number: phoneEI.value,
+                            first_name: firstNameEI.value.trim() == "" ? firstNameSpanText.textContent : firstNameEI.value.trim() ,
+                            last_name: lastNameEI.value.trim() == "" ? lastNameSpanText.textContent : lastNameEI.value.trim(),
+                            email: emailEI.value.trim() == "" ? emailSpanText.textContent : emailEI.value.trim(),
+                            phone_number: phoneEI.value.trim() == "" ? phoneSpanText.textContent : phoneEI.value.trim(),
                             job: jobEI.value,
                             admin_flag: adminEI.checked
                         })
@@ -388,7 +412,6 @@ function searchUsers(data){
             searchUserVlidtion.textContent = ""
         },5000)
     }
-    
     // Browse User Information
     function browseOne(){
         let allInfoGroup = document.querySelectorAll(".profile-landing .container .profile.search-user .user-info .info-group");
@@ -407,6 +430,9 @@ function searchUsers(data){
             indexValue++
             allInfoGroup[indexValue-1].style.display = "block"
             allInfoGroup[indexValue-1].previousElementSibling.style.display = "none"
+            // if (allInfoGroup[indexValue-1] == undefined){
+            //     console.log("yes")
+            // }
         })
 
         // Move Left
@@ -415,6 +441,7 @@ function searchUsers(data){
             allInfoGroup[indexValue-1].style.display = "block"
             allInfoGroup[indexValue-1].nextElementSibling.style.display = "none"
         })
+
     }
     browseOne()
 

@@ -53,11 +53,16 @@ ul{
     margin-left: auto;
     margin-right: auto;
 }
-small{
+/* small{
     text-align: center;
+    margin-right: 5px;
     color: var(--dangerColor);
+    background-color: white;
+    padding: 0 10px;
     font-weight: bold;
-}
+    font-size: 11px;
+    display: none;
+} */
 /* Small */
 @media (min-width: 576px) {
     .container {
@@ -430,6 +435,16 @@ hr{
     font-weight: bold;
     color: var(--lightBlackColor);
 }
+.profile-landing .container .profile.user .edit-info .reset-password small{
+    text-align: center;
+    margin-right: 5px;
+    color: var(--dangerColor);
+    background-color: white;
+    padding: 0 10px;
+    font-weight: bold;
+    font-size: 11px;
+    display: none;
+}
 .profile-landing .container .profile.user .edit-info .edit{
     font-weight: bold;
     color: var(--whiteColor);
@@ -447,6 +462,7 @@ hr{
 
 /* User Search */
 .profile-landing .container .profile.search-user .search .search-form .search-container{
+    display: flex;
     position: relative;
     right: -16px;
     width: 100%;
@@ -460,7 +476,7 @@ hr{
     -o-border-radius: 5px 0 0px 5px;
 }
 .profile-landing .container .profile.search-user .search .search-form #search{
-    width: 100%;
+    width: 80%;
     padding: 10px;
     border: none;
     outline: none;
@@ -472,12 +488,23 @@ hr{
     font-size: 16px;
     font-weight: bold;
 }
-.profile-landing .container .profile.search-user .search .error-text{
-    margin-top: 15px;
-    text-align: center;
+.profile-landing .container .profile.search-user .search .search-form #submit{
+    background-color: var(--dangerColor);
+    color: var(--whiteColor);
+    margin-right: 10px;
+    width: 20%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
 }
-.profile-landing .container .profile.search-user .search .error-text small{
-    font-size: 18px;
+.profile-landing .container .profile.search-user .search .search-form small{
     color: var(--dangerColor);
     font-weight: bold;
 }
