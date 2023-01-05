@@ -26,8 +26,8 @@ export const createUser = async (req: Request, res: Response) => {
       updated_date: new Date(),
       id: undefined as unknown as number
     }
-    const newUser = await library.create(user)
-    res.status(200).json(newUser)
+    await library.create(user)
+    res.status(200).json('the user created sucessful')
   } catch (error) {
     return res
       .status(400)
@@ -39,7 +39,7 @@ export const createUser = async (req: Request, res: Response) => {
 export const getManyUsers = async (_req: Request, res: Response) => {
   try {
     const users = await library.getManyUsers()
-    return res.status(200).send(users)
+    return res.status(200).json(users)
   } catch (error) {
     res.status(401).json(error)
   }
@@ -52,7 +52,7 @@ export const getOneUser = async (req: Request, res: Response) => {
     if (user == null) {
       return res.status(404).json('User was not found')
     } else {
-      return res.send(user)
+      return res.json(user)
     }
   } catch (error) {
     res.status(401).json(error)
@@ -70,7 +70,7 @@ export const searchForUser = async (req: Request, res: Response) => {
     if (user == null) {
       return res.status(404).json('user was not found')
     } else {
-      return res.send(user)
+      return res.json(user)
     }
   } catch (error) {
     res.status(401).json(error)
@@ -88,7 +88,7 @@ export const getMine = async (req: Request, res: Response) => {
     if (user == null) {
       return res.status(404).json('User was not found')
     } else {
-      return res.send(user)
+      return res.json(user)
     }
   } catch (error) {
     res.status(401).json(error)
@@ -124,13 +124,11 @@ export const updateUser = async (req: Request, res: Response) => {
       }
 
       const updateUser = await library.updateUser(user)
-      if (updateUser == null) {
-        return res.status(404).json('User was not found')
-      } else {
-        return res.send(updateUser)
+      if (typeof updateUser == 'string') {
+        return res.status(404).json(updateUser)
       }
     } else {
-      return res.status(404).json('you havnot the role')
+      return res.status(400).json('you have not the role')
     }
   } catch (error) {
     res.status(401).json(error)
@@ -149,16 +147,13 @@ export const deleteUser = async (req: Request, res: Response) => {
       'NOT AVILABLE',
       new Date()
     )
-    if (+userId == +req.params.id) {
-      return res.status(404).json('you can not delete yourself')
-    }
-    if (deletedUser == null) {
-      return res.status(404).json('User was not found')
+    if (typeof deletedUser == 'string') {
+      return res.status(400).json(deletedUser)
     } else {
-      return res.send(deletedUser)
+      return res.json('user deleted correctly')
     }
   } catch (error) {
-    res.status(401).json(error)
+    res.status(403).json(error)
   }
 }
 

@@ -1,6 +1,6 @@
 //create user
 export const CREATEUSER =
-  'INSERT INTO users (first_name, last_name, email, password, phone_number, job, admin_flag, user_status, created_date, updated_date) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id, first_name, last_name, email, job, admin_flag, user_status, updated_date, created_date'
+  'INSERT INTO users (first_name, last_name, email, password, phone_number, job, admin_flag, user_status, created_date, updated_date) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)'
 
 //getAll Users
 export const GETMANYUSERS =
@@ -8,7 +8,7 @@ export const GETMANYUSERS =
 
 //getOne User
 export const GETONEUSER =
-  'SELECT id, first_name, last_name, email, password, phone_number, job, admin_flag, user_status, created_date, updated_date FROM users WHERE id=($1)'
+  'SELECT id, first_name, last_name, email, phone_number, job, admin_flag, user_status, created_date, updated_date FROM users WHERE id=($1)'
 
 //search for User
 export const SEARCHFORUSER =
@@ -16,7 +16,7 @@ export const SEARCHFORUSER =
 
 //Update User
 export const UPDATEUSER =
-  'UPDATE users SET first_name=($2), last_name=($3), email=($4), password=($5), phone_number=($6), job=($7), admin_flag=($8), user_status=($9), updated_date=($10) WHERE id=($1) RETURNING id, first_name, last_name, email, phone_number, admin_flag, updated_date, created_date'
+  'UPDATE users SET first_name=($2), last_name=($3), email=($4), phone_number=($5), job=($6), admin_flag=($7), user_status=($8), updated_date=($9) WHERE id=($1) RETURNING id, first_name, last_name, email, phone_number, admin_flag, updated_date, created_date'
 
 //Delete User
 export const SELECTSTATUS = 'SELECT user_status FROM users WHERE id=($1)'

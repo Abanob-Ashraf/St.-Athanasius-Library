@@ -110,30 +110,28 @@ export class UsersModel {
   }
 
   // updateUser
-  async updateUser(u: User): Promise<User> {
+  async updateUser(u: User): Promise<User | string> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONEUSER, [u.id])
       if (test.rows.length) {
-        const hashing = bcrypt.hashSync(u.password + pepper, parseInt(saltRounds as string))
         const result = await connection.query(UPDATEUSER, [
           u.id,
           u.first_name,
           u.last_name,
           u.email,
-          hashing,
           u.phone_number,
           u.job,
           u.admin_flag,
           u.user_status,
           u.updated_date
         ])
-        const user = result.rows[0]
+        result.rows[0]
         connection.release()
-        return user
+        return 'updated user correctly'
       }
       connection.release()
-      return test.rows[0]
+      return 'user not found'
     } catch (error) {
       throw new Error(
         `Unable to update ${u.first_name + ' ' + u.last_name}, ${(error as Error).message}`
@@ -147,7 +145,7 @@ export class UsersModel {
     id: number,
     user_status: string,
     updated_date: Date
-  ): Promise<User | null> {
+  ): Promise<User | string> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONEUSER, [id])
@@ -161,14 +159,17 @@ export class UsersModel {
             await connection.query(UPDATEBOOKAFTERDELETEUSER, [id, userId])
             connection.release()
             return deleteUser.rows[0]
+          } else {
+            connection.release()
+            return 'user already deleted'
           }
         } else {
           connection.release()
-          return null
+          return 'you can not delete your self'
         }
       }
       connection.release()
-      return test.rows[0]
+      return 'user not found'
     } catch (error) {
       throw new Error(`Unable to delete user ${id} ${(error as Error).message}`)
     }
