@@ -26,12 +26,10 @@ export const createUser = async (req: Request, res: Response) => {
       updated_date: new Date(),
       id: undefined as unknown as number
     }
-    await library.create(user)
-    res.status(200).json('the user created sucessful')
+    const createdUser = await library.create(user)
+    res.status(200).json(createdUser)
   } catch (error) {
-    return res
-      .status(400)
-      .json('this email already existe if you have troble in login contact with admin')
+    return res.status(400).json('this email already existe')
   }
 }
 
@@ -49,8 +47,8 @@ export const getManyUsers = async (_req: Request, res: Response) => {
 export const getOneUser = async (req: Request, res: Response) => {
   try {
     const user = await library.getOneUser(+req.params.id)
-    if (user == null) {
-      return res.status(404).json('User was not found')
+    if (typeof user == 'string') {
+      return res.status(404).json(user)
     } else {
       return res.json(user)
     }
@@ -67,8 +65,8 @@ export const searchForUser = async (req: Request, res: Response) => {
       req.query.email as string,
       req.query.job as string
     )
-    if (user == null) {
-      return res.status(404).json('user was not found')
+    if (typeof user == 'string') {
+      return res.status(404).json(user)
     } else {
       return res.json(user)
     }
@@ -85,11 +83,7 @@ export const getMine = async (req: Request, res: Response) => {
     const userId = decode.user.id
 
     const user = await library.getOneUser(+userId)
-    if (user == null) {
-      return res.status(404).json('User was not found')
-    } else {
-      return res.json(user)
-    }
+    return res.json(user)
   } catch (error) {
     res.status(401).json(error)
   }

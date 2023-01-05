@@ -33,7 +33,7 @@ export type User = {
 
 export class UsersModel {
   // createUser
-  async create(u: User): Promise<User> {
+  async create(u: User): Promise<User | string> {
     try {
       const connection = await Client.connect()
       const hashing = bcrypt.hashSync(u.password + pepper, parseInt(saltRounds as string))
@@ -49,9 +49,9 @@ export class UsersModel {
         u.created_date,
         u.updated_date
       ])
-      const user = result.rows[0]
+      result.rows[0]
       connection.release()
-      return user
+      return 'user created correctly'
     } catch (error) {
       throw new Error(`Unable to create ${u.first_name + ' ' + u.last_name} error: ${error}`)
     }
@@ -71,7 +71,7 @@ export class UsersModel {
   }
 
   // getOneUser
-  async getOneUser(id: number): Promise<User[]> {
+  async getOneUser(id: number): Promise<User[] | string> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETONEUSER, [id])
@@ -81,7 +81,7 @@ export class UsersModel {
         return user
       }
       connection.release()
-      return result.rows[0]
+      return 'User was not found'
     } catch (error) {
       throw new Error(`Unable to get user ${id}, ${(error as Error).message}`)
     }
@@ -93,7 +93,7 @@ export class UsersModel {
     last_name: string,
     email: string,
     job: string
-  ): Promise<User[]> {
+  ): Promise<User[] | string> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(SEARCHFORUSER, [first_name, last_name, email, job])
@@ -103,7 +103,7 @@ export class UsersModel {
         return user
       }
       connection.release()
-      return result.rows[0]
+      return 'User was not found'
     } catch (error) {
       throw new Error(`Unable to get user ${first_name},${last_name} ${(error as Error).message}`)
     }
