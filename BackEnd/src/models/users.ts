@@ -149,11 +149,9 @@ export class UsersModel {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETPASSWORD, [id])
-
       if (result.rows.length) {
         const { password: hashPassword } = result.rows[0]
         const isPasswordValid = bcrypt.compareSync(old_password + pepper, hashPassword)
-
         if (isPasswordValid) {
           const newHashedPass = bcrypt.hashSync(
             new_password + pepper,
