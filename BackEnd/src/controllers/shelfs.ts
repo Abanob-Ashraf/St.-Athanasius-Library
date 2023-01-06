@@ -15,10 +15,8 @@ export const createShelf = async (req: Request, res: Response) => {
       id: undefined as unknown as number
     }
     const newShelf = await library.createShelf(shelf)
-    if (newShelf == null) {
-      return res.status(404).json('Error you have this shelf in this block')
-    } else {
-      return res.send(newShelf)
+    if (typeof newShelf == 'string') {
+      return res.status(200).json(newShelf)
     }
   } catch (error) {
     res.status(400).json(error)
@@ -39,8 +37,8 @@ export const getManyShelfs = async (_req: Request, res: Response) => {
 export const getOneShelf = async (req: Request, res: Response) => {
   try {
     const shelf = await library.getOneShelf(+req.params.id)
-    if (shelf == null) {
-      return res.status(404).json('Shelf was not found')
+    if (typeof shelf == 'string') {
+      return res.status(404).json(shelf)
     } else {
       return res.send(shelf)
     }
@@ -53,8 +51,8 @@ export const getOneShelf = async (req: Request, res: Response) => {
 export const getShelfsWithBlockId = async (req: Request, res: Response) => {
   try {
     const shelf = await library.getShelfsWithBlockId(+req.params.id)
-    if (shelf == null) {
-      return res.status(404).json('this block was not found')
+    if (typeof shelf == 'string') {
+      return res.status(404).json(shelf)
     } else {
       return res.send(shelf)
     }
@@ -75,10 +73,8 @@ export const updateShelf = async (req: Request, res: Response) => {
       updated_date: new Date()
     }
     const updatedShelf = await library.updateShelf(shelf)
-    if (updatedShelf == null) {
-      return res.status(404).json('Shelf was not found')
-    } else {
-      return res.send(updatedShelf)
+    if (typeof updatedShelf == 'string') {
+      return res.status(404).json(updatedShelf)
     }
   } catch (error) {
     res.status(401).json(error)
@@ -89,10 +85,8 @@ export const updateShelf = async (req: Request, res: Response) => {
 export const deleteShelf = async (req: Request, res: Response) => {
   try {
     const deletedShelf = await library.deleteShelf(+req.params.id)
-    if (deletedShelf == null) {
-      return res.status(404).json('Shelf was not found')
-    } else {
-      return res.send(deletedShelf)
+    if (typeof deletedShelf == 'string') {
+      return res.status(404).json(deletedShelf)
     }
   } catch (error) {
     res.status(401).json(error)

@@ -17,7 +17,7 @@ export const createBlock = async (req: Request, res: Response) => {
     const newBlock = await library.createBlock(block)
     res.status(200).json(newBlock)
   } catch (error) {
-    res.status(400).json('this block already existe')
+    res.status(404).json('this block already existe')
   }
 }
 

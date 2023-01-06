@@ -20,24 +20,23 @@ export type Shelf = {
 
 export class ShelfsModel {
   // createShelf
-  async createShelf(sh: Shelf): Promise<Shelf | null> {
+  async createShelf(sh: Shelf): Promise<Shelf | string> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(CHECKIFSHELFINTHISBLOCK, [sh.shelf_number, sh.block_id])
       if (!test.rows.length) {
-        const result = await connection.query(CREATESHELF, [
+        await connection.query(CREATESHELF, [
           sh.shelf_number,
           sh.shelf_name,
           sh.block_id,
           sh.created_date,
           sh.updated_date
         ])
-        const shelf = result.rows[0]
         connection.release()
-        return shelf
+        return 'shelf  created correctly'
       }
       connection.release()
-      return null
+      return 'this shelf in this block already existe'
     } catch (error) {
       throw new Error(`Unable to create ${sh.shelf_number}, ${(error as Error).message}`)
     }
@@ -57,7 +56,7 @@ export class ShelfsModel {
   }
 
   // getOneShelf
-  async getOneShelf(id: number): Promise<Shelf[]> {
+  async getOneShelf(id: number): Promise<Shelf[] | string> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETONESHELF, [id])
@@ -67,14 +66,14 @@ export class ShelfsModel {
         return shelf
       }
       connection.release()
-      return result.rows[0]
+      return 'shelf was not found'
     } catch (error) {
       throw new Error(`Unable to get shelf ${id}, ${(error as Error).message}`)
     }
   }
 
   // GETMANYSHELFS_BLOCKSID
-  async getShelfsWithBlockId(id: number): Promise<Shelf[] | null> {
+  async getShelfsWithBlockId(id: number): Promise<Shelf[] | string> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMANYSHELFS_BLOCKSID, [id])
@@ -84,48 +83,47 @@ export class ShelfsModel {
         return shelf
       }
       connection.release()
-      return null
+      return 'block was not found'
     } catch (error) {
       throw new Error(`Unable to get shelfs, ${(error as Error).message}`)
     }
   }
 
   // updateShelf
-  async updateShelf(sh: Shelf): Promise<Shelf> {
+  async updateShelf(sh: Shelf): Promise<Shelf | string> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONESHELF, [sh.id])
       if (test.rows.length) {
-        const result = await connection.query(UPDATESHELF, [
+        await connection.query(UPDATESHELF, [
           sh.id,
           sh.shelf_number,
           sh.shelf_name,
           sh.block_id,
           sh.updated_date
         ])
-        const shelf = result.rows[0]
         connection.release()
-        return shelf
+        return 'shelf updated correctly'
       }
       connection.release()
-      return test.rows[0]
+      return 'shelf was not found'
     } catch (error) {
       throw new Error(`Unable to update ${sh.id}, ${(error as Error).message}`)
     }
   }
 
   // deleteShelf
-  async deleteShelf(id: number): Promise<Shelf> {
+  async deleteShelf(id: number): Promise<Shelf | string> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONESHELF, [id])
       if (test.rows.length) {
-        const result = await connection.query(DELETESHELF, [id])
+        await connection.query(DELETESHELF, [id])
         connection.release()
-        return result.rows[0]
+        return 'shelf deleted correctly'
       }
       connection.release()
-      return test.rows[0]
+      return 'shelf was not found'
     } catch (error) {
       throw new Error(`Unable to delete block ${id}, ${(error as Error).message}`)
     }

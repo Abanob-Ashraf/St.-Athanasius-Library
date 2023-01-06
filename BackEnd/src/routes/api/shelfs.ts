@@ -5,7 +5,6 @@ import {
   getOneShelf,
   createShelf,
   updateShelf,
-  deleteShelf,
   getShelfsWithBlockId
 } from '../../controllers/shelfs'
 
@@ -20,7 +19,5 @@ routes.route('/block/:id').get(authorize, getShelfsWithBlockId)
 routes.route('/:id').get(authorize, getOneShelf)
 
 routes.route('/:id').put(authorize, admin, updateShelf)
-
-routes.route('/:id').delete(authorize, admin, deleteShelf)
 
 export default routes
