@@ -40,7 +40,7 @@ routes.route('/login').post(
 
 routes.route('/me').get(authorize, getMine)
 
-routes.route('/me/changePassword').get(
+routes.route('/me/changePassword').put(
   authorize,
   // password must be at least 8 chars long
   body('old_password').isLength({ min: 8 }),
