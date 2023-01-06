@@ -129,6 +129,33 @@ export const updateUser = async (req: Request, res: Response) => {
   }
 }
 
+// changePassword
+export const changePassword = async (req: Request, res: Response) => {
+  // Finds the validation errors in this request and wraps them in an object with handy functions
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+
+  const { old_password, new_password } = req.body
+  if (!old_password || !new_password) {
+    return res.status(401).json('missing or malformed parameters. email, password required')
+  }
+  try {
+    const token = req.header('Authorization')?.replace('Bearer ', '') as string
+    const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
+    const userId = decode.user.id
+
+    const user = await library.changePassword(+userId, old_password, new_password, new Date())
+
+    if (typeof user == 'string') {
+      return res.status(200).json(user)
+    }
+  } catch (error) {
+    res.status(401).json(error)
+  }
+}
+
 // deleteUser
 export const deleteUser = async (req: Request, res: Response) => {
   try {

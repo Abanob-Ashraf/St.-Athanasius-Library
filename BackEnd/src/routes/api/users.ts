@@ -1,3 +1,4 @@
+import { changePassword } from './../../controllers/users'
 import { Router } from 'express'
 import { authorize, admin } from '../../middlewares/authantication_admin'
 import {
@@ -38,6 +39,15 @@ routes.route('/login').post(
 )
 
 routes.route('/me').get(authorize, getMine)
+
+routes.route('/me/changePassword').get(
+  authorize,
+  // password must be at least 8 chars long
+  body('old_password').isLength({ min: 8 }),
+  body('new_password').isLength({ min: 8 }),
+
+  changePassword
+)
 
 routes.route('/unavilable').get(authorize, admin, getAllUnAvilableUsers)
 

@@ -18,6 +18,11 @@ export const SEARCHFORUSER =
 export const UPDATEUSER =
   'UPDATE users SET first_name=($2), last_name=($3), email=($4), phone_number=($5), job=($6), admin_flag=($7), user_status=($8), updated_date=($9) WHERE id=($1)'
 
+//Change Password
+export const GETPASSWORD = 'SELECT password FROM users WHERE id=($1)'
+
+export const CHANGEPASSWORD = 'UPDATE users SET password=($2), updated_date=($3) WHERE id=($1)'
+
 //Delete User
 export const SELECTSTATUS = 'SELECT user_status FROM users WHERE id=($1)'
 

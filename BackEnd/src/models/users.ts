@@ -3,11 +3,13 @@ import Client from '../database'
 import {
   AUTHANTICATE,
   AUTHANTICATE2,
+  CHANGEPASSWORD,
   CREATEUSER,
   DELETEUSER,
   GETALLUNAVILABLEUSERS,
   GETMANYUSERS,
   GETONEUSER,
+  GETPASSWORD,
   SEARCHFORUSER,
   SELECTSTATUS,
   UPDATEBOOKAFTERDELETEUSER,
@@ -134,6 +136,40 @@ export class UsersModel {
       throw new Error(
         `Unable to update ${u.first_name + ' ' + u.last_name}, ${(error as Error).message}`
       )
+    }
+  }
+
+  // changePassword
+  async changePassword(
+    id: number,
+    old_password: string,
+    new_password: string,
+    updated_date: Date
+  ): Promise<User[] | string> {
+    try {
+      const connection = await Client.connect()
+      const result = await connection.query(GETPASSWORD, [id])
+
+      if (result.rows.length) {
+        const { password: hashPassword } = result.rows[0]
+        const isPasswordValid = bcrypt.compareSync(old_password + pepper, hashPassword)
+
+        if (isPasswordValid) {
+          const newHashedPass = bcrypt.hashSync(
+            new_password + pepper,
+            parseInt(saltRounds as string)
+          )
+          if (old_password == new_password) {
+            return `you used this password before try another password`
+          }
+          await connection.query(CHANGEPASSWORD, [id, newHashedPass, updated_date])
+          return 'changed succefuly'
+        }
+      }
+      connection.release()
+      return 'the password do not match please try again'
+    } catch (error) {
+      throw new Error(`Unable to get password users ${(error as Error).message}`)
     }
   }
 
