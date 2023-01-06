@@ -65,14 +65,14 @@ export const updateBlock = async (req: Request, res: Response) => {
   }
 }
 
-// deleteBlock
-export const deleteBlock = async (req: Request, res: Response) => {
-  try {
-    const deletedBlock = await library.deleteBlock(+req.params.id)
-    if (typeof deletedBlock == 'string') {
-      return res.status(404).json(deletedBlock)
-    }
-  } catch (error) {
-    res.status(401).json(error)
-  }
-}
+// // deleteBlock
+// export const deleteBlock = async (req: Request, res: Response) => {
+//   try {
+//     const deletedBlock = await library.deleteBlock(+req.params.id)
+//     if (typeof deletedBlock == 'string') {
+//       return res.status(404).json(deletedBlock)
+//     }
+//   } catch (error) {
+//     res.status(401).json(error)
+//   }
+// }

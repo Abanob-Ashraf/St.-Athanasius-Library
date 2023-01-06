@@ -81,14 +81,14 @@ export const updateShelf = async (req: Request, res: Response) => {
   }
 }
 
-// deleteShelf
-export const deleteShelf = async (req: Request, res: Response) => {
-  try {
-    const deletedShelf = await library.deleteShelf(+req.params.id)
-    if (typeof deletedShelf == 'string') {
-      return res.status(404).json(deletedShelf)
-    }
-  } catch (error) {
-    res.status(401).json(error)
-  }
-}
+// // deleteShelf
+// export const deleteShelf = async (req: Request, res: Response) => {
+//   try {
+//     const deletedShelf = await library.deleteShelf(+req.params.id)
+//     if (typeof deletedShelf == 'string') {
+//       return res.status(404).json(deletedShelf)
+//     }
+//   } catch (error) {
+//     res.status(401).json(error)
+//   }
+// }

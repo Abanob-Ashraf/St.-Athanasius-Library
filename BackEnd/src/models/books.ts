@@ -3,7 +3,7 @@ import {
   CREATEBOOK,
   UPDATEBOOK,
   GETONEBOOKBYID,
-  DELETEBOOK,
+  // DELETEBOOK,
   GETMANYBOOKS,
   SEARCHFORBOOK,
   CHECKIFBOOKINTHISSHELF,
@@ -226,20 +226,20 @@ export class BooksModel {
     }
   }
 
-  // deleteBook
-  async deleteBook(id: number): Promise<Book> {
-    try {
-      const connection = await Client.connect()
-      const test = await connection.query(GETONEBOOKBYID, [id])
-      if (test.rows.length) {
-        const result = await connection.query(DELETEBOOK, [id])
-        connection.release()
-        return result.rows[0]
-      }
-      connection.release()
-      return test.rows[0]
-    } catch (error) {
-      throw new Error(`Unable to delete Book ${id}, ${(error as Error).message}`)
-    }
-  }
+  // // deleteBook
+  // async deleteBook(id: number): Promise<Book> {
+  //   try {
+  //     const connection = await Client.connect()
+  //     const test = await connection.query(GETONEBOOKBYID, [id])
+  //     if (test.rows.length) {
+  //       const result = await connection.query(DELETEBOOK, [id])
+  //       connection.release()
+  //       return result.rows[0]
+  //     }
+  //     connection.release()
+  //     return test.rows[0]
+  //   } catch (error) {
+  //     throw new Error(`Unable to delete Book ${id}, ${(error as Error).message}`)
+  //   }
+  // }
 }

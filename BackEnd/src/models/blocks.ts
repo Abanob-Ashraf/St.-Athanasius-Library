@@ -3,7 +3,7 @@ import {
   CREATEBLOCK,
   UPDATEBLOCK,
   GETONEBLOCK,
-  DELETEBLOCK,
+  // DELETEBLOCK,
   GETMANYBLOCKS
 } from '../sql-queries/blocks'
 
@@ -85,20 +85,20 @@ export class BlocksModel {
     }
   }
 
-  // deleteBlock
-  async deleteBlock(id: number): Promise<Block | string> {
-    try {
-      const connection = await Client.connect()
-      const test = await connection.query(GETONEBLOCK, [id])
-      if (test.rows.length) {
-        await connection.query(DELETEBLOCK, [id])
-        connection.release()
-        return 'deleted block correctly'
-      }
-      connection.release()
-      return 'block not found'
-    } catch (error) {
-      throw new Error(`Unable to delete block ${id}, ${(error as Error).message}`)
-    }
-  }
+  // // deleteBlock
+  // async deleteBlock(id: number): Promise<Block | string> {
+  //   try {
+  //     const connection = await Client.connect()
+  //     const test = await connection.query(GETONEBLOCK, [id])
+  //     if (test.rows.length) {
+  //       await connection.query(DELETEBLOCK, [id])
+  //       connection.release()
+  //       return 'deleted block correctly'
+  //     }
+  //     connection.release()
+  //     return 'block not found'
+  //   } catch (error) {
+  //     throw new Error(`Unable to delete block ${id}, ${(error as Error).message}`)
+  //   }
+  // }
 }

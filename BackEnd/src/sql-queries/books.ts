@@ -13,7 +13,7 @@ export const SEARCHFORBOOK =
 export const UPDATEBOOK =
   'UPDATE books SET book_code=($2), book_name=($3), author=($4), publisher=($5), topic($6), number_of_copies=($7), number_of_pages=($8), number_of_parts=($9), name_of_series=($10), conclusion=($11), currrent_user=($12), old_user=($13) ,shelf_id=($14), book_number_in_shelf=($15), who_edited=($16), updated_date=($17) WHERE id=($1) RETURNING *'
 
-export const DELETEBOOK = 'DELETE FROM books WHERE id=($1) RETURNING *'
+// export const DELETEBOOK = 'DELETE FROM books WHERE id=($1) RETURNING *'
 
 export const CHECKIFBOOKINTHISSHELF =
   'SELECT books.id FROM books WHERE books.shelf_id=($1) AND books.book_number_in_shelf=($2)'

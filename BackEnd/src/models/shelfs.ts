@@ -3,7 +3,7 @@ import {
   CREATESHELF,
   UPDATESHELF,
   GETONESHELF,
-  DELETESHELF,
+  // DELETESHELF,
   GETMANYSHELFS,
   GETMANYSHELFS_BLOCKSID,
   CHECKIFSHELFINTHISBLOCK
@@ -112,20 +112,20 @@ export class ShelfsModel {
     }
   }
 
-  // deleteShelf
-  async deleteShelf(id: number): Promise<Shelf | string> {
-    try {
-      const connection = await Client.connect()
-      const test = await connection.query(GETONESHELF, [id])
-      if (test.rows.length) {
-        await connection.query(DELETESHELF, [id])
-        connection.release()
-        return 'shelf deleted correctly'
-      }
-      connection.release()
-      return 'shelf was not found'
-    } catch (error) {
-      throw new Error(`Unable to delete block ${id}, ${(error as Error).message}`)
-    }
-  }
+  // // deleteShelf
+  // async deleteShelf(id: number): Promise<Shelf | string> {
+  //   try {
+  //     const connection = await Client.connect()
+  //     const test = await connection.query(GETONESHELF, [id])
+  //     if (test.rows.length) {
+  //       await connection.query(DELETESHELF, [id])
+  //       connection.release()
+  //       return 'shelf deleted correctly'
+  //     }
+  //     connection.release()
+  //     return 'shelf was not found'
+  //   } catch (error) {
+  //     throw new Error(`Unable to delete block ${id}, ${(error as Error).message}`)
+  //   }
+  // }
 }

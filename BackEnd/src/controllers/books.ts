@@ -186,15 +186,15 @@ export const updateBook = async (req: Request, res: Response) => {
   }
 }
 
-export const deleteBook = async (req: Request, res: Response) => {
-  try {
-    const deletedBook = await library.deleteBook(+req.params.id)
-    if (deletedBook == null) {
-      return res.status(404).json('Book was not found')
-    } else {
-      return res.send(deletedBook)
-    }
-  } catch (error) {
-    res.status(401).json(error)
-  }
-}
+// export const deleteBook = async (req: Request, res: Response) => {
+//   try {
+//     const deletedBook = await library.deleteBook(+req.params.id)
+//     if (deletedBook == null) {
+//       return res.status(404).json('Book was not found')
+//     } else {
+//       return res.send(deletedBook)
+//     }
+//   } catch (error) {
+//     res.status(401).json(error)
+//   }
+// }

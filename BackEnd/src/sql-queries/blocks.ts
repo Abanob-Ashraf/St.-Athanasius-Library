@@ -8,4 +8,4 @@ export const GETONEBLOCK = 'SELECT * FROM blocks WHERE id=($1)'
 export const UPDATEBLOCK =
   'UPDATE blocks SET block_number=($2), block_name=($3), updated_date=($4) WHERE id=($1)'
 
-export const DELETEBLOCK = 'DELETE FROM blocks WHERE id=($1)'
+// export const DELETEBLOCK = 'DELETE FROM blocks WHERE id=($1)'
