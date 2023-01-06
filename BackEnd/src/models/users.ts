@@ -37,7 +37,7 @@ export class UsersModel {
     try {
       const connection = await Client.connect()
       const hashing = bcrypt.hashSync(u.password + pepper, parseInt(saltRounds as string))
-      const result = await connection.query(CREATEUSER, [
+      await connection.query(CREATEUSER, [
         u.first_name,
         u.last_name,
         u.email,
@@ -49,7 +49,6 @@ export class UsersModel {
         u.created_date,
         u.updated_date
       ])
-      result.rows[0]
       connection.release()
       return 'user created correctly'
     } catch (error) {
@@ -115,7 +114,7 @@ export class UsersModel {
       const connection = await Client.connect()
       const test = await connection.query(GETONEUSER, [u.id])
       if (test.rows.length) {
-        const result = await connection.query(UPDATEUSER, [
+        await connection.query(UPDATEUSER, [
           u.id,
           u.first_name,
           u.last_name,
@@ -126,7 +125,6 @@ export class UsersModel {
           u.user_status,
           u.updated_date
         ])
-        result.rows[0]
         connection.release()
         return 'updated user correctly'
       }
@@ -155,10 +153,10 @@ export class UsersModel {
         const isStatusAVILABLE = status
         if (userId != id) {
           if (isStatusAVILABLE == 'AVILABLE') {
-            const deleteUser = await connection.query(DELETEUSER, [id, user_status, updated_date])
+            await connection.query(DELETEUSER, [id, user_status, updated_date])
             await connection.query(UPDATEBOOKAFTERDELETEUSER, [id, userId])
             connection.release()
-            return deleteUser.rows[0]
+            return 'user deleted correctly'
           } else {
             connection.release()
             return 'user already deleted'
@@ -196,7 +194,7 @@ export class UsersModel {
   }
 
   // getAllUnAvilableUsers
-  async getAllUnAvilableUsers(): Promise<User[] | null> {
+  async getAllUnAvilableUsers(): Promise<User[] | string> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETALLUNAVILABLEUSERS)
@@ -205,7 +203,7 @@ export class UsersModel {
         connection.release()
         return user
       }
-      return null
+      return 'no users UnAvilable'
     } catch (error) {
       throw new Error(`Unable to get UnAvilableUsers users ${(error as Error).message}`)
     }

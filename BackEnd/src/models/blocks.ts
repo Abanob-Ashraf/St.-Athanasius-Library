@@ -17,18 +17,17 @@ export type Block = {
 
 export class BlocksModel {
   // createBlock
-  async createBlock(bl: Block): Promise<Block> {
+  async createBlock(bl: Block): Promise<Block | string> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(CREATEBLOCK, [
+      await connection.query(CREATEBLOCK, [
         bl.block_number,
         bl.block_name,
         bl.created_date,
         bl.updated_date
       ])
-      const block = result.rows[0]
       connection.release()
-      return block
+      return 'block created correctly'
     } catch (error) {
       throw new Error(`Unable to create ${bl.block_number}, ${(error as Error).message}`)
     }
@@ -48,7 +47,7 @@ export class BlocksModel {
   }
 
   // getOneBlock
-  async getOneBlock(id: number): Promise<Block[]> {
+  async getOneBlock(id: number): Promise<Block[] | string> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETONEBLOCK, [id])
@@ -58,47 +57,46 @@ export class BlocksModel {
         return block
       }
       connection.release()
-      return result.rows[0]
+      return 'block was not found'
     } catch (error) {
       throw new Error(`Unable to get block ${id}, ${(error as Error).message}`)
     }
   }
 
   // updateBlock
-  async updateBlock(bl: Block): Promise<Block> {
+  async updateBlock(bl: Block): Promise<Block | string> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONEBLOCK, [bl.id])
       if (test.rows.length) {
-        const result = await connection.query(UPDATEBLOCK, [
+        await connection.query(UPDATEBLOCK, [
           bl.id,
           bl.block_number,
           bl.block_name,
           bl.updated_date
         ])
-        const block = result.rows[0]
         connection.release()
-        return block
+        return 'updated block correctly'
       }
       connection.release()
-      return test.rows[0]
+      return 'block not found'
     } catch (error) {
       throw new Error(`Unable to update ${bl.id}, ${(error as Error).message}`)
     }
   }
 
   // deleteBlock
-  async deleteBlock(id: number): Promise<Block> {
+  async deleteBlock(id: number): Promise<Block | string> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONEBLOCK, [id])
       if (test.rows.length) {
-        const result = await connection.query(DELETEBLOCK, [id])
+        await connection.query(DELETEBLOCK, [id])
         connection.release()
-        return result.rows[0]
+        return 'deleted block correctly'
       }
       connection.release()
-      return test.rows[0]
+      return 'block not found'
     } catch (error) {
       throw new Error(`Unable to delete block ${id}, ${(error as Error).message}`)
     }

@@ -17,7 +17,7 @@ export const createBlock = async (req: Request, res: Response) => {
     const newBlock = await library.createBlock(block)
     res.status(200).json(newBlock)
   } catch (error) {
-    res.status(400).json(error)
+    res.status(400).json('this block already existe')
   }
 }
 
@@ -35,8 +35,8 @@ export const getManyBlocks = async (_req: Request, res: Response) => {
 export const getOneBlock = async (req: Request, res: Response) => {
   try {
     const block = await library.getOneBlock(+req.params.id)
-    if (block == null) {
-      return res.status(404).json('block was not found')
+    if (typeof block == 'string') {
+      return res.status(404).json(block)
     } else {
       return res.send(block)
     }
@@ -57,10 +57,8 @@ export const updateBlock = async (req: Request, res: Response) => {
     }
 
     const updatedBlock = await library.updateBlock(block)
-    if (updatedBlock == null) {
-      return res.status(404).json('block was not found')
-    } else {
-      return res.send(updatedBlock)
+    if (typeof updatedBlock == 'string') {
+      return res.status(404).json(updatedBlock)
     }
   } catch (error) {
     res.status(401).json(error)
@@ -71,10 +69,8 @@ export const updateBlock = async (req: Request, res: Response) => {
 export const deleteBlock = async (req: Request, res: Response) => {
   try {
     const deletedBlock = await library.deleteBlock(+req.params.id)
-    if (deletedBlock == null) {
-      return res.status(404).json('block was not found')
-    } else {
-      return res.send(deletedBlock)
+    if (typeof deletedBlock == 'string') {
+      return res.status(404).json(deletedBlock)
     }
   } catch (error) {
     res.status(401).json(error)

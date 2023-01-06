@@ -122,7 +122,7 @@ export const updateUser = async (req: Request, res: Response) => {
         return res.status(404).json(updateUser)
       }
     } else {
-      return res.status(400).json('you have not the role')
+      return res.status(400).json(`you havn't the role`)
     }
   } catch (error) {
     res.status(401).json(error)
@@ -143,8 +143,6 @@ export const deleteUser = async (req: Request, res: Response) => {
     )
     if (typeof deletedUser == 'string') {
       return res.status(400).json(deletedUser)
-    } else {
-      return res.json('user deleted correctly')
     }
   } catch (error) {
     res.status(403).json(error)
@@ -183,8 +181,8 @@ export const authenticateUser = async (req: Request, res: Response) => {
 export const getAllUnAvilableUsers = async (_req: Request, res: Response) => {
   try {
     const users = await library.getAllUnAvilableUsers()
-    if (users == null) {
-      return res.status(404).json('no users UnAvilable')
+    if (typeof users == 'string') {
+      return res.status(404).json(users)
     }
     return res.status(200).json(users)
   } catch (error) {
