@@ -19,4 +19,4 @@ export const CHECKIFBOOKINTHISSHELF =
   'SELECT books.id FROM books WHERE books.shelf_id=($1) AND books.book_number_in_shelf=($2)'
 
 export const GETMYBOOKS =
-  'SELECT books.id, books.book_name, books.book_number_in_shelf, shelfs.shelf_number, blocks.block_number FROM books INNER JOIN shelfs ON shelfs.id = books.shelf_id INNER JOIN blocks ON blocks.id = shelfs.block_id WHERE currrent_user = ($1)'
+  'SELECT books.id, books.book_name, books.book_number_in_shelf, shelfs.shelf_number, blocks.block_number, books.updated_date FROM books INNER JOIN shelfs ON shelfs.id = books.shelf_id INNER JOIN blocks ON blocks.id = shelfs.block_id WHERE currrent_user = ($1) ORDER BY books.updated_date DESC'
