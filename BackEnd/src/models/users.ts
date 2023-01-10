@@ -35,7 +35,7 @@ export type User = {
 
 export class UsersModel {
   // createUser
-  async create(u: User): Promise<User | string> {
+  async create(u: User): Promise<object> {
     try {
       const connection = await Client.connect()
       const hashing = bcrypt.hashSync(u.password + pepper, parseInt(saltRounds as string))
@@ -52,18 +52,22 @@ export class UsersModel {
         u.updated_date
       ])
       connection.release()
-      return 'user created correctly'
+      const obj = {
+        status: 201,
+        message: 'user created correctly'
+      }
+      return obj
     } catch (error) {
       throw new Error(`Unable to create ${u.first_name + ' ' + u.last_name} error: ${error}`)
     }
   }
 
   // getManyUsers
-  async getManyUsers(): Promise<User[]> {
+  async getManyUsers(): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMANYUSERS)
-      const user = result.rows
+      const user = { status: 200, userInfo: result.rows }
       connection.release()
       return user
     } catch (error) {
@@ -72,17 +76,21 @@ export class UsersModel {
   }
 
   // getOneUser
-  async getOneUser(id: number): Promise<User[] | string> {
+  async getOneUser(id: number): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETONEUSER, [id])
       if (result.rows.length) {
-        const user = { ...result.rows[0] }
+        const user = { status: 200, userInfo: result.rows[0] }
         connection.release()
         return user
       }
       connection.release()
-      return 'User was not found'
+      const error = {
+        status: 404,
+        userInfo: 'user not found'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to get user ${id}, ${(error as Error).message}`)
     }
@@ -94,24 +102,28 @@ export class UsersModel {
     last_name: string,
     email: string,
     job: string
-  ): Promise<User[] | string> {
+  ): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(SEARCHFORUSER, [first_name, last_name, email, job])
       if (result.rows.length) {
-        const user = result.rows
+        const user = { status: 200, userInfo: result.rows }
         connection.release()
         return user
       }
       connection.release()
-      return 'User was not found'
+      const error = {
+        status: 404,
+        userInfo: 'user not found'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to get user ${first_name},${last_name} ${(error as Error).message}`)
     }
   }
 
   // updateUser
-  async updateUser(u: User): Promise<User | string> {
+  async updateUser(u: User): Promise<object> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONEUSER, [u.id])
@@ -128,10 +140,18 @@ export class UsersModel {
           u.updated_date
         ])
         connection.release()
-        return 'updated user correctly'
+        const obj = {
+          status: 202,
+          message: 'updated user correctly'
+        }
+        return obj
       }
       connection.release()
-      return 'user not found'
+      const error = {
+        status: 404,
+        message: 'user not found'
+      }
+      return error
     } catch (error) {
       throw new Error(
         `Unable to update ${u.first_name + ' ' + u.last_name}, ${(error as Error).message}`
@@ -145,7 +165,7 @@ export class UsersModel {
     old_password: string,
     new_password: string,
     updated_date: Date
-  ): Promise<User[] | string> {
+  ): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETPASSWORD, [id])
@@ -158,14 +178,26 @@ export class UsersModel {
             parseInt(saltRounds as string)
           )
           if (old_password == new_password) {
-            return `you used this password before try another password`
+            const error = {
+              status: 406,
+              message: `you used this password before try another password`
+            }
+            return error
           }
           await connection.query(CHANGEPASSWORD, [id, newHashedPass, updated_date])
-          return 'changed succefuly'
+          const obj = {
+            status: 202,
+            message: 'password changed correctly'
+          }
+          return obj
         }
       }
       connection.release()
-      return 'the password do not match please try again'
+      const error = {
+        status: 406,
+        message: 'the password do not match please try again'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to get password users ${(error as Error).message}`)
     }
@@ -177,7 +209,7 @@ export class UsersModel {
     id: number,
     user_status: string,
     updated_date: Date
-  ): Promise<User | string> {
+  ): Promise<object> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONEUSER, [id])
@@ -190,18 +222,34 @@ export class UsersModel {
             await connection.query(DELETEUSER, [id, user_status, updated_date])
             await connection.query(UPDATEBOOKAFTERDELETEUSER, [id, userId])
             connection.release()
-            return 'user deleted correctly'
+            const obj = {
+              status: 202,
+              message: 'user deleted correctly'
+            }
+            return obj
           } else {
             connection.release()
-            return 'user already deleted'
+            const obj = {
+              status: 208,
+              message: 'user already deleted'
+            }
+            return obj
           }
         } else {
           connection.release()
-          return 'you can not delete your self'
+          const error = {
+            status: 406,
+            message: 'you can not delete your self'
+          }
+          return error
         }
       }
       connection.release()
-      return 'user not found'
+      const error = {
+        status: 404,
+        message: 'user not found'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to delete user ${id} ${(error as Error).message}`)
     }
@@ -228,16 +276,20 @@ export class UsersModel {
   }
 
   // getAllUnAvilableUsers
-  async getAllUnAvilableUsers(): Promise<User[] | string> {
+  async getAllUnAvilableUsers(): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETALLUNAVILABLEUSERS)
       if (result.rows.length) {
-        const user = result.rows
+        const user = { status: 200, userInfo: result.rows }
         connection.release()
         return user
       }
-      return 'no users UnAvilable'
+      const error = {
+        status: 404,
+        userInfo: 'NOT AVILABLE users not found'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to get UnAvilableUsers users ${(error as Error).message}`)
     }

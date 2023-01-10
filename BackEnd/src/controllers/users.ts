@@ -27,7 +27,7 @@ export const createUser = async (req: Request, res: Response) => {
       id: undefined as unknown as number
     }
     const createdUser = await library.create(user)
-    res.status(200).json(createdUser)
+    res.status(createdUser['status']).json(createdUser['message'])
   } catch (error) {
     return res.status(400).json('this email already existe')
   }
@@ -37,9 +37,9 @@ export const createUser = async (req: Request, res: Response) => {
 export const getManyUsers = async (_req: Request, res: Response) => {
   try {
     const users = await library.getManyUsers()
-    return res.status(200).json(users)
+    res.status(users['status']).json(users['userInfo'])
   } catch (error) {
-    res.status(401).json(error)
+    res.status(400).json(error)
   }
 }
 
@@ -47,13 +47,9 @@ export const getManyUsers = async (_req: Request, res: Response) => {
 export const getOneUser = async (req: Request, res: Response) => {
   try {
     const user = await library.getOneUser(+req.params.id)
-    if (typeof user == 'string') {
-      return res.status(404).json(user)
-    } else {
-      return res.json(user)
-    }
+    res.status(user['status']).json(user['userInfo'])
   } catch (error) {
-    res.status(401).json(error)
+    res.status(400).json(error)
   }
 }
 
@@ -65,13 +61,9 @@ export const searchForUser = async (req: Request, res: Response) => {
       req.query.email as string,
       req.query.job as string
     )
-    if (typeof user == 'string') {
-      return res.status(404).json(user)
-    } else {
-      return res.json(user)
-    }
+    res.status(user['status']).json(user['userInfo'])
   } catch (error) {
-    res.status(401).json(error)
+    res.status(400).json(error)
   }
 }
 
@@ -83,9 +75,9 @@ export const getMine = async (req: Request, res: Response) => {
     const userId = decode.user.id
 
     const user = await library.getOneUser(+userId)
-    return res.json(user)
+    res.status(user['status']).json(user['userInfo'])
   } catch (error) {
-    res.status(401).json(error)
+    res.status(400).json(error)
   }
 }
 
@@ -118,14 +110,12 @@ export const updateUser = async (req: Request, res: Response) => {
       }
 
       const updateUser = await library.updateUser(user)
-      if (typeof updateUser == 'string') {
-        return res.status(404).json(updateUser)
-      }
+      res.status(updateUser['status']).json(updateUser['message'])
     } else {
-      return res.status(400).json(`you havn't the role`)
+      return res.status(405).json(`you havn't the role`)
     }
   } catch (error) {
-    res.status(401).json(error)
+    res.status(400).json(error)
   }
 }
 
@@ -139,7 +129,7 @@ export const changePassword = async (req: Request, res: Response) => {
 
   const { old_password, new_password } = req.body
   if (!old_password || !new_password) {
-    return res.status(401).json('missing or malformed parameters. email, password required')
+    return res.status(400).json('missing or malformed parameters. email, password required')
   }
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '') as string
@@ -147,12 +137,9 @@ export const changePassword = async (req: Request, res: Response) => {
     const userId = decode.user.id
 
     const user = await library.changePassword(+userId, old_password, new_password, new Date())
-
-    if (typeof user == 'string') {
-      return res.status(200).json(user)
-    }
+    res.status(user['status']).json(user['message'])
   } catch (error) {
-    res.status(401).json(error)
+    res.status(400).json(error)
   }
 }
 
@@ -168,11 +155,9 @@ export const deleteUser = async (req: Request, res: Response) => {
       'NOT AVILABLE',
       new Date()
     )
-    if (typeof deletedUser == 'string') {
-      return res.status(400).json(deletedUser)
-    }
+    res.status(deletedUser['status']).json(deletedUser['message'])
   } catch (error) {
-    res.status(403).json(error)
+    res.status(400).json(error)
   }
 }
 
@@ -185,7 +170,7 @@ export const authenticateUser = async (req: Request, res: Response) => {
   }
   const { email, password } = req.body
   if (!email || !password) {
-    return res.status(401).json('missing or malformed parameters. email, password required')
+    return res.status(400).json('missing or malformed parameters. email, password required')
   }
   try {
     const user = await library.authenticate(email, password)
@@ -193,14 +178,14 @@ export const authenticateUser = async (req: Request, res: Response) => {
       expiresIn: process.env.JWT_EXPIRES_IN
     })
     if (!user) {
-      return res.status(401).json('the username and password do not match please try again')
+      return res.status(400).json('the username and password do not match please try again')
     }
     if (user['user_status'] == 'NOT AVILABLE') {
-      return res.status(401).json('you can not login contact with admin')
+      return res.status(423).json('you can not login contact with admin')
     }
-    return res.json({ ...user, token })
+    return res.status(200).json({ ...user, token })
   } catch (error) {
-    res.status(401).json(error)
+    res.status(400).json(error)
   }
 }
 
@@ -208,11 +193,8 @@ export const authenticateUser = async (req: Request, res: Response) => {
 export const getAllUnAvilableUsers = async (_req: Request, res: Response) => {
   try {
     const users = await library.getAllUnAvilableUsers()
-    if (typeof users == 'string') {
-      return res.status(404).json(users)
-    }
-    return res.status(200).json(users)
+    res.status(users['status']).json(users['userInfo'])
   } catch (error) {
-    res.status(401).json(error)
+    res.status(400).json(error)
   }
 }

@@ -10,7 +10,7 @@ export const authorize = (req: Request, res: Response, next: NextFunction) => {
       next()
     } else {
       // Failed to authenticate user.
-      res.status(403).json('Login Error, Please login again')
+      res.status(401).json('Login Error, Please login again')
     }
   } catch (error) {
     res.status(401).json(error)
@@ -27,7 +27,7 @@ export const admin = (req: Request, res: Response, next: NextFunction) => {
       next()
     } else {
       // the user haven't role admin
-      res.status(403).json(`you havn't the role`)
+      res.status(405).json(`you havn't the role`)
     }
   } catch (error) {
     res.status(401).json(error)

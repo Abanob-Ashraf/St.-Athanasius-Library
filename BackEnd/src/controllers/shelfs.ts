@@ -15,9 +15,7 @@ export const createShelf = async (req: Request, res: Response) => {
       id: undefined as unknown as number
     }
     const newShelf = await library.createShelf(shelf)
-    if (typeof newShelf == 'string') {
-      return res.status(200).json(newShelf)
-    }
+    res.status(newShelf['status']).json(newShelf['message'])
   } catch (error) {
     res.status(400).json(error)
   }
@@ -27,7 +25,7 @@ export const createShelf = async (req: Request, res: Response) => {
 export const getManyShelfs = async (_req: Request, res: Response) => {
   try {
     const shelfs = await library.getManyShelfs()
-    res.status(200).json(shelfs)
+    res.status(shelfs['status']).json(shelfs['shelfInfo'])
   } catch (error) {
     res.status(401).json(error)
   }
@@ -37,11 +35,7 @@ export const getManyShelfs = async (_req: Request, res: Response) => {
 export const getOneShelf = async (req: Request, res: Response) => {
   try {
     const shelf = await library.getOneShelf(+req.params.id)
-    if (typeof shelf == 'string') {
-      return res.status(404).json(shelf)
-    } else {
-      return res.send(shelf)
-    }
+    res.status(shelf['status']).json(shelf['shelfInfo'])
   } catch (error) {
     res.status(401).json(error)
   }
@@ -50,12 +44,8 @@ export const getOneShelf = async (req: Request, res: Response) => {
 // getShelfsWithBlockId
 export const getShelfsWithBlockId = async (req: Request, res: Response) => {
   try {
-    const shelf = await library.getShelfsWithBlockId(+req.params.id)
-    if (typeof shelf == 'string') {
-      return res.status(404).json(shelf)
-    } else {
-      return res.send(shelf)
-    }
+    const shelfs = await library.getShelfsWithBlockId(+req.params.id)
+    res.status(shelfs['status']).json(shelfs['shelfInfo'])
   } catch (error) {
     res.status(401).json(error)
   }
@@ -73,21 +63,17 @@ export const updateShelf = async (req: Request, res: Response) => {
       updated_date: new Date()
     }
     const updatedShelf = await library.updateShelf(shelf)
-    if (typeof updatedShelf == 'string') {
-      return res.status(404).json(updatedShelf)
-    }
+    res.status(updatedShelf['status']).json(updatedShelf['message'])
   } catch (error) {
     res.status(401).json(error)
   }
 }
 
-// // deleteShelf
+// deleteShelf
 // export const deleteShelf = async (req: Request, res: Response) => {
 //   try {
 //     const deletedShelf = await library.deleteShelf(+req.params.id)
-//     if (typeof deletedShelf == 'string') {
-//       return res.status(404).json(deletedShelf)
-//     }
+//     res.status(deletedShelf['status']).json(deletedShelf['message'])
 //   } catch (error) {
 //     res.status(401).json(error)
 //   }

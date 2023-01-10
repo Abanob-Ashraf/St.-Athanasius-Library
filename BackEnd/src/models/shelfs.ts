@@ -20,7 +20,7 @@ export type Shelf = {
 
 export class ShelfsModel {
   // createShelf
-  async createShelf(sh: Shelf): Promise<Shelf | string> {
+  async createShelf(sh: Shelf): Promise<object> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(CHECKIFSHELFINTHISBLOCK, [sh.shelf_number, sh.block_id])
@@ -33,21 +33,29 @@ export class ShelfsModel {
           sh.updated_date
         ])
         connection.release()
-        return 'shelf  created correctly'
+        const obj = {
+          status: 201,
+          message: 'shelf created correctly'
+        }
+        return obj
       }
       connection.release()
-      return 'this shelf in this block already existe'
+      const error = {
+        status: 404,
+        message: 'this shelf in this block already existe'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to create ${sh.shelf_number}, ${(error as Error).message}`)
     }
   }
 
   // getManyShelfs
-  async getManyShelfs(): Promise<Shelf[]> {
+  async getManyShelfs(): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMANYSHELFS)
-      const shelf = result.rows
+      const shelf = { status: 200, shelfInfo: result.rows }
       connection.release()
       return shelf
     } catch (error) {
@@ -56,41 +64,50 @@ export class ShelfsModel {
   }
 
   // getOneShelf
-  async getOneShelf(id: number): Promise<Shelf[] | string> {
+  async getOneShelf(id: number): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETONESHELF, [id])
       if (result.rows.length) {
-        const shelf = { ...result.rows[0] }
+        const shelf = { status: 200, shelfInfo: result.rows[0] }
+
         connection.release()
         return shelf
       }
       connection.release()
-      return 'shelf was not found'
+      const error = {
+        status: 404,
+        shelfInfo: 'shelf not found'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to get shelf ${id}, ${(error as Error).message}`)
     }
   }
 
   // GETMANYSHELFS_BLOCKSID
-  async getShelfsWithBlockId(id: number): Promise<Shelf[] | string> {
+  async getShelfsWithBlockId(id: number): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMANYSHELFS_BLOCKSID, [id])
       if (result.rows.length) {
-        const shelf = result.rows
+        const shelf = { status: 200, shelfInfo: result.rows }
         connection.release()
         return shelf
       }
       connection.release()
-      return 'block was not found'
+      const error = {
+        status: 404,
+        shelfInfo: 'block was not found'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to get shelfs, ${(error as Error).message}`)
     }
   }
 
   // updateShelf
-  async updateShelf(sh: Shelf): Promise<Shelf | string> {
+  async updateShelf(sh: Shelf): Promise<object> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONESHELF, [sh.id])
@@ -103,27 +120,43 @@ export class ShelfsModel {
           sh.updated_date
         ])
         connection.release()
-        return 'shelf updated correctly'
+        const obj = {
+          status: 202,
+          message: 'shelf updated correctly'
+        }
+        return obj
       }
       connection.release()
-      return 'shelf was not found'
+      const error = {
+        status: 404,
+        message: 'shelf was not found'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to update ${sh.id}, ${(error as Error).message}`)
     }
   }
 
-  // // deleteShelf
-  // async deleteShelf(id: number): Promise<Shelf | string> {
+  // deleteShelf
+  // async deleteShelf(id: number): Promise<object> {
   //   try {
   //     const connection = await Client.connect()
   //     const test = await connection.query(GETONESHELF, [id])
   //     if (test.rows.length) {
   //       await connection.query(DELETESHELF, [id])
   //       connection.release()
-  //       return 'shelf deleted correctly'
+  //       const obj = {
+  //         status: 202,
+  //         message: 'shelf deleted correctly'
+  //       }
+  //       return obj
   //     }
   //     connection.release()
-  //     return 'shelf was not found'
+  //     const error = {
+  //       status: 404,
+  //       message: 'shelf was not found'
+  //     }
+  //     return error
   //   } catch (error) {
   //     throw new Error(`Unable to delete block ${id}, ${(error as Error).message}`)
   //   }
