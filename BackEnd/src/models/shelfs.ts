@@ -41,7 +41,7 @@ export class ShelfsModel {
       }
       connection.release()
       const error = {
-        status: 404,
+        status: 409,
         message: 'this shelf in this block already existe'
       }
       return error
@@ -70,7 +70,6 @@ export class ShelfsModel {
       const result = await connection.query(GETONESHELF, [id])
       if (result.rows.length) {
         const shelf = { status: 200, shelfInfo: result.rows[0] }
-
         connection.release()
         return shelf
       }

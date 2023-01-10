@@ -17,7 +17,7 @@ export type Block = {
 
 export class BlocksModel {
   // createBlock
-  async createBlock(bl: Block): Promise<Block | string> {
+  async createBlock(bl: Block): Promise<object> {
     try {
       const connection = await Client.connect()
       await connection.query(CREATEBLOCK, [
@@ -27,18 +27,22 @@ export class BlocksModel {
         bl.updated_date
       ])
       connection.release()
-      return 'block created correctly'
+      const obj = {
+        status: 201,
+        message: 'block created correctly'
+      }
+      return obj
     } catch (error) {
       throw new Error(`Unable to create ${bl.block_number}, ${(error as Error).message}`)
     }
   }
 
   // getManyBlocks
-  async getManyBlocks(): Promise<Block[]> {
+  async getManyBlocks(): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMANYBLOCKS)
-      const block = result.rows
+      const block = { status: 200, blockInfo: result.rows }
       connection.release()
       return block
     } catch (error) {
@@ -47,24 +51,28 @@ export class BlocksModel {
   }
 
   // getOneBlock
-  async getOneBlock(id: number): Promise<Block[] | string> {
+  async getOneBlock(id: number): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETONEBLOCK, [id])
       if (result.rows.length) {
-        const block = { ...result.rows[0] }
+        const block = { status: 200, blockInfo: result.rows[0] }
         connection.release()
         return block
       }
       connection.release()
-      return 'block was not found'
+      const error = {
+        status: 404,
+        blockInfo: 'block was not found'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to get block ${id}, ${(error as Error).message}`)
     }
   }
 
   // updateBlock
-  async updateBlock(bl: Block): Promise<Block | string> {
+  async updateBlock(bl: Block): Promise<object> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(GETONEBLOCK, [bl.id])
@@ -76,10 +84,18 @@ export class BlocksModel {
           bl.updated_date
         ])
         connection.release()
-        return 'updated block correctly'
+        const obj = {
+          status: 202,
+          message: 'block updated correctly'
+        }
+        return obj
       }
       connection.release()
-      return 'block not found'
+      const error = {
+        status: 404,
+        message: 'block was not found'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to update ${bl.id}, ${(error as Error).message}`)
     }

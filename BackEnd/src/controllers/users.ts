@@ -29,7 +29,7 @@ export const createUser = async (req: Request, res: Response) => {
     const createdUser = await library.create(user)
     res.status(createdUser['status']).json(createdUser['message'])
   } catch (error) {
-    return res.status(400).json('this email already existe')
+    return res.status(409).json('this email already existe')
   }
 }
 
@@ -115,7 +115,7 @@ export const updateUser = async (req: Request, res: Response) => {
       return res.status(405).json(`you havn't the role`)
     }
   } catch (error) {
-    res.status(400).json(error)
+    res.status(409).json('this email already existe')
   }
 }
 

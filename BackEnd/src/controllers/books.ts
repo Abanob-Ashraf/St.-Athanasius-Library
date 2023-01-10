@@ -35,7 +35,7 @@ export const createBook = async (req: Request, res: Response) => {
     const newBook = await library.createBook(book)
     res.status(newBook['status']).json(newBook['message'])
   } catch (error) {
-    res.status(400).json('this book already existe')
+    res.status(409).json('this book already existe')
   }
 }
 
@@ -161,7 +161,7 @@ export const updateBook = async (req: Request, res: Response) => {
       return res.status(401).json(`you can't edite this book`)
     }
   } catch (error) {
-    res.status(401).json(error)
+    res.status(409).json('this book already existe')
   }
 }
 

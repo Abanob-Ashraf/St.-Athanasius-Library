@@ -17,7 +17,7 @@ export const createShelf = async (req: Request, res: Response) => {
     const newShelf = await library.createShelf(shelf)
     res.status(newShelf['status']).json(newShelf['message'])
   } catch (error) {
-    res.status(400).json(error)
+    res.status(409).json('this shelf already existe')
   }
 }
 
@@ -65,7 +65,7 @@ export const updateShelf = async (req: Request, res: Response) => {
     const updatedShelf = await library.updateShelf(shelf)
     res.status(updatedShelf['status']).json(updatedShelf['message'])
   } catch (error) {
-    res.status(401).json(error)
+    res.status(409).json('this shelf already existe')
   }
 }
 
