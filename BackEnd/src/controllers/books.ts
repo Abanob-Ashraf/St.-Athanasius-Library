@@ -33,11 +33,9 @@ export const createBook = async (req: Request, res: Response) => {
     }
 
     const newBook = await library.createBook(book)
-    if (typeof newBook == 'string') {
-      return res.status(200).json(newBook)
-    }
+    res.status(newBook['status']).json(newBook['message'])
   } catch (error) {
-    res.status(400).json(error)
+    res.status(400).json('this book already existe')
   }
 }
 
@@ -45,7 +43,7 @@ export const createBook = async (req: Request, res: Response) => {
 export const getManyBooks = async (_req: Request, res: Response) => {
   try {
     const books = await library.getManyBooks()
-    res.status(200).json(books)
+    res.status(books['status']).json(books['bookInfo'])
   } catch (error) {
     res.status(400).json(error)
   }
@@ -55,20 +53,16 @@ export const getManyBooks = async (_req: Request, res: Response) => {
 export const getLatestBooks = async (_req: Request, res: Response) => {
   try {
     const books = await library.getLatestBooks()
-    res.status(200).json(books)
+    res.status(books['status']).json(books['bookInfo'])
   } catch (error) {
     res.status(400).json(error)
   }
 }
 
-export const getBookById = async (req: Request, res: Response) => {
+export const getOneBook = async (req: Request, res: Response) => {
   try {
-    const book = await library.getOneBookById(+req.params.id)
-    if (typeof book == 'string') {
-      return res.status(404).json(book)
-    } else {
-      return res.send(book)
-    }
+    const book = await library.getOneBook(+req.params.id)
+    res.status(book['status']).json(book['bookInfo'])
   } catch (error) {
     res.status(401).json(error)
   }
@@ -82,11 +76,7 @@ export const searchForBook = async (req: Request, res: Response) => {
       req.query.publisher as string,
       req.query.topic as string
     )
-    if (typeof book == 'string') {
-      return res.status(404).json(book)
-    } else {
-      return res.send(book)
-    }
+    res.status(book['status']).json(book['bookInfo'])
   } catch (error) {
     res.status(401).json(error)
   }
@@ -98,11 +88,7 @@ export const getUserBooks = async (req: Request, res: Response) => {
     const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
     const userId = decode.user.id
     const book = await library.getUserBooks(userId)
-    if (typeof book == 'string') {
-      return res.status(404).json(book)
-    } else {
-      return res.send(book)
-    }
+    res.status(book['status']).json(book['bookInfo'])
   } catch (error) {
     res.status(401).json(error)
   }
@@ -115,11 +101,14 @@ export const updateBook = async (req: Request, res: Response) => {
     const userWhoLoged = decode.user.id
     const adminRole = decode.user.admin_flag
 
-    const getUserBook = await library.getOneBookById(+req.params.id)
-    if (typeof getUserBook == 'string') {
-      return res.status(404).json(getUserBook)
+    const getUserBook = await library.getOneBook(+req.params.id)
+    if (getUserBook['bookInfo'] == 'book was not found') {
+      return res.status(getUserBook['status']).json(getUserBook['bookInfo'])
     }
-    const currentUser = getUserBook['currrent_user']
+
+    const bookInfo = getUserBook['bookInfo']
+
+    const currentUser = bookInfo['currrent_user']
 
     if (userWhoLoged == currentUser) {
       const book = {
@@ -143,9 +132,7 @@ export const updateBook = async (req: Request, res: Response) => {
         updated_date: new Date()
       }
       const updatedBook = await library.updateBook(book)
-      if (typeof updatedBook == 'string') {
-        return res.status(404).json(updatedBook)
-      }
+      return res.status(updatedBook['status']).json(updatedBook['message'])
     }
     if (adminRole) {
       const book = {
@@ -169,9 +156,7 @@ export const updateBook = async (req: Request, res: Response) => {
         updated_date: new Date()
       }
       const updatedBook = await library.updateBook(book)
-      if (typeof updatedBook == 'string') {
-        return res.status(404).json(updatedBook)
-      }
+      return res.status(updatedBook['status']).json(updatedBook['message'])
     } else {
       return res.status(401).json(`you can't edite this book`)
     }
@@ -183,9 +168,7 @@ export const updateBook = async (req: Request, res: Response) => {
 // export const deleteBook = async (req: Request, res: Response) => {
 //   try {
 //     const deletedBook = await library.deleteBook(+req.params.id)
-//     if (typeof deletedBook == 'string') {
-//       return res.status(404).json(deletedBook)
-//     }
+//     res.status(deletedBook['status']).json(deletedBook['message'])
 //   } catch (error) {
 //     res.status(401).json(error)
 //   }

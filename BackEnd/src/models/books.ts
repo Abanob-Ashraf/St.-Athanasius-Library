@@ -34,7 +34,7 @@ export type Book = {
 
 export class BooksModel {
   // createBook
-  async createBook(b: Book): Promise<Book | string> {
+  async createBook(b: Book): Promise<object> {
     try {
       const connection = await Client.connect()
       const test = await connection.query(CHECKIFBOOKINTHISSHELF, [
@@ -62,21 +62,29 @@ export class BooksModel {
           b.updated_date
         ])
         connection.release()
-        return 'book created correctly'
+        const obj = {
+          status: 201,
+          message: 'book created correctly'
+        }
+        return obj
       }
       connection.release()
-      return 'Error you have a book in this rank'
+      const error = {
+        status: 409,
+        message: 'Error you have a book in this rank'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to create ${b.book_name}, ${(error as Error).message}`)
     }
   }
 
   // getManyBooks
-  async getManyBooks(): Promise<Book[]> {
+  async getManyBooks(): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMANYBOOKS)
-      const book = result.rows
+      const book = { status: 200, bookInfo: result.rows }
       connection.release()
       return book
     } catch (error) {
@@ -85,11 +93,11 @@ export class BooksModel {
   }
 
   // getLatestBooks
-  async getLatestBooks(): Promise<Book[]> {
+  async getLatestBooks(): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETLATESTBOOKS)
-      const book = result.rows
+      const book = { status: 200, bookInfo: result.rows }
       connection.release()
       return book
     } catch (error) {
@@ -98,17 +106,21 @@ export class BooksModel {
   }
 
   // getOneBook
-  async getOneBookById(id: number): Promise<Book[] | string> {
+  async getOneBook(id: number): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETONEBOOKBYID, [id])
       if (result.rows.length) {
-        const book = { ...result.rows[0] }
+        const book = { status: 200, bookInfo: result.rows[0] }
         connection.release()
         return book
       }
       connection.release()
-      return 'book was not found'
+      const error = {
+        status: 404,
+        bookInfo: 'book was not found'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to get book ${id}, ${(error as Error).message}`)
     }
@@ -120,121 +132,142 @@ export class BooksModel {
     author: string,
     publisher: string,
     topic: string
-  ): Promise<Book[] | string> {
+  ): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(SEARCHFORBOOK, [book_name, author, publisher, topic])
       if (result.rows.length) {
-        const book = result.rows
+        const book = { status: 200, bookInfo: result.rows }
         connection.release()
         return book
       }
       connection.release()
-      return 'Book was not found'
+      const error = {
+        status: 404,
+        bookInfo: 'book was not found'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to get book ${book_name}, ${(error as Error).message}`)
     }
   }
 
   // getUserBooks
-  async getUserBooks(user_id: number): Promise<Book[] | string> {
+  async getUserBooks(user_id: number): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMYBOOKS, [user_id])
       if (result.rows.length) {
-        const book = result.rows
+        const book = { status: 200, bookInfo: result.rows }
         connection.release()
         return book
       }
       connection.release()
-      return 'you have not books yet'
+      const error = {
+        status: 404,
+        bookInfo: 'you have not books yet'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to get books, ${(error as Error).message}`)
     }
   }
 
   // updateBook
-  async updateBook(b: Book): Promise<Book | string> {
+  async updateBook(b: Book): Promise<object> {
     try {
       const connection = await Client.connect()
-
-      const testBookNotFound = await connection.query(GETONEBOOKBYID, [b.id])
-      if (testBookNotFound.rows.length) {
-        const testBookinThisRank = await connection.query(CHECKIFBOOKINTHISSHELF, [
+      const testBookinThisRank = await connection.query(CHECKIFBOOKINTHISSHELF, [
+        b.shelf_id,
+        b.book_number_in_shelf
+      ])
+      if (!testBookinThisRank.rows.length) {
+        await connection.query(UPDATEBOOK, [
+          b.id,
+          b.book_code,
+          b.book_name,
+          b.author,
+          b.publisher,
+          b.topic,
+          b.number_of_copies,
+          b.number_of_pages,
+          b.number_of_parts,
+          b.name_of_series,
+          b.conclusion,
+          b.currrent_user,
+          b.old_user,
           b.shelf_id,
-          b.book_number_in_shelf
+          b.book_number_in_shelf,
+          b.who_edited,
+          b.updated_date
         ])
-        if (!testBookinThisRank.rows.length) {
-          await connection.query(UPDATEBOOK, [
-            b.id,
-            b.book_code,
-            b.book_name,
-            b.author,
-            b.publisher,
-            b.topic,
-            b.number_of_copies,
-            b.number_of_pages,
-            b.number_of_parts,
-            b.name_of_series,
-            b.conclusion,
-            b.currrent_user,
-            b.old_user,
-            b.shelf_id,
-            b.book_number_in_shelf,
-            b.who_edited,
-            b.updated_date
-          ])
-          connection.release()
-          return 'Book updated correctly'
-        }
-
-        const bookId = testBookinThisRank.rows[0]
-        const currentBook = bookId['id']
-        if (testBookinThisRank.rows.length && b.id === currentBook) {
-          await connection.query(UPDATEBOOK, [
-            b.id,
-            b.book_code,
-            b.book_name,
-            b.author,
-            b.publisher,
-            b.topic,
-            b.number_of_copies,
-            b.number_of_pages,
-            b.number_of_parts,
-            b.name_of_series,
-            b.conclusion,
-            b.currrent_user,
-            b.old_user,
-            b.shelf_id,
-            b.book_number_in_shelf,
-            b.who_edited,
-            b.updated_date
-          ])
-          connection.release()
-          return 'Book updated correctly'
-        }
         connection.release()
-        return 'Error you have a book in this rank'
+        const obj = {
+          status: 202,
+          message: 'Book updated correctly'
+        }
+        return obj
+      }
+      const bookId = testBookinThisRank.rows[0]
+      const currentBook = bookId['id']
+      if (testBookinThisRank.rows.length && b.id === currentBook) {
+        await connection.query(UPDATEBOOK, [
+          b.id,
+          b.book_code,
+          b.book_name,
+          b.author,
+          b.publisher,
+          b.topic,
+          b.number_of_copies,
+          b.number_of_pages,
+          b.number_of_parts,
+          b.name_of_series,
+          b.conclusion,
+          b.currrent_user,
+          b.old_user,
+          b.shelf_id,
+          b.book_number_in_shelf,
+          b.who_edited,
+          b.updated_date
+        ])
+        connection.release()
+        const obj = {
+          status: 202,
+          message: 'Book updated correctly'
+        }
+        return obj
       }
       connection.release()
-      return 'Book was not found'
+      const error = {
+        status: 409,
+        message: 'Error you have a book in this rank'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to update ${b.id}, ${(error as Error).message}`)
     }
   }
 
-  // // deleteBook
-  // async deleteBook(id: number): Promise<Book | string> {
+  // deleteBook
+  // async deleteBook(id: number): Promise<object> {
   //   try {
   //     const connection = await Client.connect()
   //     const test = await connection.query(GETONEBOOKBYID, [id])
   //     if (test.rows.length) {
   //       await connection.query(DELETEBOOK, [id])
   //       connection.release()
-  //       return 'book deleted correctly'
+  //       const obj = {
+  //         status: 202,
+  //         message: 'Book deleted correctly'
+  //       }
+  //       return obj
   //     }
   //     connection.release()
-  //     return 'book not found'
+  //     const error = {
+  //       status: 404,
+  //       message: 'Book was not found'
+  //     }
+  //     return error
   //   } catch (error) {
   //     throw new Error(`Unable to delete Book ${id}, ${(error as Error).message}`)
   //   }

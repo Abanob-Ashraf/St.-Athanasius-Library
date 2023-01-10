@@ -4,7 +4,7 @@ import {
   createBook,
   // deleteBook,
   getManyBooks,
-  getBookById,
+  getOneBook,
   searchForBook,
   updateBook,
   getUserBooks,
@@ -23,7 +23,7 @@ routes.route('/search').get(searchForBook)
 
 routes.route('/latestBooks').get(getLatestBooks)
 
-routes.route('/:id').get(getBookById)
+routes.route('/:id').get(getOneBook)
 
 routes.route('/:id').put(authorize, updateBook)
 
