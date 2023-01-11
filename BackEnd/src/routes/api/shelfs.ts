@@ -15,7 +15,7 @@ routes.route('/').post(authorize, admin, createShelf)
 
 routes.route('/').get(authorize, getManyShelfs)
 
-routes.route('/block/:id').get(authorize, getShelfsWithBlockId)
+routes.route('/block/:id').get(getShelfsWithBlockId)
 
 routes.route('/:id').get(authorize, getOneShelf)
 

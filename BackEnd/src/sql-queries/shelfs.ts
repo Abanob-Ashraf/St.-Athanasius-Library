@@ -4,7 +4,7 @@ export const CREATESHELF =
 export const GETMANYSHELFS = 'SELECT * FROM shelfs'
 
 export const GETMANYSHELFS_BLOCKSID =
-  'SELECT shelfs.id, shelf_number FROM shelfs WHERE block_id =($1)'
+  'SELECT shelfs.id, shelf_number, shelf_name FROM shelfs WHERE block_id =($1)'
 
 export const GETONESHELF = 'SELECT * FROM shelfs WHERE id=($1)'
 
