@@ -100,12 +100,19 @@ export class UsersModel {
   async searchForUser(
     first_name: string,
     last_name: string,
+    firstname: string,
     email: string,
     job: string
   ): Promise<object> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(SEARCHFORUSER, [first_name, last_name, email, job])
+      const result = await connection.query(SEARCHFORUSER, [
+        first_name,
+        last_name,
+        firstname,
+        email,
+        job
+      ])
       if (result.rows.length) {
         const user = { status: 200, userInfo: result.rows }
         connection.release()

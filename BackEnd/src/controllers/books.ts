@@ -82,6 +82,19 @@ export const searchForBook = async (req: Request, res: Response) => {
   }
 }
 
+export const searchForBookWithBlockOrShelfAndBlock = async (req: Request, res: Response) => {
+  try {
+    const book = await library.searchForBookWithBlockOrShelfAndBlock(
+      req.query.block_number as string,
+      req.query.shelf_number as string,
+      req.query.blocknumber as string
+    )
+    res.status(book['status']).json(book['bookInfo'])
+  } catch (error) {
+    res.status(401).json(error)
+  }
+}
+
 export const getUserBooks = async (req: Request, res: Response) => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '') as string

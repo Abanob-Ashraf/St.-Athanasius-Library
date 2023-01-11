@@ -12,7 +12,7 @@ export const GETONEUSER =
 
 //search for User
 export const SEARCHFORUSER =
-  'SELECT id, first_name, last_name, email, phone_number, job, admin_flag, user_status, created_date, updated_date FROM users WHERE first_name=($1) AND last_name=($2) OR first_name=($1) OR email=($3) OR job=($4)'
+  'SELECT id, first_name, last_name, email, phone_number, job, admin_flag, user_status, created_date, updated_date FROM users WHERE first_name=($1) AND last_name=($2) OR first_name=($3) OR email=($4) OR job=($5)'
 
 //Update User
 export const UPDATEUSER =

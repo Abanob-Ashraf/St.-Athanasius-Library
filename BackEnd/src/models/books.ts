@@ -8,7 +8,8 @@ import {
   SEARCHFORBOOK,
   CHECKIFBOOKINTHISSHELF,
   GETMYBOOKS,
-  GETLATESTBOOKS
+  GETLATESTBOOKS,
+  SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK
 } from '../sql-queries/books'
 
 export type Book = {
@@ -149,6 +150,35 @@ export class BooksModel {
       return error
     } catch (error) {
       throw new Error(`Unable to get book ${book_name}, ${(error as Error).message}`)
+    }
+  }
+
+  // searchForBookWithBlockOrShelfAndBlock
+  async searchForBookWithBlockOrShelfAndBlock(
+    block_number: string,
+    shelf_number: string,
+    blocknumber: string
+  ): Promise<object> {
+    try {
+      const connection = await Client.connect()
+      const result = await connection.query(SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK, [
+        block_number,
+        shelf_number,
+        blocknumber
+      ])
+      if (result.rows.length) {
+        const book = { status: 200, bookInfo: result.rows }
+        connection.release()
+        return book
+      }
+      connection.release()
+      const error = {
+        status: 404,
+        bookInfo: 'block was not found'
+      }
+      return error
+    } catch (error) {
+      throw new Error(`Unable to get book ${(error as Error).message}`)
     }
   }
 

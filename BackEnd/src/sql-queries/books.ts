@@ -10,6 +10,9 @@ export const GETONEBOOKBYID = 'SELECT * FROM books WHERE id=($1)'
 export const SEARCHFORBOOK =
   'SELECT * FROM books WHERE book_name=($1) OR author=($2) OR publisher=($3) OR topic=($4)'
 
+export const SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
+  'SELECT books.id, books.book_code, books.book_name, books.author, books.publisher, books.topic, books.number_of_copies, books.number_of_pages, books.number_of_parts, books.name_of_series, books.conclusion, books.currrent_user, books.old_user, books.shelf_id, books.book_number_in_shelf, books.who_edited, books.created_date, books.updated_date FROM books INNER JOIN shelfs ON shelfs.id = books.shelf_id INNER JOIN blocks ON blocks.id = shelfs.block_id WHERE blocks.block_number=($1) OR shelfs.shelf_number=($2) AND blocks.block_number=($3)'
+
 export const UPDATEBOOK =
   'UPDATE books SET book_code=($2), book_name=($3), author=($4), publisher=($5), topic=($6), number_of_copies=($7), number_of_pages=($8), number_of_parts=($9), name_of_series=($10), conclusion=($11), currrent_user=($12), old_user=($13) ,shelf_id=($14), book_number_in_shelf=($15), who_edited=($16), updated_date=($17) WHERE id=($1)'
 

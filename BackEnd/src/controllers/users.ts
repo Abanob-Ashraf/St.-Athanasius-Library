@@ -58,6 +58,7 @@ export const searchForUser = async (req: Request, res: Response) => {
     const user = await library.searchForUser(
       req.query.first_name as string,
       req.query.last_name as string,
+      req.query.firstname as string,
       req.query.email as string,
       req.query.job as string
     )
