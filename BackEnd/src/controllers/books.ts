@@ -102,9 +102,7 @@ export const countBooksInBlockOrShelfAndBlock = async (req: Request, res: Respon
       req.query.shelf_number as string,
       req.query.blocknumber as string
     )
-    return res
-      .status(book['status'])
-      .json(`the books number of books are here is  ${book['length']}`)
+    return res.status(book['status']).json(`Number of books found here  ${book['length']}`)
   } catch (error) {
     res.status(401).json(error)
   }
