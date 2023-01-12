@@ -252,40 +252,58 @@ let book_submit = document.querySelector(".createBooks-landing .container .creat
 
 // book Fetch Function
 function addbook(){
-    let shelfID = document.getElementsByName("shelf_id")[0]
-    let bookNameValue = document.getElementsByName("bookName")[0]
-    let bookTopicValue = document.getElementsByName("topic")[0]
-    let authorNameValue = document.getElementsByName("authorName")[0]
-    let publisherNameValue = document.getElementsByName("publisherName")[0]
-    let seriesNameValue = document.getElementsByName("seriesName")[0]
-    let copiesNumberValue = document.getElementsByName("copiesNumber")[0]
-    let partsNumberValue = document.getElementsByName("partsNumber")[0]
-    let pagesNumberValue = document.getElementsByName("pagesNumber")[0]
-    let bookNumberValue = document.getElementsByName("bookNumber")[0]
-    let conclusionValue = document.getElementsByName("conclusion")[0]
-    let bookCodeValue = document.getElementsByName("bookCode")[0]
+    let blockID = document.getElementsByName("block_id")[0];
+    let shelfID = document.getElementsByName("shelf_id")[0];
+    let bookNameValue = document.getElementsByName("bookName")[0];
+    let bookTopicValue = document.getElementsByName("topic")[0];
+    let authorNameValue = document.getElementsByName("authorName")[0];
+    let publisherNameValue = document.getElementsByName("publisherName")[0];
+    let seriesNameValue = document.getElementsByName("seriesName")[0];
+    let copiesNumberValue = document.getElementsByName("copiesNumber")[0];
+    let partsNumberValue = document.getElementsByName("partsNumber")[0];
+    let pagesNumberValue = document.getElementsByName("pagesNumber")[0];
+    let bookNumberValue = document.getElementsByName("bookNumber")[0];
+    let conclusionValue = document.getElementsByName("conclusion")[0];
+    // let bookCodeValue = document.getElementsByName("bookCode")[0]
 
-    fetch('http://localhost:3000/library/books',
-    {
-        method: 'POST',
-        headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
-        body: JSON.stringify({
-            book_name: bookNameValue.value.trim(),
-            topic: bookTopicValue.value.trim(),
-            author: authorNameValue.value.trim() == "" ? null : authorNameValue.value.trim(),
-            publisher: publisherNameValue.value.trim() == "" ? null : publisherNameValue.value.trim(),
-            name_of_series: seriesNameValue.value.trim() == "" ? null : seriesNameValue.value.trim(),
-            number_of_copies: copiesNumberValue.value.trim(),
-            number_of_parts: partsNumberValue.value.trim(),
-            number_of_pages: pagesNumberValue.value.trim(),
-            book_number_in_shelf: bookNumberValue.value.trim(),
-            shelf_id: shelfID.value,
-            book_code: bookCodeValue.value.trim(),
-            conclusion: conclusionValue.value.trim() == "" ? null : conclusionValue.value.trim()
-        })
-    }).then(res => res.json())
-    .then(res => console.log(res))
-    .catch(e => console.log(e))
+    fetch("http://localhost:3000/library/books", {
+      method: "POST",
+      headers: new Headers({
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      }),
+      body: JSON.stringify({
+        book_name: bookNameValue.value.trim(),
+        topic: bookTopicValue.value.trim(),
+        author:
+          authorNameValue.value.trim() == ""
+            ? null
+            : authorNameValue.value.trim(),
+        publisher:
+          publisherNameValue.value.trim() == ""
+            ? null
+            : publisherNameValue.value.trim(),
+        name_of_series:
+          seriesNameValue.value.trim() == ""
+            ? null
+            : seriesNameValue.value.trim(),
+        number_of_copies: copiesNumberValue.value.trim(),
+        number_of_parts: partsNumberValue.value.trim(),
+        number_of_pages: pagesNumberValue.value.trim(),
+        book_number_in_shelf: bookNumberValue.value.trim(),
+        shelf_id: shelfID.value,
+        book_code: `${blockID.value}-${
+          shelfID.value
+        }-${bookNumberValue.value.trim()}`,
+        conclusion:
+          conclusionValue.value.trim() == ""
+            ? null
+            : conclusionValue.value.trim(),
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
 }
 book_form.addEventListener("submit", (e)=>{
     e.preventDefault()

@@ -1,6 +1,11 @@
 import { Request, Response } from 'express'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { Book, BooksModel } from '../models/books'
+import { ShelfsModel } from '../models/shelfs'
+import { BlocksModel } from '../models/blocks'
+
+const shelfLibrary = new ShelfsModel()
+const blockLibrary = new BlocksModel()
 
 const library = new BooksModel()
 
@@ -11,8 +16,19 @@ export const createBook = async (req: Request, res: Response) => {
     const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
     const userId = decode.user.id
 
+    const shelfData = await shelfLibrary.getOneShelf(req.body.shelf_id)
+
+    const shelfInfo = shelfData['shelfInfo']
+    const shelfNum = shelfInfo['shelf_number']
+
+    const blockId = shelfInfo['block_id']
+    const blockData = await blockLibrary.getOneBlock(blockId)
+
+    const blockInfo = blockData['blockInfo']
+    const blockNum = blockInfo['block_number']
+
     const book: Book = {
-      book_code: req.body.book_code,
+      book_code: `${blockNum}-${shelfNum}-${req.body.book_number_in_shelf}`,
       book_name: req.body.book_name,
       author: req.body.author,
       publisher: req.body.publisher,
@@ -131,15 +147,24 @@ export const updateBook = async (req: Request, res: Response) => {
     if (getUserBook['bookInfo'] == 'book was not found') {
       return res.status(getUserBook['status']).json(getUserBook['bookInfo'])
     }
-
     const bookInfo = getUserBook['bookInfo']
-
     const currentUser = bookInfo['currrent_user']
+
+    const shelfData = await shelfLibrary.getOneShelf(req.body.shelf_id)
+
+    const shelfInfo = shelfData['shelfInfo']
+    const shelfNum = shelfInfo['shelf_number']
+
+    const blockId = shelfInfo['block_id']
+    const blockData = await blockLibrary.getOneBlock(blockId)
+
+    const blockInfo = blockData['blockInfo']
+    const blockNum = blockInfo['block_number']
 
     if (userWhoLoged == currentUser) {
       const book = {
         id: +req.params.id,
-        book_code: req.body.book_code,
+        book_code: `${blockNum}-${shelfNum}-${req.body.book_number_in_shelf}`,
         book_name: req.body.book_name,
         author: req.body.author,
         publisher: req.body.publisher,
@@ -163,7 +188,7 @@ export const updateBook = async (req: Request, res: Response) => {
     if (adminRole) {
       const book = {
         id: +req.params.id,
-        book_code: req.body.book_code,
+        book_code: `${blockNum}-${shelfNum}-${req.body.book_number_in_shelf}`,
         book_name: req.body.book_name,
         author: req.body.author,
         publisher: req.body.publisher,
