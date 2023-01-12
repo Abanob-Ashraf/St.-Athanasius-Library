@@ -167,7 +167,7 @@ export class BooksModel {
         blocknumber
       ])
       if (result.rows.length) {
-        const book = { status: 200, bookInfo: result.rows }
+        const book = { status: 202, bookInfo: result.rows, length: result.rows.length }
         connection.release()
         return book
       }
