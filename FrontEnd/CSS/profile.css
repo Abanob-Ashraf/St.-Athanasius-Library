@@ -100,19 +100,6 @@ ul{
     color: var(--dangerColor);
     text-align: center;
 }
-.note{
-    padding: 2px 8px;
-    width: fit-content;
-    background-color: var(--dangerColor);
-    font-weight: bold;
-    font-size: 15px;
-    color: var(--whiteColor);
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-}
 hr{
     margin-top: 15px;
     margin-bottom: 15px;
@@ -316,14 +303,14 @@ hr{
 .profile-landing .container{
     height: 100%;
 }
-.profile-landing .container .grid-layout-one{ 
+.profile-landing .container .grid-layout{ 
     height: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(450px,1fr));
-    gap: 20px;
+    gap: 15px;
 }
 @media (max-width:767px){
-    .profile-landing .container .grid-layout-one{
+    .profile-landing .container .grid-layout{
         grid-template-columns: minmax(200px,1fr);
     }
 }
@@ -675,6 +662,10 @@ hr{
     -ms-border-radius: 0;
     -o-border-radius: 0;
 }
+.profile-landing .container .deleted-users .show small{
+    color: var(--dangerColor);
+    font-weight: bold;
+}
 /* End Deleted Users */
 
 /* Deleted Users informations*/
@@ -706,12 +697,6 @@ hr{
 /* End Deleted Users informations*/
 
 /* create User */
-.profile-landing .container .profile.create-user .head{
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 .profile-landing .container .profile.create-user .flag{
     width: fit-content;
     padding: 2px 8px !important;
@@ -724,6 +709,7 @@ hr{
     color: var(--whiteColor);
     font-size: 15px !important;
     font-weight: bold !important;
+    margin-bottom: 15px;
 }
 .profile-landing .container .profile.create-user .flag label{
     padding-right: 30px;
@@ -795,6 +781,12 @@ hr{
 .profile-landing .container .profile.create-user{
     margin-top: 15px;
     background-color: var(--whiteColor);
+    font-weight: bold;
+}
+.profile-landing .container .profile.create-user small{
+    display: none;
+    margin-top: 15px;
+    color: var(--dangerColor);
 }
 .profile-landing .container .create-user-form .input-field{
     margin-bottom: 15px;

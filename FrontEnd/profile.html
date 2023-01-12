@@ -42,7 +42,7 @@
     <div class="profile-landing">
         <div class="container">
             <!-- Grid Layout One -->
-            <div class="grid-layout-one">
+            <div class="grid-layout">
                 <!-- Start Profile -->
                 <div class="profile general-info">
                     <div class="admin-flag"></div>
@@ -118,7 +118,6 @@
                     <div class="search">
                         <div class="special-title">البحث عن مستخدم</div>
                         <hr>
-                        <p  class="note">للمديرين فقط</p>
                         <form action="" class="search-form">
                             <div class="search-container">
                                 <input type="search" name="المستخدم:" id="search" placeholder="البحث عن مستخدم">
@@ -185,11 +184,8 @@
                     <div class="show">
                         <div class="special-title">المستخدمين المحذوفين</div>
                         <hr>
-                        <p  class="note">للمديرين فقط</p>
                         <button class="show-deleted-users">عرض المستخدمين المحذوفين</button>
-                        <div class="error-text">
-                            <small></small>
-                        </div>
+                        <small></small>
                     </div>
                     <div class="info-show">
                         <div class="special-title">عرض المستخدمين المحذوفين</div>
@@ -210,12 +206,9 @@
             <div class="profile create-user">
                 <div class="special-title">انشاء المستخدم</div>
                 <hr>
-                <div class="head">
-                    <p  class="note">للمديرين فقط</p>
-                    <div class="flag">
-                        <input type="checkbox" name="admin-flag" id="flag-admin">
-                        <label for="flag-admin">هل تود جعله مدير؟</label>
-                    </div>
+                <div class="flag">
+                    <input type="checkbox" name="admin-flag" id="flag-admin">
+                    <label for="flag-admin">هل تود جعله مدير؟</label>
                 </div>
                 <form action="" class="create-user-form">
                     <div class="input-field">
@@ -238,7 +231,10 @@
                         <input type="submit" value="انشاء مستخدم" class="submit" />
                     </div>
                 </form>
-                <small></small>
+                <small class="one"></small>
+                <small class="two"></small>
+                <small class="three"></small>
+                <small class="four"></small>
             </div>
             <!-- End Profile -->
         </div>

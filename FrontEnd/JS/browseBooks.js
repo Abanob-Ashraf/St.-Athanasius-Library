@@ -29,12 +29,8 @@ function header(data){
 // Browse Books
 function browseBooks(){
     let keyOfSearch = document.querySelector(".browse-books-landing .container .profile.search-books .search-container #subject").value
-    let valueOfSearch = document.querySelector(".browse-books-landing .container .profile.search-books .search-container input")
-    console.log(valueOfSearch.value)
-    let params = new URLSearchParams({
-        keyOfSearch: valueOfSearch.value,
-    })
-    fetch(`http://localhost:3000/library/books/search?${params.toString()}`,
+    let valueOfSearch = document.querySelector(".browse-books-landing .container .profile.search-books .search-container input").value
+    fetch(`http://localhost:3000/library/books/search?${keyOfSearch}=${valueOfSearch}`,
     {
         method: 'GET',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

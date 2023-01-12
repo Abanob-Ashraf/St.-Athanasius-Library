@@ -6,12 +6,22 @@ let id = JSON.parse(sessionStorage.getItem("id"));
 let admin = JSON.parse(sessionStorage.getItem("admin"));
 let job = JSON.parse(sessionStorage.getItem("job"));
 let email = JSON.parse(sessionStorage.getItem("email"));
-let phone_number = JSON.parse(sessionStorage.getItem("phone_number"));
+let phone_number = JSON.parse(sessionStorage.getItem("phone_number"))
 
 window.onload = function(){
     if (window.sessionStorage.getItem("token") == undefined){
         location.replace("/login.html")
     }
+}
+
+let search_user = document.querySelector(".search-user")
+let deleted_users = document.querySelector(".deleted-users")
+let create_user = document.querySelector(".create-user")
+
+if (admin == false){
+    search_user.remove()
+    deleted_users.remove()
+    create_user.remove()
 }
 // ==================================================== Global ==================================================== //
 
@@ -154,6 +164,7 @@ submit.onsubmit = function(e){
         setTimeout(()=>{
             resetPasswordEISmall.style.display = "none"
         },5000)
+        return false
     }else {
         editbyidForMe()
     }
@@ -175,7 +186,6 @@ function searchUsers(data){
     let search = document.querySelector(".profile-landing .container .profile.search-user .search")
     let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
     let searchUserVlidtion = document.querySelector(".profile-landing .container .profile.search-user .search-form  small")
-
 
     if (searchUser.value == data[0].first_name || searchUser.value == data[0].email){
         userSearchedInfo.style.display = "block"
@@ -246,7 +256,7 @@ function searchUsers(data){
             let adminFlagSpanText = document.createTextNode(data[i].admin_flag == true ? "نعم" : "لا")
             let statusSpanText = document.createTextNode(data[i].user_status == "AVILABLE" ? "متاح" : "غير متاح")
             let createdSpanText = document.createTextNode(data[i].created_date)
-    
+
             // Classes
             infoGroup.className = "info-group"
             doubleDiv.className = "double-div"
@@ -401,11 +411,6 @@ function searchUsers(data){
                 window.location.reload()
             })
         }
-    }else if(admin == false){
-        searchUserVlidtion.textContent = "ليس لديك صلاحيات المدير"
-        setTimeout(()=>{
-            searchUserVlidtion.textContent = ""
-        },5000)
     }else{
         searchUserVlidtion.textContent = "لا يوجد هذا المستخدم"
         setTimeout(()=>{
@@ -424,15 +429,21 @@ function searchUsers(data){
         }
         let indexValue = 1;
         allInfoGroup[indexValue-1].style.display = "block"
+        if ([indexValue] == 1){
+            leftArrow.style.pointerEvents = "none";
+            rightArrow.style.pointerEvents = "stroke";
+        }
+        
 
         // Move Right
         rightArrow.addEventListener("click",()=>{
             indexValue++
             allInfoGroup[indexValue-1].style.display = "block"
             allInfoGroup[indexValue-1].previousElementSibling.style.display = "none"
-            // if (allInfoGroup[indexValue-1] == undefined){
-            //     console.log("yes")
-            // }
+            if ([indexValue] == allInfoGroup.length){
+                rightArrow.style.pointerEvents = "none";
+                leftArrow.style.pointerEvents = "stroke";
+            }
         })
 
         // Move Left
@@ -440,8 +451,11 @@ function searchUsers(data){
             indexValue--
             allInfoGroup[indexValue-1].style.display = "block"
             allInfoGroup[indexValue-1].nextElementSibling.style.display = "none"
+            if ([indexValue] == 1){
+                leftArrow.style.pointerEvents = "none";
+                rightArrow.style.pointerEvents = "stroke";
+            }
         })
-
     }
     browseOne()
 
@@ -484,8 +498,8 @@ function deletedUser(data){
     let ShowdeletedUser = document.querySelector(".profile-landing .container .deleted-users .show .show-deleted-users")
 
     ShowdeletedUser.addEventListener("click",()=>{
-        if (admin == false){
-            deletedUserError.textContent = "ليس لديك صلاحيات المدير"
+        if (data[0].id == undefined){
+            deletedUserError.textContent = "لا يوجد مستخدمين محذوفين"
             setTimeout(()=>{
                 deletedUserError.textContent = ""
             },5000)
@@ -640,25 +654,37 @@ function deletedUser(data){
                 let allInfoGroup = document.querySelectorAll(".profile-landing .container .deleted-users .info-show .info-group");
                 let rightArrow = document.querySelector(".profile-landing .container .deleted-users .info-show .right");
                 let leftArrow = document.querySelector(".profile-landing .container .deleted-users .info-show .left");
-    
                 // Consts
                 for (let i = 0 ; i < allInfoGroup.length ; i++){
                     allInfoGroup[i].style.display = "none"
                 }
                 let indexValue = 1;
                 allInfoGroup[indexValue-1].style.display = "block"
+                if ([indexValue] == 1){
+                    leftArrow.style.pointerEvents = "none";
+                    rightArrow.style.pointerEvents = "stroke";
+                }
+
                 // Move Right
                 rightArrow.addEventListener("click",()=>{
                     indexValue++
                     allInfoGroup[indexValue-1].style.display = "block"
                     allInfoGroup[indexValue-1].previousElementSibling.style.display = "none"
+                    if ([indexValue] == allInfoGroup.length){
+                        rightArrow.style.pointerEvents = "none";
+                        leftArrow.style.pointerEvents = "stroke";
+                    }
                 })
-    
+
                 // Move Left
                 leftArrow.addEventListener("click",()=>{
                     indexValue--
                     allInfoGroup[indexValue-1].style.display = "block"
                     allInfoGroup[indexValue-1].nextElementSibling.style.display = "none"
+                    if ([indexValue] == 1){
+                        leftArrow.style.pointerEvents = "none";
+                        rightArrow.style.pointerEvents = "stroke";
+                    }
                 })
             }
             browseTwo()
@@ -687,12 +713,34 @@ deleted()
 // ==================================================== Create User Partion ==================================================== //
 function create(data){
     let email = document.querySelector(".profile-landing .container .create-user-form .input-field .email")
-    let small = document.querySelector(".profile-landing .container .create-user-form small")
+    let smallOne = document.querySelector(".profile-landing .container .create-user .one")
+    let smallTwo = document.querySelector(".profile-landing .container .create-user .two")
+    let smallThee = document.querySelector(".profile-landing .container .create-user .tree")
+    let smallFour = document.querySelector(".profile-landing .container .create-user .four")
 
-    if(email.value == data.email){
-        small.textContent = "يوجد هذا المستخدم بالفعل"
+    // if(email.value.trim() == data.email){
+    //     small.textContent = "يوجد هذا البريد الالكتروني بالفعل"
+    //     setTimeout(()=>{
+    //         small.textContent = ""
+    //     },5000)
+    // }
+    if (isEmailValid(email.value.trim()) == false){
+        smallOne.style.display = "block"
+        smallOne.textContent = "يوجد خطاء في طريقه كتابه البريد الالكتروني"
+        setTimeout(()=>{
+            smallOne.style.display = "none"
+        },5000)
     }else{
-        small.textContent = "تم تسجيل المستخدم"
+        smallOne.style.color = "#2ecc71"
+        smallOne.style.display = "block"
+        smallOne.textContent = "تم انشاء البريد الالكتروني"
+        setTimeout(()=>{
+            smallOne.style.display = "none"
+        },5000)
+    }
+    function isEmailValid(email){
+        const reg =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        return reg.test(email);
     }
 }
 // Create User Fetch Function
@@ -703,22 +751,21 @@ function createUser(){
     let email = document.querySelector(".profile-landing .container .create-user-form .input-field .email")
     let password = document.querySelector(".profile-landing .container .create-user-form .input-field .password")
     let admin = document.getElementById("flag-admin")
+
     fetch('http://localhost:3000/library/users/createNewUser',
     {
         method: 'POST',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json' }),
         body: JSON.stringify({
-            first_name: firstName.value,
-            last_name: lastName.value,
-            email: email.value,
-            password: password.value,
-            job: job.value,
+            first_name: firstName.value.trim(),
+            last_name: lastName.value.trim(),
+            email: email.value.trim(),
+            password: password.value.trim(),
+            job: job.value.trim(),
             admin_flag: admin.checked
         })
     }).then(res => res.json())
-    .then(res => {
-        create(res)
-    })
+    .then(res => create(res))
     .catch(e => console.log(e))
 }
 let createUserForm = document.querySelector(".profile-landing .container .create-user-form");

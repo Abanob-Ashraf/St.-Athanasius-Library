@@ -38,46 +38,72 @@
     </div>
     <div class="createBooks-landing">
         <div class="container">
+            <div class="grid-layout">
+                <div class="create-block createBooks">
+                    <div class="special-title">انشاء وحده</div>
+                    <hr>
+                    <div class="input-field">
+                        <form action="" class="add-block">
+                            <input type="number" placeholder="رقم الوحده" required name="block_number" class="input" min="1"/>
+                            <input type="text" placeholder="اسم الوحده"  name="block_name" class="input"/>
+                            <input type="submit" value="انشاء الوحده" class="submit">
+                        </form>
+                    </div>
+                    <small></small>
+                </div>
+                <div class="create-shelf createBooks">
+                    <div class="special-title">انشاء رف</div>
+                    <hr>
+                    <div class="input-field">
+                        <form action="" class="add-shelf">
+                            <select name="block_id" required class="input"></select>
+                            <input type="number" placeholder="رقم الرف" required name="shelf_number" class="input" min="1"/>
+                            <input type="text" placeholder="اسم الرف"  name="shelf_name" class="input"/>
+                            <input type="submit" value="انشاء الرف" class="submit">
+                        </form>
+                    </div>
+                    <small></small>
+                </div>
+            </div>
             <div class="create-book createBooks">
                 <div class="special-title">تسجيل الكتب</div>
                 <hr>
-                <form action="">
+                <form action="" class="add-book">
                     <div class="input-field">
-                        <div class="flex">
-                            <input type="text" placeholder="اسم الكتاب" required name="bookName" class="input"/>
-                            <input type="text" placeholder="اسم المؤلف" required name="authorName" class="input"/>
-                            <select name="publisher" class="input">
-                                <optgroup label="اسم الناشر"></optgroup>
-                                <option value="مساعد خادم">مساعد خادم</option>
-                                <option value="امين المكتبه">امين المكتبه</option>
-                                <option value="امين السكرتاريه">امين السكرتاريه</option>
-                                <option value="امين الميديا">امين الميديا</option>
-                                <option value="امين مساعدين الخدام">امين مساعدين الخدام</option>
-                                <option value="امين مكتبه الطفل">امين مكتبه الطفل</option>
-                                <option value="خدمه مكتبه الطفل">خدمه مكتبه الطفل</option>
-                                <option value="خدمه السكرتاريه">خدمه السكرتاريه</option>
-                                <option value="خدمه الميديا">خدمه الميديا</option>
-                            </select>
+                        <div class="flex-div">
+                            <div class="block">
+                                <div class="note">اختر الوحده</div>
+                                <select name="block_id" required class="input"></select>
+                            </div>
+                            <div class="shelf">
+                                <div class="note">اختر الرف</div>
+                                <select name="shelf_id" required class="input"></select>
+                            </div>
                         </div>
-                        <select name="job" class="job input">
-                            <optgroup label="دور الخادم"></optgroup>
-                            <option value="مساعد خادم">مساعد خادم</option>
-                            <option value="امين المكتبه">امين المكتبه</option>
-                            <option value="امين السكرتاريه">امين السكرتاريه</option>
-                            <option value="امين الميديا">امين الميديا</option>
-                            <option value="امين مساعدين الخدام">امين مساعدين الخدام</option>
-                            <option value="امين مكتبه الطفل">امين مكتبه الطفل</option>
-                            <option value="خدمه مكتبه الطفل">خدمه مكتبه الطفل</option>
-                            <option value="خدمه السكرتاريه">خدمه السكرتاريه</option>
-                            <option value="خدمه الميديا">خدمه الميديا</option>
-                        </select>
-                        <input type="email" placeholder="البريد الالكتروني" required name="email" class="email input"/>
-                        <input type="password" placeholder="كلمه المرور" required name="password" class="password input"/>
-                        <input type="submit" value="انشاء مستخدم" class="submit" />
+                        <div class="body-flex">
+                            <input type="text" placeholder="اسم الكتاب" required name="bookName" class="input"/>
+                            <input list="topic"  placeholder="تصنيف الكتاب" required name="topic" class="input"/>
+                            <datalist id="topic"></datalist>
+                            <input list="authorName" placeholder="اسم المؤلف" name="authorName"  class="input"/>
+                            <datalist id="authorName"></datalist>
+                            <input list="publisherName" placeholder="اسم الناشر" name="publisherName" class="input"/>
+                            <datalist id="publisherName"></datalist>
+                            <input list="seriesName" placeholder="اسم السلسله" name="seriesName" class="input"/>
+                            <datalist id="seriesName"></datalist>
+                            <input type="number" placeholder="عدد النسخ" required name="copiesNumber" class="input" min="1"/>
+                            <input type="number" placeholder="عدد الاجزاء" required name="partsNumber" class="input" min="1"/>
+                            <input type="number" placeholder="عدد الصفحات" required name="pagesNumber" class="input" min="1"/>
+                            <input type="number" placeholder="رقم الكتاب" required name="bookNumber" class="input" min="1"/>
+                        </div>
+                        <input type="text" placeholder="كود الكتاب: xx-xx-xx" required class="input" style="text-align: center; margin-bottom: 10px;" name="bookCode"/>
+                        <textarea name="conclusion" id="" cols="30" rows="10" placeholder="موضوع الكتاب" class="input"></textarea>
+                        <input type="submit" value="تسجيل الكتاب" class="submit" />
                     </div>
                 </form>
                 <div class="show-created-book createBooks">
-    
+                    <div class="input-field">
+                        <div class="the-book"></div>
+                    </div>
                 </div>
             </div>
         </div>
