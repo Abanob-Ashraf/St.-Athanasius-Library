@@ -3,14 +3,7 @@
     "driver": "pg",
     "host": { "ENV": "DB_HOST" },
     "database": { "ENV": "DB_NAME" },
-    "user": {"ENV": "DB_USER"},
-    "password": {"ENV": "DB_PASSWORD"}
-  },
-  "test": {
-    "driver": "pg",
-    "host": { "ENV": "DB_HOST" },
-    "database": { "ENV": "DB_NAME_TEST" },
-    "user": {"ENV": "DB_USER"},
-    "password": {"ENV": "DB_PASSWORD"}
+    "user": { "ENV": "DB_USER" },
+    "password": { "ENV": "DB_PASSWORD" }
   }
 }
