@@ -19,9 +19,9 @@ let deleted_users = document.querySelector(".deleted-users")
 let create_user = document.querySelector(".create-user")
 
 if (admin == false){
-    search_user.remove()
-    deleted_users.remove()
-    create_user.remove()
+    search_user.style.display = "none"
+    deleted_users.style.display = "none"
+    create_user.style.display = "none"
 }
 // ==================================================== Global ==================================================== //
 
@@ -52,11 +52,9 @@ function header(data){
 function userGeneral(data){
     let name = document.querySelector(".profile-landing .container .profile.general-info .name");
     let adminFlag = document.querySelector(".profile-landing .container .profile.general-info .admin-flag");
-    let id = document.querySelector(".profile-landing .container .profile.general-info .id");
     let job = document.querySelector(".profile-landing .container .profile.general-info .job");
 
     name.textContent = `${data.first_name} ${data.last_name}`
-    id.textContent = `#${data.id}`
     job.textContent = data.job
     if (data.admin_flag == true) {
         adminFlag.textContent = `مدير`

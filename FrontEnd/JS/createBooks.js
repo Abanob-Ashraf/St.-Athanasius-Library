@@ -8,10 +8,12 @@ window.onload = function(){
     }
 }
 
-let create_block_shelf = document.querySelector(".createBooks-landing .container .create-block-shelf")
+let create_block = document.querySelector(".createBooks-landing .container .create-block")
+let create_shelf = document.querySelector(".createBooks-landing .container .create-shelf")
 
 if (admin == false){
-    create_block_shelf.remove()
+    create_block.style.display = "none"
+    create_shelf.style.display = "none"
 }
 // ==================================================== End Global ==================================================== //
 
