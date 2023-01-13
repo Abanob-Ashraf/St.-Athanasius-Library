@@ -262,6 +262,7 @@ function addbook(){
     let pagesNumberValue = document.getElementsByName("pagesNumber")[0]
     let bookNumberValue = document.getElementsByName("bookNumber")[0]
     let conclusionValue = document.getElementsByName("conclusion")[0]
+
     fetch('http://localhost:3000/library/books',
     {
         method: 'POST',
@@ -295,13 +296,13 @@ book_form.addEventListener("submit", (e)=>{
 
 // ==================================================== Add book ==================================================== //
 // book Fetch Function
-function addbook(){
-    fetch('http://localhost:3000/library/books',
-    {
-        method: 'POST',
-        headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
-    }).then(res => res.json())
-    .then(res => console.log(res))
-    .catch(e => console.log(e))
-}
+// function addbook(){
+//     fetch('http://localhost:3000/library/books',
+//     {
+//         method: 'POST',
+//         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
+//     }).then(res => res.json())
+//     .then(res => console.log(res))
+//     .catch(e => console.log(e))
+// }
 // ==================================================== End Add book ==================================================== //
