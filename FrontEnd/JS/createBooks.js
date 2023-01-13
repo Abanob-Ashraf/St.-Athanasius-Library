@@ -167,13 +167,13 @@ function addBlock(){
         return status
     })
     .then((status)=>{
-        if (blockNumberValue.value.trim() != "" && status == 400){
+        if (blockNumberValue.value.trim() != "" && status == 409){
             errorMsg.style.display = "block"
             errorMsg.textContent = "هذه الوحده موجوده بالفعل"
             setTimeout(()=>{
                 errorMsg.style.display = "none"
             },2000)
-        }else if (blockNumberValue.value.trim() != "" && status == 200){
+        }else if (blockNumberValue.value.trim() != "" && status == 201){
             errorMsg.style.display = "block"
             errorMsg.textContent = "تم انشا الوحده"
             setTimeout(()=>{
@@ -219,14 +219,13 @@ function addshelfs(){
         return status
     })
     .then((status) => {
-        console.log(status)
-        if (shelfNumberValue.value.trim() != "" && status == 404){
+        if (shelfNumberValue.value.trim() != "" && status == 409){
             errorMsg.style.display = "block"
             errorMsg.textContent = "هذه الوحده موجوده بالفعل"
             setTimeout(()=>{
                 errorMsg.style.display = "none"
             },2000)
-        }else if (shelfNumberValue.value.trim() != "" && status == 200){
+        }else if (shelfNumberValue.value.trim() != "" && status == 201){
             errorMsg.style.display = "block"
             errorMsg.textContent = "تم انشا الوحده"
             setTimeout(()=>{
@@ -264,7 +263,6 @@ function addbook(){
     let bookNumberValue = document.getElementsByName("bookNumber")[0]
     let conclusionValue = document.getElementsByName("conclusion")[0]
     let bookCodeValue = document.getElementsByName("bookCode")[0]
-
     fetch('http://localhost:3000/library/books',
     {
         method: 'POST',
@@ -280,7 +278,7 @@ function addbook(){
             number_of_pages: pagesNumberValue.value.trim(),
             book_number_in_shelf: bookNumberValue.value.trim(),
             shelf_id: shelfID.value,
-            book_code: bookCodeValue.value.trim(),
+            book_code: bookCodeValue.value,
             conclusion: conclusionValue.value.trim() == "" ? null : conclusionValue.value.trim()
         })
     }).then(res => res.json())
