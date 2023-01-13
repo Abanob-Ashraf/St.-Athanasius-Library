@@ -5,13 +5,11 @@
   "scripts": {
     "clean": "rimraf build/",
     "build": "npm run clean && npx tsc",
-    "jasmine": "npm run build && jasmine",
     "dev": "nodemon ./src/main.ts",
     "start": "npm run build && nodemon build/main.js",
     "database:up": "db-migrate up",
     "database:fkdata": "psql -U abano -d librarydb -a -f data_migrations/initialization.sql",
     "database:reset": "db-migrate reset",
-    "test": "set ENV=test && db-migrate --env test up && npm run jasmine && db-migrate --env test reset",
     "prettier": "prettier --write src/**/*.{ts,tsx,js,jsx}",
     "lint": "eslint . --ext .ts",
     "lint:fix": "npm run lint -- --fix"
