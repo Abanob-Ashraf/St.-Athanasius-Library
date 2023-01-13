@@ -198,6 +198,7 @@ block_form.addEventListener("submit",(e)=>{
 // ==================================================== Add shelf ==================================================== //
 let shelf_form = document.querySelector(".createBooks-landing .container .create-shelf .add-shelf")
 let shelf_submit = document.querySelector(".createBooks-landing .container .create-shelf .submit")
+let errorMsg = document.querySelector(".createBooks-landing .container .create-shelf small")
 
 // shelf Fetch Function
 function addshelfs(){
@@ -295,13 +296,13 @@ function addbook(){
             the_book.textContent = "تم انشاء هذا الكتاب"
             setTimeout(()=>{
                 show_book.style.display = "none"
-            },5000)
+            },2000)
         }else if (status == 409){
             show_book.style.display = "block"
             the_book.textContent = "هذا الكتاب يوجد بالفعل"
             setTimeout(()=>{
                 show_book.style.display = "none"
-            },5000)
+            },2000)
         }
         })
     .catch(e => console.log(e))
