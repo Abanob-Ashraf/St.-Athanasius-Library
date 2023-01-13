@@ -282,29 +282,32 @@ function addbook(){
             shelf_id: shelfID.value,
             conclusion: conclusionValue.value.trim() == "" ? null : conclusionValue.value.trim()
         })
-    }).then(res => res.json())
-    .then(res => console.log(res))
+    }).then(res => {
+        res.json()
+        let status =  res.status
+        return status
+    })
+    .then((status) => {
+        let show_book = document.querySelector(".show-created-book")
+        let the_book = document.querySelector(".show-created-book .input-field .the-book")
+        if (status == 201){
+            show_book.style.display = "block"
+            the_book.textContent = "تم انشاء هذا الكتاب"
+            setTimeout(()=>{
+                show_book.style.display = "none"
+            },5000)
+        }else if (status == 409){
+            show_book.style.display = "block"
+            the_book.textContent = "هذا الكتاب يوجد بالفعل"
+            setTimeout(()=>{
+                show_book.style.display = "none"
+            },5000)
+        }
+        })
     .catch(e => console.log(e))
 }
 book_form.addEventListener("submit", (e)=>{
     e.preventDefault()
     addbook()
 })
-// ==================================================== End Add book ==================================================== //
-
-
-
-
-
-// ==================================================== Add book ==================================================== //
-// book Fetch Function
-// function addbook(){
-//     fetch('http://localhost:3000/library/books',
-//     {
-//         method: 'POST',
-//         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
-//     }).then(res => res.json())
-//     .then(res => console.log(res))
-//     .catch(e => console.log(e))
-// }
 // ==================================================== End Add book ==================================================== //

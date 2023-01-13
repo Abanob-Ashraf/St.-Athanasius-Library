@@ -396,8 +396,19 @@ small{
     font-weight: bold;
     color: var(--dangerColor);
 }
-.createBooks-landing .container .show-created-book .the-book:not(:last-child){
-    margin-bottom: 15px;
+.createBooks-landing .container .show-created-book{
+    display: none;
+}
+.createBooks-landing .container .go-to-browse-book{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    color: var(--dangerColor);
+}
+.createBooks-landing .container .go-to-browse-book a{
+    color: var(--dangerColor);
+    font-weight: bold;
 }
 
 /* End Create Books Page */
