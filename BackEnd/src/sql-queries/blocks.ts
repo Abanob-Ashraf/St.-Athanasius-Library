@@ -1,7 +1,7 @@
 export const CREATEBLOCK =
   'INSERT INTO blocks (block_number, block_name, created_date, updated_date) VALUES($1, $2, $3, $4)'
 
-export const GETMANYBLOCKS = 'SELECT * FROM blocks'
+export const GETMANYBLOCKS = 'SELECT * FROM blocks ORDER BY block_number ASC'
 
 export const GETONEBLOCK = 'SELECT * FROM blocks WHERE id=($1)'
 

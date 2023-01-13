@@ -29,6 +29,7 @@ export const createBook = async (req: Request, res: Response) => {
 
     const book: Book = {
       book_code: `${blockNum}-${shelfNum}-${req.body.book_number_in_shelf}`,
+      // book_code: req.body.book_code,
       book_name: req.body.book_name,
       author: req.body.author,
       publisher: req.body.publisher,
@@ -165,6 +166,7 @@ export const updateBook = async (req: Request, res: Response) => {
       const book = {
         id: +req.params.id,
         book_code: `${blockNum}-${shelfNum}-${req.body.book_number_in_shelf}`,
+        // book_code: req.body.book_code,
         book_name: req.body.book_name,
         author: req.body.author,
         publisher: req.body.publisher,
