@@ -262,7 +262,6 @@ function addbook(){
     let pagesNumberValue = document.getElementsByName("pagesNumber")[0]
     let bookNumberValue = document.getElementsByName("bookNumber")[0]
     let conclusionValue = document.getElementsByName("conclusion")[0]
-    let bookCodeValue = document.getElementsByName("bookCode")[0]
     fetch('http://localhost:3000/library/books',
     {
         method: 'POST',
@@ -278,7 +277,6 @@ function addbook(){
             number_of_pages: pagesNumberValue.value.trim(),
             book_number_in_shelf: bookNumberValue.value.trim(),
             shelf_id: shelfID.value,
-            book_code: bookCodeValue.value,
             conclusion: conclusionValue.value.trim() == "" ? null : conclusionValue.value.trim()
         })
     }).then(res => res.json())
