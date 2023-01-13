@@ -64,10 +64,13 @@ function userGeneral(data){
 }
 // userInfo Profile Function
 function userInfo(data){
-    let userInfo = document.querySelector(".profile-landing .container .profile.user .user-info");
-    let userInfoEdit = document.querySelector(".profile-landing .container .profile.user .user-info .edit");
-    let userEdit = document.querySelector(".profile-landing .container .profile.user .edit-info");
+    let userInfo = document.querySelector(".profile-landing .container .profile.user .user-info")
+    let userEdit = document.querySelector(".profile-landing .container .profile.user .edit-info")
+    let userChangePassword = document.querySelector(".profile-landing .container .profile.user .change-password")
+    let userInfoEdit = document.querySelector(".profile-landing .container .profile.user .user-info .edit")
     let userEditBack = document.querySelector(".profile-landing .container .profile.user .edit-info .back")
+    let userEditGo = document.querySelector(".profile-landing .container .profile.user .edit-info .go")
+    let userChangePasswordBack = document.querySelector(".profile-landing .container .profile.user .change-password .back")
     let firstName = document.querySelector(".profile-landing .container .profile.user .user-info .first-name span");
     let lastName = document.querySelector(".profile-landing .container .profile.user .user-info .last-name span");
     let email = document.querySelector(".profile-landing .container .profile.user .user-info .email span");
@@ -78,19 +81,31 @@ function userInfo(data){
     let lastNamePH = document.querySelector(".profile-landing .container .profile.user .edit-info .last-name input");
     let emailPH = document.querySelector(".profile-landing .container .profile.user .edit-info .email input");
     let phonePH = document.querySelector(".profile-landing .container .profile.user .edit-info .phone input");
-    
-
-
-    userEditBack.addEventListener("click",()=>{
-        userInfo.style.display = "block"
-        userEdit.style.display = "none"
-    })
 
     userInfoEdit.addEventListener("click",()=>{
         userInfo.style.display = "none"
         userEdit.style.display = "block"
+        userChangePassword.style.display = "none"
     })
 
+    userEditGo.addEventListener("click",()=>{
+        userInfo.style.display = "none"
+        userEdit.style.display = "none"
+        userChangePassword.style.display = "block"
+    })
+
+    userEditBack.addEventListener("click",()=>{
+        userInfo.style.display = "block"
+        userEdit.style.display = "none"
+        userChangePassword.style.display = "none"
+    })
+    
+    userChangePasswordBack.addEventListener("click",()=>{
+        userInfo.style.display = "none"
+        userEdit.style.display = "block"
+        userChangePassword.style.display = "none"
+    })
+    
     firstName.textContent = data.first_name
     lastName.textContent = data.last_name
     email.textContent = data.email
@@ -133,7 +148,6 @@ function editbyidForMe(){
     let lastNameEI = document.querySelector(".profile-landing .container .profile.user .edit-info .last-name input");
     let emailEI = document.querySelector(".profile-landing .container .profile.user .edit-info .email input");
     let phoneEI = document.querySelector(".profile-landing .container .profile.user .edit-info .phone input");
-    let resetPasswordEI = document.querySelector(".profile-landing .container .profile.user .edit-info .reset-password input");
     
     fetch(`http://localhost:3000/library/users/${id}`,
     {
@@ -143,7 +157,6 @@ function editbyidForMe(){
             first_name: firstNameEI.value.trim() == "" ? first_name : firstNameEI.value.trim(),
             last_name: lastNameEI.value.trim() == "" ? last_name : lastNameEI.value.trim(),
             email: emailEI.value.trim() == "" ? email : emailEI.value.trim(),
-            password: resetPasswordEI.value,
             phone_number: phoneEI.value.trim() == "" ? phone_number : phoneEI.value.trim(),
             job: job,
             admin_flag: admin
@@ -151,23 +164,41 @@ function editbyidForMe(){
     }).then(res => res.json())
     .catch(e => console.log(e))    
 }
-let submit = document.querySelector(".profile-landing .container .profile.user .edit-info form");
-let resetPasswordEI = document.querySelector(".profile-landing .container .profile.user .edit-info .reset-password input");
-let resetPasswordEISmall = document.querySelector(".profile-landing .container .profile.user .edit-info .reset-password small");
-submit.onsubmit = function(e){
-    if(resetPasswordEI.value.trim() == ""){
-        e.preventDefault()
-        resetPasswordEISmall.style.display = "inline"
-        resetPasswordEISmall.textContent = "الرجاء ادخال كلمه المرور"
-        setTimeout(()=>{
-            resetPasswordEISmall.style.display = "none"
-        },5000)
-        return false
-    }else {
+let submit_1 = document.querySelector(".profile-landing .container .profile.user .edit-info .editInfo");
+submit_1.onsubmit = function(){
         editbyidForMe()
-    }
 }
-// ==================================================== Header & User Information & General Information Partions ==================================================== //
+// ==================================================== End Header & User Information & General Information Partions ==================================================== //
+
+
+
+
+
+// ==================================================== Change Password ==================================================== //
+// Change Password Fetch Function
+function changePassword(){
+    let oldPassword = document.querySelector(".profile-landing .container .profile.user .change-password .password-container .old-password input")
+    let newpassword = document.querySelector(".profile-landing .container .profile.user .change-password .password-container .new-password input")
+    fetch(`http://localhost:3000/library/users/me/changePassword`,
+    {
+        method: 'PUT',
+        headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
+        body: JSON.stringify({
+            old_password: oldPassword.value.trim(),
+            new_password: newpassword.value.trim()
+        })
+    }).then(res => res.json())
+    .then(res => console.log(res))
+    .catch(e => console.log(e))
+}
+
+let submit = document.querySelector(".profile-landing .container .profile.user .change-password .changePassword");
+submit.onsubmit = function(e){
+    changePassword()
+    sessionStorage.removeItem("token")
+    location.href = "/login.html"
+}
+// ==================================================== End Change Password ==================================================== //
 
 
 

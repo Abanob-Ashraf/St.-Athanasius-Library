@@ -86,7 +86,7 @@
                     <div class="edit-info">
                         <div class="special-title">تعديل المعلومات الشخصيه</div>
                         <hr>
-                        <form action="">
+                        <form action="" class="editInfo">
                             <div class="first-name">
                                 <input type="text" name="first-name">
                             </div>
@@ -99,9 +99,24 @@
                             <div class="phone">
                                 <input type="text" name="phone">
                             </div>
-                            <div class="reset-password">
-                                <input type="password" placeholder="كتابه / تغير كلمه المرور" name="password">
-                                <small></small>
+                            <p class="go">هل تود تغير كلمه المرور؟</p>
+                            <div class="double-div">
+                                <input class="edit" type="submit" value="حفظ البيانات">
+                                <p class="back">الرجوع</p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="change-password">
+                        <div class="special-title">تغير كلمه السر</div>
+                        <hr>
+                        <form action="" class="changePassword">
+                            <div class="password-container">
+                                <div class="old-password">
+                                    <input type="password" required name="old-password" placeholder="كلمه السر القديمه">
+                                </div>
+                                <div class="new-password">
+                                    <input type="password" required name="new-password" placeholder="كلمه السر الجديده">
+                                </div>
                             </div>
                             <div class="double-div">
                                 <input class="edit" type="submit" value="حفظ البيانات">

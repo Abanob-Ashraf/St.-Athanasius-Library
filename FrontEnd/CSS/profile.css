@@ -108,25 +108,34 @@ hr{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
-}
-.edit{
-    font-weight: bold;
-    color: var(--whiteColor);
-    background-color: var(--dangerColor);
-    border: none;
-    padding: 5px 15px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    cursor: pointer;
 }
 .back{
     font-weight: bold;
     color: var(--dangerColor);
     padding: 5px 15px;
+    cursor: pointer;
+}
+.go{
+    width: fit-content;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--dangerColor);
+    padding: 5px 15px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+.edit{
+    width: 200px !important; 
+    font-weight: bold !important;
+    color: var(--whiteColor) !important;
+    background-color: var(--dangerColor);
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
     cursor: pointer;
 }
 .delete{
@@ -143,7 +152,6 @@ hr{
     cursor: pointer;
 }
 .add{
-    margin-bottom: 15px;
     font-weight: bold;
     color: var(--whiteColor);
     background-color: var(--dangerColor);
@@ -432,20 +440,55 @@ hr{
     font-size: 11px;
     display: none;
 }
-.profile-landing .container .profile.user .edit-info .edit{
-    font-weight: bold;
-    color: var(--whiteColor);
-    background-color: var(--dangerColor);
-    border: none;
-    padding: 8px;
+/* End Edit User Information */
+
+/* Change Password */
+.profile-landing .container .profile.user .change-password{
+    display: none;
+}
+.profile-landing .container .profile.user .change-password .password-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.profile-landing .container .profile.user .change-password .old-password{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background-color: var(--thirdColor);
+    margin-bottom: 15px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
-    cursor: pointer;
 }
-/* End Edit User Information */
+.profile-landing .container .profile.user .change-password .new-password{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background-color: var(--thirdColor);
+    margin-bottom: 30px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.profile-landing .container .profile.user .change-password div input{
+    border: none;
+    width: 100%;
+    outline: none;
+    padding: 8px;
+    font-weight: bold;
+    color: var(--lightBlackColor);
+}
+/* End Change Password */
 
 /* User Search */
 .profile-landing .container .profile.search-user .search .search-form .search-container{
