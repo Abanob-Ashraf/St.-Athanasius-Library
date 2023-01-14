@@ -40,7 +40,11 @@ export const createUser = async (req: Request, res: Response) => {
       to: user.email,
       from: 'abanobashraf74@gmail.com',
       subject: 'Signup succeeded',
-      html: '<h1> wellcome in our library!</h1>'
+      html: `
+      <p>Wellcome in our Library</p>
+      <p>Click this link to login in our website.</p>
+      <a href="http://127.0.0.1:5500/login.html"> link </a> 
+    `
     })
     res.status(createdUser['status']).json(createdUser['message'])
   } catch (error) {
