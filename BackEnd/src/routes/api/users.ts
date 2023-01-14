@@ -1,4 +1,3 @@
-import { changePassword } from './../../controllers/users'
 import { Router } from 'express'
 import { authorize, admin } from '../../middlewares/authantication_admin'
 import {
@@ -10,7 +9,9 @@ import {
   getOneUser,
   getAllUnAvilableUsers,
   getMine,
-  searchForUser
+  searchForUser,
+  changePassword,
+  resetPassword
 } from '../../controllers/users'
 import { body } from 'express-validator'
 
@@ -36,6 +37,15 @@ routes.route('/login').post(
   body('password').isLength({ min: 8 }),
 
   authenticateUser
+)
+
+routes.route('/resetPassword').put(
+  // email must be an email
+  body('email').isEmail(),
+  // password must be at least 8 chars long
+  body('new_password').isLength({ min: 8 }),
+
+  resetPassword
 )
 
 routes.route('/me').get(authorize, getMine)

@@ -144,6 +144,26 @@ export const changePassword = async (req: Request, res: Response) => {
   }
 }
 
+// resetPassword
+export const resetPassword = async (req: Request, res: Response) => {
+  // Finds the validation errors in this request and wraps them in an object with handy functions
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+
+  const { email, new_password } = req.body
+  if (!email || !new_password) {
+    return res.status(400).json('missing or malformed parameters. email, password required')
+  }
+  try {
+    const user = await library.resetPassword(email, new_password, new Date())
+    res.status(user['status']).json(user['message'])
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}
+
 // deleteUser
 export const deleteUser = async (req: Request, res: Response) => {
   try {

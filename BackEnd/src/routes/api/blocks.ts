@@ -7,20 +7,12 @@ import {
   updateBlock
   //   deleteBlock
 } from '../../controllers/blocks'
-import {
-  countBooksInBlockOrShelfAndBlock,
-  searchForBookWithBlockOrShelfAndBlock
-} from '../../controllers/books'
 
 const routes = Router()
 
 routes.route('/').post(authorize, admin, createBlock)
 
 routes.route('/').get(getManyBlocks)
-
-routes.route('/getBooksInThisBlock').get(searchForBookWithBlockOrShelfAndBlock)
-
-routes.route('/countBooksInThisBlock').get(authorize, countBooksInBlockOrShelfAndBlock)
 
 routes.route('/:id').get(authorize, getOneBlock)
 

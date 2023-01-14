@@ -23,6 +23,11 @@ export const GETPASSWORD = 'SELECT password FROM users WHERE id=($1)'
 
 export const CHANGEPASSWORD = 'UPDATE users SET password=($2), updated_date=($3) WHERE id=($1)'
 
+//Reset Password
+export const GETUSERWITHEMAIL = 'SELECT * FROM users WHERE email=($1)'
+
+export const RESETPASSWORD = 'UPDATE users SET password=($2), updated_date=($3) WHERE email=($1)'
+
 //Delete User
 export const SELECTSTATUS = 'SELECT user_status FROM users WHERE id=($1)'
 

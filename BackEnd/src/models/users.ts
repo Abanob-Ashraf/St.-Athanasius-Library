@@ -10,6 +10,8 @@ import {
   GETMANYUSERS,
   GETONEUSER,
   GETPASSWORD,
+  GETUSERWITHEMAIL,
+  RESETPASSWORD,
   SEARCHFORUSER,
   SELECTSTATUS,
   UPDATEBOOKAFTERDELETEUSER,
@@ -203,6 +205,31 @@ export class UsersModel {
       const error = {
         status: 406,
         message: 'the password do not match please try again'
+      }
+      return error
+    } catch (error) {
+      throw new Error(`Unable to get password users ${(error as Error).message}`)
+    }
+  }
+
+  // resetPassword
+  async resetPassword(email: string, new_password: string, updated_date: Date): Promise<object> {
+    try {
+      const connection = await Client.connect()
+      const result = await connection.query(GETUSERWITHEMAIL, [email])
+      if (result.rows.length) {
+        const newHashedPass = bcrypt.hashSync(new_password + pepper, parseInt(saltRounds as string))
+        await connection.query(RESETPASSWORD, [email, newHashedPass, updated_date])
+        const obj = {
+          status: 202,
+          message: 'password changed correctly'
+        }
+        return obj
+      }
+      connection.release()
+      const error = {
+        status: 404,
+        message: 'this email does not exiest here'
       }
       return error
     } catch (error) {

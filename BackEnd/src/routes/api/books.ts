@@ -8,7 +8,9 @@ import {
   searchForBook,
   updateBook,
   getUserBooks,
-  getLatestBooks
+  getLatestBooks,
+  countBooksInBlockOrShelfAndBlock,
+  searchForBookWithBlockOrShelfAndBlock
 } from '../../controllers/books'
 
 const routes = Router()
@@ -22,6 +24,10 @@ routes.route('/').get(getManyBooks)
 routes.route('/search').get(searchForBook)
 
 routes.route('/latestBooks').get(getLatestBooks)
+
+routes.route('/getBooksInThisBlock').get(searchForBookWithBlockOrShelfAndBlock)
+
+routes.route('/countBooksInThisBlock').get(authorize, countBooksInBlockOrShelfAndBlock)
 
 routes.route('/:id').get(getOneBook)
 
