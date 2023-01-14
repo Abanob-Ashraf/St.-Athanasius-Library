@@ -6,10 +6,11 @@ import nodemailer from 'nodemailer'
 import sendgridTransport from 'nodemailer-sendgrid-transport'
 
 const library = new UsersModel()
+const apikey = process.env.API_KEY
 
 const transporter = nodemailer.createTransport(
   sendgridTransport({
-    auth: { api_key: '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' }
+    auth: { api_key: apikey }
   })
 )
 
@@ -35,14 +36,13 @@ export const createUser = async (req: Request, res: Response) => {
       id: undefined as unknown as number
     }
     const createdUser = await library.create(user)
-
-    res.status(createdUser['status']).json(createdUser['message'])
-    return transporter.sendMail({
+    transporter.sendMail({
       to: user.email,
       from: 'abanobashraf74@gmail.com',
       subject: 'Signup succeeded',
       html: '<h1> wellcome in our library!</h1>'
     })
+    res.status(createdUser['status']).json(createdUser['message'])
   } catch (error) {
     return res.status(409).json('this email already existe')
   }
