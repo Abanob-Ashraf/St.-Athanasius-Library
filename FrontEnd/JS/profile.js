@@ -45,6 +45,7 @@ function header(data){
 
     logout.addEventListener("click",()=>{
         sessionStorage.removeItem("token")
+        sessionStorage.removeItem("email")
         location.href = "/login.html"
     })
 }
@@ -193,9 +194,10 @@ function changePassword(){
 }
 
 let submit = document.querySelector(".profile-landing .container .profile.user .change-password .changePassword");
-submit.onsubmit = function(e){
+submit.onsubmit = function(){
     changePassword()
     sessionStorage.removeItem("token")
+    sessionStorage.removeItem("email")
     location.href = "/login.html"
 }
 // ==================================================== End Change Password ==================================================== //
@@ -458,11 +460,10 @@ function searchUsers(data){
         }
         let indexValue = 1;
         allInfoGroup[indexValue-1].style.display = "block"
-        if ([indexValue] == 1){
+        if (allInfoGroup.length == 1){
             leftArrow.style.pointerEvents = "none";
-            rightArrow.style.pointerEvents = "stroke";
+            rightArrow.style.pointerEvents = "none";
         }
-        
 
         // Move Right
         rightArrow.addEventListener("click",()=>{
@@ -494,7 +495,7 @@ function search(){
     let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
     let params = new URLSearchParams({
         email: searchUser.value,
-        first_name: searchUser.value
+        firstname: searchUser.value
     })
     fetch(`http://localhost:3000/library/users/search?${params.toString()}`,
         {
@@ -689,9 +690,9 @@ function deletedUser(data){
                 }
                 let indexValue = 1;
                 allInfoGroup[indexValue-1].style.display = "block"
-                if ([indexValue] == 1){
+                if (allInfoGroup.length == 1){
                     leftArrow.style.pointerEvents = "none";
-                    rightArrow.style.pointerEvents = "stroke";
+                    rightArrow.style.pointerEvents = "none";
                 }
 
                 // Move Right

@@ -21,6 +21,7 @@ function header(data){
 
     logout.addEventListener("click",()=>{
         sessionStorage.removeItem("token")
+        sessionStorage.removeItem("email")
         location.href = "/login.html"
     })
 }
