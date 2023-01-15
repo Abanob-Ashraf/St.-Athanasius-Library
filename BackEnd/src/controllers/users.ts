@@ -25,7 +25,7 @@ export const createUser = async (req: Request, res: Response) => {
     const user: User = {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
-      email: req.body.email,
+      email: req.body.email.toLowerCase(),
       password: req.body.password,
       phone_number: req.body.phone_number,
       job: req.body.job,
@@ -77,7 +77,6 @@ export const searchForUser = async (req: Request, res: Response) => {
     const user = await library.searchForUser(
       req.query.first_name as string,
       req.query.last_name as string,
-      req.query.firstname as string,
       req.query.email as string,
       req.query.job as string
     )
@@ -119,7 +118,7 @@ export const updateUser = async (req: Request, res: Response) => {
         id: +req.params.id,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        email: req.body.email,
+        email: req.body.email.toLowerCase(),
         password: req.body.password,
         phone_number: req.body.phone_number,
         job: req.body.job,
@@ -171,7 +170,7 @@ export const getUserDataToResetPassword = async (req: Request, res: Response) =>
     return res.status(400).json({ errors: errors.array() })
   }
 
-  const { email } = req.body
+  const email = req.body.email.toLowerCase()
   if (!email) {
     return res.status(400).json('missing or malformed parameters. email, password required')
   }
@@ -249,7 +248,8 @@ export const authenticateUser = async (req: Request, res: Response) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() })
   }
-  const { email, password } = req.body
+  const email = req.body.email.toLowerCase()
+  const password = req.body.password
   if (!email || !password) {
     return res.status(400).json('missing or malformed parameters. email, password required')
   }

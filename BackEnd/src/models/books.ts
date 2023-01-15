@@ -8,8 +8,8 @@ import {
   SEARCHFORBOOK,
   CHECKIFBOOKINTHISSHELF,
   GETMYBOOKS,
-  GETLATESTBOOKS,
-  SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK
+  GETLATESTBOOKS
+  // SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK
 } from '../sql-queries/books'
 
 export type Book = {
@@ -156,16 +156,24 @@ export class BooksModel {
   // searchForBookWithBlockOrShelfAndBlock
   async searchForBookWithBlockOrShelfAndBlock(
     block_number: string,
-    shelf_number: string,
-    blocknumber: string
+    shelf_number: string
   ): Promise<object> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK, [
-        block_number,
-        shelf_number,
-        blocknumber
-      ])
+      let SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK = `SELECT books.id, books.book_code, books.book_name, books.author, books.publisher, 
+      books.topic, books.number_of_copies, books.number_of_pages, books.number_of_parts, books.name_of_series, books.conclusion, 
+      books.currrent_user, books.old_user, books.shelf_id, books.book_number_in_shelf, books.who_edited, books.created_date, books.updated_date 
+      FROM books 
+      INNER JOIN shelfs 
+      ON shelfs.id = books.shelf_id 
+      INNER JOIN blocks 
+      ON blocks.id = shelfs.block_id 
+      WHERE blocks.block_number='${block_number}'`
+      if (shelf_number != null) {
+        SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
+          SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK + `AND shelfs.shelf_number='${shelf_number}'`
+      }
+      const result = await connection.query(SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK)
       if (result.rows.length) {
         const book = { status: 202, bookInfo: result.rows, length: result.rows.length }
         connection.release()
