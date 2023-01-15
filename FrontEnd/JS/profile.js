@@ -748,12 +748,6 @@ function create(data){
     let smallThee = document.querySelector(".profile-landing .container .create-user .tree")
     let smallFour = document.querySelector(".profile-landing .container .create-user .four")
 
-    // if(email.value.trim() == data.email){
-    //     small.textContent = "يوجد هذا البريد الالكتروني بالفعل"
-    //     setTimeout(()=>{
-    //         small.textContent = ""
-    //     },5000)
-    // }
     if (isEmailValid(email.value.trim()) == false){
         smallOne.style.display = "block"
         smallOne.textContent = "يوجد خطاء في طريقه كتابه البريد الالكتروني"
@@ -763,7 +757,7 @@ function create(data){
     }else{
         smallOne.style.color = "#2ecc71"
         smallOne.style.display = "block"
-        smallOne.textContent = "تم انشاء البريد الالكتروني"
+        smallOne.textContent = "تم انشاء الحساب الرجاء التاكد من بريدك"
         setTimeout(()=>{
             smallOne.style.display = "none"
         },5000)

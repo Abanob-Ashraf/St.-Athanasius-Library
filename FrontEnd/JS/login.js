@@ -48,8 +48,8 @@ function validateFromDataBase(data){
         if (passwordValue ==  ""){
             passwordMsg.textContent = 'لا تترك الحقل فارغ'
             setError(password)
-        }else if(passwordValue.length < 8 || passwordValue.length > 14){
-            passwordMsg.textContent = `يرجي ان لا تزيد الاحرف عن 14 او اقل من 8 احرف`
+        }else if(passwordValue.length < 8){
+            passwordMsg.textContent =  `يرجي ان لا تقل كلمه المرور عن 8 احرف`
             setError(password)
         }else {
             setSuccess(password)   

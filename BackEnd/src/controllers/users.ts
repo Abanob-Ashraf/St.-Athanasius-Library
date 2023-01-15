@@ -191,7 +191,7 @@ export const getUserDataToResetPassword = async (req: Request, res: Response) =>
         html: `
           <h1>You requested a password reset</h1>
           <h3>Click this link to set a new password.</h3>
-          <a href="http://127.0.0.1:5500/frontend/Password_resetPassword.html/${token}"> link </a>
+          <a href="http://127.0.0.1:5500/Password_resetPassword.html?${token}"> link </a>
         `
       })
     }
