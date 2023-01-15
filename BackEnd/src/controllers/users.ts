@@ -41,8 +41,8 @@ export const createUser = async (req: Request, res: Response) => {
       from: 'abanobashraf74@gmail.com',
       subject: 'Signup succeeded',
       html: `
-      <p>Wellcome in our Library</p>
-      <p>Click this link to login in our website.</p>
+      <h1>Wellcome in our Library</h1>
+      <h3>Click this link to login in our website.</h3>
       <a href="http://127.0.0.1:5500/login.html"> link </a> 
     `
     })
@@ -163,21 +163,62 @@ export const changePassword = async (req: Request, res: Response) => {
   }
 }
 
-// resetPassword
-export const resetPassword = async (req: Request, res: Response) => {
+// getUserDataToResetPassword
+export const getUserDataToResetPassword = async (req: Request, res: Response) => {
   // Finds the validation errors in this request and wraps them in an object with handy functions
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() })
   }
 
-  const { email, new_password } = req.body
-  if (!email || !new_password) {
+  const { email } = req.body
+  if (!email) {
     return res.status(400).json('missing or malformed parameters. email, password required')
   }
   try {
-    const user = await library.resetPassword(email, new_password, new Date())
-    res.status(user['status']).json(user['message'])
+    const user = await library.getUserDataToResetPassword(email)
+    const userInfo = user['userInfo']
+
+    const token = jwt.sign({ userInfo }, process.env.TOKEN_SECRET as unknown as string, {
+      expiresIn: '1h'
+    })
+
+    if (user['userInfo'] != 'this email does not exiest here') {
+      transporter.sendMail({
+        to: email,
+        from: 'abanobashraf74@gmail.com',
+        subject: 'Password reset',
+        html: `
+          <h1>You requested a password reset</h1>
+          <h3>Click this link to set a new password.</h3>
+          <a href="http://127.0.0.1:5500/frontend/Password_resetPassword.html/${token}"> link </a>
+        `
+      })
+    }
+    return res.status(user['status']).json(user['message'])
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}
+
+// postNewPassword
+export const postNewPassword = async (req: Request, res: Response) => {
+  // Finds the validation errors in this request and wraps them in an object with handy functions
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+  const { new_password } = req.body
+  if (!new_password) {
+    return res.status(400).json('missing or malformed parameters. email, password required')
+  }
+  try {
+    const token = req.header('Authorization')?.replace('Bearer ', '') as string
+    const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
+    const useremail = decode.userInfo.email
+
+    const user = await library.postNewPassword(useremail, new_password, new Date())
+    return res.status(user['status']).json(user['message'])
   } catch (error) {
     res.status(400).json(error)
   }

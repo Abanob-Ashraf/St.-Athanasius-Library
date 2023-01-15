@@ -212,8 +212,29 @@ export class UsersModel {
     }
   }
 
-  // resetPassword
-  async resetPassword(email: string, new_password: string, updated_date: Date): Promise<object> {
+  // getUserDataToResetPassword
+  async getUserDataToResetPassword(email: string): Promise<object> {
+    try {
+      const connection = await Client.connect()
+      const result = await connection.query(GETUSERWITHEMAIL, [email])
+      if (result.rows.length) {
+        const user = { status: 200, userInfo: result.rows[0], message: 'check your email' }
+        connection.release()
+        return user
+      }
+      connection.release()
+      const error = {
+        status: 404,
+        message: 'this email does not exiest here'
+      }
+      return error
+    } catch (error) {
+      throw new Error(`Unable to get password users ${(error as Error).message}`)
+    }
+  }
+
+  // postNewPassword
+  async postNewPassword(email: string, new_password: string, updated_date: Date): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETUSERWITHEMAIL, [email])

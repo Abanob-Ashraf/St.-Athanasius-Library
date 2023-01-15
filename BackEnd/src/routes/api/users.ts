@@ -11,7 +11,8 @@ import {
   getMine,
   searchForUser,
   changePassword,
-  resetPassword
+  getUserDataToResetPassword,
+  postNewPassword
 } from '../../controllers/users'
 import { body } from 'express-validator'
 
@@ -39,13 +40,19 @@ routes.route('/login').post(
   authenticateUser
 )
 
-routes.route('/resetPassword').put(
+routes.route('/resetPassword').post(
   // email must be an email
   body('email').isEmail(),
   // password must be at least 8 chars long
+
+  getUserDataToResetPassword
+)
+
+routes.route('/NewPassword').post(
+  // password must be at least 8 chars long
   body('new_password').isLength({ min: 8 }),
 
-  resetPassword
+  postNewPassword
 )
 
 routes.route('/me').get(authorize, getMine)
