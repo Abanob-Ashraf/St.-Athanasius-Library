@@ -169,9 +169,15 @@ export class BooksModel {
       INNER JOIN blocks 
       ON blocks.id = shelfs.block_id 
       WHERE blocks.block_number='${block_number}'`
+      if (shelf_number == null) {
+        SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
+          SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
+          `ORDER BY books.shelf_id, books.book_number_in_shelf ASC`
+      }
       if (shelf_number != null) {
         SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
-          SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK + `AND shelfs.shelf_number='${shelf_number}'`
+          SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
+          `AND shelfs.shelf_number='${shelf_number}' ORDER BY books.book_number_in_shelf ASC`
       }
       const result = await connection.query(SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK)
       if (result.rows.length) {
