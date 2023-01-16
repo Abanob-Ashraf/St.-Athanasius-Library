@@ -102,6 +102,7 @@ function search(data){
         }
 
         raw.addEventListener("click",()=>{
+            sessionStorage.setItem("book_id",data[i].id)
             sessionStorage.setItem("book_name",data[i].book_name)
             sessionStorage.setItem("book_number_in_shelf",data[i].book_number_in_shelf)
             sessionStorage.setItem("created_date",data[i].created_date)
@@ -149,67 +150,63 @@ form.addEventListener("submit",(e)=>{
 
 
 // Latest Books Function
-// function latestBook(data){
-    // for (let i = 0 ; i <= data.length; i++){
-    //     let booksName = document.querySelectorAll(".profile-landing .container .profile.latest-books .latest-book div p");
-    //     let booksCreatedTime = document.querySelectorAll(".profile-landing .container .profile.latest-books .latest-book div span");
-    //     let latestBook = document.querySelector(".profile-landing .container .profile.latest-books .latest-book");
-    //     let latestBookCLick = document.querySelectorAll(".profile-landing .container .profile.latest-books .latest-book div p");
-    //     let latestBookInfo = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info");
-    //     let userEditBack = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .back")
-    //     let bookName = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-name span")
-    //     let bookAuthor = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-author span")
-    //     let bookApublisher = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .publisher span")
-    //     let bookCode = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-code span")
-    //     let bookCopies = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-copies span")
-    //     let bookCreated = document.querySelector(".profile-landing .container .profile.latest-books .latest-book-info .book-created span")
+function latestBook(data){
+    for (let i = 0 ; i <= data.length; i++){
+        let booksName = document.querySelectorAll(".browse-books-landing .container .browseBooks.latest-books .latest-book div p");
+        let booksCreatedTime = document.querySelectorAll(".browse-books-landing .container .browseBooks.latest-books .latest-book div span");
+        let latestBook = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book");
+        let latestBookCLick = document.querySelectorAll(".browse-books-landing .container .browseBooks.latest-books .latest-book div p");
+        let latestBookInfo = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book-info");
+        let userEditBack = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book-info .back")
+        let bookName = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book-info .book-name span")
+        let bookAuthor = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book-info .book-author span")
+        let bookApublisher = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book-info .publisher span")
+        let bookCode = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book-info .book-code span")
+        let bookCopies = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book-info .book-copies span")
+        let bookCreated = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book-info .book-created span")
 
-    //     booksName[i].textContent = data[i].book_name
-    //     booksCreatedTime[i].textContent = data[i].created_date
+        booksName[i].textContent = data[i].book_name
+        booksCreatedTime[i].textContent = data[i].created_date
+        userEditBack.addEventListener("click",()=>{
+            latestBook.style.display = "block"
+            latestBookInfo.style.display = "none"
+        })
 
-    //     userEditBack.addEventListener("click",()=>{
-    //         latestBook.style.display = "block"
-    //         latestBookInfo.style.display = "none"
-    //     })
+        latestBookCLick.forEach((e)=>{
+            e.addEventListener("click",()=>{
+                if (e.textContent == data[i].book_name){
+                    latestBook.style.display = "none"
+                    latestBookInfo.style.display = "block"
+                    bookName.textContent = data[i].book_name
+                    bookAuthor.textContent = data[i].author
+                    bookApublisher.textContent = data[i].publisher
+                    bookCode.textContent = data[i].book_code
+                    bookCopies.textContent = data[i].number_of_copies
+                    bookCreated.textContent = data[i].created_date
 
-    //     latestBookCLick.forEach((e)=>{
-    //         e.addEventListener("click",()=>{
-    //             if (e.textContent == data[i].book_name){
-    //                 latestBook.style.display = "none"
-    //                 latestBookInfo.style.display = "block"
-    //                 bookName.textContent = data[i].book_name
-    //                 bookAuthor.textContent = data[i].author
-    //                 bookApublisher.textContent = data[i].publisher
-    //                 bookCode.textContent = data[i].book_code
-    //                 bookCopies.textContent = data[i].number_of_copies
-    //                 bookCreated.textContent = data[i].created_date
-
-    //                 if (data[i].who_edited == null){
-    //                     bookAuthor.textContent = `لا يوجد`
-    //                 }
-    //                 if (data[i].author == null){
-    //                     bookAuthor.textContent = `لا يوجد`
-    //                 }
-    //                 if (data[i].publisher == null){
-    //                     bookApublisher.textContent = `لا يوجد`
-    //                 }
-    //             }
-    //         })
-    //     })
-    // }
-// }
+                    if (data[i].author == null){
+                        bookAuthor.textContent = `لا يوجد`
+                    }
+                    if (data[i].publisher == null){
+                        bookApublisher.textContent = `لا يوجد`
+                    }
+                }
+            })
+        })
+    }
+}
 
 
-// // LatestBooks Fetch Function
-// function latestBooks(){
-//     fetch('http://localhost:3000/library/books/latestBooks',
-//     {
-//         method: 'GET',
-//         headers: new Headers({"Authorization": `Bearer ${token}`}),
-//     }).then(res => res.json())
-//     .then(res => {
-//         latestBook(res)
-//     })
-//     .catch(e => console.log(e))
-// }
-// latestBooks()
+// LatestBooks Fetch Function
+function latestBooks(){
+    fetch('http://localhost:3000/library/books/latestBooks',
+    {
+        method: 'GET',
+        headers: new Headers({"Authorization": `Bearer ${token}`}),
+    }).then(res => res.json())
+    .then(res => {
+        latestBook(res)
+    })
+    .catch(e => console.log(e))
+}
+latestBooks()

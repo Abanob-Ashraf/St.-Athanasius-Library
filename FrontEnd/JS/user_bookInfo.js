@@ -1,5 +1,6 @@
 let icon = document.querySelector(".header i")
 icon.addEventListener("click",()=>{
+    sessionStorage.removeItem("book_id")
     sessionStorage.removeItem("book_name")
     sessionStorage.removeItem("book_number_in_shelf")
     sessionStorage.removeItem("created_date")
@@ -40,21 +41,21 @@ let bookNumberInShelf = document.querySelector(".book-number-in-shelf span")
 let bookCode = document.querySelector(".book-code span")
 let createdDate = document.querySelector(".created-date span")
 
-if (conclusion == null){
-    conclusion.textContent = "لا يوجد"
+if (conclusion.textContent == null){
+    conclusion_div.textContent = "لا يوجد"
 }else{
     conclusion_div.textContent = conclusion
 }
 
 bookName.textContent = book_name
 
-if (author == null){
+if (author.textContent == null){
     Author.textContent = "لا يوجد"
 }else{
     Author.textContent = author
 }
 
-if (publisher == null){
+if (publisher.textContent == null){
     Publisher.textContent = "لا يوجد"
 }else{
     Publisher.textContent = publisher
@@ -62,7 +63,7 @@ if (publisher == null){
 
 Topic.textContent = topic
 
-if (name_of_series == null){
+if (name_of_series.textContent == null){
     seriesName.textContent = "لا يوجد"
 }else{
     seriesName.textContent = name_of_series

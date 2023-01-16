@@ -215,10 +215,13 @@ function searchUsers(data){
     let userSearchedEdit = document.querySelector(".profile-landing .container .profile.search-user .edit-info")
     let userSearchedInfo = document.querySelector(".profile-landing .container .profile.search-user .user-info")
     let search = document.querySelector(".profile-landing .container .profile.search-user .search")
-    let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
+    let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search").value
+    let searchUserSpride = [...searchUser]
+    let searchUser_firstName = searchUserSpride.indexOf(" ") == -1 ? searchUser : searchUser.slice(0,searchUserSpride.indexOf(" "))
+    let searchUser_lastName = searchUser.slice(searchUserSpride.indexOf(" ")+1)
     let searchUserVlidtion = document.querySelector(".profile-landing .container .profile.search-user .search-form  small")
 
-    if (searchUser.value == data[0].first_name || searchUser.value == data[0].email){
+    if (searchUser_firstName == data[0].first_name || searchUser_lastName == data[0].last_name || searchUser == data[0].email || searchUser == data[0].job){
         userSearchedInfo.style.display = "block"
         search.style.display = "none"
         userSearchedEdit.style.display = "none"
@@ -461,8 +464,8 @@ function searchUsers(data){
         let indexValue = 1;
         allInfoGroup[indexValue-1].style.display = "block"
         if (allInfoGroup.length == 1){
-            leftArrow.style.pointerEvents = "none";
-            rightArrow.style.pointerEvents = "none";
+            leftArrow.style.visibility = "hidden";
+            rightArrow.style.visibility = "hidden";
         }
 
         // Move Right
@@ -492,10 +495,15 @@ function searchUsers(data){
 }
 // search Fetch With Params Function
 function search(){
-    let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search")
+    let searchUser = document.querySelector(".profile-landing .container .profile.search-user .search .search-form #search").value
+    let searchUserSpride = [...searchUser]
+    let searchUser_firstName = searchUserSpride.indexOf(" ") == -1 ? searchUser : searchUser.slice(0,searchUserSpride.indexOf(" "))
+    let searchUser_lastName = searchUser.slice(searchUserSpride.indexOf(" ")+1)
     let params = new URLSearchParams({
-        email: searchUser.value,
-        firstname: searchUser.value
+        email: searchUser,
+        first_name: searchUser_firstName,
+        last_name: searchUser_lastName,
+        job: searchUser
     })
     fetch(`http://localhost:3000/library/users/search?${params.toString()}`,
         {
@@ -503,6 +511,7 @@ function search(){
             headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
         }).then(res => res.json())
         .then(res => {
+            console.log(res)
             searchUsers(res)
         })
         .catch(e => console.log(e))
@@ -691,8 +700,8 @@ function deletedUser(data){
                 let indexValue = 1;
                 allInfoGroup[indexValue-1].style.display = "block"
                 if (allInfoGroup.length == 1){
-                    leftArrow.style.pointerEvents = "none";
-                    rightArrow.style.pointerEvents = "none";
+                    leftArrow.style.visibility = "hidden";
+                    rightArrow.style.visibility = "hidden";
                 }
 
                 // Move Right
