@@ -42,12 +42,13 @@
     <div class="browse-books-landing">
         <div class="container">
             <!-- Profile -->
-            <div class="profile search-books">
+            <div class="browseBooks search-books">
                 <div class="special-title">البحث عن الكتاب</div>
                 <hr>
                 <form action="" class="search-form">
                     <div class="search-container">
-                        <input type="search" name="book" id="book" placeholder="البحث عن الكتاب حسب">
+                        <!-- <input type="submit" value="البحث" name="submit" class="submit"> -->
+                        <input type="search" name="book" required id="book" placeholder="البحث عن الكتاب حسب">
                         <select name="subject" id="subject">
                             <option value="book_name">الاسم</option>
                             <option value="author">الكاتب</option>
@@ -56,118 +57,101 @@
                         </select>
                     </div>
                 </form>
-                <div class="profile books">
+                <small></small>
+                <div class="browseBooks books">
                     <table class="the-books">
                         <tr>
                             <th>اسم الكتاب</th>
                             <th>المؤلف</th>
                             <th>الناشر</th>
-                            <th>الموضوع</th>
-                            <th>التصنيف</th>
-                            <th>عدد النسخ</th>
-                            <th>عدد الاجزاء</th>
-                            <th>عدد الصفحات</th>
                             <th>كود الكتاب</th>
-                            <th>تاريخ التسجيل</th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td>تجسد الكلمه</td>
-                            <td>البابا اثناسيوس</td>
-                            <td>اسقفيه الشباب</td>
-                            <td>تجسد الرب يسوع المسيح</td>
-                            <td>عقيده</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>180</td>
-                            <td>1-1-1</td>
-                            <td>15/12/2022</td>
-                            <td class="delete">حذف الكتاب</td>
                         </tr>
                     </table>
                 </div>
             </div>
             <!-- End Profile -->
 
-            <!-- Start Profile -->
-            <div class="profile latest-books" style="margin-top: 15px;">
-                <div class="latest-book">
-                    <div class="special-title">اخر الكتب المضافه</div>
-                    <hr>
-                    <div class="book">
-                        <p></p>
-                        <span></span>
+            <div class="grid-layout">
+                <!-- Start Profile -->
+                <div class="browseBooks latest-books" style="margin-top: 15px;">
+                    <div class="latest-book">
+                        <div class="special-title">اخر الكتب المضافه</div>
+                        <hr>
+                        <div class="book">
+                            <p></p>
+                            <span></span>
+                        </div>
+                        <div class="book">
+                            <p></p>
+                            <span></span>
+                        </div>
+                        <div class="book">
+                            <p></p>
+                            <span></span>
+                        </div>
+                        <div class="book">
+                            <p></p>
+                            <span></span>
+                        </div>
+                        <div class="book">
+                            <p></p>
+                            <span></span>
+                        </div>
+                        <div class="book">
+                            <p></p>
+                            <span></span>
+                        </div>
+                        <div class="book">
+                            <p></p>
+                            <span></span>
+                        </div>
+                        <div class="book">
+                            <p></p>
+                            <span></span>
+                        </div>
+                        <div class="book">
+                            <p></p>
+                            <span></span>
+                        </div>
+                        <div class="book">
+                            <p></p>
+                            <span></span>
+                        </div>
                     </div>
-                    <div class="book">
-                        <p></p>
-                        <span></span>
-                    </div>
-                    <div class="book">
-                        <p></p>
-                        <span></span>
-                    </div>
-                    <div class="book">
-                        <p></p>
-                        <span></span>
-                    </div>
-                    <div class="book">
-                        <p></p>
-                        <span></span>
-                    </div>
-                    <div class="book">
-                        <p></p>
-                        <span></span>
-                    </div>
-                    <div class="book">
-                        <p></p>
-                        <span></span>
-                    </div>
-                    <div class="book">
-                        <p></p>
-                        <span></span>
-                    </div>
-                    <div class="book">
-                        <p></p>
-                        <span></span>
-                    </div>
-                    <div class="book">
-                        <p></p>
-                        <span></span>
+                    <div class="latest-book-info">
+                        <div class="special-title">معلومات الكتاب</div>
+                        <hr>
+                        <div class="book-name">
+                            <p>اسم الكتاب :</p>
+                            <span></span>
+                        </div>
+                        <div class="book-author">
+                            <p>اسم المؤلف :</p>
+                            <span></span>
+                        </div>
+                        <div class="publisher">
+                            <p>اسم الناشر :</p>
+                            <span></span>
+                        </div>
+                        <div class="book-copies">
+                            <p> النسخ :</p>
+                            <span></span>
+                        </div>
+                        <div class="book-code">
+                            <p>كود الكتاب :</p>
+                            <span></span>
+                        </div>
+                        <div class="book-created">
+                            <p>تاريخ الانشاء :</p>
+                            <span></span>
+                        </div>
+                        <div class="dubel-div">
+                            <p class="back">الرجوع</p>
+                        </div>
                     </div>
                 </div>
-                <div class="latest-book-info">
-                    <div class="special-title">معلومات الكتاب</div>
-                    <hr>
-                    <div class="book-name">
-                        <p>اسم الكتاب :</p>
-                        <span></span>
-                    </div>
-                    <div class="book-author">
-                        <p>اسم المؤلف :</p>
-                        <span></span>
-                    </div>
-                    <div class="publisher">
-                        <p>اسم الناشر :</p>
-                        <span></span>
-                    </div>
-                    <div class="book-copies">
-                        <p> النسخ :</p>
-                        <span></span>
-                    </div>
-                    <div class="book-code">
-                        <p>كود الكتاب :</p>
-                        <span></span>
-                    </div>
-                    <div class="book-created">
-                        <p>تاريخ الانشاء :</p>
-                        <span></span>
-                    </div>
-                    <div class="dubel-div">
-                        <p class="back">الرجوع</p>
-                    </div>
-                </div>
+                <!-- End Profile -->
             </div>
-            <!-- End Profile -->
         </div>
     </div>
     <!-- End Browse Books Landing -->
