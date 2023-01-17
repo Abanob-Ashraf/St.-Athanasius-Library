@@ -145,10 +145,7 @@ form.addEventListener("submit",(e)=>{
 
 
 
-
-
-
-
+// ==================================================== Latest Books ==================================================== //
 // Latest Books Function
 function latestBook(data){
     for (let i = 0 ; i <= data.length; i++){
@@ -175,7 +172,7 @@ function latestBook(data){
         book.appendChild(span)
         span.appendChild(spanText)
 
-        p.addEventListener("click",()=>{
+        book.addEventListener("click",()=>{
             latestBook.style.display = "none"
             latestBookInfo.style.display = "block"
             bookName.textContent = data[i].book_name
@@ -212,3 +209,113 @@ function latestBooks(){
     .catch(e => console.log(e))
 }
 latestBooks()
+// ==================================================== End Latest Books ==================================================== //
+
+
+
+
+
+// ==================================================== My Books ==================================================== //
+// Latest Books Function
+function myBook(data){
+    for (let i = 0 ; i <= 10; i++){
+        let book = document.createElement("div")
+        let p = document.createElement("p")
+        let pText = document.createTextNode(data[i].book_name)
+        let span = document.createElement("span")
+        let spanText = document.createTextNode(data[i].updated_date)
+        let myBook = document.querySelector(".browse-books-landing .container .browseBooks.my-books .my-book");
+        let myBookInfo = document.querySelector(".browse-books-landing .container .browseBooks.my-books .my-book-info");
+        let userEditBack = document.querySelector(".browse-books-landing .container .browseBooks.my-books .my-book-info .back")
+        let bookName = document.querySelector(".browse-books-landing .container .browseBooks.my-books .my-book-info .book-name span")
+        let blockNum = document.querySelector(".browse-books-landing .container .browseBooks.my-books .my-book-info .book-block span")
+        let shelfNum = document.querySelector(".browse-books-landing .container .browseBooks.my-books .my-book-info .book-shelf span")
+        let bookNum = document.querySelector(".browse-books-landing .container .browseBooks.my-books .my-book-info .book-number span")
+        let bookCreated = document.querySelector(".browse-books-landing .container .browseBooks.my-books .my-book-info .book-created span")
+
+        book.className = "book"
+
+        myBook.appendChild(book)
+        book.appendChild(p)
+        p.appendChild(pText)
+        book.appendChild(span)
+        span.appendChild(spanText)
+
+        book.addEventListener("click",()=>{
+            myBook.style.display = "none"
+            myBookInfo.style.display = "block"
+            bookName.textContent = data[i].book_name
+            blockNum.textContent = data[i].block_number
+            shelfNum.textContent = data[i].shelf_number
+            bookNum.textContent = data[i].book_number_in_shelf
+            bookCreated.textContent = data[i].updated_date
+        })
+
+        userEditBack.addEventListener("click",()=>{
+            myBook.style.display = "block"
+            myBookInfo.style.display = "none"
+        })
+    }
+}
+// LatestBooks Fetch Function
+function myBooks(){
+    fetch('http://localhost:3000/library/books/user/myBooks',
+    {
+        method: 'GET',
+        headers: new Headers({"Authorization": `Bearer ${token}`}),
+    }).then(res => res.json())
+    .then(res => {
+        console.log(res)
+        myBook(res)
+    })
+    .catch(e => console.log(e))
+}
+myBooks()
+// ==================================================== End My Books ==================================================== //
+
+
+
+
+
+// ==================================================== BLock Books ==================================================== //
+// Latest Books Function
+function blockBook(data){
+    for (let i = 0 ; i <= data.length ; i++){
+        let book = document.createElement("div")
+        let p = document.createElement("p")
+        // let pText = document.createTextNode(data[i].book_name)
+        let span = document.createElement("span")
+        // let spanText = document.createTextNode(data[i].updated_date)
+
+        book.className = "book"
+
+        myBook.appendChild(book)
+        book.appendChild(p)
+        p.appendChild(pText)
+        book.appendChild(span)
+        span.appendChild(spanText)
+
+        book.addEventListener("click",()=>{
+        })
+
+        userEditBack.addEventListener("click",()=>{
+            myBook.style.display = "block"
+            myBookInfo.style.display = "none"
+        })
+    }
+}
+// LatestBooks Fetch Function
+function blockBooks(){
+    fetch('http://localhost:3000/library/blocks/getBooksInThisBlock',
+    {
+        method: 'GET',
+        headers: new Headers({"Authorization": `Bearer ${token}`}),
+    }).then(res => res.json())
+    .then(res => {
+        console.log(res)
+        blockBook(res)
+    })
+    .catch(e => console.log(e))
+}
+blockBooks()
+// ==================================================== End BLock Books ==================================================== //
