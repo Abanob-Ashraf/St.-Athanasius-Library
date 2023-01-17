@@ -152,10 +152,12 @@ form.addEventListener("submit",(e)=>{
 // Latest Books Function
 function latestBook(data){
     for (let i = 0 ; i <= data.length; i++){
-        let booksName = document.querySelectorAll(".browse-books-landing .container .browseBooks.latest-books .latest-book div p");
-        let booksCreatedTime = document.querySelectorAll(".browse-books-landing .container .browseBooks.latest-books .latest-book div span");
+        let book = document.createElement("div")
+        let p = document.createElement("p")
+        let pText = document.createTextNode(data[i].book_name)
+        let span = document.createElement("span")
+        let spanText = document.createTextNode(data[i].created_date)
         let latestBook = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book");
-        let latestBookCLick = document.querySelectorAll(".browse-books-landing .container .browseBooks.latest-books .latest-book div p");
         let latestBookInfo = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book-info");
         let userEditBack = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book-info .back")
         let bookName = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book-info .book-name span")
@@ -165,38 +167,38 @@ function latestBook(data){
         let bookCopies = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book-info .book-copies span")
         let bookCreated = document.querySelector(".browse-books-landing .container .browseBooks.latest-books .latest-book-info .book-created span")
 
-        booksName[i].textContent = data[i].book_name
-        booksCreatedTime[i].textContent = data[i].created_date
+        book.className = "book"
+
+        latestBook.appendChild(book)
+        book.appendChild(p)
+        p.appendChild(pText)
+        book.appendChild(span)
+        span.appendChild(spanText)
+
+        p.addEventListener("click",()=>{
+            latestBook.style.display = "none"
+            latestBookInfo.style.display = "block"
+            bookName.textContent = data[i].book_name
+            bookAuthor.textContent = data[i].author
+            bookApublisher.textContent = data[i].publisher
+            bookCode.textContent = data[i].book_code
+            bookCopies.textContent = data[i].number_of_copies
+            bookCreated.textContent = data[i].created_date
+
+            if (data[i].author == null){
+                bookAuthor.textContent = `لا يوجد`
+            }
+            if (data[i].publisher == null){
+                bookApublisher.textContent = `لا يوجد`
+            }
+        })
+
         userEditBack.addEventListener("click",()=>{
             latestBook.style.display = "block"
             latestBookInfo.style.display = "none"
         })
-
-        latestBookCLick.forEach((e)=>{
-            e.addEventListener("click",()=>{
-                if (e.textContent == data[i].book_name){
-                    latestBook.style.display = "none"
-                    latestBookInfo.style.display = "block"
-                    bookName.textContent = data[i].book_name
-                    bookAuthor.textContent = data[i].author
-                    bookApublisher.textContent = data[i].publisher
-                    bookCode.textContent = data[i].book_code
-                    bookCopies.textContent = data[i].number_of_copies
-                    bookCreated.textContent = data[i].created_date
-
-                    if (data[i].author == null){
-                        bookAuthor.textContent = `لا يوجد`
-                    }
-                    if (data[i].publisher == null){
-                        bookApublisher.textContent = `لا يوجد`
-                    }
-                }
-            })
-        })
     }
 }
-
-
 // LatestBooks Fetch Function
 function latestBooks(){
     fetch('http://localhost:3000/library/books/latestBooks',

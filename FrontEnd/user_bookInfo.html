@@ -28,7 +28,7 @@
     <!-- bookInfo -->
     <div class="bookinfo-landing">
         <div class="container">
-            <div class="bookinfo info">
+            <div class="bookinfo book-info">
                 <div class="flex-bookinfo">
                     <div class="general-info">
                         <div class="book-name">
@@ -81,28 +81,29 @@
                         <div class="note">
                             الموضوع
                         </div>
-                        <div class="text"></div>
+                        <textarea class="input"></textarea>
                     </div>
                 </div>
             </div>
-            <div class="bookinfo">
+            <div class="bookinfo edit-book">
                 <form action="" class="save-edit">
                     <div class="flex-bookinfo-edit">
                         <div class="general-info">
                             <div class="flex">
-                                <div class="book-name">
-                                    <p class="title-e">اسم الكتاب</p>
-                                    <input type="text" required name="bookName" class="input"/>
+                                <div class="block-num">
+                                    <p class="title-e">اختر الوحده</p>
+                                    <select name="block-num" class="input">
+                                        <option></option>
+                                    </select>
                                 </div>
-                                <div class="author">
-                                    <p class="title-e">اسم المؤلف</p>
-                                    <input list="authorName" name="authorName"  class="input"/>
-                                    <datalist id="authorName"></datalist>
+                                <div class="shelf-num">
+                                    <p class="title-e">اختر الرف</p>
+                                    <select name="shelf-num" class="input"></select>
                                 </div>
                             </div>
                             <div class="book-name">
                                 <p class="title-e">اسم الكتاب</p>
-                                <input type="text" required name="bookName" class="input"/>
+                                <input type="text" name="bookName" class="input"/>
                             </div>
                             <div class="author">
                                 <p class="title-e">اسم المؤلف</p>
@@ -116,7 +117,7 @@
                             </div>
                             <div class="topic">
                                 <p class="title-e">التصنيف</p>
-                                <input list="topic" required name="topic" class="input"/>
+                                <input list="topic" name="topic" class="input"/>
                                 <datalist id="topic"></datalist>
                             </div>
                             <div class="name-of-series">
@@ -126,27 +127,31 @@
                             </div>
                             <div class="number-of-copies">
                                 <p class="title-e">عدد النسخ</p>
-                                <input type="number" required name="copiesNumber" class="input" min="1"/>
+                                <input type="number" name="copiesNumber" class="input" min="1"/>
                             </div>
                             <div class="number-of-parts">
                                 <p class="title-e">عدد الاجزاء</p>
-                                <input type="number" required name="partsNumber" class="input" min="1"/>
+                                <input type="number" name="partsNumber" class="input" min="1"/>
                             </div>
                             <div class="number-of-pages">
                                 <p class="title-e">عدد الصفح</p>
-                                <input type="number" required name="pagesNumber" class="input" min="1"/>
+                                <input type="number" name="pagesNumber" class="input" min="1"/>
                             </div>
                             <div class="book-number-in-shelf">
                                 <p class="title-e">رقم الكتاب في الرف</p>
-                                <input type="number" required name="bookNumber" class="input" min="1"/>
+                                <input type="number" name="bookNumber" class="input" min="1"/>
                             </div>
                         </div>
                         <div class="conclusion">
-                            <div class="note">
+                            <div class="title-e">
                                 الموضوع
                             </div>
-                            <textarea name="conclusion" id="" cols="50" rows="17" class="input"></textarea>
+                            <textarea name="conclusion" class="input"></textarea>
                         </div>
+                    </div>
+                    <div class="setting bookinfo">
+                        <input type="submit" class="submit" value="حفظ">
+                        <p class="back">الرجوع</p>
                     </div>
                 </form>
             </div>
