@@ -24,4 +24,16 @@ values
         'AVILABLE',
         '2022-11-01 00:00:00',
         '2022-11-01 00:00:00'
-    );
+),
+(
+    'Kerolos',
+    'Reda',
+    'elfanan2003@gmail.com',
+    '$2b$10$IaE21QJ62BUw/5Z7h0dGae5DHsOxum0TcgdotUt7ldJCmToqlIQV2',
+    '01282332039',
+    'owner',
+    true,
+    'AVILABLE',
+    '2022-11-01 00:00:00',
+    '2022-11-01 00:00:00'
+)
