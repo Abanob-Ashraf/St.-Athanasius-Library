@@ -6,11 +6,11 @@ import nodemailer from 'nodemailer'
 import sendgridTransport from 'nodemailer-sendgrid-transport'
 
 const library = new UsersModel()
-const apikey = process.env.API_KEY
+const emailapikey = process.env.API_KEY
 
 const transporter = nodemailer.createTransport(
   sendgridTransport({
-    auth: { api_key: apikey }
+    auth: { api_key: emailapikey }
   })
 )
 
@@ -196,6 +196,8 @@ export const getUserDataToResetPassword = async (req: Request, res: Response) =>
     }
     return res.status(user['status']).json(user['message'])
   } catch (error) {
+    console.log(error)
+
     res.status(400).json(error)
   }
 }
