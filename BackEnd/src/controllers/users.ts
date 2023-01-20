@@ -196,8 +196,6 @@ export const getUserDataToResetPassword = async (req: Request, res: Response) =>
     }
     return res.status(user['status']).json(user['message'])
   } catch (error) {
-    console.log(error)
-
     res.status(400).json(error)
   }
 }
@@ -268,6 +266,7 @@ export const authenticateUser = async (req: Request, res: Response) => {
     }
     return res.status(200).json({ ...user, token })
   } catch (error) {
+    console.log(error)
     res.status(400).json(error)
   }
 }
