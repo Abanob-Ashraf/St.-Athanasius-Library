@@ -1,8 +1,6 @@
-let msg = document.querySelector(".email-form small")
-let form = document.forms[0]
-let email = document.getElementsByName("email")[0]
-
+// Reset Password Fetch Function
 function send(){
+    let email = document.getElementsByName("email")[0]
     fetch('http://localhost:3000/library/users/resetPassword',
     {
         method: 'POST',
@@ -12,19 +10,26 @@ function send(){
         })
     }).then(res => res.json())
     .then(res => {
-        if(isEmailValid(email.value.trim()) == true){
+        let msg = document.querySelector("small")
+        if(res == "this email does not exiest here"){
+            // IF response = "this email does not exiest here" Show =>
+            msg.textContent = "هذا البريد الالكتروني غير مسجل"
+            setTimeout(()=>{
+                msg.textContent = ""
+            },5000)
+        }else{
+            // Else Show =>
             msg.textContent = "تم الارسال الرجاء التاكد من بريدك"
             setTimeout(()=>{
                 msg.textContent = ""
             },5000)
         }
-        function isEmailValid(email){
-            const reg =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-            return reg.test(email);
-        }
     })
     .catch(e => console.log(e))
 }
+
+// Submit/Run=>(Code) Reset Password Fetch
+let form = document.forms[0]
 form.addEventListener("submit",(e)=>{
     e.preventDefault()
     send()
