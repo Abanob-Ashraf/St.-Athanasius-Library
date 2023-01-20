@@ -145,18 +145,20 @@
                     </div>
                 </div>
                 <!-- End Profile -->
-                <div class="browseBooks latest-books" style="margin-top: 15px;">
-                    <div class="latest-book">
+                <div class="browseBooks block-books">
+                    <div class="block-book">
                         <div class="special-title">الكتب في الوحده</div>
                         <hr>
                         <div class="block">
                             <div class="note">اختر الوحده</div>
-                            <select name="block_id" required class="input">
+                            <select name="block_num_one" required class="input">
                                 <option></option>
                             </select>
                         </div>
+                        <div class="scroll"></div>
+                        <p class="count"></p>
                     </div>
-                    <div class="latest-book-info">
+                    <div class="block-book-info">
                         <div class="special-title">معلومات الكتاب</div>
                         <hr>
                         <div class="book-name">
@@ -189,24 +191,28 @@
                     </div>
                 </div>
                 <!-- End Profile -->
-                <div class="browseBooks latest-books" style="margin-top: 15px;">
-                    <div class="latest-book">
+                <div class="browseBooks shelf-books">
+                    <div class="shelf-book">
                         <div class="special-title">الكتب في الرف</div>
                         <hr>
                         <div class="flex">
                             <div class="block">
                                 <div class="note">اختر الوحده</div>
-                                <select name="block_id" required class="input">
+                                <select name="block_num_two" required class="input">
                                     <option></option>
                                 </select>
                             </div>
                             <div class="shelf">
                                 <div class="note">اختر الرف</div>
-                                <select name="shelf_id" required class="input"></select>
+                                <select name="shelf_num" required class="input">
+                                    <option></option>
+                                </select>
                             </div>
                         </div>
+                        <div class="scroll"></div>
+                        <p class="count"></p>
                     </div>
-                    <div class="latest-book-info">
+                    <div class="shelf-book-info">
                         <div class="special-title">معلومات الكتاب</div>
                         <hr>
                         <div class="book-name">

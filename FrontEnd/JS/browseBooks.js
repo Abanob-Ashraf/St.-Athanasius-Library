@@ -265,7 +265,6 @@ function myBooks(){
         headers: new Headers({"Authorization": `Bearer ${token}`}),
     }).then(res => res.json())
     .then(res => {
-        console.log(res)
         myBook(res)
     })
     .catch(e => console.log(e))
@@ -277,45 +276,269 @@ myBooks()
 
 
 
+// ==================================================== All BLock ==================================================== //
+function allBlockData(data){
+    let blockID_1 = document.getElementsByName("block_num_one")[0]
+    let blockID_2 = document.getElementsByName("block_num_two")[0]
+
+    for (let i = 0 ; i < data.length ; i++){
+        let  option = document.createElement("option")
+        let optionText = document.createTextNode(`الوحده ${data[i].block_number}`)
+
+        option.setAttribute("value",data[i].block_number)
+
+        blockID_1.appendChild(option)
+        option.appendChild(optionText)
+    }
+
+    for (let i = 0 ; i < data.length ; i++){
+        let  option = document.createElement("option")
+        let optionText = document.createTextNode(`الوحده ${data[i].block_number}`)
+
+        option.setAttribute("value",data[i].block_number)
+
+        blockID_2.appendChild(option)
+        option.appendChild(optionText)
+    }
+}
+// AllBlock Fetch Function
+function allBlock(){
+    fetch('http://localhost:3000/library/blocks',
+    {
+        method: 'GET',
+        headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
+    }).then(res => res.json())
+    .then(res => {
+        allBlockData(res)
+    })
+    .catch(e => console.log(e))
+}
+allBlock()
+// ==================================================== End All BLock ==================================================== //
+
+
+
+
+// ==================================================== All Shelfs In One BLock ==================================================== //
+function allShelfsData(data){
+    let shelfID = document.getElementsByName("shelf_num")[0]
+    let blockID = document.getElementsByName("block_num_two")[0]
+
+    for (let i = 0 ; i < data.length ; i++){
+        let  option = document.createElement("option")
+        let optionText = document.createTextNode(`${data[i].shelf_number == undefined ? "لا يوجد" : `الرف ${data[i].shelf_number}`}`)
+
+        option.setAttribute("value",data[i].shelf_number == undefined ? "" : data[i].shelf_number)
+
+        shelfID.appendChild(option)
+        option.appendChild(optionText)
+
+        blockID.addEventListener("input",()=>{
+            option.remove()
+            option.previousElementSibling.remove()
+        })
+    }
+}
+// AllShelfsInOneBLock Fetch Function
+function allShelfsInOneBlock(){
+    let blockID = document.getElementsByName("block_num_two")[0]
+    blockID.addEventListener("input",()=>{
+        fetch(`http://localhost:3000/library//shelfs/block/${blockID.value}`,
+        {
+            method: 'GET',
+            headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
+        }).then(res => res.json())
+        .then(res => {
+            allShelfsData(res)
+        })
+        .catch(e => console.log(e))
+    })
+}
+allShelfsInOneBlock()
+// ==================================================== End All Shelfs In One BLock ==================================================== //
+
+
+
+
+
+
 // ==================================================== BLock Books ==================================================== //
-// Latest Books Function
+// Block Books Function
 function blockBook(data){
     for (let i = 0 ; i <= data.length ; i++){
         let book = document.createElement("div")
         let p = document.createElement("p")
-        // let pText = document.createTextNode(data[i].book_name)
+        let pText = document.createTextNode(data[i].book_name)
         let span = document.createElement("span")
-        // let spanText = document.createTextNode(data[i].updated_date)
+        let spanText = document.createTextNode(data[i].updated_date)
+        let blockBook = document.querySelector(".browse-books-landing .container .browseBooks.block-books .block-book")
+        let blockBooks = document.querySelector(".browse-books-landing .container .browseBooks.block-books .block-book .scroll")
+        let blockBookInfo = document.querySelector(".browse-books-landing .container .browseBooks.block-books .block-book-info");
+        let userEditBack = document.querySelector(".browse-books-landing .container .browseBooks.block-books .block-book-info .back")
+        let bookName = document.querySelector(".browse-books-landing .container .browseBooks.block-books .block-book-info .book-name span")
+        let bookAuthor = document.querySelector(".browse-books-landing .container .browseBooks.block-books .block-book-info .book-author span")
+        let bookApublisher = document.querySelector(".browse-books-landing .container .browseBooks.block-books .block-book-info .publisher span")
+        let bookCode = document.querySelector(".browse-books-landing .container .browseBooks.block-books .block-book-info .book-code span")
+        let bookCopies = document.querySelector(".browse-books-landing .container .browseBooks.block-books .block-book-info .book-copies span")
+        let bookCreated = document.querySelector(".browse-books-landing .container .browseBooks.block-books .block-book-info .book-created span")
 
         book.className = "book"
 
-        myBook.appendChild(book)
+        blockBooks.appendChild(book)
         book.appendChild(p)
         p.appendChild(pText)
         book.appendChild(span)
         span.appendChild(spanText)
 
         book.addEventListener("click",()=>{
+            blockBook.style.display = "none"
+            blockBookInfo.style.display = "block"
+            bookName.textContent = data[i].book_name
+            bookAuthor.textContent = data[i].author
+            bookApublisher.textContent = data[i].publisher
+            bookCode.textContent = data[i].book_code
+            bookCopies.textContent = data[i].number_of_copies
+            bookCreated.textContent = data[i].created_date
         })
 
         userEditBack.addEventListener("click",()=>{
-            myBook.style.display = "block"
-            myBookInfo.style.display = "none"
+            blockBook.style.display = "block"
+            blockBookInfo.style.display = "none"
         })
     }
 }
-// LatestBooks Fetch Function
+// blockBooks & length Fetch Function
 function blockBooks(){
-    fetch('http://localhost:3000/library/blocks/getBooksInThisBlock',
-    {
-        method: 'GET',
-        headers: new Headers({"Authorization": `Bearer ${token}`}),
-    }).then(res => res.json())
-    .then(res => {
-        console.log(res)
-        blockBook(res)
+    let blockID = document.getElementsByName("block_num_one")[0]
+    blockID.addEventListener("input",()=>{
+        let blockBooks = document.querySelector(".browse-books-landing .container .browseBooks.block-books .block-book .scroll")
+        let blockBooksDivs = document.querySelectorAll(".browse-books-landing .container .browseBooks.block-books .block-book .scroll div")
+        blockBooks.style.display = "block"
+        blockBooksDivs.forEach((e)=>{
+            e.remove()
+        })
+        fetch(`http://localhost:3000/library/books/getBooksInThisBlock?block_number=${blockID.value.toString()}`,
+        {
+            method: 'GET',
+            headers: new Headers({"Authorization": `Bearer ${token}`}),
+        }).then(res => res.json())
+        .then(res => {
+            blockBook(res)
+        })
+        .catch(e => console.log(e))
     })
-    .catch(e => console.log(e))
+
+}
+function blockBooksLength(){
+    let blockID = document.getElementsByName("block_num_one")[0]
+    blockID.addEventListener("input",()=>{
+        fetch(`http://localhost:3000/library/books/countBooksInThisBlock?block_number=${blockID.value.toString()}`,
+        {
+            method: 'GET',
+            headers: new Headers({"Authorization": `Bearer ${token}`}),
+        }).then(res => res.json())
+        .then(res => {
+            let blockBooksLength = document.querySelector(".browse-books-landing .container .browseBooks.block-books .block-book .count")
+            blockBooksLength.textContent = res
+        })
+        .catch(e => console.log(e))
+    })
+
 }
 blockBooks()
+blockBooksLength()
+// ==================================================== End BLock Books ==================================================== //
+
+
+
+
+
+
+// ==================================================== shelf Books ==================================================== //
+// shelf Books Function
+function shelfBook(data){
+    for (let i = 0 ; i <= data.length ; i++){
+        let book = document.createElement("div")
+        let p = document.createElement("p")
+        let pText = document.createTextNode(data[i].book_name)
+        let span = document.createElement("span")
+        let spanText = document.createTextNode(data[i].updated_date)
+        let shelfBook = document.querySelector(".browse-books-landing .container .browseBooks.shelf-books .shelf-book")
+        let shelfBooks = document.querySelector(".browse-books-landing .container .browseBooks.shelf-books .shelf-book .scroll")
+        let shelfBookInfo = document.querySelector(".browse-books-landing .container .browseBooks.shelf-books .shelf-book-info");
+        let userEditBack = document.querySelector(".browse-books-landing .container .browseBooks.shelf-books .shelf-book-info .back")
+        let bookName = document.querySelector(".browse-books-landing .container .browseBooks.shelf-books .shelf-book-info .book-name span")
+        let bookAuthor = document.querySelector(".browse-books-landing .container .browseBooks.shelf-books .shelf-book-info .book-author span")
+        let bookApublisher = document.querySelector(".browse-books-landing .container .browseBooks.shelf-books .shelf-book-info .publisher span")
+        let bookCode = document.querySelector(".browse-books-landing .container .browseBooks.shelf-books .shelf-book-info .book-code span")
+        let bookCopies = document.querySelector(".browse-books-landing .container .browseBooks.shelf-books .shelf-book-info .book-copies span")
+        let bookCreated = document.querySelector(".browse-books-landing .container .browseBooks.shelf-books .block-book-info .book-created span")
+
+        book.className = "book"
+
+        shelfBooks.appendChild(book)
+        book.appendChild(p)
+        p.appendChild(pText)
+        book.appendChild(span)
+        span.appendChild(spanText)
+
+        book.addEventListener("click",()=>{
+            shelfBook.style.display = "none"
+            shelfBookInfo.style.display = "block"
+            bookName.textContent = data[i].book_name
+            bookAuthor.textContent = data[i].author
+            bookApublisher.textContent = data[i].publisher
+            bookCode.textContent = data[i].book_code
+            bookCopies.textContent = data[i].number_of_copies
+            bookCreated.textContent = data[i].created_date
+        })
+
+        userEditBack.addEventListener("click",()=>{
+            shelfBook.style.display = "block"
+            shelfBookInfo.style.display = "none"
+        })
+    }
+}
+// shelfBooks & length Fetch Function
+function shelfBooks(){
+    let shelfID = document.getElementsByName("shelf_num")[0]
+    let blockID = document.getElementsByName("block_num_two")[0]
+    shelfID.addEventListener("input",()=>{
+        let shelfBooks = document.querySelector(".browse-books-landing .container .browseBooks.shelf-books .shelf-book .scroll")
+        let shelfBooksDivs = document.querySelectorAll(".browse-books-landing .container .browseBooks.shelf-books .shelf-book .scroll div")
+        shelfBooks.style.display = "block"
+        shelfBooksDivs.forEach((e)=>{
+            e.remove()
+        })
+        fetch(`http://localhost:3000/library/books/getBooksInThisBlock?block_number=${blockID.value.toString()}&shelf_number=${shelfID.value.toString()}`,
+        {
+            method: 'GET',
+            headers: new Headers({"Authorization": `Bearer ${token}`}),
+        }).then(res => res.json())
+        .then(res => {
+            shelfBook(res)
+        })
+        .catch(e => console.log(e))
+    })
+
+}
+function shelfkBooksLength(){
+    let shelfID = document.getElementsByName("block_num_one")[0]
+    let blockID = document.getElementsByName("block_num_two")[0]
+    shelfID.addEventListener("input",()=>{
+        fetch(`http://localhost:3000/library/books/countBooksInThisBlock?block_number=${blockID.value.toString()}&shelf_number=${shelfID.value.toString()}`,
+        {
+            method: 'GET',
+            headers: new Headers({"Authorization": `Bearer ${token}`}),
+        }).then(res => res.json())
+        .then(res => {
+            let shelfBooksLength = document.querySelector(".browse-books-landing .container .browseBooks.shelf-books .shelf-book .count span")
+            shelfBooksLength.textContent = res
+        })
+        .catch(e => console.log(e))
+    })
+
+}
+shelfBooks()
+shelfkBooksLength()
 // ==================================================== End BLock Books ==================================================== //

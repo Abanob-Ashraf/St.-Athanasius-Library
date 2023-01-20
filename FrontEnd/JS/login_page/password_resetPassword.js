@@ -1,16 +1,16 @@
+// Redirect to Login page If Token = undefined OR Empty
 window.onload = function(){
     if (token == undefined || token == ""){
         location.href = "/login.html"
     }
 }
 
-let form = document.forms[0]
-let resetPassword = document.getElementsByName("password")[0]
-let msg = document.querySelector(".password-form small")
-
+// Get Token From Send URL And Put It In Fetch
 let token = location.href.slice(50)
 
+// Set New Password Fetch Function
 function resetPass(){
+    let resetPassword = document.getElementsByName("password")[0]
     fetch('http://localhost:3000/library/users/NewPassword',
     {
         method: 'POST',
@@ -20,23 +20,23 @@ function resetPass(){
         })
     }).then(res => res.json())
     .then(res => {
-        console.log(res)
-        if(resetPassword.value.length < 8){
+        let msg = document.querySelector("small")
+        if(res.errors){
+            // IF response = Has Errors Show =>
             msg.textContent = `يرجي ان لا تقل كلمه المرور عن 8 احرف`
             setTimeout(()=>{
                 msg.textContent = ``
-            },2000)
-        }else{
-            msg.textContent = `تم تغير كلمه المرور سيتم ارجاعك لصفحه تسجيل الدخول`
-            setTimeout(()=>{
-                msg.textContent = ``
-                location.href = "/login.html"
             },5000)
+        }else{
+            // Else Go To Login Page =>
+            location.href = "/login.html"
         }
     })
     .catch(e => console.log(e))
 }
 
+// Submit/Run=>(Code) Set New Password Fetch Function
+let form = document.forms[0]
 form.addEventListener("submit",(e)=>{
     e.preventDefault()
     resetPass()

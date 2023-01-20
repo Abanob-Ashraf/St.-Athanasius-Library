@@ -13,39 +13,51 @@
     <title>مكتبه القديس اثناسيوس | تسجيل الدخول</title>
 </head>
 <body>
+    <!-- Start Header -->
     <div class="header">
         <div class="container">
+            <!-- Logo -->
             <a href="./index.html" class="logo">
                 <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
                 <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
             </a>
+            <!-- Close Icon -->
+            <a href="./index.html" class="close"><i class="fa-solid fa-xmark fa-2x"></i></a>
         </div>
     </div>
-    <div class="page-container">
-        <div class="signin-form">
-            <form action="#" class="sign-in-form">
+    <!-- End Header -->
+
+    <!-- Start Login Container -->
+    <div class="login-container">
+        <!-- Start Login Form -->
+        <div class="login-form">
+            <form action="#" class="login-form">
                 <h2 class="title">تسجيل الدخول</h2>
+                <!-- Email Input Field -->
                 <div class="input-field">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" placeholder="البريد الالكتروني" name="email"/>
+                    <i class="fas fa-envelope icon"></i>
+                    <input type="email" placeholder="البريد الالكتروني" required name="email"/>
                     <i class="fas fa-check-circle check"></i>
                     <i class="fas fa-exclamation-circle exclamation"></i>
                 </div>
-                <small></small>
+                <!-- Password Input Field -->
                 <div class="input-field">
-                    <i class="fas fa-lock"></i>
+                    <i class="fas fa-lock icon"></i>
                     <input type="password" placeholder="كلمه المرور" required name="password"/>
                     <i class="fas fa-check-circle check"></i>
                     <i class="fas fa-exclamation-circle exclamation"></i>
                 </div>
+                <!-- Password Error Message -->
                 <small></small>
-                <div class="submit">
-                    <input type="submit" value="تسجيل الدخول" class="btn solid" required/>
-                </div>
+                <!-- Submit Input -->
+                <input type="submit" value="تسجيل الدخول"class="submit" required/>
+                <hr>
                 <a href="./email_resetPassword.html" class="reset">هل نسيت كلمه المرور؟</a>
             </form>
         </div>
+        <!-- End Login Form -->
     </div>
-    <script src="./js/login.js"></script>
+    <!-- End Login Container -->
+    <script src="./js/login_page/login.js"></script>
 </body>
 </html>
