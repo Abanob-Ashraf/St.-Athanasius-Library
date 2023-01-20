@@ -5,16 +5,17 @@ import { Pool } from 'pg'
 dotenv.config()
 
 const { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD, ENV } = process.env
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env
 
 console.log(ENV)
-console.log(`Database is connected at prot:${DB_PORT}`)
 
 const Client = new Pool({
-  host: DB_HOST,
-  database: DB_NAME,
-  user: DB_USER,
-  password: DB_PASSWORD,
-  port: parseInt(DB_PORT as string)
+  host: ENV === 'dev' ? DB_HOST : PGHOST,
+  database: ENV === 'dev' ? DB_NAME : PGDATABASE,
+  user: ENV === 'dev' ? DB_USER : PGUSER,
+  password: ENV === 'dev' ? DB_PASSWORD : PGPASSWORD,
+  port: parseInt(DB_PORT as string),
+  ssl: ENV === 'dev' ? false : true
 })
 
 Client.on('error', (error: Error) => {

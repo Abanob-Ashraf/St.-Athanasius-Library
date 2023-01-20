@@ -181,7 +181,6 @@ export const getUserDataToResetPassword = async (req: Request, res: Response) =>
     const token = jwt.sign({ userInfo }, process.env.TOKEN_SECRET as unknown as string, {
       expiresIn: '1h'
     })
-
     if (user['userInfo'] != 'this email does not exiest here') {
       transporter.sendMail({
         to: email,
@@ -266,7 +265,6 @@ export const authenticateUser = async (req: Request, res: Response) => {
     }
     return res.status(200).json({ ...user, token })
   } catch (error) {
-    console.log(error)
     res.status(400).json(error)
   }
 }

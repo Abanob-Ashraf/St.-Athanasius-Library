@@ -1,6 +1,8 @@
 import express, { Application, Request, Response } from 'express'
 import morgan from 'morgan'
 import helmet from 'helmet'
+import compression from 'compression'
+
 import rateLimit from 'express-rate-limit'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
@@ -15,10 +17,11 @@ const PORT = process.env.PORT || 3000
 const app: Application = express()
 
 // HTTP request logger middleware
-app.use(morgan('common'))
+app.use(morgan('combined'))
 
 // HTTP Security middleware
 app.use(helmet())
+app.use(compression())
 
 // middeewane to parse incoming requests
 app.use(express.json())

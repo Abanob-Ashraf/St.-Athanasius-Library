@@ -325,6 +325,7 @@ export class UsersModel {
       connection.release()
       return null
     } catch (error) {
+      console.log(error)
       throw new Error(`Unable to login: ${(error as Error).message}`)
     }
   }
