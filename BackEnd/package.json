@@ -7,6 +7,7 @@
     "build": "npm run clean && npx tsc",
     "dev": "nodemon ./src/main.ts",
     "start": "npm run build && nodemon build/main.js",
+    "prod": "set ENV=prod && npm run start",
     "database:up": "db-migrate up",
     "database:fkdata": "psql -U abano -d librarydb -a -f data_migrations/initialization.sql",
     "database:reset": "db-migrate reset",
@@ -35,7 +36,8 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.9.0",
     "nodemailer-sendgrid-transport": "^0.2.0",
-    "pg": "^8.8.0"
+    "pg": "^8.8.0",
+    "postgres": "^3.3.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
