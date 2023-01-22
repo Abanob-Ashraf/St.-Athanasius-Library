@@ -1,3 +1,5 @@
+import path from 'path'
+import fs from 'fs'
 import express, { Application, Request, Response } from 'express'
 import morgan from 'morgan'
 import helmet from 'helmet'
@@ -17,7 +19,8 @@ const PORT = process.env.PORT || 3000
 const app: Application = express()
 
 // HTTP request logger middleware
-app.use(morgan('combined'))
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+app.use(morgan('combined', { stream: accessLogStream }))
 
 // HTTP Security middleware
 app.use(helmet())
@@ -35,7 +38,7 @@ app.use(
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
     statusCode: 429, // StatusCode = 429 Too Many Requests
-    message: 'Too many requests, please try again after 15 minutes'
+    message: 'Too many requests, please try again later'
   })
 )
 
