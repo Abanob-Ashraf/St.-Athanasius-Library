@@ -5,5 +5,13 @@
     "database": { "ENV": "DB_NAME" },
     "user": { "ENV": "DB_USER" },
     "password": { "ENV": "DB_PASSWORD" }
+  },
+  "prod": {
+    "driver": "pg",
+    "host": { "ENV": "PGHOST" },
+    "database": { "ENV": "PGDATABASE" },
+    "user": { "ENV": "PGUSER" },
+    "password": { "ENV": "PGPASSWORD" },
+    "ssl": true
   }
 }
