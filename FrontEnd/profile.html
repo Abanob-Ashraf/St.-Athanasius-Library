@@ -13,15 +13,19 @@
     <title>مكتبه القديس اثناسيوس | الصفحه الشخصيه</title>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Start Header -->
     <div class="header">
         <div class="container">
+            <!-- Logo -->
             <a href="./index.html" class="logo">
                 <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
                 <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
             </a>
+            <!-- Start User Login Drop List  -->
             <div class="user-login">
-                <div class="profile-pic"></div>
+                <div class="profile-pic">
+                    <img src="./IMGS/AVATAR/avatar-01.png">
+                </div>
                 <i class="fa-solid fa-caret-down fa-1x"></i>
             </div>
             <ul class="menu">
@@ -32,8 +36,9 @@
                 <li><a href="./createBooks.html">تسجيل الكتب</a></li>
                 <li><a href="./browseBooks.html">تصفح الكتب</a></li>
                 <hr>
-                <li><a id="logout">تسجيل الخروج</a></li>
+                <li><a class="logout">تسجيل الخروج</a></li>
             </ul>
+            <!-- End User Login Drop List  -->
         </div>
     </div>
     <!-- End Header -->
@@ -41,21 +46,24 @@
     <!-- Profile Landing -->
     <div class="profile-landing">
         <div class="container">
-            <!-- Grid Layout One -->
+            <!-- Grid Layout -->
             <div class="grid-layout">
-                <!-- Start Profile -->
+                <!-- Start Profile General Information -->
                 <div class="profile general-info">
                     <div class="admin-flag"></div>
-                    <div class="pic"></div>
+                    <div class="pic">
+                        <img src="./IMGS/AVATAR/avatar-01.png">
+                    </div>
                     <div class="name"></div>
                     <div class="job"></div>
+                    <input type="file" name="pic" accept="image/*">
                 </div>
                 <!-- End Profile -->
 
-                <!-- Start Profile -->
+                <!-- Start Profile All User Information -->
                 <div class="profile user">
                     <div class="user-info">
-                        <div class="special-title">المعلومات الشخصيه</div>
+                        <div class="title">المعلومات الشخصيه</div>
                         <hr>
                         <div class="first-name">
                             <p>الاسم الاول :</p>
@@ -81,44 +89,45 @@
                             <p>تاريخ الانشاء :</p>
                             <span></span>
                         </div>
-                        <button class="edit">اتود تعديل البيانات ؟</button>
+                        <p class="edit">اتود تعديل البيانات ؟</p>
                     </div>
+                    <!-- Start Edit All User Information-->
                     <div class="edit-info">
-                        <div class="special-title">تعديل المعلومات الشخصيه</div>
+                        <div class="title">تعديل المعلومات الشخصيه</div>
                         <hr>
                         <form action="" class="editInfo">
                             <div class="first-name">
-                                <input type="text" name="first-name">
+                                <input type="text" name="first-name" class="input">
                             </div>
                             <div class="last-name">
-                                <input type="text" name="last-name">
+                                <input type="text" name="last-name" class="input">
                             </div>
                             <div class="email">
-                                <input type="email" name="email">
+                                <input type="email" name="email" class="input">
                             </div>
                             <div class="phone">
-                                <input type="text" name="phone">
+                                <input type="text" name="phone" class="input">
                             </div>
-                            <p class="go">هل تود تغير كلمه المرور؟</p>
-                            <div class="double-div">
+                            <small class="go">هل تود تغير كلمه المرور؟</small class="go">
+                            <div class="flex">
                                 <input class="edit" type="submit" value="حفظ البيانات">
                                 <p class="back">الرجوع</p>
                             </div>
                         </form>
                     </div>
+                    <!-- Start Change Password-->
                     <div class="change-password">
-                        <div class="special-title">تغير كلمه السر</div>
+                        <div class="title">تغير كلمه السر</div>
                         <hr>
                         <form action="" class="changePassword">
-                            <div class="password-container">
-                                <div class="old-password">
-                                    <input type="password" required name="old-password" placeholder="كلمه السر القديمه">
-                                </div>
-                                <div class="new-password">
-                                    <input type="password" required name="new-password" placeholder="كلمه السر الجديده">
-                                </div>
+                            <div class="old-password">
+                                <input type="password" required name="old-password" placeholder="كلمه السر القديمه"  class="input">
                             </div>
-                            <div class="double-div">
+                            <div class="new-password">
+                                <input type="password" required name="new-password" placeholder="كلمه السر الجديده" class="input">
+                            </div>
+                            <small></small>
+                            <div class="flex">
                                 <input class="edit" type="submit" value="حفظ البيانات">
                                 <p class="back">الرجوع</p>
                             </div>
@@ -130,18 +139,18 @@
                 <!-- Start Profile -->
                 <div class="profile search-user">
                     <div class="search">
-                        <div class="special-title">البحث عن مستخدم</div>
+                        <div class="title">البحث عن مستخدم</div>
                         <hr>
                         <form action="" class="search-form">
                             <div class="search-container">
                                 <input type="search" name="المستخدم:" id="search" placeholder="البحث عن مستخدم">
-                                <input type="submit" value="البحث" id="submit">
+                                <input type="submit" value="البحث" class="submit">
                             </div>
                             <small></small>
                         </form>
                     </div>
                     <div class="user-info">
-                        <div class="special-title">معلومات المستخدم</div>
+                        <div class="title">معلومات المستخدم</div>
                         <hr>
                         <div class="scroll-container"></div>
                         <div class="arrows">
@@ -151,7 +160,7 @@
                         </div>
                     </div>
                     <div class="edit-info">
-                        <div class="special-title">تعديل المعلومات الشخصيه للمستخدم</div>
+                        <div class="title">تعديل المعلومات الشخصيه للمستخدم</div>
                         <hr>
                         <form action="">
                             <div class="first-name">
@@ -184,7 +193,7 @@
                                 <input type="checkbox" name="admin-flag" id="admin-flag" class="input">
                                 <label for="admin-flag">هل تود جعله مدير؟</label>
                             </div>
-                            <div class="double-div">
+                            <div class="flex">
                                 <input class="edit" type="submit" value="حفظ البيانات">
                                 <p class="back">الرجوع</p>
                             </div>
@@ -196,13 +205,13 @@
                 <!-- Start Profile -->
                 <div class="profile deleted-users">
                     <div class="show">
-                        <div class="special-title">المستخدمين المحذوفين</div>
+                        <div class="title">المستخدمين المحذوفين</div>
                         <hr>
                         <button class="show-deleted-users">عرض المستخدمين المحذوفين</button>
                         <small></small>
                     </div>
                     <div class="info-show">
-                        <div class="special-title">عرض المستخدمين المحذوفين</div>
+                        <div class="title">عرض المستخدمين المحذوفين</div>
                         <hr>
                         <div class="scroll-container"></div>
                         <div class="arrows">
@@ -218,7 +227,7 @@
 
             <!-- Profile -->
             <div class="profile create-user">
-                <div class="special-title">انشاء المستخدم</div>
+                <div class="title">انشاء المستخدم</div>
                 <hr>
                 <div class="flag">
                     <input type="checkbox" name="admin-flag" id="flag-admin">
@@ -254,6 +263,15 @@
         </div>
     <!-- Profile Landing -->
     </div>
-    <script src="./JS/profile.js"></script>
+    <script src="./JS/profile_page/main.js" type="module"></script>
+    <script src="./JS/profile_page/pranch/global.js" type="module"></script>
+    <script src="./JS/profile_page/pranch/header.js" type="module"></script>
+    <script src="./JS/profile_page/pranch/general_info.js" type="module"></script>
+    <script src="./JS/profile_page/pranch/user_info.js" type="module"></script>
+    <script src="./JS/profile_page/pranch/edit_user_info.js" type="module"></script>
+    <script src="./JS/profile_page/pranch/change_password.js" type="module"></script>
+    <script src="./JS/profile_page/pranch/search_user.js" type="module"></script>
+    <script src="./JS/profile_page/pranch/deleted_users.js" type="module"></script>
+    <script src="./JS/profile_page/pranch/create_user.js" type="module"></script>
 </body>
 </html>

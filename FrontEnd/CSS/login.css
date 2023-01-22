@@ -220,24 +220,6 @@ form {
     -o-transform: translateY(-50%);
     visibility: hidden;
 }
-
-/* Success Valid */
-.input-field.success input{
-    border-color: var(--successColor);
-    border-width: 2px;
-}
-
-.input-field.success i{
-    background-color: transparent;
-    border-color: var(--successColor);
-    color: var(--successColor);
-    border-width: 2px;
-}
-
-.input-field.success .check{
-    visibility: visible;
-}
-
 /* Error Valid */
 .input-field.error input{
     border-color: var(--dangerColor);
