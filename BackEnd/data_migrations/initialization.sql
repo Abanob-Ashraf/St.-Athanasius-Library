@@ -2,6 +2,7 @@
 insert into users (
         first_name,
         last_name,
+        full_name,
         email,
         password,
         phone_number,
@@ -14,8 +15,9 @@ insert into users (
 values (
         'Abanob',
         'Ashraf',
+        'Abanob Ashraf',
         'abanobashraf74@gmail.com',
-        '$2b$10$NdQMZcrQiipT2Re16Jagl.gNW7iU2fx2MZB1UYPvoYpXlC5EyKm3m',
+        '$2b$10$Tf7IBGEZcCKUrbQR3kwLQeCG8MtktNYaSB2RNQSIO0UexyRIwj.FS',
         '01142601607',
         'owner',
         true,
@@ -26,6 +28,7 @@ values (
     (
         'Kerolos',
         'Reda',
+        'Kerolos Reda',
         'elfanan2003@gmail.com',
         '$2b$10$IaE21QJ62BUw/5Z7h0dGae5DHsOxum0TcgdotUt7ldJCmToqlIQV2',
         '01282332039',
@@ -38,8 +41,9 @@ values (
     (
         'Abanob',
         'Hanna',
+        'Abanob Hanna',
         'abanobashra74@gmail.com',
-        '$2b$10$Z8jPy1hLXiOvlI9AsSU/I.apYYjWv6Hq3G.0He2t7qMgLcuqj1vAm',
+        '$2b$10$Tf7IBGEZcCKUrbQR3kwLQeCG8MtktNYaSB2RNQSIO0UexyRIwj.FS',
         '01119936520',
         'owner',
         true,

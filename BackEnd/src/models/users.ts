@@ -12,6 +12,7 @@ import {
   GETPASSWORD,
   GETUSERWITHEMAIL,
   RESETPASSWORD,
+  SEARCHFORUSER,
   // SEARCHFORUSER,
   SELECTSTATUS,
   UPDATEBOOKAFTERDELETEUSER,
@@ -25,6 +26,7 @@ export type User = {
   id: number
   first_name: string
   last_name: string
+  full_name: string
   email: string
   password: string
   phone_number: string
@@ -34,7 +36,6 @@ export type User = {
   created_date: Date
   updated_date: Date
 }
-
 export class UsersModel {
   // createUser
   async create(u: User): Promise<object> {
@@ -44,6 +45,7 @@ export class UsersModel {
       await connection.query(CREATEUSER, [
         u.first_name,
         u.last_name,
+        u.full_name,
         u.email,
         hashing,
         u.phone_number,
@@ -102,18 +104,19 @@ export class UsersModel {
   async searchForUser(
     first_name: string,
     last_name: string,
+    full_name: string,
     email: string,
     job: string
   ): Promise<object> {
     try {
       const connection = await Client.connect()
-      let SEARCHFORUSER = `SELECT id, first_name, last_name, email, phone_number, job, admin_flag, 
-      user_status, created_date, updated_date 
-      FROM users WHERE email='${email}' OR job='${job}' OR first_name='${first_name}'`
-      if (last_name != null) {
-        SEARCHFORUSER = SEARCHFORUSER + `AND last_name='${last_name}'`
-      }
-      const result = await connection.query(SEARCHFORUSER)
+      const result = await connection.query(SEARCHFORUSER, [
+        first_name,
+        last_name,
+        full_name,
+        email,
+        job
+      ])
       if (result.rows.length) {
         const user = { status: 200, userInfo: result.rows }
         connection.release()
@@ -140,6 +143,7 @@ export class UsersModel {
           u.id,
           u.first_name,
           u.last_name,
+          u.full_name,
           u.email,
           u.phone_number,
           u.job,
@@ -161,9 +165,7 @@ export class UsersModel {
       }
       return error
     } catch (error) {
-      throw new Error(
-        `Unable to update ${u.first_name + ' ' + u.last_name}, ${(error as Error).message}`
-      )
+      throw new Error(`Unable to update ${u.full_name}, ${(error as Error).message}`)
     }
   }
 
@@ -325,6 +327,7 @@ export class UsersModel {
       connection.release()
       return null
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error)
       throw new Error(`Unable to login: ${(error as Error).message}`)
     }
