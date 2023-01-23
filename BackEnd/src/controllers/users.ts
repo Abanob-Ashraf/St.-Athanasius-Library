@@ -42,7 +42,9 @@ export const createUser = async (req: Request, res: Response) => {
     const userData = await library.getUserDataToResetPassword(user.email)
     const userInfo = userData['userInfo']
 
-    const token = jwt.sign({ userInfo }, process.env.TOKEN_SECRET as unknown as string)
+    const token = jwt.sign({ userInfo }, process.env.TOKEN_SECRET as unknown as string, {
+      expiresIn: process.env.JWT_EXPIRES_IN
+    })
     transporter.sendMail({
       to: user.email,
       from: 'abanobashraf74@gmail.com',
