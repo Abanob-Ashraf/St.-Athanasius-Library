@@ -24,7 +24,7 @@
             <!-- Start User Login Drop List  -->
             <div class="user-login">
                 <div class="profile-pic">
-                    <img src="./IMGS/AVATAR/avatar-01.png">
+                    <img>
                 </div>
                 <i class="fa-solid fa-caret-down fa-1x"></i>
             </div>
@@ -52,25 +52,20 @@
                 <div class="profile general-info">
                     <div class="admin-flag"></div>
                     <div class="pic">
-                        <img src="./IMGS/AVATAR/avatar-01.png">
+                        <img>
                     </div>
                     <div class="name"></div>
                     <div class="job"></div>
-                    <input type="file" name="pic" accept="image/*">
                 </div>
                 <!-- End Profile -->
 
-                <!-- Start Profile All User Information -->
+                <!-- Start Profile User's Information -->
                 <div class="profile user">
                     <div class="user-info">
                         <div class="title">المعلومات الشخصيه</div>
                         <hr>
-                        <div class="first-name">
-                            <p>الاسم الاول :</p>
-                            <span></span>
-                        </div>
-                        <div class="last-name">
-                            <p>الاسم الاخير :</p>
+                        <div class="full-name">
+                            <p>الاسم :</p>
                             <span></span>
                         </div>
                         <div class="job">
@@ -91,7 +86,7 @@
                         </div>
                         <p class="edit">اتود تعديل البيانات ؟</p>
                     </div>
-                    <!-- Start Edit All User Information-->
+                    <!-- Start Edit User's Information-->
                     <div class="edit-info">
                         <div class="title">تعديل المعلومات الشخصيه</div>
                         <hr>
@@ -114,6 +109,7 @@
                                 <p class="back">الرجوع</p>
                             </div>
                         </form>
+                        <small class="errorMsg"></small>
                     </div>
                     <!-- Start Change Password-->
                     <div class="change-password">
@@ -136,19 +132,20 @@
                 </div>
                 <!-- End Profile -->
 
-                <!-- Start Profile -->
+                <!-- Start Profile Search For A User-->
                 <div class="profile search-user">
                     <div class="search">
                         <div class="title">البحث عن مستخدم</div>
                         <hr>
                         <form action="" class="search-form">
                             <div class="search-container">
-                                <input type="search" name="المستخدم:" id="search" placeholder="البحث عن مستخدم">
+                                <input type="search" name="المستخدم:" class="search-for-a-user" placeholder="البحث عن مستخدم">
                                 <input type="submit" value="البحث" class="submit">
                             </div>
                             <small></small>
                         </form>
                     </div>
+                    <!-- Other Users Informations -->
                     <div class="user-info">
                         <div class="title">معلومات المستخدم</div>
                         <hr>
@@ -159,15 +156,17 @@
                             <i class="fa-sharp fa-solid fa-angles-left fa-2x left"></i>
                         </div>
                     </div>
+                    <!-- Other Users Informations Edit -->
                     <div class="edit-info">
                         <div class="title">تعديل المعلومات الشخصيه للمستخدم</div>
                         <hr>
+                        <!-- Other Users Informations Edit Form -->
                         <form action="">
                             <div class="first-name">
-                                <input type="text" placeholder="الاسم الاول" name="الاسم الاول:" class="input">
+                                <input type="text" name="الاسم الاول:" class="input">
                             </div>
                             <div class="last-name">
-                                <input type="text" placeholder="الاسم الاخير" name="الاسم الاخير:" class="input">
+                                <input type="text" name="الاسم الاخير:" class="input">
                             </div>
                             <div class="job">
                                 <select name="job" class="input">
@@ -184,10 +183,10 @@
                                 </select>
                             </div>
                             <div class="email">
-                                <input type="email" placeholder="البريد الالكتروني" name="البريد الالكتروني:" class="input">
+                                <input type="email" name="البريد الالكتروني:" class="input">
                             </div>
                             <div class="phone">
-                                <input type="text" placeholder="رقم الهاتف" name="رقم الهاتف:" class="input">
+                                <input type="text" name="رقم الهاتف:" class="input">
                             </div>
                             <div class="flag">
                                 <input type="checkbox" name="admin-flag" id="admin-flag" class="input">
@@ -197,12 +196,13 @@
                                 <input class="edit" type="submit" value="حفظ البيانات">
                                 <p class="back">الرجوع</p>
                             </div>
+                            <small class="errorMsg"></small>
                         </form>
                     </div>
                 </div>
                 <!-- End Profile -->
 
-                <!-- Start Profile -->
+                <!-- Start Profile Deleted Users -->
                 <div class="profile deleted-users">
                     <div class="show">
                         <div class="title">المستخدمين المحذوفين</div>
@@ -210,6 +210,7 @@
                         <button class="show-deleted-users">عرض المستخدمين المحذوفين</button>
                         <small></small>
                     </div>
+                    <!-- Start Profile Deleted Users Information -->
                     <div class="info-show">
                         <div class="title">عرض المستخدمين المحذوفين</div>
                         <hr>
@@ -225,7 +226,7 @@
             </div>
             <!-- End Grid Layout One -->
 
-            <!-- Profile -->
+            <!-- Start Profile Create Users-->
             <div class="profile create-user">
                 <div class="title">انشاء المستخدم</div>
                 <hr>
@@ -233,6 +234,7 @@
                     <input type="checkbox" name="admin-flag" id="flag-admin">
                     <label for="flag-admin">هل تود جعله مدير؟</label>
                 </div>
+                <!-- Create User Form -->
                 <form action="" class="create-user-form">
                     <div class="input-field">
                         <input type="text" placeholder="الاسم الاول" required name="firstName" class="first-name input"/>
@@ -254,24 +256,80 @@
                         <input type="submit" value="انشاء مستخدم" class="submit" />
                     </div>
                 </form>
-                <small class="one"></small>
-                <small class="two"></small>
-                <small class="three"></small>
-                <small class="four"></small>
+                <small></small>
             </div>
             <!-- End Profile -->
+
+            <!-- Start Footer -->
+            <div class="footer">
+                <div class="grid-layout">
+                    <div class="box">
+                        <a href="./index.html" class="logo">
+                            <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
+                            <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
+                        </a>
+                        <ul class="social">
+                            <li>
+                                <a href="#" class="facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="youtube">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <p class="text">
+                            مكتبه البابا اثناسيوس الرسولي ترحب بكم
+                        </p>
+                    </div>
+                    <div class="box">
+                        <ul class="links">
+                            <li><a href="#">اللنك الاول</a></li>
+                            <li><a href="#">اللنك الثاني</a></li>
+                            <li><a href="#">اللنك الثالث</a></li>
+                            <li><a href="#">اللنك الرابع</a></li>
+                        </ul>
+                    </div>
+                    <div class="box">
+                        <div class="line">
+                            <i class="fas fa-map-marker-alt fa-fw"></i>
+                            <div class="info">القاهره,الخصوص,ارض الكرادسه, كنيسه الشهيد مارمينا و البابا كيرلس</div>
+                        </div>
+                        <div class="line">
+                            <i class="far fa-clock fa-fw"></i>
+                            <div class="info">ساعات العمل من : 4 ظهرا ال 8 ليلا</div>
+                        </div>
+                        <div class="line">
+                            <i class="fas fa-phone-volume fa-fw"></i>
+                            <div class="info">
+                                <span>+201282332039</span>
+                                <span>+201142601607</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="copyright">Made With blablalba</p>
+            </div>
+            <!-- End Footer -->
         </div>
     <!-- Profile Landing -->
     </div>
-    <script src="./JS/profile_page/main.js" type="module"></script>
-    <script src="./JS/profile_page/pranch/global.js" type="module"></script>
-    <script src="./JS/profile_page/pranch/header.js" type="module"></script>
-    <script src="./JS/profile_page/pranch/general_info.js" type="module"></script>
-    <script src="./JS/profile_page/pranch/user_info.js" type="module"></script>
-    <script src="./JS/profile_page/pranch/edit_user_info.js" type="module"></script>
-    <script src="./JS/profile_page/pranch/change_password.js" type="module"></script>
-    <script src="./JS/profile_page/pranch/search_user.js" type="module"></script>
-    <script src="./JS/profile_page/pranch/deleted_users.js" type="module"></script>
-    <script src="./JS/profile_page/pranch/create_user.js" type="module"></script>
+    <!-- Start Footer -->
+    <script src="./JS/profile_page/global.js" type="module"></script>
+    <script src="./JS/profile_page/header.js" type="module"></script>
+    <script src="./JS/profile_page/general_info.js" type="module"></script>
+    <script src="./JS/profile_page/user_info.js" type="module"></script>
+    <script src="./JS/profile_page/edit_user_info.js" type="module"></script>
+    <script src="./JS/profile_page/change_password.js" type="module"></script>
+    <script src="./JS/profile_page/search_for_a_user.js" type="module"></script>
+    <script src="./JS/profile_page/deleted_users.js" type="module"></script>
+    <script src="./JS/profile_page/create_user.js" type="module"></script>
 </body>
 </html>
