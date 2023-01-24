@@ -22,11 +22,10 @@ export const createUser = async (req: Request, res: Response) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() })
     }
-    const full_name = req.body.first_name + ' ' + req.body.last_name
     const user: User = {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
-      full_name: full_name,
+      full_name: `${req.body.first_name} ${req.body.last_name}`,
       email: req.body.email.toLowerCase(),
       password: req.body.password,
       phone_number: req.body.phone_number,
@@ -125,12 +124,11 @@ export const updateUser = async (req: Request, res: Response) => {
     const userRole = decode.user.admin_flag
 
     if (userId == +req.params.id || userRole == true) {
-      const full_name = req.body.first_name + ' ' + req.body.last_name
       const user = {
         id: +req.params.id,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        full_name: full_name,
+        full_name: `${req.body.first_name} ${req.body.last_name}`,
         email: req.body.email.toLowerCase(),
         password: req.body.password,
         phone_number: req.body.phone_number,
