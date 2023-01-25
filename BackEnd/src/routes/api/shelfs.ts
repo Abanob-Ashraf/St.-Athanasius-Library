@@ -16,7 +16,7 @@ routes.route('/').post(authorize, admin, createShelf)
 
 routes.route('/').get(authorize, getManyShelfs)
 
-routes.route('/backup').get(authorize, admin, getAllShelfsForBackup)
+routes.route('/ShelfsBackup').get(authorize, admin, getAllShelfsForBackup)
 
 routes.route('/block/:id').get(getShelfsWithBlockId)
 

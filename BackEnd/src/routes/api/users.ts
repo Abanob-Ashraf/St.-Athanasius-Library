@@ -67,7 +67,7 @@ routes.route('/me/changePassword').put(
   changePassword
 )
 
-routes.route('/backup').get(authorize, admin, getAllUsersForBackup)
+routes.route('/UserBackup').get(authorize, admin, getAllUsersForBackup)
 
 routes.route('/unavilable').get(authorize, admin, getAllUnAvilableUsers)
 

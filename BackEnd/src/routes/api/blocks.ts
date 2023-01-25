@@ -15,7 +15,7 @@ routes.route('/').post(authorize, admin, createBlock)
 
 routes.route('/').get(getManyBlocks)
 
-routes.route('/backup').get(authorize, admin, getAllBlocksForBackup)
+routes.route('/BlocksBackup').get(authorize, admin, getAllBlocksForBackup)
 
 routes.route('/:id').get(authorize, getOneBlock)
 

@@ -30,7 +30,7 @@ routes.route('/getBooksInThisBlock').get(searchForBookWithBlockOrShelfAndBlock)
 
 routes.route('/countBooksInThisBlock').get(authorize, countBooksInBlockOrShelfAndBlock)
 
-routes.route('/backup').get(authorize, admin, getAllBooksForBackup)
+routes.route('/BooksBackup').get(authorize, admin, getAllBooksForBackup)
 
 routes.route('/:id').get(getOneBook)
 

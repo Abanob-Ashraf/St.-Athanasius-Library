@@ -1,9 +1,6 @@
-import { getAllBooksForBackup } from './../../controllers/books'
-import { getAllShelfsForBackup } from './../../controllers/shelfs'
-import { getAllBlocksForBackup } from './../../controllers/blocks'
+import { fullBackup } from './../../middlewares/fullBackup'
 import { admin, authorize } from './../../middlewares/authantication_admin'
 import { Router, Request, Response } from 'express'
-import { getAllUsersForBackup } from '../../controllers/users'
 
 const routes = Router()
 
@@ -17,15 +14,6 @@ const welcome = async (_req: Request, res: Response) => {
 
 routes.route('/').get(welcome)
 
-routes
-  .route('/backup')
-  .get(
-    authorize,
-    admin,
-    getAllUsersForBackup,
-    getAllBlocksForBackup,
-    getAllShelfsForBackup,
-    getAllBooksForBackup
-  )
+routes.route('/FullBackup').get(authorize, admin, fullBackup)
 
 export default routes
