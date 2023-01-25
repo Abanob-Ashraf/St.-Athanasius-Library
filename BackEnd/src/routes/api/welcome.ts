@@ -1,4 +1,4 @@
-import { fullBackup } from './../../middlewares/fullBackup'
+import { fullBackup } from '../../middlewares/full_backup'
 import { admin, authorize } from './../../middlewares/authantication_admin'
 import { Router, Request, Response } from 'express'
 
