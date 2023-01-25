@@ -1,12 +1,11 @@
 import converter from 'json-2-csv'
-import fs from 'fs'
-// import archiver from 'archiver'
+import JSZip from 'jszip'
+import * as fs from 'fs'
 import { Request, Response } from 'express'
 import { UsersModel } from '../models/users'
 import { BlocksModel } from '../models/blocks'
 import { ShelfsModel } from '../models/shelfs'
 import { BooksModel } from '../models/books'
-import path from 'path'
 
 const userLibrary = new UsersModel()
 const blockLibrary = new BlocksModel()
@@ -16,7 +15,7 @@ const bookLibrary = new BooksModel()
 // Full Backup
 export const fullBackup = async (_req: Request, res: Response) => {
   try {
-    const dir = __dirname + '../../../backup'
+    const dir = __dirname + '../../../backup/'
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir)
     }
@@ -32,7 +31,7 @@ export const fullBackup = async (_req: Request, res: Response) => {
         const newCsv = userDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
         // write CSV to a file
-        fs.writeFileSync(path.join(dir, 'usersTable.csv'), finalCsv as string)
+        fs.writeFileSync(dir + 'usersTable.csv', finalCsv as string)
       }
     })
 
@@ -47,7 +46,7 @@ export const fullBackup = async (_req: Request, res: Response) => {
         const newCsv = blockDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
         // write CSV to a file
-        fs.writeFileSync(path.join(dir, 'blocksTable.csv'), finalCsv as string)
+        fs.writeFileSync(dir + 'blocksTable.csv', finalCsv as string)
       }
     })
 
@@ -62,7 +61,7 @@ export const fullBackup = async (_req: Request, res: Response) => {
         const newCsv = shelfDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
         // write CSV to a file
-        fs.writeFileSync(path.join(dir, 'shelfsTable.csv'), finalCsv as string)
+        fs.writeFileSync(dir + 'shelfsTable.csv', finalCsv as string)
       }
     })
 
@@ -77,11 +76,39 @@ export const fullBackup = async (_req: Request, res: Response) => {
         const newCsv = bookDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
         // write CSV to a file
-        fs.writeFileSync(path.join(dir, 'booksTable.csv'), finalCsv as string)
+        fs.writeFileSync(dir + 'booksTable.csv', finalCsv as string)
       }
     })
+    // make a zip file contain a csv files
+    if (books['status'] == 200) {
+      const zip = new JSZip()
+      //put a setTimeout to wait the folder created and then creat a zip file
+      setTimeout(() => {
+        try {
+          const userData = fs.readFileSync(dir + 'usersTable.csv')
+          zip.file('usersTable.csv', userData)
+          const blockData = fs.readFileSync(dir + 'blocksTable.csv')
+          zip.file('blocksTable.csv', blockData)
+          const shelfData = fs.readFileSync(dir + 'shelfsTable.csv')
+          zip.file('shelfsTable.csv', shelfData)
+          const bookData = fs.readFileSync(dir + 'booksTable.csv')
+          zip.file('booksTable.csv', bookData)
 
-    res.status(books['status']).json(books['message'])
+          zip
+            .generateNodeStream({ type: 'nodebuffer', streamFiles: true })
+            .pipe(fs.createWriteStream('backup.zip'))
+            .on('finish', function () {
+              //Delete folder after zip file created
+              fs.rmSync(dir, { recursive: true, force: true })
+              res
+                .status(books['status'])
+                .json({ message01: books['message'], message02: 'zip file created' })
+            })
+        } catch (error) {
+          res.status(400).json(error)
+        }
+      })
+    }
   } catch (error) {
     res.status(400).json(error)
   }

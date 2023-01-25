@@ -6,7 +6,6 @@ import { User, UsersModel } from '../models/users'
 import { validationResult } from 'express-validator'
 import nodemailer from 'nodemailer'
 import sendgridTransport from 'nodemailer-sendgrid-transport'
-import path from 'path'
 
 const library = new UsersModel()
 const emailapikey = process.env.API_KEY
@@ -309,12 +308,12 @@ export const getAllUsersForBackup = async (_req: Request, res: Response) => {
         const newCsv = userDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
 
-        const dir = __dirname + '../../../backup'
+        const dir = __dirname + '../../../backup/'
         if (!fs.existsSync(dir)) {
           fs.mkdirSync(dir)
         }
         // write CSV to a file
-        fs.writeFileSync(path.join(dir, 'usersTable.csv'), finalCsv as string)
+        fs.writeFileSync(dir + 'usersTable.csv', finalCsv as string)
       }
     })
 

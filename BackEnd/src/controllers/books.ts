@@ -5,7 +5,6 @@ import jwt, { JwtPayload } from 'jsonwebtoken'
 import { Book, BooksModel } from '../models/books'
 import { ShelfsModel } from '../models/shelfs'
 import { BlocksModel } from '../models/blocks'
-import path from 'path'
 
 const shelfLibrary = new ShelfsModel()
 const blockLibrary = new BlocksModel()
@@ -232,12 +231,12 @@ export const getAllBooksForBackup = async (_req: Request, res: Response) => {
         const newCsv = booksDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
 
-        const dir = __dirname + '../../../backup'
+        const dir = __dirname + '../../../backup/'
         if (!fs.existsSync(dir)) {
           fs.mkdirSync(dir)
         }
         // write CSV to a file
-        fs.writeFileSync(path.join(dir, 'booksTable.csv'), finalCsv as string)
+        fs.writeFileSync(dir + 'booksTable.csv', finalCsv as string)
       }
     })
 
