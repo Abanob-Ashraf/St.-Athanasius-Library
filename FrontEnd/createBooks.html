@@ -13,15 +13,19 @@
     <title>مكتبه القديس اثناسيوس | تسجيل الكتب</title>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Start Header -->
     <div class="header">
         <div class="container">
+            <!-- Logo -->
             <a href="./index.html" class="logo">
                 <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
                 <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
             </a>
+            <!-- Start User Login Drop List  -->
             <div class="user-login">
-                <div class="profile-pic"></div>
+                <div class="profile-pic">
+                    <img>
+                </div>
                 <i class="fa-solid fa-caret-down fa-1x"></i>
             </div>
             <ul class="menu">
@@ -34,15 +38,22 @@
                 <hr>
                 <li><a class="logout">تسجيل الخروج</a></li>
             </ul>
+            <!-- End User Login Drop List  -->
         </div>
     </div>
+    <!-- End Header -->
+
+    <!-- Create Books Landing  -->
     <div class="createBooks-landing">
         <div class="container">
+            <!-- Grid Layout -->
             <div class="grid-layout">
+                <!-- Start Create Books - Create Blocks -->
                 <div class="create-block createBooks">
-                    <div class="special-title">انشاء وحده</div>
+                    <div class="title">انشاء وحده</div>
                     <hr>
                     <div class="input-field">
+                        <!-- Create Blocks Form -->
                         <form action="" class="add-block">
                             <input type="number" placeholder="رقم الوحده" required name="block_number" class="input" min="1"/>
                             <input type="text" placeholder="اسم الوحده"  name="block_name" class="input"/>
@@ -51,10 +62,14 @@
                     </div>
                     <small></small>
                 </div>
+                <!-- End Create Books -->
+
+                <!-- Start Create Books - Create Shelfs -->
                 <div class="create-shelf createBooks">
-                    <div class="special-title">انشاء رف</div>
+                    <div class="title">انشاء رف</div>
                     <hr>
                     <div class="input-field">
+                        <!-- Create shelfs Form -->
                         <form action="" class="add-shelf">
                             <select name="block_id" required class="input"></select>
                             <input type="number" placeholder="رقم الرف" required name="shelf_number" class="input" min="1"/>
@@ -64,13 +79,18 @@
                     </div>
                     <small></small>
                 </div>
+                <!-- End Create Books -->
             </div>
+            <!-- End Grid Layout -->
+
+            <!-- Start Create Books - Create Book -->
             <div class="create-book createBooks">
-                <div class="special-title">تسجيل الكتب</div>
+                <div class="title">تسجيل الكتب</div>
                 <hr>
+                <!-- Create Book Form -->
                 <form action="" class="add-book">
                     <div class="input-field">
-                        <div class="flex-div">
+                        <div class="flex">
                             <div class="block">
                                 <div class="note">اختر الوحده</div>
                                 <select name="block_id" required class="input">
@@ -107,18 +127,38 @@
                     </div>
                 </div>
             </div>
+            <!-- End Create Books -->
+
+            <!-- Start Create Books - Go To Browse Book Page -->
             <div class="go-to-browse-book createBooks">
                 <a href="/browseBooks.html">تصفح الكتب الان</a>
                 <a href="/browseBooks.html"><i class="fa-solid fa-arrow-left fa-2x"></i></a>
             </div>
-            <!-- End Profile -->
+            <!-- End Create Books -->
+
+            <!-- Start Footer -->
             <div class="footer">
-                <div class="grid-layout">
+                <div class="box-container">
+                    <!-- Side One -->
+                    <div class="box">
+                        <div class="line">
+                            <i class="fa-solid fa-envelope"></i>
+                            <a href="mailto:elfanan2003@gmail.com" class="info">elfanan2003@gmail.com</a>
+                        </div>
+                        <div class="line">
+                            <i class="fas fa-phone-volume fa-fw"></i>
+                            <a href="tele:+291282332039" class="info">+201282332039</a>
+                        </div>
+                    </div>
+                    <!-- side Two -->
                     <div class="box">
                         <a href="./index.html" class="logo">
                             <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
                             <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
                         </a>
+                    </div>
+                    <!-- Side Three -->
+                    <div class="box">
                         <ul class="social">
                             <li>
                                 <a href="#" class="facebook">
@@ -136,49 +176,21 @@
                                 </a>
                             </li>
                         </ul>
-                        <p class="text">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus nulla rem, dignissimos iste aspernatur
-                        </p>
-                    </div>
-                    <div class="box">
-                        <ul class="links">
-                            <li><a href="#">Important Link 1</a></li>
-                            <li><a href="#">Important Link 2</a></li>
-                            <li><a href="#">Important Link 3</a></li>
-                            <li><a href="#">Important Link 4</a></li>
-                            <li><a href="#">Important Link 5</a></li>
-                        </ul>
-                    </div>
-                    <div class="box">
-                        <div class="line">
-                            <i class="fas fa-map-marker-alt fa-fw"></i>
-                            <div class="info">Egypt, Giza, Inside The Sphinx, Room Number 220</div>
-                        </div>
-                        <div class="line">
-                            <i class="far fa-clock fa-fw"></i>
-                            <div class="info">Business Hours: From 10:00 To 18:00</div>
-                        </div>
-                        <div class="line">
-                            <i class="fas fa-phone-volume fa-fw"></i>
-                            <div class="info">
-                                <span>+20123456789</span>
-                                <span>+20198765432</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <p class="copyright">Made With &lt;3 By Elzero</p>
+                <!-- Copy Right -->
+                <p class="copy-right"></p>
             </div>
             <!-- End Footer -->
         </div>
+        <!-- End Create Books Landing -->
     </div>
-    <script src="./JS/create_books_page/main.js" type="module"></script>
-    <script src="./JS/create_books_page/pranch/global.js" type="module"></script>
-    <script src="./JS/create_books_page/pranch/header.js" type="module"></script>
-    <script src="./JS/create_books_page/pranch/get_all_blocks.js" type="module"></script>
-    <script src="./JS/create_books_page/pranch/get_all_shelfs_in_block.js" type="module"></script>
-    <script src="./JS/create_books_page/pranch/create_block.js" type="module"></script>
-    <script src="./JS/create_books_page/pranch/create_shelf.js" type="module"></script>
-    <script src="./JS/create_books_page/pranch/create_book.js" type="module"></script>
+    <script src="./JS/create_books_page/global.js" type="module"></script>
+    <script src="./JS/create_books_page/header.js" type="module"></script>
+    <script src="./JS/create_books_page/get_all_blocks.js" type="module"></script>
+    <script src="./JS/create_books_page/get_all_shelfs_in_block.js" type="module"></script>
+    <script src="./JS/create_books_page/create_block.js" type="module"></script>
+    <script src="./JS/create_books_page/create_shelf.js" type="module"></script>
+    <script src="./JS/create_books_page/create_book.js" type="module"></script>
 </body>
 </html>

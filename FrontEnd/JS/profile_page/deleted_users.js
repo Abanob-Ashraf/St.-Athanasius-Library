@@ -163,7 +163,7 @@ function response(data){
 }
 
 // deleted_users Fetch Function (To Get Information)
-export function deleted_users(){
+function deleted_users(){
     fetch(`http://localhost:3000/library/users/unavilable`,
         {
             method: 'GET',

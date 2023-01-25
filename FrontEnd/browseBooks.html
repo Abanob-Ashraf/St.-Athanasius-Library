@@ -13,15 +13,19 @@
     <title>مكتبه القديس اثناسيوس | تصفح الكتب</title>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Start Header -->
     <div class="header">
         <div class="container">
+            <!-- Logo -->
             <a href="./index.html" class="logo">
                 <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
                 <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
             </a>
+            <!-- Start User Login Drop List  -->
             <div class="user-login">
-                <div class="profile-pic"></div>
+                <div class="profile-pic">
+                    <img>
+                </div>
                 <i class="fa-solid fa-caret-down fa-1x"></i>
             </div>
             <ul class="menu">
@@ -34,6 +38,7 @@
                 <hr>
                 <li><a class="logout">تسجيل الخروج</a></li>
             </ul>
+            <!-- End User Login Drop List  -->
         </div>
     </div>
     <!-- End Header -->
@@ -41,15 +46,15 @@
     <!-- Browse Books Landing -->
     <div class="browse-books-landing">
         <div class="container">
-            <!-- Profile -->
+            <!-- Start Browse Books - Search Books -->
             <div class="browseBooks search-books">
-                <div class="special-title">البحث عن الكتاب</div>
+                <div class="title">البحث عن الكتاب</div>
                 <hr>
+                <!-- Search Form -->
                 <form action="" class="search-form">
                     <div class="search-container">
-                        <!-- <input type="submit" value="البحث" name="submit" class="submit"> -->
-                        <input type="search" name="book" required id="book" placeholder="البحث عن الكتاب حسب">
-                        <select name="subject" id="subject">
+                        <input type="search" name="book" required class="book" placeholder="البحث عن الكتاب حسب">
+                        <select name="subject" class="subject">
                             <option value="book_name">الاسم</option>
                             <option value="author">الكاتب</option>
                             <option value="topic">التصنيف</option>
@@ -58,6 +63,7 @@
                     </div>
                 </form>
                 <small></small>
+                <!-- Start Browse Books - Show Books -->
                 <div class="browseBooks books">
                     <table class="the-books">
                         <tr>
@@ -68,18 +74,21 @@
                         </tr>
                     </table>
                 </div>
+                <!-- End Browse Books -->
             </div>
-            <!-- End Profile -->
+            <!-- End Browse Books -->
 
+            <!-- Grid Layout -->
             <div class="grid-layout">
-                <!-- Start Profile -->
-                <div class="browseBooks latest-books" style="margin-top: 15px;">
+                <!-- Start Browse Books - Latest Books -->
+                <div class="browseBooks latest-books">
                     <div class="latest-book">
-                        <div class="special-title">اخر الكتب المضافه</div>
+                        <div class="title">اخر الكتب المضافه</div>
                         <hr>
                     </div>
+                    <!-- Book Information -->
                     <div class="latest-book-info">
-                        <div class="special-title">معلومات الكتاب</div>
+                        <div class="title">معلومات الكتاب</div>
                         <hr>
                         <div class="book-name">
                             <p>اسم الكتاب :</p>
@@ -105,49 +114,58 @@
                             <p>تاريخ الانشاء :</p>
                             <span></span>
                         </div>
-                        <div class="dubel-div">
+                        <div class="flex">
                             <p class="back">الرجوع</p>
                         </div>
                     </div>
                 </div>
-                <!-- End Profile -->
-                <div class="browseBooks my-books" style="margin-top: 15px;">
+                <!-- End Browse Books -->
+
+                <!-- Start Browse Books - My Books -->
+                <div class="browseBooks my-books">
                     <div class="my-book">
-                        <div class="special-title">كتبي</div>
+                        <div class="title">كتبي</div>
                         <hr>
                     </div>
+                    <!-- Book Information -->
                     <div class="my-book-info">
-                        <div class="special-title">معلومات الكتاب</div>
+                        <div class="title">معلومات الكتاب</div>
                         <hr>
                         <div class="book-name">
                             <p>اسم الكتاب :</p>
                             <span></span>
                         </div>
-                        <div class="book-block">
-                            <p>رقم الوحده :</p>
+                        <div class="book-author">
+                            <p>اسم المؤلف :</p>
                             <span></span>
                         </div>
-                        <div class="book-shelf">
-                            <p>رقم الرف :</p>
+                        <div class="publisher">
+                            <p>اسم الناشر :</p>
                             <span></span>
                         </div>
-                        <div class="book-number">
-                            <p>رقم الكتاب في الرف :</p>
+                        <div class="book-copies">
+                            <p> النسخ :</p>
+                            <span></span>
+                        </div>
+                        <div class="book-code">
+                            <p>كود الكتاب :</p>
                             <span></span>
                         </div>
                         <div class="book-created">
                             <p>تاريخ الانشاء :</p>
                             <span></span>
                         </div>
-                        <div class="dubel-div">
+                        <div class="flex">
                             <p class="back">الرجوع</p>
                         </div>
                     </div>
                 </div>
-                <!-- End Profile -->
+                <!-- End Browse Books -->
+
+                <!-- Start Browse Books - Books In Block Show And Length -->
                 <div class="browseBooks block-books">
                     <div class="block-book">
-                        <div class="special-title">الكتب في الوحده</div>
+                        <div class="title">الكتب في الوحده</div>
                         <hr>
                         <div class="block">
                             <div class="note">اختر الوحده</div>
@@ -155,11 +173,14 @@
                                 <option></option>
                             </select>
                         </div>
+                        <!-- Scroll View -->
                         <div class="scroll"></div>
+                        <!-- Books Length -->
                         <p class="count"></p>
                     </div>
+                    <!-- Book Information -->
                     <div class="block-book-info">
-                        <div class="special-title">معلومات الكتاب</div>
+                        <div class="title">معلومات الكتاب</div>
                         <hr>
                         <div class="book-name">
                             <p>اسم الكتاب :</p>
@@ -185,15 +206,17 @@
                             <p>تاريخ الانشاء :</p>
                             <span></span>
                         </div>
-                        <div class="dubel-div">
+                        <div class="flex">
                             <p class="back">الرجوع</p>
                         </div>
                     </div>
                 </div>
-                <!-- End Profile -->
+                <!-- End Browse Books -->
+
+                <!-- Start Browse Books - Books In Shelf In BLock Show And Length -->
                 <div class="browseBooks shelf-books">
                     <div class="shelf-book">
-                        <div class="special-title">الكتب في الرف</div>
+                        <div class="title">الكتب في الرف</div>
                         <hr>
                         <div class="flex">
                             <div class="block">
@@ -209,11 +232,14 @@
                                 </select>
                             </div>
                         </div>
+                        <!-- Scroll View -->
                         <div class="scroll"></div>
+                        <!-- Books Length -->
                         <p class="count"></p>
                     </div>
+                    <!-- Book Information -->
                     <div class="shelf-book-info">
-                        <div class="special-title">معلومات الكتاب</div>
+                        <div class="title">معلومات الكتاب</div>
                         <hr>
                         <div class="book-name">
                             <p>اسم الكتاب :</p>
@@ -239,21 +265,38 @@
                             <p>تاريخ الانشاء :</p>
                             <span></span>
                         </div>
-                        <div class="dubel-div">
+                        <div class="flex">
                             <p class="back">الرجوع</p>
                         </div>
                     </div>
                 </div>
-                <!-- End Profile -->
+                <!-- End Browse Books -->
             </div>
-            <!-- End Profile -->
+            <!-- End Grid Layout -->
+
+            <!-- Start Footer -->
             <div class="footer">
-                <div class="grid-layout">
+                <div class="box-container">
+                    <!-- Side One -->
+                    <div class="box">
+                        <div class="line">
+                            <i class="fa-solid fa-envelope"></i>
+                            <a href="mailto:elfanan2003@gmail.com" class="info">elfanan2003@gmail.com</a>
+                        </div>
+                        <div class="line">
+                            <i class="fas fa-phone-volume fa-fw"></i>
+                            <a href="tele:+291282332039" class="info">+201282332039</a>
+                        </div>
+                    </div>
+                    <!-- side Two -->
                     <div class="box">
                         <a href="./index.html" class="logo">
                             <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
                             <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
                         </a>
+                    </div>
+                    <!-- Side Three -->
+                    <div class="box">
                         <ul class="social">
                             <li>
                                 <a href="#" class="facebook">
@@ -271,54 +314,25 @@
                                 </a>
                             </li>
                         </ul>
-                        <p class="text">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus nulla rem, dignissimos iste aspernatur
-                        </p>
-                    </div>
-                    <div class="box">
-                        <ul class="links">
-                            <li><a href="#">Important Link 1</a></li>
-                            <li><a href="#">Important Link 2</a></li>
-                            <li><a href="#">Important Link 3</a></li>
-                            <li><a href="#">Important Link 4</a></li>
-                            <li><a href="#">Important Link 5</a></li>
-                        </ul>
-                    </div>
-                    <div class="box">
-                        <div class="line">
-                            <i class="fas fa-map-marker-alt fa-fw"></i>
-                            <div class="info">Egypt, Giza, Inside The Sphinx, Room Number 220</div>
-                        </div>
-                        <div class="line">
-                            <i class="far fa-clock fa-fw"></i>
-                            <div class="info">Business Hours: From 10:00 To 18:00</div>
-                        </div>
-                        <div class="line">
-                            <i class="fas fa-phone-volume fa-fw"></i>
-                            <div class="info">
-                                <span>+20123456789</span>
-                                <span>+20198765432</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <p class="copyright">Made With &lt;3 By Elzero</p>
+                <!-- Copy Right -->
+                <p class="copy-right"></p>
             </div>
             <!-- End Footer -->
         </div>
     </div>
     <!-- End Browse Books Landing -->
-    <script src="./JS/browse_books_page/main.js" type="module"></script>
-    <script src="./JS/browse_books_page/pranch/global.js" type="module"></script>
-    <script src="./JS/browse_books_page/pranch/header.js" type="module"></script>
-    <script src="./JS/browse_books_page/pranch/search_book.js" type="module"></script>
-    <script src="./JS/browse_books_page/pranch/latest_books.js" type="module"></script>
-    <script src="./JS/browse_books_page/pranch/my_books.js" type="module"></script>
-    <script src="./JS/browse_books_page/pranch/get_all_blocks.js" type="module"></script>
-    <script src="./JS/browse_books_page/pranch/get_all_shelfs_in_block.js" type="module"></script>
-    <script src="./JS/browse_books_page/pranch/books_in_block.js" type="module"></script>
-    <script src="./JS/browse_books_page/pranch/books_in_shelf.js" type="module"></script>
-    <script src="./JS/browse_books_page/pranch/books_in_block_length.js" type="module"></script>
-    <script src="./JS/browse_books_page/pranch/books_in_shelf_length.js" type="module"></script>
+    <script src="./JS/browse_books_page/global.js" type="module"></script>
+    <script src="./JS/browse_books_page/header.js" type="module"></script>
+    <script src="./JS/browse_books_page/search_book.js" type="module"></script>
+    <script src="./JS/browse_books_page/latest_books.js" type="module"></script>
+    <script src="./JS/browse_books_page/my_books.js" type="module"></script>
+    <script src="./JS/browse_books_page/get_all_blocks.js" type="module"></script>
+    <script src="./JS/browse_books_page/get_all_shelfs_in_block.js" type="module"></script>
+    <script src="./JS/browse_books_page/books_in_block.js" type="module"></script>
+    <script src="./JS/browse_books_page/books_in_shelf.js" type="module"></script>
+    <script src="./JS/browse_books_page/books_in_block_length.js" type="module"></script>
+    <script src="./JS/browse_books_page/books_in_shelf_length.js" type="module"></script>
 </body>
 </html>

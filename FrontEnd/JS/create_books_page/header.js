@@ -4,7 +4,7 @@ let profile_pic = document.querySelector(".user-login .profile-pic img")
 let menu = document.querySelector(".menu")
 let welcome = document.querySelector(".menu .welcome")
 let logout = document.querySelector(".menu .logout")
-let profile_landing_side = document.querySelector(".profile-landing")
+let create_books_landing_side = document.querySelector(".createBooks-landing")
 
 // Header Response Function
 function response(data){
@@ -17,7 +17,7 @@ function response(data){
     })
 
     // hide Header Menu 
-    profile_landing_side.addEventListener("click",()=>{
+    create_books_landing_side.addEventListener("click",()=>{
         menu.classList.remove("clicked")
     })
 
