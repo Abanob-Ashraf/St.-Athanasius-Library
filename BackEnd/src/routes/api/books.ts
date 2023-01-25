@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { authorize } from '../../middlewares/authantication_admin'
+import { admin, authorize } from '../../middlewares/authantication_admin'
 import {
   createBook,
   // deleteBook,
@@ -10,7 +10,8 @@ import {
   getUserBooks,
   getLatestBooks,
   countBooksInBlockOrShelfAndBlock,
-  searchForBookWithBlockOrShelfAndBlock
+  searchForBookWithBlockOrShelfAndBlock,
+  getAllBooksForBackup
 } from '../../controllers/books'
 
 const routes = Router()
@@ -28,6 +29,8 @@ routes.route('/latestBooks').get(getLatestBooks)
 routes.route('/getBooksInThisBlock').get(searchForBookWithBlockOrShelfAndBlock)
 
 routes.route('/countBooksInThisBlock').get(authorize, countBooksInBlockOrShelfAndBlock)
+
+routes.route('/backup').get(authorize, admin, getAllBooksForBackup)
 
 routes.route('/:id').get(getOneBook)
 

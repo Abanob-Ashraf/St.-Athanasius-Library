@@ -85,7 +85,7 @@ export class BooksModel {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMANYBOOKS)
-      const book = { status: 200, bookInfo: result.rows }
+      const book = { status: 200, bookInfo: result.rows, message: 'backup completed' }
       connection.release()
       return book
     } catch (error) {

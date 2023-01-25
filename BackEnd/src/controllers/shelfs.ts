@@ -1,3 +1,5 @@
+import converter from 'json-2-csv'
+import fs from 'fs'
 import { Request, Response } from 'express'
 import { Shelf, ShelfsModel } from '../models/shelfs'
 
@@ -66,6 +68,32 @@ export const updateShelf = async (req: Request, res: Response) => {
     res.status(updatedShelf['status']).json(updatedShelf['message'])
   } catch (error) {
     res.status(409).json('this shelf already existe')
+  }
+}
+
+// getAllShelfsForBackup
+export const getAllShelfsForBackup = async (_req: Request, res: Response) => {
+  try {
+    const shelfs = await library.getManyShelfs()
+    // console.log(shelfs['shelfInfo'])
+
+    converter.json2csv(shelfs['shelfInfo'], (err, shelfsDataAsCSV) => {
+      if (err) {
+        throw err
+      }
+      if (shelfsDataAsCSV != undefined) {
+        // modify the data to be a compatible for database when recover
+        const newCsv = shelfsDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
+        const finalCsv = newCsv.replaceAll('null', '')
+
+        // write CSV to a file
+        fs.writeFileSync('shelfsTable.csv', finalCsv as string)
+      }
+    })
+
+    res.status(shelfs['status']).json(shelfs['message'])
+  } catch (error) {
+    res.status(400).json(error)
   }
 }
 

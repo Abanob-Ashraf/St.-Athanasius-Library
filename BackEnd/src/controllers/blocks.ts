@@ -1,3 +1,5 @@
+import converter from 'json-2-csv'
+import fs from 'fs'
 import { Request, Response } from 'express'
 import { Block, BlocksModel } from '../models/blocks'
 
@@ -54,6 +56,32 @@ export const updateBlock = async (req: Request, res: Response) => {
     res.status(updatedBlock['status']).json(updatedBlock['message'])
   } catch (error) {
     res.status(409).json('this block already existe')
+  }
+}
+
+// getAllBlocksForBackup
+export const getAllBlocksForBackup = async (_req: Request, res: Response) => {
+  try {
+    const blocks = await library.getManyBlocks()
+    // console.log(blocks['blockInfo'])
+
+    converter.json2csv(blocks['blockInfo'], (err, blocksDataAsCSV) => {
+      if (err) {
+        throw err
+      }
+      if (blocksDataAsCSV != undefined) {
+        // modify the data to be a compatible for database when recover
+        const newCsv = blocksDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
+        const finalCsv = newCsv.replaceAll('null', '')
+
+        // write CSV to a file
+        fs.writeFileSync('blocksTable.csv', finalCsv as string)
+      }
+    })
+
+    res.status(blocks['status']).json(blocks['message'])
+  } catch (error) {
+    res.status(400).json(error)
   }
 }
 

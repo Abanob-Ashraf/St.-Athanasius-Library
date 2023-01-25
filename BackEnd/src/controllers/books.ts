@@ -1,3 +1,5 @@
+import converter from 'json-2-csv'
+import fs from 'fs'
 import { Request, Response } from 'express'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { Book, BooksModel } from '../models/books'
@@ -211,6 +213,32 @@ export const updateBook = async (req: Request, res: Response) => {
     }
   } catch (error) {
     res.status(409).json('this book already existe')
+  }
+}
+
+// getAllBooksForBackup
+export const getAllBooksForBackup = async (_req: Request, res: Response) => {
+  try {
+    const books = await library.getManyBooks()
+    // console.log(books['bookInfo'])
+
+    converter.json2csv(books['bookInfo'], (err, booksDataAsCSV) => {
+      if (err) {
+        throw err
+      }
+      if (booksDataAsCSV != undefined) {
+        // modify the data to be a compatible for database when recover
+        const newCsv = booksDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
+        const finalCsv = newCsv.replaceAll('null', '')
+
+        // write CSV to a file
+        fs.writeFileSync('booksTable.csv', finalCsv as string)
+      }
+    })
+
+    res.status(books['status']).json(books['message'])
+  } catch (error) {
+    res.status(400).json(error)
   }
 }
 

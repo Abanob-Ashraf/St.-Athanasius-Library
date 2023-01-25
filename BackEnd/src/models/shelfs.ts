@@ -55,7 +55,7 @@ export class ShelfsModel {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMANYSHELFS)
-      const shelf = { status: 200, shelfInfo: result.rows }
+      const shelf = { status: 200, shelfInfo: result.rows, message: 'backup completed' }
       connection.release()
       return shelf
     } catch (error) {

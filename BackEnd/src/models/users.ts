@@ -71,7 +71,7 @@ export class UsersModel {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMANYUSERS)
-      const user = { status: 200, userInfo: result.rows }
+      const user = { status: 200, userInfo: result.rows, message: 'backup completed' }
       connection.release()
       return user
     } catch (error) {

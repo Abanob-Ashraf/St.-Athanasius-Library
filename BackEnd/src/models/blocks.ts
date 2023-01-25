@@ -42,7 +42,7 @@ export class BlocksModel {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMANYBLOCKS)
-      const block = { status: 200, blockInfo: result.rows }
+      const block = { status: 200, blockInfo: result.rows, message: 'backup completed' }
       connection.release()
       return block
     } catch (error) {

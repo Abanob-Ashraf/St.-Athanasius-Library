@@ -12,7 +12,8 @@ import {
   searchForUser,
   changePassword,
   getUserDataToResetPassword,
-  postNewPassword
+  postNewPassword,
+  getAllUsersForBackup
 } from '../../controllers/users'
 import { body } from 'express-validator'
 
@@ -65,6 +66,8 @@ routes.route('/me/changePassword').put(
 
   changePassword
 )
+
+routes.route('/backup').get(authorize, admin, getAllUsersForBackup)
 
 routes.route('/unavilable').get(authorize, admin, getAllUnAvilableUsers)
 

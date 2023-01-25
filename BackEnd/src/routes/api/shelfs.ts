@@ -6,7 +6,8 @@ import {
   createShelf,
   updateShelf,
   // deleteShelf,
-  getShelfsWithBlockId
+  getShelfsWithBlockId,
+  getAllShelfsForBackup
 } from '../../controllers/shelfs'
 
 const routes = Router()
@@ -14,6 +15,8 @@ const routes = Router()
 routes.route('/').post(authorize, admin, createShelf)
 
 routes.route('/').get(authorize, getManyShelfs)
+
+routes.route('/backup').get(authorize, admin, getAllShelfsForBackup)
 
 routes.route('/block/:id').get(getShelfsWithBlockId)
 

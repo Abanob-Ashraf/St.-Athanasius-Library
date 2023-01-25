@@ -1,3 +1,5 @@
+import converter from 'json-2-csv'
+import fs from 'fs'
 import { Request, Response } from 'express'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { User, UsersModel } from '../models/users'
@@ -286,6 +288,32 @@ export const getAllUnAvilableUsers = async (_req: Request, res: Response) => {
   try {
     const users = await library.getAllUnAvilableUsers()
     res.status(users['status']).json(users['userInfo'])
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}
+
+// getAllUsersForBackup
+export const getAllUsersForBackup = async (_req: Request, res: Response) => {
+  try {
+    const users = await library.getManyUsers()
+    // console.log(users['userInfo'])
+
+    converter.json2csv(users['userInfo'], (err, userDataAsCSV) => {
+      if (err) {
+        throw err
+      }
+      if (userDataAsCSV != undefined) {
+        // modify the data to be a compatible for database when recover
+        const newCsv = userDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
+        const finalCsv = newCsv.replaceAll('null', '')
+
+        // write CSV to a file
+        fs.writeFileSync('usersTable.csv', finalCsv as string)
+      }
+    })
+
+    res.status(users['status']).json(users['message'])
   } catch (error) {
     res.status(400).json(error)
   }
