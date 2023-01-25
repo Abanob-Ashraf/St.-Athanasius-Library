@@ -309,7 +309,10 @@ export const getAllUsersForBackup = async (_req: Request, res: Response) => {
         const finalCsv = newCsv.replaceAll('null', '')
 
         // write CSV to a file
-        fs.writeFileSync('usersTable.csv', finalCsv as string)
+        fs.writeFileSync(
+          'C:/Users/abano/Desktop/library/BackEnd/backup/usersTable.csv',
+          finalCsv as string
+        )
       }
     })
 

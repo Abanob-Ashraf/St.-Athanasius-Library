@@ -87,7 +87,10 @@ export const getAllShelfsForBackup = async (_req: Request, res: Response) => {
         const finalCsv = newCsv.replaceAll('null', '')
 
         // write CSV to a file
-        fs.writeFileSync('shelfsTable.csv', finalCsv as string)
+        fs.writeFileSync(
+          'C:/Users/abano/Desktop/library/BackEnd/backup/shelfsTable.csv',
+          finalCsv as string
+        )
       }
     })
 

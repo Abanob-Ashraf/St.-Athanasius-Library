@@ -25,7 +25,10 @@ export const fullBackup = async (_req: Request, res: Response) => {
         const newCsv = userDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
         // write CSV to a file
-        fs.writeFileSync('usersTable.csv', finalCsv as string)
+        fs.writeFileSync(
+          'C:/Users/abano/Desktop/library/BackEnd/backup/usersTable.csv',
+          finalCsv as string
+        )
       }
     })
 
@@ -40,7 +43,10 @@ export const fullBackup = async (_req: Request, res: Response) => {
         const newCsv = blockDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
         // write CSV to a file
-        fs.writeFileSync('blocksTable.csv', finalCsv as string)
+        fs.writeFileSync(
+          'C:/Users/abano/Desktop/library/BackEnd/backup/blocksTable.csv',
+          finalCsv as string
+        )
       }
     })
 
@@ -55,7 +61,10 @@ export const fullBackup = async (_req: Request, res: Response) => {
         const newCsv = shelfDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
         // write CSV to a file
-        fs.writeFileSync('shelfsTable.csv', finalCsv as string)
+        fs.writeFileSync(
+          'C:/Users/abano/Desktop/library/BackEnd/backup/shelfsTable.csv',
+          finalCsv as string
+        )
       }
     })
 
@@ -71,7 +80,10 @@ export const fullBackup = async (_req: Request, res: Response) => {
         const finalCsv = newCsv.replaceAll('null', '')
 
         // write CSV to a file
-        fs.writeFileSync('booksTable.csv', finalCsv as string)
+        fs.writeFileSync(
+          'C:/Users/abano/Desktop/library/BackEnd/backup/booksTable.csv',
+          finalCsv as string
+        )
       }
     })
 

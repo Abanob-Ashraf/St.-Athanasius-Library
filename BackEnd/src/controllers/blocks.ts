@@ -75,7 +75,10 @@ export const getAllBlocksForBackup = async (_req: Request, res: Response) => {
         const finalCsv = newCsv.replaceAll('null', '')
 
         // write CSV to a file
-        fs.writeFileSync('blocksTable.csv', finalCsv as string)
+        fs.writeFileSync(
+          'C:/Users/abano/Desktop/library/BackEnd/backup/blocksTable.csv',
+          finalCsv as string
+        )
       }
     })
 
