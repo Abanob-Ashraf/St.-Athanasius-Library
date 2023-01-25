@@ -1,5 +1,6 @@
-let token = JSON.parse(sessionStorage.getItem("token"));
-let book_id = sessionStorage.getItem("book_id")
+let book_information = document.querySelector(".book-info")
+let edit_book = document.querySelector(".edit-book")
+let edit = document.querySelector(".edit")
 let book_name = sessionStorage.getItem("book_name")
 let book_code = sessionStorage.getItem("book_code")
 let book_number_in_shelf = sessionStorage.getItem("book_number_in_shelf")
@@ -12,18 +13,19 @@ let publisher = sessionStorage.getItem("publisher")
 let topic = sessionStorage.getItem("topic")
 let conclusion = sessionStorage.getItem("conclusion")
 let author = sessionStorage.getItem("author")
-export function bookInfo(){
+
+function book_info(){
     // Book Name
     let bookName = document.querySelector(".book-info .book-name span")
     bookName.textContent = book_name
 
     // Book Auther
     let Author = document.querySelector(".book-info .author span")
-    Author.textContent = author == null ? "لا يوجد" : author
+    Author.textContent = author
 
     // Book Publisher
     let Publisher = document.querySelector(".book-info .publisher span")
-    Publisher.textContent = publisher == null ? "لا يوجد" : publisher
+    Publisher.textContent = publisher
 
     // Book Topic
     let Topic = document.querySelector(".book-info .topic span")
@@ -31,7 +33,7 @@ export function bookInfo(){
 
     // Book Series
     let seriesName = document.querySelector(".book-info .name-of-series span")
-    seriesName.textContent = name_of_series == null ? "لا يوجد" : name_of_series
+    seriesName.textContent = name_of_series
 
     // Book Copies
     let numberOfCopies = document.querySelector(".book-info .number-of-copies span")
@@ -61,12 +63,10 @@ export function bookInfo(){
     let Conclusion = document.querySelector(".book-info .conclusion textarea")
     Conclusion.setAttribute("placeholder",conclusion)
 
-    let book_info = document.querySelector(".book-info")
-    let edit_book = document.querySelector(".edit-book")
-    let edit = document.querySelector(".edit")
+    // Redirct To Edit Book From Book Information
     edit.addEventListener("click",()=>{
-        book_info.style.display = "none"
+        book_information.style.display = "none"
         edit_book.style.display = "block"
     })
 }
-bookInfo()
+book_info()

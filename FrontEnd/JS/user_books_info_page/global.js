@@ -1,5 +1,6 @@
-export function global(){
-    let icon = document.querySelector(".header i")
+let icon = document.querySelector(".header i")
+
+function global(){
     icon.addEventListener("click",()=>{
         sessionStorage.removeItem("book_id")
         sessionStorage.removeItem("book_name")

@@ -11,8 +11,10 @@ function books_in_bLock_length(){
         }).then(res => res.json())
         .then(res => {
             let block_books_Length = document.querySelector(".browseBooks.block-books .block-book .count")
-            if (res == "عدد الكتب undefined"){
+            if (blockID.value == ""){
                 block_books_Length.textContent = ""
+            }else if (res == "عدد الكتب undefined"){
+                block_books_Length.textContent = "لا يوجد كتب"
             }else{
                 block_books_Length.textContent = res
             }

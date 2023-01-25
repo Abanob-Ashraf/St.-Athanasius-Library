@@ -1,8 +1,8 @@
-let token = JSON.parse(sessionStorage.getItem("token"));
-let book_id = sessionStorage.getItem("book_id")
+let book_info = document.querySelector(".book-info")
+let edit_book = document.querySelector(".edit-book")
+let back = document.querySelector(".back")
 let book_name = sessionStorage.getItem("book_name")
 let book_number_in_shelf = sessionStorage.getItem("book_number_in_shelf")
-let created_date = sessionStorage.getItem("created_date")
 let name_of_series = sessionStorage.getItem("name_of_series")
 let number_of_copies = sessionStorage.getItem("number_of_copies")
 let number_of_pages = sessionStorage.getItem("number_of_pages")
@@ -11,7 +11,8 @@ let publisher = sessionStorage.getItem("publisher")
 let topic = sessionStorage.getItem("topic")
 let conclusion = sessionStorage.getItem("conclusion")
 let author = sessionStorage.getItem("author")
-export function bookEditInfo(){
+
+function edit_book_info(){
     // Book Name
     let bookName_e = document.querySelector(".edit-book .book-name .input")
     bookName_e.setAttribute("placeholder",book_name)
@@ -52,12 +53,10 @@ export function bookEditInfo(){
     let Conclusion_e = document.querySelector(".edit-book .conclusion textarea")
     Conclusion_e.setAttribute("placeholder",conclusion)
     
-    let book_info = document.querySelector(".book-info")
-    let edit_book = document.querySelector(".edit-book")
-    let back = document.querySelector(".back")
+    // Redirct To Book Information From Edit Book
     back.addEventListener("click",()=>{
         book_info.style.display = "block"
         edit_book.style.display = "none"
     })
 }
-bookEditInfo()
+edit_book_info()

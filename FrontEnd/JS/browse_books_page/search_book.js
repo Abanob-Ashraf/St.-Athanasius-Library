@@ -54,16 +54,16 @@ function response(data){
             sessionStorage.setItem("book_name",data[i].book_name)
             sessionStorage.setItem("book_number_in_shelf",data[i].book_number_in_shelf)
             sessionStorage.setItem("created_date",data[i].created_date)
-            sessionStorage.setItem("name_of_series",data[i].name_of_series)
+            sessionStorage.setItem("name_of_series",data[i].name_of_series == null ? "لا يوجد" : data[i].name_of_series)
             sessionStorage.setItem("number_of_copies",data[i].number_of_copies)
             sessionStorage.setItem("number_of_pages",data[i].number_of_pages)
             sessionStorage.setItem("number_of_parts",data[i].number_of_parts)
-            sessionStorage.setItem("publisher",data[i].publisher)
+            sessionStorage.setItem("publisher",data[i].publisher == null ? "لا يوجد" : data[i].publisher)
             sessionStorage.setItem("topic",data[i].topic)
-            sessionStorage.setItem("conclusion",data[i].conclusion)
-            sessionStorage.setItem("author",data[i].author)
+            sessionStorage.setItem("conclusion",data[i].conclusion == null ? "لا يوجد" : data[i].conclusion)
+            sessionStorage.setItem("author",data[i].author == null ? "لا يوجد" : data[i].author)
             sessionStorage.setItem("book_code",data[i].book_code)
-            location.href = "/bookInfo.html"
+            location.href = "/userBookInfo.html"
         })
 
         // When Submit Remove Right & Previous Elements To But New Elements

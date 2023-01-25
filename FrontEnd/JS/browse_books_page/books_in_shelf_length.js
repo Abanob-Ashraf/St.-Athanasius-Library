@@ -12,8 +12,10 @@ function books_in_shelf_in_bLock_length(){
         }).then(res => res.json())
         .then(res => {
             let shelf_books_Length = document.querySelector(".browseBooks.shelf-books .shelf-book .count")
-            if (res == "عدد الكتب undefined"){
+            if (shelfID.value == ""){
                 shelf_books_Length.textContent = ""
+            }else if (res == "عدد الكتب undefined"){
+                shelf_books_Length.textContent = "لا يوجد كتب"
             }else{
                 shelf_books_Length.textContent = res
             }
