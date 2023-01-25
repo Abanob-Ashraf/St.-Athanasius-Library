@@ -31,7 +31,6 @@ export const fullBackup = async (_req: Request, res: Response) => {
         // modify the data to be a compatible for database when recover
         const newCsv = userDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
-
         // write CSV to a file
         fs.writeFileSync(path.join(dir, 'usersTable.csv'), finalCsv as string)
       }
