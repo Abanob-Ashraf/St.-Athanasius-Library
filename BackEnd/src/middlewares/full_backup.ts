@@ -96,7 +96,7 @@ export const fullBackup = async (_req: Request, res: Response) => {
 
           zip
             .generateNodeStream({ type: 'nodebuffer', streamFiles: true })
-            .pipe(fs.createWriteStream('backup.zip'))
+            .pipe(fs.createWriteStream('../../library/backup.zip'))
             .on('finish', function () {
               //Delete folder after zip file created
               fs.rmSync(dir, { recursive: true, force: true })
