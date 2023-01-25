@@ -2,6 +2,7 @@ import converter from 'json-2-csv'
 import fs from 'fs'
 import { Request, Response } from 'express'
 import { Shelf, ShelfsModel } from '../models/shelfs'
+import path from 'path'
 
 const library = new ShelfsModel()
 
@@ -87,10 +88,12 @@ export const getAllShelfsForBackup = async (_req: Request, res: Response) => {
         const finalCsv = newCsv.replaceAll('null', '')
 
         // write CSV to a file
-        fs.writeFileSync(
-          'C:/Users/abano/Desktop/library/BackEnd/backup/shelfsTable.csv',
-          finalCsv as string
-        )
+        const dir = __dirname + '../../../backup'
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir)
+        }
+        // write CSV to a file
+        fs.writeFileSync(path.join(dir, 'shelfsTable.csv'), finalCsv as string)
       }
     })
 

@@ -2,6 +2,7 @@ import converter from 'json-2-csv'
 import fs from 'fs'
 import { Request, Response } from 'express'
 import { Block, BlocksModel } from '../models/blocks'
+import path from 'path'
 
 const library = new BlocksModel()
 
@@ -74,11 +75,12 @@ export const getAllBlocksForBackup = async (_req: Request, res: Response) => {
         const newCsv = blocksDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
 
+        const dir = __dirname + '../../../backup'
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir)
+        }
         // write CSV to a file
-        fs.writeFileSync(
-          'C:/Users/abano/Desktop/library/BackEnd/backup/blocksTable.csv',
-          finalCsv as string
-        )
+        fs.writeFileSync(path.join(dir, 'blocksTable.csv'), finalCsv as string)
       }
     })
 

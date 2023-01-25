@@ -1,10 +1,12 @@
 import converter from 'json-2-csv'
 import fs from 'fs'
+// import archiver from 'archiver'
 import { Request, Response } from 'express'
 import { UsersModel } from '../models/users'
 import { BlocksModel } from '../models/blocks'
 import { ShelfsModel } from '../models/shelfs'
 import { BooksModel } from '../models/books'
+import path from 'path'
 
 const userLibrary = new UsersModel()
 const blockLibrary = new BlocksModel()
@@ -14,6 +16,11 @@ const bookLibrary = new BooksModel()
 // Full Backup
 export const fullBackup = async (_req: Request, res: Response) => {
   try {
+    const dir = __dirname + '../../../backup'
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir)
+    }
+
     //Backup users table
     const users = await userLibrary.getManyUsers()
     converter.json2csv(users['userInfo'], (err, userDataAsCSV) => {
@@ -24,11 +31,9 @@ export const fullBackup = async (_req: Request, res: Response) => {
         // modify the data to be a compatible for database when recover
         const newCsv = userDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
+
         // write CSV to a file
-        fs.writeFileSync(
-          'C:/Users/abano/Desktop/library/BackEnd/backup/usersTable.csv',
-          finalCsv as string
-        )
+        fs.writeFileSync(path.join(dir, 'usersTable.csv'), finalCsv as string)
       }
     })
 
@@ -43,10 +48,7 @@ export const fullBackup = async (_req: Request, res: Response) => {
         const newCsv = blockDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
         // write CSV to a file
-        fs.writeFileSync(
-          'C:/Users/abano/Desktop/library/BackEnd/backup/blocksTable.csv',
-          finalCsv as string
-        )
+        fs.writeFileSync(path.join(dir, 'blocksTable.csv'), finalCsv as string)
       }
     })
 
@@ -61,10 +63,7 @@ export const fullBackup = async (_req: Request, res: Response) => {
         const newCsv = shelfDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
         // write CSV to a file
-        fs.writeFileSync(
-          'C:/Users/abano/Desktop/library/BackEnd/backup/shelfsTable.csv',
-          finalCsv as string
-        )
+        fs.writeFileSync(path.join(dir, 'shelfsTable.csv'), finalCsv as string)
       }
     })
 
@@ -78,12 +77,8 @@ export const fullBackup = async (_req: Request, res: Response) => {
         // modify the data to be a compatible for database when recover
         const newCsv = bookDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
-
         // write CSV to a file
-        fs.writeFileSync(
-          'C:/Users/abano/Desktop/library/BackEnd/backup/booksTable.csv',
-          finalCsv as string
-        )
+        fs.writeFileSync(path.join(dir, 'booksTable.csv'), finalCsv as string)
       }
     })
 
