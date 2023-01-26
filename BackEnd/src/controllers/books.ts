@@ -47,7 +47,7 @@ export const createBook = async (req: Request, res: Response) => {
       who_edited: req.body.who_edited,
       created_date: new Date(),
       updated_date: new Date(),
-      id: undefined as unknown as number
+      id: undefined as unknown as string
     }
 
     const newBook = await library.createBook(book)
@@ -79,7 +79,7 @@ export const getLatestBooks = async (_req: Request, res: Response) => {
 
 export const getOneBook = async (req: Request, res: Response) => {
   try {
-    const book = await library.getOneBook(+req.params.id)
+    const book = await library.getOneBook(req.params.id)
     res.status(book['status']).json(book['bookInfo'])
   } catch (error) {
     res.status(401).json(error)
@@ -143,7 +143,7 @@ export const updateBook = async (req: Request, res: Response) => {
     const userWhoLoged = decode.user.id
     const adminRole = decode.user.admin_flag
 
-    const getUserBook = await library.getOneBook(+req.params.id)
+    const getUserBook = await library.getOneBook(req.params.id)
     if (getUserBook['bookInfo'] == 'book was not found') {
       return res.status(getUserBook['status']).json(getUserBook['bookInfo'])
     }
@@ -163,7 +163,7 @@ export const updateBook = async (req: Request, res: Response) => {
 
     if (userWhoLoged == currentUser) {
       const book = {
-        id: +req.params.id,
+        id: req.params.id,
         book_code: `${blockNum}-${shelfNum}-${req.body.book_number_in_shelf}`,
         book_name: req.body.book_name,
         author: req.body.author,
@@ -187,7 +187,7 @@ export const updateBook = async (req: Request, res: Response) => {
     }
     if (adminRole) {
       const book = {
-        id: +req.params.id,
+        id: req.params.id,
         book_code: `${blockNum}-${shelfNum}-${req.body.book_number_in_shelf}`,
         book_name: req.body.book_name,
         author: req.body.author,
@@ -248,7 +248,7 @@ export const getAllBooksForBackup = async (_req: Request, res: Response) => {
 
 // export const deleteBook = async (req: Request, res: Response) => {
 //   try {
-//     const deletedBook = await library.deleteBook(+req.params.id)
+//     const deletedBook = await library.deleteBook(req.params.id)
 //     res.status(deletedBook['status']).json(deletedBook['message'])
 //   } catch (error) {
 //     res.status(401).json(error)

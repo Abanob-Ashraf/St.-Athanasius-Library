@@ -13,7 +13,7 @@ import {
 } from '../sql-queries/books'
 
 export type Book = {
-  id: number
+  id: string
   book_code: string
   book_name: string
   author: string
@@ -24,11 +24,11 @@ export type Book = {
   number_of_parts: number
   name_of_series: number
   conclusion: string
-  currrent_user: number
-  old_user: null
-  shelf_id: number
+  currrent_user: string
+  old_user: string
+  shelf_id: string
   book_number_in_shelf: number
-  who_edited: number
+  who_edited: string
   created_date: Date
   updated_date: Date
 }
@@ -107,7 +107,7 @@ export class BooksModel {
   }
 
   // getOneBook
-  async getOneBook(id: number): Promise<object> {
+  async getOneBook(id: string): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETONEBOOKBYID, [id])
@@ -172,7 +172,7 @@ export class BooksModel {
       if (shelf_number == null) {
         SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
           SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
-          `ORDER BY books.shelf_id, books.book_number_in_shelf ASC`
+          `ORDER BY shelfs.shelf_number, books.book_number_in_shelf ASC`
       }
       if (shelf_number != null) {
         SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
@@ -197,7 +197,7 @@ export class BooksModel {
   }
 
   // getUserBooks
-  async getUserBooks(user_id: number): Promise<object> {
+  async getUserBooks(user_id: string): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMYBOOKS, [user_id])
@@ -293,7 +293,7 @@ export class BooksModel {
   }
 
   // deleteBook
-  // async deleteBook(id: number): Promise<object> {
+  // async deleteBook(id: string): Promise<object> {
   //   try {
   //     const connection = await Client.connect()
   //     const test = await connection.query(GETONEBOOKBYID, [id])

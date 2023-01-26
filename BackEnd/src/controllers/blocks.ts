@@ -13,7 +13,7 @@ export const createBlock = async (req: Request, res: Response) => {
       block_name: req.body.block_name,
       created_date: new Date(),
       updated_date: new Date(),
-      id: undefined as unknown as number
+      id: undefined as unknown as string
     }
     const newBlock = await library.createBlock(block)
     res.status(newBlock['status']).json(newBlock['message'])
@@ -35,7 +35,7 @@ export const getManyBlocks = async (_req: Request, res: Response) => {
 // getOneBlock
 export const getOneBlock = async (req: Request, res: Response) => {
   try {
-    const block = await library.getOneBlock(+req.params.id)
+    const block = await library.getOneBlock(req.params.id)
     res.status(block['status']).json(block['blockInfo'])
   } catch (error) {
     res.status(401).json(error)
@@ -46,7 +46,7 @@ export const getOneBlock = async (req: Request, res: Response) => {
 export const updateBlock = async (req: Request, res: Response) => {
   try {
     const block = {
-      id: +req.params.id,
+      id: req.params.id,
       block_number: req.body.block_number,
       block_name: req.body.block_name,
       created_date: new Date(),
@@ -92,7 +92,7 @@ export const getAllBlocksForBackup = async (_req: Request, res: Response) => {
 // // deleteBlock
 // export const deleteBlock = async (req: Request, res: Response) => {
 //   try {
-//     const deletedBlock = await library.deleteBlock(+req.params.id)
+//     const deletedBlock = await library.deleteBlock(req.params.id)
 //     if (typeof deletedBlock == 'string') {
 //       return res.status(404).json(deletedBlock)
 //     }

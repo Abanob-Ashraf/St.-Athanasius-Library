@@ -10,10 +10,10 @@ import {
 } from '../sql-queries/shelfs'
 
 export type Shelf = {
-  id: number
+  id: string
   shelf_number: number
   shelf_name: string
-  block_id: number
+  block_id: string
   created_date: Date
   updated_date: Date
 }
@@ -64,7 +64,7 @@ export class ShelfsModel {
   }
 
   // getOneShelf
-  async getOneShelf(id: number): Promise<object> {
+  async getOneShelf(id: string): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETONESHELF, [id])
@@ -85,7 +85,7 @@ export class ShelfsModel {
   }
 
   // GETMANYSHELFS_BLOCKSID
-  async getShelfsWithBlockId(id: number): Promise<object> {
+  async getShelfsWithBlockId(id: string): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETMANYSHELFS_BLOCKSID, [id])
@@ -137,7 +137,7 @@ export class ShelfsModel {
   }
 
   // deleteShelf
-  // async deleteShelf(id: number): Promise<object> {
+  // async deleteShelf(id: string): Promise<object> {
   //   try {
   //     const connection = await Client.connect()
   //     const test = await connection.query(GETONESHELF, [id])

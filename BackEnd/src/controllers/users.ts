@@ -36,7 +36,7 @@ export const createUser = async (req: Request, res: Response) => {
       user_status: 'AVILABLE',
       created_date: new Date(),
       updated_date: new Date(),
-      id: undefined as unknown as number
+      id: undefined as unknown as string
     }
     const createdUser = await library.create(user)
 
@@ -69,6 +69,8 @@ export const getManyUsers = async (_req: Request, res: Response) => {
     const users = await library.getManyUsers()
     res.status(users['status']).json(users['userInfo'])
   } catch (error) {
+    console.log(error)
+
     res.status(400).json(error)
   }
 }
@@ -76,7 +78,7 @@ export const getManyUsers = async (_req: Request, res: Response) => {
 // getOneUser
 export const getOneUser = async (req: Request, res: Response) => {
   try {
-    const user = await library.getOneUser(+req.params.id)
+    const user = await library.getOneUser(req.params.id)
     res.status(user['status']).json(user['userInfo'])
   } catch (error) {
     res.status(400).json(error)
@@ -105,7 +107,7 @@ export const getMine = async (req: Request, res: Response) => {
     const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
     const userId = decode.user.id
 
-    const user = await library.getOneUser(+userId)
+    const user = await library.getOneUser(userId)
     res.status(user['status']).json(user['userInfo'])
   } catch (error) {
     res.status(400).json(error)
@@ -125,9 +127,9 @@ export const updateUser = async (req: Request, res: Response) => {
     const userId = decode.user.id
     const userRole = decode.user.admin_flag
 
-    if (userId == +req.params.id || userRole == true) {
+    if (userId == req.params.id || userRole == true) {
       const user = {
-        id: +req.params.id,
+        id: req.params.id,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         full_name: `${req.body.first_name} ${req.body.last_name}`,
@@ -168,7 +170,7 @@ export const changePassword = async (req: Request, res: Response) => {
     const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
     const userId = decode.user.id
 
-    const user = await library.changePassword(+userId, old_password, new_password, new Date())
+    const user = await library.changePassword(userId, old_password, new_password, new Date())
     res.status(user['status']).json(user['message'])
   } catch (error) {
     res.status(400).json(error)
@@ -242,12 +244,7 @@ export const deleteUser = async (req: Request, res: Response) => {
     const token = req.header('Authorization')?.replace('Bearer ', '') as string
     const decode = jwt.verify(token, process.env.TOKEN_SECRET as unknown as string) as JwtPayload
     const userId = decode.user.id
-    const deletedUser = await library.deleteUser(
-      +userId,
-      +req.params.id,
-      'NOT AVILABLE',
-      new Date()
-    )
+    const deletedUser = await library.deleteUser(userId, req.params.id, 'NOT AVILABLE', new Date())
     res.status(deletedUser['status']).json(deletedUser['message'])
   } catch (error) {
     res.status(400).json(error)

@@ -8,7 +8,7 @@ import {
 } from '../sql-queries/blocks'
 
 export type Block = {
-  id: number
+  id: string
   block_number: number
   block_name: string
   created_date: Date
@@ -51,7 +51,7 @@ export class BlocksModel {
   }
 
   // getOneBlock
-  async getOneBlock(id: number): Promise<object> {
+  async getOneBlock(id: string): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETONEBLOCK, [id])
@@ -102,7 +102,7 @@ export class BlocksModel {
   }
 
   // // deleteBlock
-  // async deleteBlock(id: number): Promise<Block | string> {
+  // async deleteBlock(id: string): Promise<Block | string> {
   //   try {
   //     const connection = await Client.connect()
   //     const test = await connection.query(GETONEBLOCK, [id])

@@ -1,5 +1,5 @@
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
+    id uuid primary key default gen_random_uuid() ,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     full_name VARCHAR(100) NOT NULL,
@@ -12,6 +12,7 @@ CREATE TABLE users (
     created_date TIMESTAMP NOT NULL,
     updated_date TIMESTAMP NOT NULL
 );
+
 -- /* Populate The Users Table */
 /*
 insert into users (

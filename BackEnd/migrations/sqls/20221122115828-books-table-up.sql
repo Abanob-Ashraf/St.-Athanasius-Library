@@ -1,5 +1,5 @@
 CREATE TABLE books (
-    id SERIAL PRIMARY KEY,
+    id uuid primary key default gen_random_uuid(),
     book_code VARCHAR(100) UNIQUE NOT NULL,
     book_name VARCHAR(100) NOT NULL,
     author VARCHAR(100),
@@ -10,11 +10,11 @@ CREATE TABLE books (
     number_of_parts integer,
     name_of_series text,
     conclusion text,
-    currrent_user integer REFERENCES users(id) NOT NULL,
-    old_user integer REFERENCES users(id),
-    shelf_id integer REFERENCES shelfs(id) NOT NULL,
+    currrent_user uuid REFERENCES users(id) NOT NULL,
+    old_user uuid REFERENCES users(id),
+    shelf_id uuid REFERENCES shelfs(id) NOT NULL,
     book_number_in_shelf integer NOT NULL,
-    who_edited integer REFERENCES users(id),
+    who_edited uuid REFERENCES users(id),
     created_date TIMESTAMP NOT NULL,
     updated_date TIMESTAMP NOT NULL
 );

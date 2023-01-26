@@ -23,7 +23,7 @@ const saltRounds = process.env.SALT_ROUND
 const pepper = process.env.BCRYPT_PASSWORD
 
 export type User = {
-  id: number
+  id: string
   first_name: string
   last_name: string
   full_name: string
@@ -80,7 +80,7 @@ export class UsersModel {
   }
 
   // getOneUser
-  async getOneUser(id: number): Promise<object> {
+  async getOneUser(id: string): Promise<object> {
     try {
       const connection = await Client.connect()
       const result = await connection.query(GETONEUSER, [id])
@@ -171,7 +171,7 @@ export class UsersModel {
 
   // changePassword
   async changePassword(
-    id: number,
+    id: string,
     old_password: string,
     new_password: string,
     updated_date: Date
@@ -261,8 +261,8 @@ export class UsersModel {
 
   // deleteUser
   async deleteUser(
-    userId: number,
-    id: number,
+    userId: string,
+    id: string,
     user_status: string,
     updated_date: Date
   ): Promise<object> {
