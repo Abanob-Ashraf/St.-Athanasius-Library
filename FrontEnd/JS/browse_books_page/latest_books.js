@@ -11,7 +11,7 @@ let book_created = document.querySelector(".browseBooks.latest-books .latest-boo
 
 // latest Book Response
 function response(data){
-    for (let i = 0 ; i <= 5; i++){
+    for (let i = 0 ; i < 5; i++){
         // Create Elements
         let book = document.createElement("div")
         let p = document.createElement("p")

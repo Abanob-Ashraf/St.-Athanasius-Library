@@ -235,6 +235,21 @@ hr{
 .edit:hover{
     background-color: var(--secondDangerColor);
 }
+.note{
+    width: fit-content;
+    border: none;
+    outline: none;
+    padding: 2px 8px;
+    background-color: var(--dangerColor);
+    color: var(--whiteColor);
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
 .arrows{
     margin-top: 15px;
     display: flex;
@@ -268,6 +283,7 @@ hr{
     font-size: 17px;
     color: var(--whiteColor);
 }
+
 /* Start User Login Drop List */
 .header .container .user-login{
     display: flex;
@@ -741,6 +757,65 @@ hr{
         border: none;
     }
 }
+
+/* Backup Data */
+.profile.backup-data{
+    margin-top: 15px;
+}
+.profile.backup-data .text{
+    width: 100%;
+    margin-right: 15px;
+    font-weight: bold;
+    color: var(--dangerColor);
+}
+.profile.backup-data .flex .backup{
+    text-align: center;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.profile.backup-data .flex .backup{
+    text-align: center;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.profile.backup-data .flex .backup:not(:last-child){
+    margin-left: 15px;
+}
+.profile.backup-data .backup{
+    margin-top: 15px;
+    text-align: center;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+@media (max-width:991px){
+    .profile.backup-data .flex{
+        flex-direction: column;
+        margin-top: 0;
+    }
+    .profile.backup-data .note{
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .profile.backup-data .text{
+        margin-right: 0;
+        text-align: center;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--mainBlackColor);
+    }
+    .profile.backup-data .flex .backup:not(:last-child){
+        margin-left: 0;
+    }
+}
+
 
 /* Footer */
 .footer {

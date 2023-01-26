@@ -1,6 +1,6 @@
 let token = JSON.parse(sessionStorage.getItem("token"));
 let shelfID = document.getElementsByName("shelf_id")[0]
-let blockID = document.getElementsByName("block_id")[1]
+let blockID = document.getElementsByName("block_id")[1] || document.getElementsByName("block_id")[0]
 
 // All Shelfs Response
 function response(data){
@@ -34,7 +34,7 @@ function response(data){
 // all_shelfs Fetch Function (To Get Information)
 function all_shelfs(){
     blockID.addEventListener("input",()=>{
-        fetch(`http://localhost:3000/library//shelfs/block/${blockID.value}`,
+        fetch(`http://localhost:3000/library/shelfs/block/${blockID.value}`,
         {
             method: 'GET',
             headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

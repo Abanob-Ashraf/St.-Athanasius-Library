@@ -48,7 +48,7 @@
         <div class="container">
             <!-- Grid Layout -->
             <div class="grid-layout">
-                <!-- Start Profile General Information -->
+                <!-- Start Profile - General Information -->
                 <div class="profile general-info">
                     <div class="admin-flag"></div>
                     <div class="pic">
@@ -59,7 +59,7 @@
                 </div>
                 <!-- End Profile -->
 
-                <!-- Start Profile User's Information -->
+                <!-- Start Profile - User's Information -->
                 <div class="profile user">
                     <div class="user-info">
                         <div class="title">المعلومات الشخصيه</div>
@@ -132,7 +132,7 @@
                 </div>
                 <!-- End Profile -->
 
-                <!-- Start Profile Search For A User-->
+                <!-- Start Profile - Search For A User-->
                 <div class="profile search-user">
                     <div class="search">
                         <div class="title">البحث عن مستخدم</div>
@@ -202,7 +202,7 @@
                 </div>
                 <!-- End Profile -->
 
-                <!-- Start Profile Deleted Users -->
+                <!-- Start Profile - Deleted Users -->
                 <div class="profile deleted-users">
                     <div class="show">
                         <div class="title">المستخدمين المحذوفين</div>
@@ -210,7 +210,7 @@
                         <button class="show-deleted-users">عرض المستخدمين المحذوفين</button>
                         <small></small>
                     </div>
-                    <!-- Start Profile Deleted Users Information -->
+                    <!-- Start Profile - Deleted Users Information -->
                     <div class="info-show">
                         <div class="title">عرض المستخدمين المحذوفين</div>
                         <hr>
@@ -226,7 +226,7 @@
             </div>
             <!-- End Grid Layout One -->
 
-            <!-- Start Profile Create Users-->
+            <!-- Start Profile - Create Users-->
             <div class="profile create-user">
                 <div class="title">انشاء المستخدم</div>
                 <hr>
@@ -256,6 +256,25 @@
                         <input type="submit" value="انشاء مستخدم" class="submit" />
                     </div>
                 </form>
+                <small></small>
+            </div>
+            <!-- End Profile -->
+
+            <!-- Start Profile - Backup Data-->
+            <div class="profile backup-data">
+                <div class="title">استعاده البيانات</div>
+                <hr>
+                <div class="flex">
+                    <div class="note">تحذير</div>
+                    <div class="text">يجب عدم التلاعب او الاقتراب بالملف الذي سيتم تنزيله عند استعاعده البيانات</div>
+                </div>
+                <div class="flex">
+                    <div class="submit backup">استعاده بيانات المستخدمين</div>
+                    <div class="submit backup">استعاده بيانات الكتب</div>
+                    <div class="submit backup">استعاده بيانات الوحدات</div>
+                    <div class="submit backup">استعاده بيانات الارفف</div>
+                </div>
+                <div class="submit backup all">استعاده جميع البيانات</div>
                 <small></small>
             </div>
             <!-- End Profile -->
@@ -318,5 +337,6 @@
     <script src="./JS/profile_page/search_for_a_user.js" type="module"></script>
     <script src="./JS/profile_page/deleted_users.js" type="module"></script>
     <script src="./JS/profile_page/create_user.js" type="module"></script>
+    <script src="./JS/profile_page/backup_data.js" type="module"></script>
 </body>
 </html>

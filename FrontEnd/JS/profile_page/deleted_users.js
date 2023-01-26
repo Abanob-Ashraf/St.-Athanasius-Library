@@ -19,36 +19,33 @@ function response(data){
                 // Divs
                 let userInfo = document.querySelector(".deleted-users .info-show .scroll-container")
                 let infoGroup = document.createElement("div");
-                let id = document.createElement("div")
                 let fullName = document.createElement("div")
                 let job = document.createElement("div")
                 let email = document.createElement("div")
                 let phone = document.createElement("div")
     
                 // P 
-                let idP = document.createElement("p")
                 let fullNameP = document.createElement("p")
                 let jobP = document.createElement("p")
                 let emailP = document.createElement("p")
                 let phoneP = document.createElement("p")
+                let note = document.createElement("p")
     
                 // span
-                let idSpan = document.createElement("span")
                 let fullNameSpan = document.createElement("span")
                 let jobSpan = document.createElement("span")
                 let emailSpan = document.createElement("span")
                 let phoneSpan = document.createElement("span")
     
                 // PTexts
-                let idPText = document.createTextNode("id :")
                 let fullNamePText = document.createTextNode("الاسم :")
                 let jobPText = document.createTextNode("دور الخادم :")
                 let emailPText = document.createTextNode("البريد الالكتروني :")
                 let phonePText = document.createTextNode("رقم الهاتف :")
+                let noteText = document.createTextNode("اذا تود استرجاع المستخدم ابحث عنه و اضغط حفظ البيانات عند التعديل")
         
     
                 // spanTexts
-                let idSpanText = document.createTextNode(data[i].id)
                 let fullNameSpanText = document.createTextNode(data[i].full_name)
                 let jobSpanText = document.createTextNode(data[i].job)
                 let emailSpanText = document.createTextNode(data[i].email)
@@ -56,20 +53,14 @@ function response(data){
     
                 // Classes
                 infoGroup.className = "info-group"
-                id.className = "id"
                 fullName.className = "full-name"
                 job.className = "job"
                 email.className = "email"
                 phone.className = "phone"
+                note.className = "note"
         
                 // Appends
                 userInfo.appendChild(infoGroup)
-                // ID
-                infoGroup.appendChild(id)
-                id.appendChild(idP)
-                idP.appendChild(idPText)
-                id.appendChild(idSpan)
-                idSpan.appendChild(idSpanText)
     
                 // Full Name
                 infoGroup.appendChild(fullName)
@@ -98,6 +89,10 @@ function response(data){
                 phoneP.appendChild(phonePText)
                 phone.appendChild(phoneSpan)
                 phoneSpan.appendChild(phoneSpanText)
+
+                // Note
+                infoGroup.appendChild(note)
+                note.appendChild(noteText)
 
                 // Redirect To User Information From Show Partion
                 let user_deleted_info_back = document.querySelector(".deleted-users .info-show .back")

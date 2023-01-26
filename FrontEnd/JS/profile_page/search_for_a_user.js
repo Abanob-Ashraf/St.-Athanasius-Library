@@ -18,7 +18,6 @@ function response(data){
             let edit = document.createElement("button")
             let del = document.createElement("button")
             let infoGroup = document.createElement("div");
-            let id = document.createElement("div")
             let fullName = document.createElement("div")
             let job = document.createElement("div")
             let email = document.createElement("div")
@@ -28,7 +27,6 @@ function response(data){
             let created = document.createElement("div")
 
             // P 
-            let idP = document.createElement("p")
             let fullNameP = document.createElement("p")
             let jobP = document.createElement("p")
             let emailP = document.createElement("p")
@@ -38,7 +36,6 @@ function response(data){
             let createdP = document.createElement("p")
 
             // span
-            let idSpan = document.createElement("span")
             let fullNameSpan = document.createElement("span")
             let jobSpan = document.createElement("span")
             let emailSpan = document.createElement("span")
@@ -52,7 +49,6 @@ function response(data){
             let delText = document.createTextNode("حذف المستخدم")
 
             // PTexts
-            let idPText = document.createTextNode("id :")
             let fullNamePText = document.createTextNode("الاسم :")
             let jobPText = document.createTextNode("دور الخادم :")
             let emailPText = document.createTextNode("البريد الالكتروني :")
@@ -63,7 +59,6 @@ function response(data){
     
 
             // spanTexts
-            let idSpanText = document.createTextNode(data[i].id)
             let fullNameSpanText = document.createTextNode(data[i].full_name)
             let jobSpanText = document.createTextNode(data[i].job)
             let emailSpanText = document.createTextNode(data[i].email)
@@ -77,7 +72,6 @@ function response(data){
             doubleDiv.className = "flex"
             edit.className = "edit"
             del.className = "delete"
-            id.className = "id"
             fullName.className = "full-name"
             job.className = "job"
             email.className = "email"
@@ -88,12 +82,6 @@ function response(data){
     
             // Appends
             userInfo.appendChild(infoGroup)
-            // ID
-            infoGroup.appendChild(id)
-            id.appendChild(idP)
-            idP.appendChild(idPText)
-            id.appendChild(idSpan)
-            idSpan.appendChild(idSpanText)
 
             // Full Name
             infoGroup.appendChild(fullName)
@@ -195,7 +183,7 @@ function response(data){
                             admin_flag: admin.checked
                         })
                     }).then(res => res.json())
-                    .catch(e => console.log(e))    
+                    .catch(e => console.log(e))
                 })
             })
 
@@ -210,7 +198,7 @@ function response(data){
 
             // Delete Current User On Click (Fetch Function (To Delete Information))
             del.addEventListener("click",()=>{
-                fetch(`http://localhost:3000/library/users/${parseInt(idSpanText.textContent)}`,
+                fetch(`http://localhost:3000/library/users/${data[i].id}`,
                 {
                     method: 'DELETE',
                     headers: new Headers({"Authorization": `Bearer ${token}`}),

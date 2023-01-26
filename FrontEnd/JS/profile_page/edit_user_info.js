@@ -11,10 +11,10 @@ let firstNameEI = document.querySelector(".profile.user .edit-info .first-name i
 let lastNameEI = document.querySelector(".profile.user .edit-info .last-name input");
 let emailEI = document.querySelector(".profile.user .edit-info .email input");
 let phoneEI = document.querySelector(".profile.user .edit-info .phone input");
+let errorMsg = document.querySelector(".profile.user .edit-info .errorMsg")
 
 // Edit_user Response
 function response(data){
-    let errorMsg = document.querySelector(".profile.user .edit-info .errorMsg")
     if (data == "this email already existe"){
         errorMsg.textContent = "هذا البريد الالكتروني او رقم الهاتف مسجل من قبل"
         setTimeout(()=>{
@@ -45,7 +45,6 @@ function edit_user(){
         })
     }).then(res => res.json())
     .then(res => {
-        console.log(res)
         response(res)
     })
     .catch(e => console.log(e))    
@@ -53,7 +52,4 @@ function edit_user(){
 form.addEventListener("submit",(e)=>{
     e.preventDefault()
     edit_user()
-    setTimeout(()=>{
-        location.reload()
-    },4000)
 })
