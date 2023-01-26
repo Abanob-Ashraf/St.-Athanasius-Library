@@ -1,13 +1,32 @@
 let token = JSON.parse(sessionStorage.getItem("token"));
 let user_login = document.querySelector(".user-login")
+let Bars = document.querySelector(".bars")
+let links = document.querySelector(".links")
 let profile_pic = document.querySelector(".user-login .profile-pic img")
 let menu = document.querySelector(".menu")
 let welcome = document.querySelector(".menu .welcome")
 let logout = document.querySelector(".menu .logout")
-let profile_landing_side = document.querySelector(".profile-landing")
+let Index_landing_side = document.querySelector(".index-landing")
 
-// Header Response Function
-function response(data){
+
+// Header Links Response Function
+function links_response(){
+    // Show Header Links 
+    Bars.addEventListener("click",()=>{
+        links.classList.toggle("clicked")
+    })
+
+    // hide Header Links 
+    Index_landing_side.addEventListener("click",()=>{
+        links.classList.remove("clicked")
+    })
+}
+links_response()
+
+
+
+// Header Menu Response Function
+function menu_response(data){
     // Profile Img
     profile_pic.src = `https://api.dicebear.com/5.x/initials/svg?seed=${data.first_name[0]}${data.last_name[0]}`
 
@@ -17,7 +36,7 @@ function response(data){
     })
 
     // hide Header Menu 
-    profile_landing_side.addEventListener("click",()=>{
+    Index_landing_side.addEventListener("click",()=>{
         menu.classList.remove("clicked")
     })
 
@@ -39,7 +58,7 @@ function header(){
         headers: new Headers({"Authorization": `Bearer ${token}`}),
     }).then(res => res.json())
     .then(res => {
-        response(res)
+        menu_response(res)
     })
     .catch(e => console.log(e))
 }

@@ -154,7 +154,7 @@ hr{
     color: var(--whiteColor);
 }
 
-/* If Not User */
+/* User Not Login */
 /* Links */
 .bars{
     display: none;
@@ -233,6 +233,7 @@ hr{
         margin-bottom: 5px;
     }
     .links li a{
+        text-align: center;
         display: block;
         padding: 5px 10px;
     }
@@ -249,10 +250,13 @@ hr{
         text-align: center;
         margin-top: 10px;
     }
+    .links.clicked{
+        display: block;
+    }
 }
 
-/* If User */
-/* Start User Login Drop List */
+/* User Login */
+/* User Login Drop List */
 .header .container .user-login{
     display: flex;
     align-items: center;

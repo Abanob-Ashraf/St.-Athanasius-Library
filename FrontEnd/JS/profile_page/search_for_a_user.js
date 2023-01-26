@@ -162,6 +162,8 @@ function response(data){
                 email.setAttribute("placeholder",data[i].email)
                 let phone = document.querySelector(".profile.search-user .edit-info .phone .input");
                 phone.setAttribute("placeholder",data[i].phone_number)
+                let admin = document.querySelector(".profile.search-user .edit-info #admin-flag");
+                admin.checked = data[i].admin_flag
                 // Edit Current User On Submit (Fetch Function (To Edit Information))
                 form.addEventListener("submit",(e)=>{
                     let firstName = document.querySelector(".profile.search-user .edit-info .first-name .input");
