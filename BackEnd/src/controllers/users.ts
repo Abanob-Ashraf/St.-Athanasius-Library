@@ -69,8 +69,6 @@ export const getManyUsers = async (_req: Request, res: Response) => {
     const users = await library.getManyUsers()
     res.status(users['status']).json(users['userInfo'])
   } catch (error) {
-    console.log(error)
-
     res.status(400).json(error)
   }
 }
@@ -304,7 +302,6 @@ export const getAllUsersForBackup = async (_req: Request, res: Response) => {
         // modify the data to be a compatible for database when recover
         const newCsv = userDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
         const finalCsv = newCsv.replaceAll('null', '')
-
         const dir = __dirname + '../../../backup/'
         if (!fs.existsSync(dir)) {
           fs.mkdirSync(dir)
