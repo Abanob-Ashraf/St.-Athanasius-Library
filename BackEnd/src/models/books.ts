@@ -154,10 +154,7 @@ export class BooksModel {
   }
 
   // searchForBookWithBlockOrShelfAndBlock
-  async searchForBookWithBlockOrShelfAndBlock(
-    block_number: string,
-    shelf_number: string
-  ): Promise<object> {
+  async searchForBookWithBlockOrShelfAndBlock(block_id: string, shelf_id: string): Promise<object> {
     try {
       const connection = await Client.connect()
       let SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK = `SELECT books.id, books.book_code, books.book_name, books.author, books.publisher, 
@@ -168,16 +165,16 @@ export class BooksModel {
       ON shelfs.id = books.shelf_id 
       INNER JOIN blocks 
       ON blocks.id = shelfs.block_id 
-      WHERE blocks.block_number='${block_number}'`
-      if (shelf_number == null) {
+      WHERE blocks.id='${block_id}'`
+      if (shelf_id == null) {
         SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
           SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
           `ORDER BY shelfs.shelf_number, books.book_number_in_shelf ASC`
       }
-      if (shelf_number != null) {
+      if (shelf_id != null) {
         SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
           SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
-          `AND shelfs.shelf_number='${shelf_number}' ORDER BY books.book_number_in_shelf ASC`
+          `AND shelfs.id='${shelf_id}' ORDER BY books.book_number_in_shelf ASC`
       }
       const result = await connection.query(SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK)
       if (result.rows.length) {

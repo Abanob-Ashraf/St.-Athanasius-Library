@@ -103,8 +103,8 @@ export const searchForBook = async (req: Request, res: Response) => {
 export const searchForBookWithBlockOrShelfAndBlock = async (req: Request, res: Response) => {
   try {
     const book = await library.searchForBookWithBlockOrShelfAndBlock(
-      req.query.block_number as string,
-      req.query.shelf_number as string
+      req.query.block_id as string,
+      req.query.shelf_id as string
     )
     return res.status(book['status']).json(book['bookInfo'])
   } catch (error) {
@@ -115,8 +115,8 @@ export const searchForBookWithBlockOrShelfAndBlock = async (req: Request, res: R
 export const countBooksInBlockOrShelfAndBlock = async (req: Request, res: Response) => {
   try {
     const book = await library.searchForBookWithBlockOrShelfAndBlock(
-      req.query.block_number as string,
-      req.query.shelf_number as string
+      req.query.block_id as string,
+      req.query.shelf_id as string
     )
     return res.status(book['status']).json(`عدد الكتب ${book['length']}`)
   } catch (error) {
