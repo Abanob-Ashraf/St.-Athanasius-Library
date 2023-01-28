@@ -13,7 +13,7 @@ function response(data){
         let optionText = document.createTextNode(`الوحده ${data[i].block_number}`)
 
         // Set Element Attribute
-        option.setAttribute("value",data[i].block_number)
+        option.setAttribute("value",data[i].id)
 
         // Append Elements
         blockID_1.appendChild(option)
@@ -29,7 +29,10 @@ function response(data){
         let optionText = document.createTextNode(`الوحده ${data[i].block_number}`)
 
         // Set Element Attribute
-        option.setAttribute("value",data[i].block_number)
+        option.setAttribute("value",data[i].id)
+
+        // Set Element Attribute
+        option.setAttribute("data",data[i].block_number)
 
         // Append Elements
         blockID_2.appendChild(option)

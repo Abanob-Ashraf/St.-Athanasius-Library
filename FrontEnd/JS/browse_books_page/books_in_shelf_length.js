@@ -5,7 +5,7 @@ let blockID = document.getElementsByName("block_num_two")[0]
 // books_in_shelf_in_bLock_length Fetch Function (To Get Information)
 function books_in_shelf_in_bLock_length(){
     shelfID.addEventListener("input",()=>{
-        fetch(`http://localhost:3000/library/books/countBooksInThisBlock?block_number=${blockID.value.toString()}&shelf_number=${shelfID.value.toString()}`,
+        fetch(`http://localhost:3000/library/books/countBooksInThisBlock?block_id=${blockID.value}&shelf_id=${shelfID.value}`,
         {
             method: 'GET',
             headers: new Headers({"Authorization": `Bearer ${token}`}),

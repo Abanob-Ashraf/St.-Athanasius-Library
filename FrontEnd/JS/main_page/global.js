@@ -13,6 +13,5 @@ function global(){
     }
 
     copy_right.textContent = `كل الحقوق ملكيه مكتبه القديس اثناسيوس الرسولي ${new Date().getFullYear()}©`
-    
 }
 global()

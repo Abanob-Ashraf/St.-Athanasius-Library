@@ -72,7 +72,7 @@ function books_in_bLock(){
         block_book_scroll_div.forEach((e)=>{
             e.remove()
         })
-        fetch(`http://localhost:3000/library/books/getBooksInThisBlock?block_number=${blockID.value.toString()}`,
+        fetch(`http://localhost:3000/library/books/getBooksInThisBlock?block_id=${blockID.value}`,
         {
             method: 'GET',
             headers: new Headers({"Authorization": `Bearer ${token}`}),

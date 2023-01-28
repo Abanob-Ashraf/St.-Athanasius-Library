@@ -6,24 +6,7 @@ let profile_pic = document.querySelector(".user-login .profile-pic img")
 let menu = document.querySelector(".menu")
 let welcome = document.querySelector(".menu .welcome")
 let logout = document.querySelector(".menu .logout")
-let Index_landing_side = document.querySelector(".index-landing")
-
-
-// Header Links Response Function
-function links_response(){
-    // Show Header Links 
-    Bars.addEventListener("click",()=>{
-        links.classList.toggle("clicked")
-    })
-
-    // hide Header Links 
-    Index_landing_side.addEventListener("click",()=>{
-        links.classList.remove("clicked")
-    })
-}
-links_response()
-
-
+let Intro_landing_side = document.querySelector(".intro-landing")
 
 // Header Menu Response Function
 function menu_response(data){
@@ -36,7 +19,7 @@ function menu_response(data){
     })
 
     // hide Header Menu 
-    Index_landing_side.addEventListener("click",()=>{
+    Intro_landing_side.addEventListener("click",()=>{
         menu.classList.remove("clicked")
     })
 
@@ -63,3 +46,18 @@ function header(){
     .catch(e => console.log(e))
 }
 header()
+
+
+// Header Links Response Function
+function links_response(){
+    // Show Header Links 
+    Bars.addEventListener("click",()=>{
+        links.classList.toggle("clicked")
+    })
+
+    // hide Header Links 
+    Index_landing_side.addEventListener("click",()=>{
+        links.classList.remove("clicked")
+    })
+}
+links_response()

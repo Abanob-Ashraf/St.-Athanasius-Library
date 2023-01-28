@@ -17,7 +17,7 @@ function response(data){
         let optionText = document.createTextNode(`الرف ${data[i].shelf_number}`)
 
         // Set Element Attribute
-        option.setAttribute("value",data[i].shelf_number == undefined ? "" : data[i].shelf_number)
+        option.setAttribute("value",data[i].id == undefined ? "" : data[i].id)
 
         // Append Elements
         shelfID.appendChild(option)
