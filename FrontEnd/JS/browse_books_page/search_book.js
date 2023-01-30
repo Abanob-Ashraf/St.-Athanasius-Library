@@ -1,14 +1,14 @@
 let token = JSON.parse(sessionStorage.getItem("token"))
 let form = document.forms[0]
-let errorMsg = document.querySelector(".search-books small")
-let books = document.querySelector(".books")
+let errorMsg = document.querySelector(".search small")
+let show_searched_books = document.querySelector(".show-searched-books")
 
 // Search Response
 function response(data){
     for (let i = 0 ; i < data.length; i++){
-        books.style.display = "block"
+        show_searched_books.style.display = "block"
         // Call Tabel From Html & Create Tabel Raw
-        let table = document.querySelector(".the-books")    
+        let table = document.querySelector(".searched-books")    
         let raw =  document.createElement("tr")
 
         // Create Tabel Discription
@@ -40,7 +40,7 @@ function response(data){
 
         if(data == "book was not found"){
             // If data == "book was not found" Show =>
-            books.style.display = "none"
+            show_searched_books.style.display = "none"
             errorMsg.textContent = "هذا الكتاب غير موجود"
             setTimeout(()=>{
                 // After 4 Milli Second Do =>
@@ -76,9 +76,9 @@ function response(data){
 
 // search Fetch Function (To Get Information)
 function search(){
-    let keyOfSearch = document.querySelector(".browseBooks.search-books .search-container .subject").value
-    let valueOfSearch = document.querySelector(".browseBooks.search-books .search-container input").value
-    fetch(`http://localhost:3000/library/books/search?${keyOfSearch}=${valueOfSearch}`,
+    let Key_of_search = document.querySelector(".subject").value
+    let value_of_search = document.querySelector(".search-book").value
+    fetch(`http://localhost:3000/library/books/search?${Key_of_search}=${value_of_search}`,
     {
         method: 'GET',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

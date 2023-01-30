@@ -382,125 +382,86 @@ hr{
 
 /* Footer */
 .footer {
-  margin-top: 15px;
-  background-color: var(--mainBlackColor);
-  border-radius: 15px;
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  -ms-border-radius: 15px;
-  -o-border-radius: 15px;
+    background-color: var(--mainBlackColor);
 }
-.footer .box-container{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 50px 50px 0 50px;
-}
-@media (max-width: 991px) {
-  .footer {
-    text-align: center;
-  }
-  .footer .box-container{
-      flex-direction: column;
-  }
-  .footer .box-container .box{
-      width: 100%;
-      margin-bottom: 20px;
-      padding-top: 20px;
-  }
-  .footer .box-container .box:not(:first-child){
-      border-top: 1px solid var(--lightBlackColor);
-  }
-  .footer .box-container .box:last-child{
-      padding-top: 50px;
-  }
+.footer .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Side One */
-.footer .logo{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
-  .footer .logo h3{
-      font-size: 17px;
-      color: var(--whiteColor);
-  }
-
-.footer .box .text {
-  text-align: center;
-  line-height: 2;
-  color: var(--whiteColor);
+/* Logo Box */
+.footer .box .logo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.footer .box .logo h3{
+    font-size: 17px;
+    color: var(--whiteColor);
 }
 
-/* Side Two */
-.footer .box .line {
-  display: flex;
-  align-items: center;
-  color: var(--lightBlackColor);
-  font-weight: bold;
-  cursor: pointer;
-}
-.footer .box .line:not(:last-child) {
-  margin-bottom: 15px;
-}
-.footer .box .line i {
-  font-size: 25px;
-  color: var(--lightBlackColor);
-  border-radius: 5px 5px 0 0;
-  margin-left: 10px;
-}
-.footer .box .line .info {
-  line-height: 1.7;
-  color: var(--lightBlackColor);
-}
-.footer .box .line .info span {
-  display: block;
-}
-
-  /* Side Three */
-.footer .box .social {
-  display: flex;
-  justify-content: center;
+/* Social Media Box */
+.footer .box .social{
+    display: flex;
+    justify-content: center;
 }
 .footer .box .social li {
-  margin-right: 10px;
+margin-right: 10px;
 }
 .footer .box .social li a {
-  background-color: var(--darkBlackColor);
-  color: var(--lightBlackColor);
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
-  transition: 0.3s;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -ms-transition: 0.3s;
-  -o-transition: 0.3s;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
+background-color: var(--darkBlackColor);
+color: var(--lightBlackColor);
+display: inline-flex;
+justify-content: center;
+align-items: center;
+width: 50px;
+height: 50px;
+font-size: 20px;
+transition: 0.3s;
+-webkit-transition: 0.3s;
+-moz-transition: 0.3s;
+-ms-transition: 0.3s;
+-o-transition: 0.3s;
+border-radius: 5px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+-ms-border-radius: 5px;
+-o-border-radius: 5px;
 }
 .footer .box .social .facebook:hover {
-  background-color: var(--facebookColor);
+background-color: var(--facebookColor);
+color: var(--whiteColor);
 }
-.footer .box .social .twitter:hover {
-  background-color: var(--twitterColor);
+.footer .box .social .telegram:hover {
+background-color: var(--telegramColor);
+color: var(--whiteColor);
 }
 .footer .box .social .youtube:hover {
-  background-color: var(--youtubeColor);
+background-color: var(--youtubeColor);
+color: var(--whiteColor);
+}
+.footer .box .social .email:hover {
+background-color: var(--emailColor);
+color: var(--whiteColor);
 }
 
 /* Copy Right */
 .footer .copy-right {
-  padding: 25px 0;
-  text-align: center;
-  color: var(--whiteColor);
-  margin: 50px 0 0;
-  border-top: 1px solid var(--lightBlackColor);
+padding: 25px 0;
+text-align: center;
+color: var(--whiteColor);
+border-top: 1px solid var(--lightBlackColor);
+}
+@media (max-width:991px){
+    .footer .container{
+        flex-direction: column;
+    }
+    .footer .box .logo{
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    .footer .box .social{
+        margin-bottom: 15px;
+    }
 }

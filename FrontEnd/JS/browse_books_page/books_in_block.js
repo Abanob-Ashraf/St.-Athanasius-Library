@@ -1,15 +1,15 @@
 let token = JSON.parse(sessionStorage.getItem("token"));
-let blockID = document.getElementsByName("block_num_one")[0]
-let block_book = document.querySelector(".browseBooks.block-books .block-book")
-let block_book_scroll = document.querySelector(".browseBooks.block-books .block-book .scroll")
-let block_book_info = document.querySelector(".browseBooks.block-books .block-book-info");
-let block_book_info_back = document.querySelector(".browseBooks.block-books .block-book-info .back")
-let book_name = document.querySelector(".browseBooks.block-books .block-book-info .book-name span")
-let book_author = document.querySelector(".browseBooks.block-books .block-book-info .book-author span")
-let book_publisher = document.querySelector(".browseBooks.block-books .block-book-info .publisher span")
-let book_code = document.querySelector(".browseBooks.block-books .block-book-info .book-code span")
-let book_copies = document.querySelector(".browseBooks.block-books .block-book-info .book-copies span")
-let book_created = document.querySelector(".browseBooks.block-books .block-book-info .book-created span")
+let blockID = document.getElementsByName("select_block")[0]
+let block_book = document.querySelector(".book-in-block .block-books")
+let block_book_scroll = document.querySelector(".book-in-block .block-books .scroll")
+let block_book_info = document.querySelector(".book-in-block .block-books-info");
+let block_book_info_back = document.querySelector(".book-in-block .block-books-info .back")
+let book_name = document.querySelector(".book-in-block .block-books-info .book-name span")
+let book_author = document.querySelector(".book-in-block .block-books-info .book-author span")
+let book_publisher = document.querySelector(".book-in-block .block-books-info .publisher span")
+let book_code = document.querySelector(".book-in-block .block-books-info .book-code span")
+let book_copies = document.querySelector(".book-in-block .block-books-info .book-copies span")
+let book_created = document.querySelector(".book-in-block .block-books-info .book-created span")
 
 // Books In BLock Response
 function response(data){
@@ -62,8 +62,8 @@ function response(data){
 function books_in_bLock(){
     // When Input BLock Number Show Books In current BLock
     blockID.addEventListener("input",()=>{
-        let block_book_scroll = document.querySelector(".browseBooks.block-books .block-book .scroll")
-        let block_book_scroll_div = document.querySelectorAll(".browseBooks.block-books .block-book .scroll div")
+        let block_book_scroll = document.querySelector(".book-in-block .block-books .scroll")
+        let block_book_scroll_div = document.querySelectorAll(".book-in-block .block-books .scroll div")
         block_book_scroll.style.display = "block"
         if (blockID.value == ""){
             block_book_scroll.style.display = "none"

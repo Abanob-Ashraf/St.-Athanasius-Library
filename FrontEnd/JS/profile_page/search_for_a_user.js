@@ -166,12 +166,14 @@ function response(data){
                 admin.checked = data[i].admin_flag
                 // Edit Current User On Submit (Fetch Function (To Edit Information))
                 form.addEventListener("submit",(e)=>{
+                    e.preventDefault()
                     let firstName = document.querySelector(".profile.search-user .edit-info .first-name .input");
                     let lastName = document.querySelector(".profile.search-user .edit-info .last-name .input");
                     let email = document.querySelector(".profile.search-user .edit-info .email .input");
                     let job = document.querySelector(".profile.search-user .edit-info .job .input");
                     let admin = document.querySelector(".profile.search-user .edit-info #admin-flag");
                     let phone = document.querySelector(".profile.search-user .edit-info .phone .input");
+                    let errorMsg = document.querySelector(".profile.search-user .edit-info .errorMsg")
                     fetch(`http://localhost:3000/library/users/${data[i].id}`,
                     {
                         method: 'PUT',
@@ -185,6 +187,23 @@ function response(data){
                             admin_flag: admin.checked
                         })
                     }).then(res => res.json())
+                    .then(res => {
+                        if (res == "this email already existe"){
+                            errorMsg.textContent = "هذا البريد الالكتروني او رقم الهاتف مسجل من قبل"
+                            setTimeout(()=>{
+                                errorMsg.textContent = ""
+                            },4000)
+                        }else if (res == "updated user correctly"){
+                            setTimeout(()=>{
+                                location.reload()
+                            })
+                        }else if (res.errors[0].param == "email"){
+                            errorMsg.textContent = "يرجي كتابه البريد الالكتروني بشكل صحيح"
+                            setTimeout(()=>{
+                                errorMsg.textContent = ""
+                            },4000)
+                        }
+                    })
                     .catch(e => console.log(e))
                 })
             })

@@ -1,6 +1,6 @@
 let token = JSON.parse(sessionStorage.getItem("token"));
-let blockID_1 = document.getElementsByName("block_num_one")[0]
-let blockID_2 = document.getElementsByName("block_num_two")[0]
+let blockID_1 = document.getElementsByName("select_block")[0]
+let blockID_2 = document.getElementsByName("select_block_sh")[0]
 
 // All Blocks Response
 function response(data){

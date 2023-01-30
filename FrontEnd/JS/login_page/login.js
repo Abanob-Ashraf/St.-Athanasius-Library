@@ -30,6 +30,7 @@ function validateFromDataBase(data){
         passwordMsg.textContent = "البريد الالكتروني غير صحيح او كلمه المرور غير صحيحه"
     }else{
         // Else Set Sessions Storage And Put And Go To Profile Page =>
+        sessionStorage.setItem("full_name" , JSON.stringify(data.full_name))
         sessionStorage.setItem("first_name" , JSON.stringify(data.first_name))
         sessionStorage.setItem("last_name" , JSON.stringify(data.last_name))
         sessionStorage.setItem("token" , JSON.stringify(data.token))
@@ -38,6 +39,7 @@ function validateFromDataBase(data){
         sessionStorage.setItem("job" , JSON.stringify(data.job))
         sessionStorage.setItem("email" , JSON.stringify(data.email))
         sessionStorage.setItem("phone_number" , JSON.stringify(data.phone_number))
+        sessionStorage.setItem("created_date" , JSON.stringify(data.created_date))
         location.href = "/profile.html"
     }
 

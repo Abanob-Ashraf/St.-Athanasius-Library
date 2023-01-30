@@ -20,6 +20,14 @@ function response(data){
         setTimeout(()=>{
             errorMsg.textContent = ""
         },4000)
+    }else if (data == "updated user correctly"){
+        sessionStorage.setItem("first_name" , firstNameEI.value.trim() == "" ? JSON.stringify(first_name) : JSON.stringify(firstNameEI.value.trim()))
+        sessionStorage.setItem("last_name" , lastNameEI.value.trim() == "" ? JSON.stringify(last_name) : JSON.stringify(lastNameEI.value.trim()))
+        sessionStorage.setItem("email" , emailEI.value.trim() == "" ? JSON.stringify(email) : JSON.stringify(emailEI.value.trim()))
+        sessionStorage.setItem("phone_number" , phoneEI.value.trim() == "" ? JSON.stringify(phone_number) : JSON.stringify(phoneEI.value.trim()))
+        setTimeout(()=>{
+            location.reload()
+        })
     }else if (data.errors[0].param == "email"){
         errorMsg.textContent = "يرجي كتابه البريد الالكتروني بشكل صحيح"
         setTimeout(()=>{
@@ -45,6 +53,7 @@ function edit_user(){
         })
     }).then(res => res.json())
     .then(res => {
+        console.log(res)
         response(res)
     })
     .catch(e => console.log(e))    

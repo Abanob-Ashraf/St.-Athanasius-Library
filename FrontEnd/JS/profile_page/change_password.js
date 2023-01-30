@@ -36,8 +36,15 @@ function change_Password(){
             setTimeout(()=>{
                 // Afer 2 milli Second Clear Session And Reload Page 
                 sessionStorage.clear()
-                location.reload()
-            },2000)
+                location.href = "/login.html"
+            })
+        }else if (res.errors[0].param == "new_password"){
+            // Else Response = "password changed correctly" Show => 
+            errorMsg.textContent = "يرجي ان لا تقل كلمه المرور عن 8 احرف/ارقام"
+            setTimeout(()=>{
+                // Afer 4 milli Second Remove Error Message 
+                errorMsg.textContent = ""
+            },4000)
         }
     })
     .catch(e => console.log(e))

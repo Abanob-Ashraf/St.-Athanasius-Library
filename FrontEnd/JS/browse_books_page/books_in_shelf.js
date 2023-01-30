@@ -1,16 +1,16 @@
 let token = JSON.parse(sessionStorage.getItem("token"));
-let shelfID = document.getElementsByName("shelf_num")[0]
-let blockID = document.getElementsByName("block_num_two")[0]
-let shelf_book = document.querySelector(".browseBooks.shelf-books .shelf-book")
-let shelf_book_scroll = document.querySelector(".browseBooks.shelf-books .shelf-book .scroll")
-let shelf_book_info = document.querySelector(".browseBooks.shelf-books .shelf-book-info");
-let shelf_book_info_back = document.querySelector(".browseBooks.shelf-books .shelf-book-info .back")
-let book_name = document.querySelector(".browseBooks.shelf-books .shelf-book-info .book-name span")
-let book_author = document.querySelector(".browseBooks.shelf-books .shelf-book-info .book-author span")
-let book_publisher = document.querySelector(".browseBooks.shelf-books .shelf-book-info .publisher span")
-let book_code = document.querySelector(".browseBooks.shelf-books .shelf-book-info .book-code span")
-let book_copies = document.querySelector(".browseBooks.shelf-books .shelf-book-info .book-copies span")
-let book_created = document.querySelector(".browseBooks.shelf-books .shelf-book-info .book-created span")
+let shelfID = document.getElementsByName("select_shelf")[0]
+let blockID = document.getElementsByName("select_block_sh")[0]
+let shelf_book = document.querySelector(".book-in-shelf .shelf-books")
+let shelf_book_scroll = document.querySelector(".book-in-shelf .shelf-books .scroll")
+let shelf_book_info = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info");
+let shelf_book_info_back = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .back")
+let book_name = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .book-name span")
+let book_author = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .book-author span")
+let book_publisher = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .publisher span")
+let book_code = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .book-code span")
+let book_copies = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .book-copies span")
+let book_created = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .book-created span")
 
 // Books In Shelf In BLock Response
 function response(data){
@@ -63,8 +63,8 @@ function response(data){
 function books_in_shelf_in_bLock(){
     // When Input Shelf Number Show Books In current Shelf
     shelfID.addEventListener("input",()=>{
-        let shelf_book_scroll = document.querySelector(".browseBooks.shelf-books .shelf-book .scroll")
-        let shelf_book_scroll_div = document.querySelectorAll(".browseBooks.shelf-books .shelf-book .scroll div")
+        let shelf_book_scroll = document.querySelector(".book-in-shelf .shelf-books .scroll")
+        let shelf_book_scroll_div = document.querySelectorAll(".book-in-shelf .shelf-books .scroll div")
         shelf_book_scroll.style.display = "block"
         if (shelfID.value == ""){
             shelf_book_scroll.style.display = "none"

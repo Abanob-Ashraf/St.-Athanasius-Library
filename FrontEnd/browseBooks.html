@@ -47,25 +47,26 @@
     <div class="browse-books-landing">
         <div class="container">
             <!-- Start Browse Books - Search Books -->
-            <div class="browseBooks search-books">
-                <div class="title">البحث عن الكتاب</div>
+            <div class="browseBooks search">
+                <div class="title">البحث عن كتاب</div>
                 <hr>
                 <!-- Search Form -->
                 <form action="" class="search-form">
-                    <div class="search-container">
-                        <input type="search" name="book" required class="book" placeholder="البحث عن الكتاب حسب">
-                        <select name="subject" class="subject">
+                    <div class="flex">
+                        <input type="search" required class="search-book input" placeholder="البحث عن الكتاب حسب">
+                        <select class="subject input">
                             <option value="book_name">الاسم</option>
                             <option value="author">الكاتب</option>
                             <option value="topic">التصنيف</option>
                             <option value="publisher">الناشر</option>
                         </select>
                     </div>
+                    <input type="submit" class="submit" value="البحث">
                 </form>
                 <small></small>
                 <!-- Start Browse Books - Show Books -->
-                <div class="browseBooks books">
-                    <table class="the-books">
+                <div class="show-searched-books">
+                    <table class="searched-books">
                         <tr>
                             <th>اسم الكتاب</th>
                             <th>المؤلف</th>
@@ -76,7 +77,6 @@
                 </div>
                 <!-- End Browse Books -->
             </div>
-            <!-- End Browse Books -->
 
             <!-- Grid Layout -->
             <div class="grid-layout">
@@ -114,9 +114,7 @@
                             <p>تاريخ الانشاء :</p>
                             <span></span>
                         </div>
-                        <div class="flex">
-                            <p class="back">الرجوع</p>
-                        </div>
+                        <p class="back">الرجوع</p>
                     </div>
                 </div>
                 <!-- End Browse Books -->
@@ -151,31 +149,29 @@
                             <p>تاريخ الانشاء :</p>
                             <span></span>
                         </div>
-                        <div class="flex">
-                            <p class="back">الرجوع</p>
-                        </div>
+                        <p class="back">الرجوع</p>
                     </div>
                 </div>
                 <!-- End Browse Books -->
 
                 <!-- Start Browse Books - Books In Block Show And Length -->
-                <div class="browseBooks block-books">
-                    <div class="block-book">
+                <div class="browseBooks book-in-block">
+                    <div class="block-books">
                         <div class="title">الكتب في الوحده</div>
                         <hr>
-                        <div class="block">
+                        <div class="select-block">
                             <div class="note">اختر الوحده</div>
-                            <select name="block_num_one" required class="input">
+                            <select name="select_block" required class="input">
                                 <option></option>
                             </select>
                         </div>
                         <!-- Scroll View -->
                         <div class="scroll"></div>
-                        <!-- Books Length -->
-                        <p class="count"></p>
+                        <!-- Count -->
+                        <div class="count"></div>
                     </div>
                     <!-- Book Information -->
-                    <div class="block-book-info">
+                    <div class="block-books-info">
                         <div class="title">معلومات الكتاب</div>
                         <hr>
                         <div class="book-name">
@@ -195,46 +191,44 @@
                             <span></span>
                         </div>
                         <div class="book-code">
-                            <p>كود الكتاب :</p>
+                            <p> كود الكتاب :</p>
                             <span></span>
                         </div>
                         <div class="book-created">
                             <p>تاريخ الانشاء :</p>
                             <span></span>
                         </div>
-                        <div class="flex">
-                            <p class="back">الرجوع</p>
-                        </div>
+                        <p class="back">الرجوع</p>
                     </div>
                 </div>
                 <!-- End Browse Books -->
 
                 <!-- Start Browse Books - Books In Shelf In BLock Show And Length -->
-                <div class="browseBooks shelf-books">
-                    <div class="shelf-book">
+                <div class="browseBooks book-in-shelf">
+                    <div class="shelf-books">
                         <div class="title">الكتب في الرف</div>
                         <hr>
                         <div class="flex">
-                            <div class="block">
+                            <div class="select-block">
                                 <div class="note">اختر الوحده</div>
-                                <select name="block_num_two" required class="input">
+                                <select name="select_block_sh" required class="input">
                                     <option></option>
                                 </select>
                             </div>
-                            <div class="shelf">
+                            <div class="select-shelf">
                                 <div class="note">اختر الرف</div>
-                                <select name="shelf_num" required class="input">
+                                <select name="select_shelf" required class="input">
                                     <option></option>
                                 </select>
                             </div>
                         </div>
                         <!-- Scroll View -->
                         <div class="scroll"></div>
-                        <!-- Books Length -->
-                        <p class="count"></p>
+                        <!-- Count -->
+                        <div class="count"></div>
                     </div>
                     <!-- Book Information -->
-                    <div class="shelf-book-info">
+                    <div class="shelf-books-info">
                         <div class="title">معلومات الكتاب</div>
                         <hr>
                         <div class="book-name">
@@ -254,70 +248,62 @@
                             <span></span>
                         </div>
                         <div class="book-code">
-                            <p>كود الكتاب :</p>
+                            <p> كود الكتاب :</p>
                             <span></span>
                         </div>
                         <div class="book-created">
                             <p>تاريخ الانشاء :</p>
                             <span></span>
                         </div>
-                        <div class="flex">
-                            <p class="back">الرجوع</p>
-                        </div>
+                        <p class="back">الرجوع</p>
                     </div>
                 </div>
-                <!-- End Browse Books -->
+                <!-- End Book In shelf -->
             </div>
             <!-- End Grid Layout -->
-
-            <!-- Start Footer -->
-            <div class="footer">
-                <div class="box-container">
-                    <!-- Side One -->
-                    <div class="box">
-                        <div class="line">
-                            <i class="fa-solid fa-envelope"></i>
-                            <a href="mailto:elfanan2003@gmail.com" class="info">elfanan2003@gmail.com</a>
-                        </div>
-                        <div class="line">
-                            <i class="fas fa-phone-volume fa-fw"></i>
-                            <a href="tele:+291282332039" class="info">+201282332039</a>
-                        </div>
-                    </div>
-                    <!-- side Two -->
-                    <div class="box">
-                        <a href="./index.html" class="logo">
-                            <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
-                            <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
-                        </a>
-                    </div>
-                    <!-- Side Three -->
-                    <div class="box">
-                        <ul class="social">
-                            <li>
-                                <a href="#" class="facebook">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="twitter">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="youtube">
-                                    <i class="fab fa-youtube"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Copy Right -->
-                <p class="copy-right"></p>
-            </div>
-            <!-- End Footer -->
         </div>
     </div>
+
+    <!-- Start Footer -->
+    <div class="footer">
+        <div class="container">
+            <!-- Logo Box -->
+            <div class="box">
+                <a href="./index.html" class="logo">
+                    <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
+                    <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
+                </a>    
+            </div>
+            <!-- Social Media Box -->
+            <div class="box">
+                <ul class="social">
+                    <li>
+                        <a href="https://www.facebook.com/subdeaconwael?mibextid=ZbWKwL" class="facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://t.me/StAthansiousbot" class="telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="youtube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:st.athanasius998@gmail.com" class="email">
+                            <i class="fa-solid fa-envelope"></i>                        
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Copy Right -->
+        <p class="copy-right"></p>
+    </div>
+    <!-- End Footer -->
     <!-- End Browse Books Landing -->
     <script src="./JS/browse_books_page/global.js" type="module"></script>
     <script src="./JS/browse_books_page/header.js" type="module"></script>

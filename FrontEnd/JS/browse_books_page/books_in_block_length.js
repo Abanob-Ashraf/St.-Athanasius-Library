@@ -1,5 +1,5 @@
 let token = JSON.parse(sessionStorage.getItem("token"));
-let blockID = document.getElementsByName("block_num_one")[0]
+let blockID = document.getElementsByName("select_block")[0]
 
 // books_in_bLock_length Fetch Function (To Get Information)
 function books_in_bLock_length(){
@@ -10,12 +10,15 @@ function books_in_bLock_length(){
             headers: new Headers({"Authorization": `Bearer ${token}`}),
         }).then(res => res.json())
         .then(res => {
-            let block_books_Length = document.querySelector(".browseBooks.block-books .block-book .count")
+            let block_books_Length = document.querySelector(".book-in-block .block-books .count")
             if (blockID.value == ""){
+                block_books_Length.style.display = "none"
                 block_books_Length.textContent = ""
             }else if (res == "عدد الكتب undefined"){
+                block_books_Length.style.display = "block"
                 block_books_Length.textContent = "لا يوجد كتب"
             }else{
+                block_books_Length.style.display = "block"
                 block_books_Length.textContent = res
             }
         })

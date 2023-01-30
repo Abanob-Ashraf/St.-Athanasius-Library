@@ -1,6 +1,6 @@
 let token = JSON.parse(sessionStorage.getItem("token"));
-let shelfID = document.getElementsByName("shelf_num")[0]
-let blockID = document.getElementsByName("block_num_two")[0]
+let shelfID = document.getElementsByName("select_shelf")[0]
+let blockID = document.getElementsByName("select_block_sh")[0]
 
 // All Shelfs Response
 function response(data){
