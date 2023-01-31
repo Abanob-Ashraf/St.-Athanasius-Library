@@ -16,8 +16,8 @@ dotenv.config()
 // create an instance server
 const app: Application = express()
 
-const privateKey = fs.readFileSync('../server.key')
-const certificate = fs.readFileSync('../server.cert')
+const privateKey = fs.readFileSync('server.key')
+const certificate = fs.readFileSync('servr.cert')
 
 // HTTP request logger middleware
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
