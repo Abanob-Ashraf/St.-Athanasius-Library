@@ -13,8 +13,6 @@ import routes from './routes/main'
 
 dotenv.config()
 
-const PORT = process.env.PORT || 3000
-
 // create an instance server
 const app: Application = express()
 
@@ -49,9 +47,10 @@ app.use((_: Request, res: Response) => {
 })
 
 // start express server
-app.listen(PORT, () => {
+const PORT = 3000
+app.listen(process.env.PORT || PORT, () =>
   // eslint-disable-next-line no-console
   console.log(`Server is starting at prot:${PORT}`)
-})
+)
 
 export default app

@@ -11,7 +11,7 @@
     "host": { "ENV": "PGHOST" },
     "database": { "ENV": "PGDATABASE" },
     "user": { "ENV": "PGUSER" },
-    "password": { "ENV": "PGPASSWORD" },
-    "ssl": true
+    "password": { "ENV": "PGPASSWORD" }
+    
   }
 }
