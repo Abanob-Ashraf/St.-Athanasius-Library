@@ -3,14 +3,14 @@ let shelfID = document.getElementsByName("select_shelf")[0]
 let blockID = document.getElementsByName("select_block_sh")[0]
 let shelf_book = document.querySelector(".book-in-shelf .shelf-books")
 let shelf_book_scroll = document.querySelector(".book-in-shelf .shelf-books .scroll")
-let shelf_book_info = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info");
-let shelf_book_info_back = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .back")
-let book_name = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .book-name span")
-let book_author = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .book-author span")
-let book_publisher = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .publisher span")
-let book_code = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .book-code span")
-let book_copies = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .book-copies span")
-let book_created = document.querySelector(".book-in-shelf .shelf-books .shelf-books-info .book-created span")
+let shelf_book_info = document.querySelector(".book-in-shelf .shelf-books-info");
+let shelf_book_info_back = document.querySelector(".book-in-shelf .shelf-books-info .back")
+let book_name = document.querySelector(".book-in-shelf .shelf-books-info .book-name span")
+let book_author = document.querySelector(".book-in-shelf .shelf-books-info .book-author span")
+let book_publisher = document.querySelector(".book-in-shelf .shelf-books-info .publisher span")
+let book_code = document.querySelector(".book-in-shelf .shelf-books-info .book-code span")
+let book_copies = document.querySelector(".book-in-shelf .shelf-books-info .book-copies span")
+let book_created = document.querySelector(".book-in-shelf .shelf-books-info .book-created span")
 
 // Books In Shelf In BLock Response
 function response(data){
@@ -27,7 +27,7 @@ function response(data){
 
         // Create Elements Text
         let pText = document.createTextNode(data[i].book_name)
-        let spanText = document.createTextNode(data[i].created_date)
+        let spanText = document.createTextNode(`${new Date(data[i].created_date).getDate()}/${new Date(data[i].created_date).getMonth()+1}/${new Date(data[i].created_date).getFullYear()}`)
 
         // Create Elements Class
         book.className = "book"
@@ -48,7 +48,7 @@ function response(data){
             book_publisher.textContent = data[i].publisher == null ? book_publisher.textContent = `لا يوجد` : data[i].publisher
             book_code.textContent = data[i].book_code
             book_copies.textContent = data[i].number_of_copies
-            book_created.textContent = data[i].created_date
+            book_created.textContent = `${new Date(data[i].created_date).getDate()}/${new Date(data[i].created_date).getMonth()+1}/${new Date(data[i].created_date).getFullYear()}`
         })
 
         // Redirct From Shelf Book Information To Shelf Book
