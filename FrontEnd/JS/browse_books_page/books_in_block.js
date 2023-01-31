@@ -26,7 +26,7 @@ function response(data){
 
         // Create Elements Text
         let pText = document.createTextNode(data[i].book_name)
-        let spanText = document.createTextNode(data[i].created_date)
+        let spanText = document.createTextNode(`${new Date(data[i].created_date).getDate()}/${new Date(data[i].created_date).getMonth()+1}/${new Date(data[i].created_date).getFullYear()}`)
 
         // Create Elements Class
         book.className = "book"
@@ -47,7 +47,7 @@ function response(data){
             book_publisher.textContent = data[i].publisher == null ? book_publisher.textContent = `لا يوجد` : data[i].publisher
             book_code.textContent = data[i].book_code
             book_copies.textContent = data[i].number_of_copies
-            book_created.textContent = data[i].created_date
+            book_created.textContent = `${new Date(data[i].created_date).getDate()}/${new Date(data[i].created_date).getMonth()+1}/${new Date(data[i].created_date).getFullYear()}`
         })
 
         // Redirct From Block Book Information To Block Book

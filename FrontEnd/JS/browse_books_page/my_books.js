@@ -22,7 +22,7 @@ function response(data){
 
         // Create Elements Text
         let pText = document.createTextNode(data[i].book_name)
-        let spanText = document.createTextNode(data[i].updated_date)
+        let spanText = document.createTextNode(`${new Date(data[i].updated_date).getDate()}/${new Date(data[i].updated_date).getMonth()+1}/${new Date(data[i].updated_date).getFullYear()}`)
 
         // Create Elements Class
         book.className = "book"
@@ -42,7 +42,7 @@ function response(data){
             block_number.textContent = data[i].block_number
             shelf_number.textContent = data[i].shelf_number
             book_number.textContent = data[i].book_number_in_shelf
-            book_created.textContent = data[i].updated_date
+            book_created.textContent = `${new Date(data[i].updated_date).getDate()}/${new Date(data[i].updated_date).getMonth()+1}/${new Date(data[i].updated_date).getFullYear()}`
         })
 
         // Redirct From My Book Information To My Book
