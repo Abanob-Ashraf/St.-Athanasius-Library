@@ -4,7 +4,7 @@ import express, { Application, Request, Response } from 'express'
 import morgan from 'morgan'
 import helmet from 'helmet'
 import compression from 'compression'
-import https from 'https'
+// import https from 'https'
 import rateLimit from 'express-rate-limit'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
@@ -17,8 +17,8 @@ dotenv.config()
 // create an instance server
 const app: Application = express()
 
-const privateKey = fs.readFileSync('server.key')
-const certificate = fs.readFileSync('servr.cert')
+// const privateKey = fs.readFileSync('server.key')
+// const certificate = fs.readFileSync('servr.cert')
 
 // HTTP request logger middleware
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
