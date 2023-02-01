@@ -1,7 +1,7 @@
 // Reset Password Fetch Function
 function send(){
     let email = document.getElementsByName("email")[0]
-    fetch('http://localhost:3000/library/users/resetPassword',
+    fetch('https://st-athanasius-library.com.up.railway.app/library/users/resetPassword',
     {
         method: 'POST',
         headers: new Headers({'Content-Type': 'application/json'}),

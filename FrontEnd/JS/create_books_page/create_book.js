@@ -32,7 +32,7 @@ function response(data){
 }
 // add_book Fetch Function (To Add Information)
 function add_book(){
-    fetch('http://localhost:3000/library/books',
+    fetch('https://st-athanasius-library.com.up.railway.app/library/books',
     {
         method: 'POST',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

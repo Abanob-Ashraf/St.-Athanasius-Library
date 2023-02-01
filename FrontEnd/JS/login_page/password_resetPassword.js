@@ -11,7 +11,7 @@ let token = location.href.slice(50)
 // Set New Password Fetch Function
 function resetPass(){
     let resetPassword = document.getElementsByName("password")[0]
-    fetch('http://localhost:3000/library/users/NewPassword',
+    fetch('https://st-athanasius-library.com.up.railway.app/library/users/NewPassword',
     {
         method: 'POST',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

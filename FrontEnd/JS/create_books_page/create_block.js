@@ -21,7 +21,7 @@ function response(data){
 
 // add_block Fetch Function (To Add Information)
 function add_block(){
-    fetch('http://localhost:3000/library/blocks',
+    fetch('https://st-athanasius-library.com.up.railway.app/library/blocks',
     {
         method: 'POST',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

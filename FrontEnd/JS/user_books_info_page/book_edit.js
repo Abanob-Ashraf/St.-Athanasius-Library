@@ -41,7 +41,7 @@ function response(data){
 
 
 function edit_book(){
-    fetch(`http://localhost:3000/library/books/${book_id}`,
+    fetch(`https://st-athanasius-library.com.up.railway.app/library/books/${book_id}`,
     {
         method: 'PUT',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

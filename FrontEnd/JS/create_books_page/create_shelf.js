@@ -22,7 +22,7 @@ function response(data){
 
 // add_shelf Fetch Function (To Add Information)
 function add_shelf(){
-    fetch('http://localhost:3000/library/shelfs',
+    fetch('https://st-athanasius-library.com.up.railway.app/library/shelfs',
     {
         method: 'POST',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

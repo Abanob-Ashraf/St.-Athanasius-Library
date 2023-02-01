@@ -174,7 +174,7 @@ function response(data){
                     let admin = document.querySelector(".profile.search-user .edit-info #admin-flag");
                     let phone = document.querySelector(".profile.search-user .edit-info .phone .input");
                     let errorMsg = document.querySelector(".profile.search-user .edit-info .errorMsg")
-                    fetch(`http://localhost:3000/library/users/${data[i].id}`,
+                    fetch(`https://st-athanasius-library.com.up.railway.app/library/users/${data[i].id}`,
                     {
                         method: 'PUT',
                         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
@@ -219,7 +219,7 @@ function response(data){
 
             // Delete Current User On Click (Fetch Function (To Delete Information))
             del.addEventListener("click",()=>{
-                fetch(`http://localhost:3000/library/users/${data[i].id}`,
+                fetch(`https://st-athanasius-library.com.up.railway.app/library/users/${data[i].id}`,
                 {
                     method: 'DELETE',
                     headers: new Headers({"Authorization": `Bearer ${token}`}),
@@ -298,7 +298,7 @@ function search(){
         last_name: Search_for_a_user,
         job: Search_for_a_user
     })
-    fetch(`http://localhost:3000/library/users/search?${params.toString()}`,
+    fetch(`https://st-athanasius-library.com.up.railway.app/library/users/search?${params.toString()}`,
         {
             method: 'GET',
             headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

@@ -36,7 +36,7 @@ function create_user(){
     let password = document.querySelector(".create-user-form .input-field .password")
     let admin = document.getElementById("flag-admin")
 
-    fetch('http://localhost:3000/library/users/createNewUser',
+    fetch('https://st-athanasius-library.com.up.railway.app/library/users/createNewUser',
     {
         method: 'POST',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json' }),

@@ -78,7 +78,7 @@ function response(data){
 function search(){
     let Key_of_search = document.querySelector(".subject").value
     let value_of_search = document.querySelector(".search-book").value
-    fetch(`http://localhost:3000/library/books/search?${Key_of_search}=${value_of_search}`,
+    fetch(`https://st-athanasius-library.com.up.railway.app/library/books/search?${Key_of_search}=${value_of_search}`,
     {
         method: 'GET',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

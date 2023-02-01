@@ -39,7 +39,7 @@ function response(data){
 
 // Edit_user Fetch Function (To Edit Information)
 function edit_user(){
-    fetch(`http://localhost:3000/library/users/${id}`,
+    fetch(`https://st-athanasius-library.com.up.railway.app/library/users/${id}`,
     {
         method: 'PUT',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

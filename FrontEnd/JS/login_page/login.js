@@ -61,7 +61,7 @@ function login() {
     if (sessionStorage.getItem("token")){
         token = JSON.parse(sessionStorage.getItem("token"))
     } else {
-        fetch('http://localhost:3000/library/users/login',
+        fetch('https://st-athanasius-library.com.up.railway.app/library/users/login',
         {
             method: 'POST',
             headers: new Headers({'Content-Type': 'application/json'}),

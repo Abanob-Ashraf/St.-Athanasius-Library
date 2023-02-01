@@ -53,7 +53,7 @@ function response(data){
 
 // latest_books Fetch Function (To Get Information)
 function latest_books(){
-    fetch('http://localhost:3000/library/books/latestBooks',
+    fetch('https://st-athanasius-library.com.up.railway.app/library/books/latestBooks',
     {
         method: 'GET',
         headers: new Headers({"Authorization": `Bearer ${token}`}),

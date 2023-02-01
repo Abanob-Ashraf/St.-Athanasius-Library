@@ -34,7 +34,7 @@ function response(data){
 // all_shelfs Fetch Function (To Get Information)
 function all_shelfs(){
     blockID.addEventListener("input",()=>{
-        fetch(`http://localhost:3000/library/shelfs/block/${blockID.value}`,
+        fetch(`https://st-athanasius-library.com.up.railway.app/library/shelfs/block/${blockID.value}`,
         {
             method: 'GET',
             headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

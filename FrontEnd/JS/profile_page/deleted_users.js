@@ -157,7 +157,7 @@ function response(data){
 
 // deleted_users Fetch Function (To Get Information)
 function deleted_users(){
-    fetch(`http://localhost:3000/library/users/unavilable`,
+    fetch(`https://st-athanasius-library.com.up.railway.app/library/users/unavilable`,
         {
             method: 'GET',
             headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

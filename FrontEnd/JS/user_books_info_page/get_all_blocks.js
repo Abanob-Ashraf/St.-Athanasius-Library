@@ -23,7 +23,7 @@ function response(data){
 
 // all_Blocks Fetch Function (To Get Information)
 function all_Blocks(){
-    fetch('http://localhost:3000/library/blocks',
+    fetch('https://st-athanasius-library.com.up.railway.app/library/blocks',
     {
         method: 'GET',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),

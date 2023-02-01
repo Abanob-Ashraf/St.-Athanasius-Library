@@ -6,7 +6,7 @@ let errorMsg = document.querySelector(".profile.user .change-password small")
 
 // change_Password Featch Function (To Edit Information)
 function change_Password(){
-    fetch(`http://localhost:3000/library/users/me/changePassword`,
+    fetch(`https://st-athanasius-library.com.up.railway.app/library/users/me/changePassword`,
     {
         method: 'PUT',
         headers: new Headers({"Authorization": `Bearer ${token}`,'Content-Type': 'application/json'}),
