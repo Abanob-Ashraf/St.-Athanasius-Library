@@ -10,6 +10,7 @@ import * as dotenv from 'dotenv'
 import cors from 'cors'
 
 import routes from './routes/main'
+import welcome from './routes/api/welcome'
 
 dotenv.config()
 
@@ -44,6 +45,8 @@ app.use(
 )
 
 app.use('/library', routes)
+
+app.use('/', welcome)
 
 app.use((_: Request, res: Response) => {
   res.status(404).end('Ohh you are lost, read the API documentation to find your way back home 😂')
