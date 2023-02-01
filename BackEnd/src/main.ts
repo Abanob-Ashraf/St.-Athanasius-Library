@@ -4,7 +4,7 @@ import express, { Application, Request, Response } from 'express'
 import morgan from 'morgan'
 import helmet from 'helmet'
 import compression from 'compression'
-// import https from 'https'
+import https from 'https'
 import rateLimit from 'express-rate-limit'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
@@ -17,8 +17,8 @@ dotenv.config()
 // create an instance server
 const app: Application = express()
 
-// const privateKey = fs.readFileSync('server.key')
-// const certificate = fs.readFileSync('servr.cert')
+const privateKey = fs.readFileSync('server.key')
+const certificate = fs.readFileSync('servr.cert')
 
 // HTTP request logger middleware
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
@@ -54,12 +54,11 @@ app.use((_: Request, res: Response) => {
 
 // start express server
 const PORT = 3000
-// https
-//   .createServer({ key: privateKey, cert: certificate }, app)
-//   .
-app.listen(process.env.PORT || PORT, () =>
-  // eslint-disable-next-line no-console
-  console.log(`Server is starting at prot:${PORT}`)
-)
+https
+  .createServer({ key: privateKey, cert: certificate }, app)
+  .listen(process.env.PORT || PORT, () =>
+    // eslint-disable-next-line no-console
+    console.log(`Server is starting at prot:${PORT}`)
+  )
 
 export default app
