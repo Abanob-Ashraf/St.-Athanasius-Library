@@ -51,17 +51,11 @@ app.use((_: Request, res: Response) => {
 
 // start express server
 const PORT = 3000
+https
+  .createServer({ key: privateKey, cert: certificate }, app)
+  .listen(process.env.PORT || PORT, () =>
+    // eslint-disable-next-line no-console
+    console.log(`Server is starting at prot:${PORT}`)
+  )
 
-if (process.env.ENV == 'prod') {
-  https
-    .createServer({ key: privateKey, cert: certificate }, app)
-    .listen(process.env.PORT || PORT, () =>
-      // eslint-disable-next-line no-console
-      console.log(`Server is starting at prot:${PORT}`)
-    )
-}
-app.listen(process.env.PORT || PORT, () =>
-  // eslint-disable-next-line no-console
-  console.log(`Server is starting at prot:${PORT}`)
-)
 export default app
