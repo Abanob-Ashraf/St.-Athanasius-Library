@@ -14,8 +14,9 @@
     --thirdColor: #e4e5e7;
     --blueColor: #0075ff;
     --facebookColor: #1877f2;
-    --twitterColor: #1da1f2;
-    --youtubeColor: #ff0000;
+    --telegramColor: #0088cc;
+    --phoneColor: #ff0000;
+    --emailColor: #dd4b39;
 }
 
 *{
@@ -364,8 +365,8 @@ color: var(--whiteColor);
 background-color: var(--telegramColor);
 color: var(--whiteColor);
 }
-.footer .box .social .youtube:hover {
-background-color: var(--youtubeColor);
+.footer .box .social .phone:hover {
+background-color: var(--phoneColor);
 color: var(--whiteColor);
 }
 .footer .box .social .email:hover {
