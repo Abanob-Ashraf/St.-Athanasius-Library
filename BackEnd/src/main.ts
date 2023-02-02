@@ -46,19 +46,15 @@ app.use(
 
 app.use('/library', routes)
 
-app.use('/', welcome)
-
 app.use((_: Request, res: Response) => {
   res.status(404).end('Ohh you are lost, read the API documentation to find your way back home 😂')
 })
 
 // start express server
 const PORT = 3000
-https
-  .createServer({ key: privateKey, cert: certificate }, app)
-  .listen(process.env.PORT || PORT, () =>
-    // eslint-disable-next-line no-console
-    console.log(`Server is starting at prot:${PORT}`)
-  )
+app.listen(process.env.PORT || PORT, () =>
+  // eslint-disable-next-line no-console
+  console.log(`Server is starting at prot:${PORT}`)
+)
 
 export default app

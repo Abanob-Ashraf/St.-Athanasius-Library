@@ -1,4 +1,6 @@
 import { Router, Request, Response } from 'express'
+import { fullBackup } from '../../middlewares/full_backup'
+import { admin, authorize } from '../../middlewares/authantication_admin'
 
 const routes = Router()
 
@@ -11,5 +13,7 @@ const welcome = async (_req: Request, res: Response) => {
 }
 
 routes.route('/').get(welcome)
+
+routes.route('/FullBackup').get(authorize, admin, fullBackup)
 
 export default routes
