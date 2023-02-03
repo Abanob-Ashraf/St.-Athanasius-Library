@@ -53,7 +53,7 @@ export const createUser = async (req: Request, res: Response) => {
       html: `
       <h1>Wellcome in our Library</h1>
       <h3>Click this link to login in our website.</h3>
-      <a href="https://st-athanasius-library.web.app/Password_resetPassword.html?${token}"> https://st-athanasius-library.web.app/Password_resetPassword.html?${token} </a> 
+      <a href="https://st-athanasius-library.web.app/password_resetPassword.html?${token}"> https://st-athanasius-library.web.app/password_resetPassword.html?${token} </a> 
       <h4>This link will expire in 48 hours.</h4>
     `
     })
@@ -203,7 +203,7 @@ export const getUserDataToResetPassword = async (req: Request, res: Response) =>
           <h1>You requested a password reset</h1>
           <h3>Click this link to set a new password.</h3>
           
-          <a href="https://st-athanasius-library.web.app/Password_resetPassword.html?${token}"> https://st-athanasius-library.web.app/Password_resetPassword.html?${token} </a>
+          <a href="https://st-athanasius-library.web.app/password_resetPassword.html?${token}"> https://st-athanasius-library.web.app/password_resetPassword.html?${token} </a>
           <h4>This link will expire in 30 minutes.</h4>
         `
       })
