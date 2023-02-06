@@ -48,7 +48,7 @@ export const createUser = async (req: Request, res: Response) => {
     })
     transporter.sendMail({
       to: user.email,
-      from: 'abanobashraf74@gmail.com',
+      from: 'st.athanasius998@gmail.com',
       subject: 'Signup succeeded',
       html: `
       <h1>Wellcome in our Library</h1>
@@ -197,7 +197,7 @@ export const getUserDataToResetPassword = async (req: Request, res: Response) =>
     if (user['userInfo'] != 'this email does not exiest here') {
       transporter.sendMail({
         to: email,
-        from: 'abanobashraf74@gmail.com',
+        from: 'st.athanasius998@gmail.com',
         subject: 'Password reset',
         html: `
           <h1>You requested a password reset</h1>
