@@ -20,7 +20,7 @@ function validateFromDataBase(data){
 
     // Declare Password Variables
     let password = document.getElementsByName("password")[0];
-    let passwordMsg = document.querySelectorAll("small")[0]
+    let passwordMsg = document.querySelectorAll("small")[0];
 
 
     if(data == "the username and password do not match please try again" || data.errors){
@@ -79,7 +79,7 @@ function login() {
 
 // Submit/Run=>(Code) Login Fetch
 let form = document.forms[0];
-form.addEventListener('submit', (e) => {
+form.addEventListener("submit",(e)=>{
     e.preventDefault()
     login()
-});
+})

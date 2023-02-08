@@ -10,7 +10,7 @@ function send(){
         })
     }).then(res => res.json())
     .then(res => {
-        let msg = document.querySelector("small")
+        let msg = document.querySelector("small");
         if(res == "this email does not exiest here"){
             // IF response = "this email does not exiest here" Show =>
             msg.textContent = "هذا البريد الالكتروني غير مسجل"
@@ -29,7 +29,7 @@ function send(){
 }
 
 // Submit/Run=>(Code) Reset Password Fetch
-let form = document.forms[0]
+let form = document.forms[0];
 form.addEventListener("submit",(e)=>{
     e.preventDefault()
     send()

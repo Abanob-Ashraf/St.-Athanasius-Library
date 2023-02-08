@@ -21,4 +21,4 @@ if (admin == false){
 }
 
 // Put Copy Right Content
-copy_right.textContent = `كل الحقوق ملكيه مكتبه القديس اثناسيوس الرسولي ${new Date().getFullYear()}©` 
+copy_right.textContent = `كل الحقوق محفوظه - مكتبه القديس اثناسيوس الرسولي ${new Date().getFullYear()}©` 

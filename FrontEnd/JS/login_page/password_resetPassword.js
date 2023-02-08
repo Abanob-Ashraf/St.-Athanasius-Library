@@ -6,7 +6,7 @@ window.onload = function(){
 }
 
 // Get Token From Send URL And Put It In Fetch
-let token = location.href.slice(50)
+let token = location.href.slice(66);
 
 // Set New Password Fetch Function
 function resetPass(){
@@ -20,7 +20,7 @@ function resetPass(){
         })
     }).then(res => res.json())
     .then(res => {
-        let msg = document.querySelector("small")
+        let msg = document.querySelector("small");
         if(res.errors){
             // IF response = Has Errors Show =>
             msg.textContent = `يرجي ان لا تقل كلمه المرور عن 8 احرف`
@@ -36,7 +36,7 @@ function resetPass(){
 }
 
 // Submit/Run=>(Code) Set New Password Fetch Function
-let form = document.forms[0]
+let form = document.forms[0];
 form.addEventListener("submit",(e)=>{
     e.preventDefault()
     resetPass()
