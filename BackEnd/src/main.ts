@@ -50,8 +50,7 @@ app.use((_: Request, res: Response) => {
 
 // start express server
 const PORT = 3000
-// https
-//   .createServer({ key: privateKey, cert: certificate }, app)
+https.createServer({ key: privateKey, cert: certificate }, app)
 app.listen(process.env.PORT || PORT, () =>
   // eslint-disable-next-line no-console
   console.log(`Server is starting at prot:${PORT}`)
