@@ -19,8 +19,8 @@ const privateKey = fs.readFileSync('server.key')
 const certificate = fs.readFileSync('servr.cert')
 
 // HTTP request logger middleware
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
-app.use(morgan('combined', { stream: accessLogStream }))
+// const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+// app.use(morgan('combined', { stream: accessLogStream }))
 
 // HTTP Security middleware
 app.use(helmet())

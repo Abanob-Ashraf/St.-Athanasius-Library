@@ -29,7 +29,8 @@ export const fullBackup = async (_req: Request, res: Response) => {
       if (userDataAsCSV != undefined) {
         // modify the data to be a compatible for database when recover
         const newCsv = userDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
-        const finalCsv = newCsv.replaceAll('null', '')
+        const semifinalCsv = newCsv.replaceAll(' GMT+0300 (Eastern European Summer Time)', '')
+        const finalCsv = semifinalCsv.replaceAll('null', '')
         // write CSV to a file
         fs.writeFileSync(dir + 'usersTable.csv', finalCsv as string)
       }
@@ -44,7 +45,8 @@ export const fullBackup = async (_req: Request, res: Response) => {
       if (blockDataAsCSV != undefined) {
         // modify the data to be a compatible for database when recover
         const newCsv = blockDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
-        const finalCsv = newCsv.replaceAll('null', '')
+        const semifinalCsv = newCsv.replaceAll(' GMT+0300 (Eastern European Summer Time)', '')
+        const finalCsv = semifinalCsv.replaceAll('null', '')
         // write CSV to a file
         fs.writeFileSync(dir + 'blocksTable.csv', finalCsv as string)
       }
@@ -59,7 +61,8 @@ export const fullBackup = async (_req: Request, res: Response) => {
       if (shelfDataAsCSV != undefined) {
         // modify the data to be a compatible for database when recover
         const newCsv = shelfDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
-        const finalCsv = newCsv.replaceAll('null', '')
+        const semifinalCsv = newCsv.replaceAll(' GMT+0300 (Eastern European Summer Time)', '')
+        const finalCsv = semifinalCsv.replaceAll('null', '')
         // write CSV to a file
         fs.writeFileSync(dir + 'shelfsTable.csv', finalCsv as string)
       }
@@ -74,7 +77,8 @@ export const fullBackup = async (_req: Request, res: Response) => {
       if (bookDataAsCSV != undefined) {
         // modify the data to be a compatible for database when recover
         const newCsv = bookDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
-        const finalCsv = newCsv.replaceAll('null', '')
+        const semifinalCsv = newCsv.replaceAll(' GMT+0300 (Eastern European Summer Time)', '')
+        const finalCsv = semifinalCsv.replaceAll('null', '')
         // write CSV to a file
         fs.writeFileSync(dir + 'booksTable.csv', finalCsv as string)
       }

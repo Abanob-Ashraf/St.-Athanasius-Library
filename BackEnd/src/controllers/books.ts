@@ -47,6 +47,8 @@ export const createBook = async (req: Request, res: Response) => {
       who_edited: req.body.who_edited,
       created_date: new Date(),
       updated_date: new Date(),
+      entry_date: req.body.entry_date,
+      publish_date: req.body.publish_date,
       id: undefined as unknown as string
     }
 
@@ -180,7 +182,9 @@ export const updateBook = async (req: Request, res: Response) => {
         book_number_in_shelf: req.body.book_number_in_shelf,
         who_edited: userWhoLoged,
         created_date: new Date(),
-        updated_date: new Date()
+        updated_date: new Date(),
+        entry_date: req.body.entry_date,
+        publish_date: req.body.publish_date
       }
       const updatedBook = await library.updateBook(book)
       return res.status(updatedBook['status']).json(updatedBook['message'])
@@ -204,7 +208,9 @@ export const updateBook = async (req: Request, res: Response) => {
         book_number_in_shelf: req.body.book_number_in_shelf,
         who_edited: userWhoLoged,
         created_date: new Date(),
-        updated_date: new Date()
+        updated_date: new Date(),
+        entry_date: req.body.entry_date,
+        publish_date: req.body.publish_date
       }
       const updatedBook = await library.updateBook(book)
       return res.status(updatedBook['status']).json(updatedBook['message'])
@@ -229,7 +235,8 @@ export const getAllBooksForBackup = async (_req: Request, res: Response) => {
       if (booksDataAsCSV != undefined) {
         // modify the data to be a compatible for database when recover
         const newCsv = booksDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
-        const finalCsv = newCsv.replaceAll('null', '')
+        const semifinalCsv = newCsv.replaceAll(' GMT+0300 (Eastern European Summer Time)', '')
+        const finalCsv = semifinalCsv.replaceAll('null', '')
 
         const dir = __dirname + '../../../backup/'
         if (!fs.existsSync(dir)) {

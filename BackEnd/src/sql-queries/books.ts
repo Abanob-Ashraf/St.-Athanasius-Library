@@ -1,5 +1,5 @@
 export const CREATEBOOK =
-  'INSERT INTO books (book_code, book_name, author, publisher, topic, number_of_copies, number_of_pages, number_of_parts, name_of_series, conclusion, currrent_user, old_user, shelf_id, book_number_in_shelf, who_edited, created_date, updated_date) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)'
+  'INSERT INTO books (book_code, book_name, author, publisher, topic, number_of_copies, number_of_pages, number_of_parts, name_of_series, conclusion, currrent_user, old_user, shelf_id, book_number_in_shelf, who_edited, created_date, updated_date, entry_date, publish_date) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)'
 
 export const GETMANYBOOKS = 'SELECT * FROM books'
 
@@ -11,7 +11,7 @@ export const SEARCHFORBOOK =
   'SELECT * FROM books WHERE book_name=($1) OR author=($2) OR publisher=($3) OR topic=($4) ORDER BY created_date DESC'
 
 export const UPDATEBOOK =
-  'UPDATE books SET book_code=($2), book_name=($3), author=($4), publisher=($5), topic=($6), number_of_copies=($7), number_of_pages=($8), number_of_parts=($9), name_of_series=($10), conclusion=($11), currrent_user=($12), old_user=($13) ,shelf_id=($14), book_number_in_shelf=($15), who_edited=($16), updated_date=($17) WHERE id=($1)'
+  'UPDATE books SET book_code=($2), book_name=($3), author=($4), publisher=($5), topic=($6), number_of_copies=($7), number_of_pages=($8), number_of_parts=($9), name_of_series=($10), conclusion=($11), currrent_user=($12), old_user=($13) ,shelf_id=($14), book_number_in_shelf=($15), who_edited=($16), updated_date=($17), entry_date=($18), publish_date=($19) WHERE id=($1)'
 
 // export const DELETEBOOK = 'DELETE FROM books WHERE id=($1)'
 

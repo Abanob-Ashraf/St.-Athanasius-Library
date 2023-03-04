@@ -4,14 +4,15 @@
     "host": { "ENV": "DB_HOST" },
     "database": { "ENV": "DB_NAME" },
     "user": { "ENV": "DB_USER" },
-    "password": { "ENV": "DB_PASSWORD" }
+    "password": { "ENV": "DB_PASSWORD" },
+    "port": { "ENV": "DB_PORT" }
   },
   "prod": {
     "driver": "pg",
     "host": { "ENV": "PGHOST" },
     "database": { "ENV": "PGDATABASE" },
     "user": { "ENV": "PGUSER" },
-    "password": { "ENV": "PGPASSWORD" }
-    
+    "password": { "ENV": "PGPASSWORD" },
+    "port": { "ENV": "PGPORT" }
   }
 }
