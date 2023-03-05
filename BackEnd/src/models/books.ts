@@ -5,7 +5,7 @@ import {
   GETONEBOOKBYID,
   // DELETEBOOK,
   GETMANYBOOKS,
-  SEARCHFORBOOK,
+  // SEARCHFORBOOK,
   CHECKIFBOOKINTHISSHELF,
   GETMYBOOKS,
   GETLATESTBOOKS
@@ -140,12 +140,20 @@ export class BooksModel {
   ): Promise<object> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(SEARCHFORBOOK, [book_name, author, publisher, topic])
+      const result = await connection.query(
+        `SELECT * FROM books WHERE book_name LIKE '%${book_name}%' 
+              OR author LIKE '%${author}%' 
+              OR publisher LIKE '%${publisher}%' 
+              OR topic LIKE '%${topic}%' 
+              ORDER BY created_date DESC`
+      )
       if (result.rows.length) {
         const book = { status: 200, bookInfo: result.rows }
         connection.release()
         return book
       }
+      console.log(result)
+
       connection.release()
       const error = {
         status: 404,
@@ -153,6 +161,8 @@ export class BooksModel {
       }
       return error
     } catch (error) {
+      console.log(error)
+
       throw new Error(`Unable to get book ${book_name}, ${(error as Error).message}`)
     }
   }
