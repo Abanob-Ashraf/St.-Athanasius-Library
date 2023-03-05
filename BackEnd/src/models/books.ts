@@ -152,8 +152,6 @@ export class BooksModel {
         connection.release()
         return book
       }
-      console.log(result)
-
       connection.release()
       const error = {
         status: 404,
@@ -161,8 +159,6 @@ export class BooksModel {
       }
       return error
     } catch (error) {
-      console.log(error)
-
       throw new Error(`Unable to get book ${book_name}, ${(error as Error).message}`)
     }
   }

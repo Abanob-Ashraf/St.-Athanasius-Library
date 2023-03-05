@@ -12,7 +12,6 @@ import {
   GETPASSWORD,
   GETUSERWITHEMAIL,
   RESETPASSWORD,
-  SEARCHFORUSER,
   // SEARCHFORUSER,
   SELECTSTATUS,
   UPDATEBOOKAFTERDELETEUSER,
@@ -110,13 +109,14 @@ export class UsersModel {
   ): Promise<object> {
     try {
       const connection = await Client.connect()
-      const result = await connection.query(SEARCHFORUSER, [
-        first_name,
-        last_name,
-        full_name,
-        email,
-        job
-      ])
+      const result = await connection.query(
+        `SELECT id, first_name, last_name, full_name, email, phone_number, job, admin_flag, user_status, created_date, updated_date 
+        FROM users WHERE email LIKE '%${email}%' 
+        OR job LIKE '%${job}%'  
+        OR first_name LIKE '%${first_name}%'  
+        OR last_name LIKE '%${last_name}%'  
+        OR full_name LIKE '%${full_name}%' `
+      )
       if (result.rows.length) {
         const user = { status: 200, userInfo: result.rows }
         connection.release()
