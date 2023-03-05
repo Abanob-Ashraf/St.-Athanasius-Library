@@ -110,12 +110,12 @@ export class UsersModel {
     try {
       const connection = await Client.connect()
       const result = await connection.query(
-        `SELECT id, first_name, last_name, full_name, email, phone_number, job, admin_flag, user_status, created_date, updated_date 
-        FROM users WHERE email LIKE '%${email}%' 
-        OR job LIKE '%${job}%'  
-        OR first_name LIKE '%${first_name}%'  
-        OR last_name LIKE '%${last_name}%'  
-        OR full_name LIKE '%${full_name}%' `
+        `SELECT id, first_name, last_name, full_name, email, phone_number, job, admin_flag, user_status, created_date, updated_date
+        FROM users WHERE email LIKE '%${email}%'
+        OR LOWER (job) LIKE LOWER ('%${job}%')
+        OR LOWER (first_name) LIKE LOWER ('%${first_name}%')
+        OR LOWER (last_name) LIKE LOWER ('%${last_name}%')
+        OR LOWER (full_name) LIKE LOWER ('%${full_name}%')`
       )
       if (result.rows.length) {
         const user = { status: 200, userInfo: result.rows }
