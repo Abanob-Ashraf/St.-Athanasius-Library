@@ -4,7 +4,9 @@ import {
   UPDATEBLOCK,
   GETONEBLOCK,
   // DELETEBLOCK,
-  GETMANYBLOCKS
+  GETMANYBLOCKS,
+  CHECKIFBLOCKINTHISLIBRARY,
+  GETMANYBLOCKS_LIBRARYID
 } from '../sql-queries/blocks'
 
 export type Block = {
@@ -13,6 +15,7 @@ export type Block = {
   block_name: string
   created_date: Date
   updated_date: Date
+  library_id: string
 }
 
 export class BlocksModel {
@@ -20,18 +23,31 @@ export class BlocksModel {
   async createBlock(bl: Block): Promise<object> {
     try {
       const connection = await Client.connect()
-      await connection.query(CREATEBLOCK, [
+      const test = await connection.query(CHECKIFBLOCKINTHISLIBRARY, [
         bl.block_number,
-        bl.block_name,
-        bl.created_date,
-        bl.updated_date
+        bl.library_id
       ])
-      connection.release()
-      const obj = {
-        status: 201,
-        message: 'block created correctly'
+      if (!test.rows.length) {
+        await connection.query(CREATEBLOCK, [
+          bl.block_number,
+          bl.block_name,
+          bl.created_date,
+          bl.updated_date,
+          bl.library_id
+        ])
+        connection.release()
+        const obj = {
+          status: 201,
+          message: 'block created correctly'
+        }
+        return obj
       }
-      return obj
+      connection.release()
+      const error = {
+        status: 409,
+        message: 'this block in this library already existe'
+      }
+      return error
     } catch (error) {
       throw new Error(`Unable to create ${bl.block_number}, ${(error as Error).message}`)
     }
@@ -71,6 +87,27 @@ export class BlocksModel {
     }
   }
 
+  // GETMANYBLOCKS_libraryID
+  async getBlocksWithLibraryId(id: string): Promise<object> {
+    try {
+      const connection = await Client.connect()
+      const result = await connection.query(GETMANYBLOCKS_LIBRARYID, [id])
+      if (result.rows.length) {
+        const block = { status: 200, blockInfo: result.rows }
+        connection.release()
+        return block
+      }
+      connection.release()
+      const error = {
+        status: 404,
+        blockInfo: 'block was not found'
+      }
+      return error
+    } catch (error) {
+      throw new Error(`Unable to get blocks, ${(error as Error).message}`)
+    }
+  }
+
   // updateBlock
   async updateBlock(bl: Block): Promise<object> {
     try {
@@ -81,7 +118,8 @@ export class BlocksModel {
           bl.id,
           bl.block_number,
           bl.block_name,
-          bl.updated_date
+          bl.updated_date,
+          bl.library_id
         ])
         connection.release()
         const obj = {

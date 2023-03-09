@@ -5,7 +5,8 @@ import {
   getOneBlock,
   createBlock,
   updateBlock,
-  getAllBlocksForBackup
+  getAllBlocksForBackup,
+  getBlocksWithLibraryId
   //   deleteBlock
 } from '../../controllers/blocks'
 
@@ -16,6 +17,8 @@ routes.route('/').post(authorize, admin, createBlock)
 routes.route('/').get(getManyBlocks)
 
 routes.route('/BlocksBackup').get(authorize, admin, getAllBlocksForBackup)
+
+routes.route('/librarys/:id').get(getBlocksWithLibraryId)
 
 routes.route('/:id').get(authorize, getOneBlock)
 

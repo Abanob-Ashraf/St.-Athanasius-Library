@@ -13,6 +13,7 @@ export const createBlock = async (req: Request, res: Response) => {
       block_name: req.body.block_name,
       created_date: new Date(),
       updated_date: new Date(),
+      library_id: req.body.library_id,
       id: undefined as unknown as string
     }
     const newBlock = await library.createBlock(block)
@@ -29,6 +30,16 @@ export const getManyBlocks = async (_req: Request, res: Response) => {
     res.status(blocks['status']).json(blocks['blockInfo'])
   } catch (error) {
     res.status(400).json(error)
+  }
+}
+
+// getBlocksWithLibraryId
+export const getBlocksWithLibraryId = async (req: Request, res: Response) => {
+  try {
+    const blocks = await library.getBlocksWithLibraryId(req.params.id)
+    res.status(blocks['status']).json(blocks['blockInfo'])
+  } catch (error) {
+    res.status(401).json(error)
   }
 }
 
@@ -50,7 +61,8 @@ export const updateBlock = async (req: Request, res: Response) => {
       block_number: req.body.block_number,
       block_name: req.body.block_name,
       created_date: new Date(),
-      updated_date: new Date()
+      updated_date: new Date(),
+      library_id: req.body.library_id
     }
     const updatedBlock = await library.updateBlock(block)
     res.status(updatedBlock['status']).json(updatedBlock['message'])
