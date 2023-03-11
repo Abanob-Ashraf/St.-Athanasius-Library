@@ -164,7 +164,11 @@ export class BooksModel {
   }
 
   // searchForBookWithBlockOrShelfAndBlock
-  async searchForBookWithBlockOrShelfAndBlock(block_id: string, shelf_id: string): Promise<object> {
+  async searchForBookWithBlockOrShelfAndBlock(
+    library_id: string,
+    block_id: string,
+    shelf_id: string
+  ): Promise<object> {
     try {
       const connection = await Client.connect()
       let SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK = `SELECT books.id, books.book_code, books.book_name, books.author, books.publisher, 
@@ -174,13 +178,25 @@ export class BooksModel {
       INNER JOIN shelfs 
       ON shelfs.id = books.shelf_id 
       INNER JOIN blocks 
-      ON blocks.id = shelfs.block_id 
-      WHERE blocks.id='${block_id}'`
-      if (shelf_id == null) {
+      ON blocks.id = shelfs.block_id
+      INNER JOIN librarys 
+	    ON librarys.id = blocks.library_id 
+      WHERE librarys.id='${library_id}'`
+      if (block_id == null || shelf_id == null) {
         SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
           SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
-          `ORDER BY shelfs.shelf_number, books.book_number_in_shelf ASC`
+          `ORDER BY blocks.block_number, shelfs.shelf_number, books.book_number_in_shelf ASC`
       }
+      if (block_id != null) {
+        SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
+          SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
+          `AND blocks.id='${block_id}' ORDER BY blocks.block_number, shelfs.shelf_number, books.book_number_in_shelf ASC`
+      }
+      // if (shelf_id == null) {
+      //   SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
+      //     SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
+      //     `ORDER BY blocks.block_number, shelfs.shelf_number, books.book_number_in_shelf ASC`
+      // }
       if (shelf_id != null) {
         SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
           SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
