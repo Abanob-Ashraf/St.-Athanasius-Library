@@ -182,26 +182,28 @@ export class BooksModel {
       INNER JOIN librarys 
 	    ON librarys.id = blocks.library_id 
       WHERE librarys.id='${library_id}'`
-      if (block_id == null || shelf_id == null) {
+      if (block_id == null && shelf_id == null) {
+        SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
+          SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
+          `ORDER BY blocks.block_number, shelfs.shelf_number, books.book_number_in_shelf ASC`
+      } else if (block_id != null && shelf_id != null) {
+        SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
+          SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
+          `AND blocks.id='${block_id}' AND shelfs.id='${shelf_id}' ORDER BY blocks.block_number, shelfs.shelf_number, books.book_number_in_shelf ASC`
+      } else if (block_id != null) {
+        SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
+          SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
+          `AND blocks.id='${block_id}' ORDER BY blocks.block_number, shelfs.shelf_number, books.book_number_in_shelf ASC`
+      } else if (shelf_id == null) {
         SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
           SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
           `ORDER BY blocks.block_number, shelfs.shelf_number, books.book_number_in_shelf ASC`
       }
-      if (block_id != null) {
-        SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
-          SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
-          `AND blocks.id='${block_id}' ORDER BY blocks.block_number, shelfs.shelf_number, books.book_number_in_shelf ASC`
-      }
-      // if (shelf_id == null) {
+      // if (shelf_id != null) {
       //   SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
       //     SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
-      //     `ORDER BY blocks.block_number, shelfs.shelf_number, books.book_number_in_shelf ASC`
+      //     `AND shelfs.id='${shelf_id}' ORDER BY books.book_number_in_shelf ASC`
       // }
-      if (shelf_id != null) {
-        SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK =
-          SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK +
-          `AND shelfs.id='${shelf_id}' ORDER BY books.book_number_in_shelf ASC`
-      }
       const result = await connection.query(SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK)
       if (result.rows.length) {
         const book = { status: 202, bookInfo: result.rows, length: result.rows.length }
