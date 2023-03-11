@@ -11,9 +11,9 @@ export const createBlock = async (req: Request, res: Response) => {
     const block: Block = {
       block_number: req.body.block_number,
       block_name: req.body.block_name,
+      library_id: req.body.library_id,
       created_date: new Date(),
       updated_date: new Date(),
-      library_id: req.body.library_id,
       id: undefined as unknown as string
     }
     const newBlock = await library.createBlock(block)
@@ -60,9 +60,9 @@ export const updateBlock = async (req: Request, res: Response) => {
       id: req.params.id,
       block_number: req.body.block_number,
       block_name: req.body.block_name,
+      library_id: req.body.library_id,
       created_date: new Date(),
-      updated_date: new Date(),
-      library_id: req.body.library_id
+      updated_date: new Date()
     }
     const updatedBlock = await library.updateBlock(block)
     res.status(updatedBlock['status']).json(updatedBlock['message'])

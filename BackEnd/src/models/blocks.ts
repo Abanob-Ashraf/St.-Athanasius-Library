@@ -13,9 +13,9 @@ export type Block = {
   id: string
   block_number: number
   block_name: string
+  library_id: string
   created_date: Date
   updated_date: Date
-  library_id: string
 }
 
 export class BlocksModel {
@@ -31,9 +31,9 @@ export class BlocksModel {
         await connection.query(CREATEBLOCK, [
           bl.block_number,
           bl.block_name,
+          bl.library_id,
           bl.created_date,
-          bl.updated_date,
-          bl.library_id
+          bl.updated_date
         ])
         connection.release()
         const obj = {
@@ -118,8 +118,8 @@ export class BlocksModel {
           bl.id,
           bl.block_number,
           bl.block_name,
-          bl.updated_date,
-          bl.library_id
+          bl.library_id,
+          bl.updated_date
         ])
         connection.release()
         const obj = {

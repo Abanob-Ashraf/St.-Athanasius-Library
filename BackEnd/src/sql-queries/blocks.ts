@@ -1,5 +1,5 @@
 export const CREATEBLOCK =
-  'INSERT INTO blocks (block_number, block_name, created_date, updated_date, library_id) VALUES($1, $2, $3, $4, $5)'
+  'INSERT INTO blocks (block_number, block_name, library_id, created_date, updated_date) VALUES($1, $2, $3, $4, $5)'
 
 export const GETMANYBLOCKS = 'SELECT * FROM blocks ORDER BY block_number ASC'
 

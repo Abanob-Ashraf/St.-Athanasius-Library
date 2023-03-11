@@ -6,8 +6,10 @@ import { UsersModel } from '../models/users'
 import { BlocksModel } from '../models/blocks'
 import { ShelfsModel } from '../models/shelfs'
 import { BooksModel } from '../models/books'
+import { LibrarysModel } from '../models/librarys'
 
 const userLibrary = new UsersModel()
+const librarysLibrary = new LibrarysModel()
 const blockLibrary = new BlocksModel()
 const shelfLibrary = new ShelfsModel()
 const bookLibrary = new BooksModel()
@@ -33,6 +35,22 @@ export const fullBackup = async (_req: Request, res: Response) => {
         const finalCsv = semifinalCsv.replaceAll('null', '')
         // write CSV to a file
         fs.writeFileSync(dir + 'usersTable.csv', finalCsv as string)
+      }
+    })
+
+    //Backup library table
+    const librarys = await librarysLibrary.getManyLibrarys()
+    converter.json2csv(librarys['libraryInfo'], (err, libraryDataAsCSV) => {
+      if (err) {
+        throw err
+      }
+      if (libraryDataAsCSV != undefined) {
+        // modify the data to be a compatible for database when recover
+        const newCsv = libraryDataAsCSV.replaceAll(' GMT+0200 (Eastern European Standard Time)', '')
+        const semifinalCsv = newCsv.replaceAll(' GMT+0300 (Eastern European Summer Time)', '')
+        const finalCsv = semifinalCsv.replaceAll('null', '')
+        // write CSV to a file
+        fs.writeFileSync(dir + 'librarysTable.csv', finalCsv as string)
       }
     })
 
@@ -91,6 +109,8 @@ export const fullBackup = async (_req: Request, res: Response) => {
         try {
           const userData = fs.readFileSync(dir + 'usersTable.csv')
           zip.file('usersTable.csv', userData)
+          const libraryData = fs.readFileSync(dir + 'librarysTable.csv')
+          zip.file('librarysTable.csv', libraryData)
           const blockData = fs.readFileSync(dir + 'blocksTable.csv')
           zip.file('blocksTable.csv', blockData)
           const shelfData = fs.readFileSync(dir + 'shelfsTable.csv')

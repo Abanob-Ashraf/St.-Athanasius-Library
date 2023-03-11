@@ -45,10 +45,10 @@ export const createBook = async (req: Request, res: Response) => {
       shelf_id: req.body.shelf_id,
       book_number_in_shelf: req.body.book_number_in_shelf,
       who_edited: req.body.who_edited,
-      created_date: new Date(),
-      updated_date: new Date(),
       entry_date: req.body.entry_date,
       publish_date: req.body.publish_date,
+      created_date: new Date(),
+      updated_date: new Date(),
       id: undefined as unknown as string
     }
 
@@ -181,10 +181,10 @@ export const updateBook = async (req: Request, res: Response) => {
         shelf_id: req.body.shelf_id,
         book_number_in_shelf: req.body.book_number_in_shelf,
         who_edited: userWhoLoged,
-        created_date: new Date(),
-        updated_date: new Date(),
         entry_date: req.body.entry_date,
-        publish_date: req.body.publish_date
+        publish_date: req.body.publish_date,
+        created_date: new Date(),
+        updated_date: new Date()
       }
       const updatedBook = await library.updateBook(book)
       return res.status(updatedBook['status']).json(updatedBook['message'])
@@ -207,10 +207,10 @@ export const updateBook = async (req: Request, res: Response) => {
         shelf_id: req.body.shelf_id,
         book_number_in_shelf: req.body.book_number_in_shelf,
         who_edited: userWhoLoged,
-        created_date: new Date(),
-        updated_date: new Date(),
         entry_date: req.body.entry_date,
-        publish_date: req.body.publish_date
+        publish_date: req.body.publish_date,
+        created_date: new Date(),
+        updated_date: new Date()
       }
       const updatedBook = await library.updateBook(book)
       return res.status(updatedBook['status']).json(updatedBook['message'])

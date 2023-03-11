@@ -46,7 +46,6 @@ export const updateLibrary = async (req: Request, res: Response) => {
   try {
     const library = {
       id: req.params.id,
-      library_number: req.body.library_number,
       library_name: req.body.library_name,
       created_date: new Date(),
       updated_date: new Date()

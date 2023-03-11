@@ -29,10 +29,10 @@ export type Book = {
   shelf_id: string
   book_number_in_shelf: number
   who_edited: string
-  created_date: Date
-  updated_date: Date
   entry_date: Date
   publish_date: Date
+  created_date: Date
+  updated_date: Date
 }
 
 export class BooksModel {
@@ -61,10 +61,10 @@ export class BooksModel {
           b.shelf_id,
           b.book_number_in_shelf,
           b.who_edited,
-          b.created_date,
-          b.updated_date,
           b.entry_date,
-          b.publish_date
+          b.publish_date,
+          b.created_date,
+          b.updated_date
         ])
         connection.release()
         const obj = {
@@ -250,9 +250,9 @@ export class BooksModel {
           b.shelf_id,
           b.book_number_in_shelf,
           b.who_edited,
-          b.updated_date,
           b.entry_date,
-          b.publish_date
+          b.publish_date,
+          b.updated_date
         ])
         connection.release()
         const obj = {
@@ -281,9 +281,9 @@ export class BooksModel {
           b.shelf_id,
           b.book_number_in_shelf,
           b.who_edited,
-          b.updated_date,
           b.entry_date,
-          b.publish_date
+          b.publish_date,
+          b.updated_date
         ])
         connection.release()
         const obj = {
