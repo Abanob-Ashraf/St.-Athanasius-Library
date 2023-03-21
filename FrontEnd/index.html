@@ -5,11 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Font Awsome 5 Free -->
-    <link rel="stylesheet" href="./css/all.min.css">
+    <link rel="stylesheet" href="./app/CSS/all.min.css">
+    <!-- BootStrap 5 -->
+    <link rel="stylesheet" href="./app/CSS/bootstrap.min.css">
     <!-- Login Style Sheet -->
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./app/SCSS/index.css">
     <!-- Title Icon -->
-    <link rel="icon" href="./IMGS/LOGO/Logo.png">
+    <link rel="icon" href="./IMGS/LOGO/logo-icon.ico">
     <title>مكتبه القديس اثناسيوس | الصفحه الرئيسيه</title>
 </head>
 <body>
@@ -18,16 +20,18 @@
         <div class="container">
             <!-- Logo -->
             <a href="./index.html" class="logo">
-                <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
+                <img src="./images/logo/logo.png" alt="">
                 <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
             </a>
 
             <!-- Start User Not Login -->
-            <div class="user-not-login">
-                <i class="fa-solid fa-bars fa-2x bars"></i>
-                <ul class="links">
+            <div class="visitor-nav">
+                <i class="fa-solid fa-bars fa-2x"></i>
+                <ul class="menu">
                     <li><a href="#intro">الرئيسيه</a></li>
-                    <li><a href="#about-us">عن مكتبه القديس اثناسيوس الرسولي</a></li>
+                    <li><a href="#about-us">المسئولين</a></li>
+                    <li><a href="#about-us">انشطه المكتبه</a></li>
+                    <li><a href="#about-us">تواصل معنا</a></li>
                     <li><a href="#browse">تصفح الكتب</a></li>
                     <li><a href="./login.html" class="login">تسجيل الدخول</a></li>
                 </ul>
@@ -35,11 +39,9 @@
             <!-- End User Not Login  -->
 
             <!-- Start User Login Drop List  -->
-            <div class="user-login">
-                <div class="user-login">
-                    <div class="profile-pic">
-                        <img>
-                    </div>
+            <div class="member-nav">
+                <div class="avatar">
+                    <img class="member-avatar" src="./images/adminstrators/anton.jpg">
                     <i class="fa-solid fa-caret-down fa-1x"></i>
                 </div>
                 <ul class="menu">
@@ -57,195 +59,8 @@
         </div>
     </div>
     <!-- End Header -->
-
-    <!--  Start Intro Landing -->
-    <div class="intro-landing" id="intro">
-        <div class="container">
-            <div class="home">
-                <div class="intro-box">
-                    <div class="box">
-                        <div class="intro">
-                            <img src="./IMGS/LOGO/logo_1.png" alt="">
-                            <h1>مكتبه القديس اثناسيوس الرسولي ترحب بكم</h1>
-                            <p>فَتِّشُوا الْكُتُبَ لأَنَّكُمْ تَظُنُّونَ أَنَّ لَكُمْ فِيهَا حَيَاةً أَبَدِيَّةً. وَهِيَ الَّتِي تَشْهَدُ لِي. (يو 5: 39)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--  End Intro Landing -->
-
-    <!-- Start About Us -->
-    <div class="about-us" id="about-us">
-        <p class="special-title">عن مكتبه القديس اثناسيوس الرسولي</p>
-        <div class="container">
-            <div class="grid-layout">
-                <div class="administrators">
-                    <div class="title">مسؤول</div>
-                    <div class="slide">
-                        <div class="card">
-                            <img src="./IMGS/ADMINSTRATORS/whael.jpg" alt="">
-                        </div>
-                        <div class="info">
-                            <div class="name">أ/وائل اشرف : <span>امين المكتبه</span></div>
-                            <div class="telephone"><a href="tel:+201222272420">للتواصل اصغط هنا</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="administrators">
-                    <div class="title">مسؤول</div>
-                    <div class="slide">
-                        <div class="card">
-                            <div class="profile-pic">
-                                <img src="./IMGS/ADMINSTRATORS/anton.jpg" alt="">
-                            </div>
-                        </div>
-                        <div class="info">
-                            <div class="name">أ/أنطون ميخائيل : <span>امين ميديا المكتبه</span></div>
-                            <div class="telephone"><a href="tel:+201282431270">للتواصل اصغط هنا</a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="about-library">
-                <div class="title">معلومات عن المكتبه</div>
-                <div class="card">
-                    <div class="flex">
-                        <div class="visions">
-                            <div class="title">رؤيا المكتبه</div>
-                            <p>1- الوصول بافراد الكنيسه الارثوذكسيه من جميع الاعمار لاضافه سنين اخري علي اعمارهم و خبرات ابائيه ارثوذكسيه ذات طابع كنسي.</p>
-                            <p>2- الوصول بمستوي المكتبه الي مستوي يؤهلها للتنافس مع المكتبات الارثوذكسيه من حيث المحتوي و طريقه عرضه و الخدمات المقدمه.</p>
-                        </div>
-                        <div class="goals">
-                            <div class="title">اهداف المكتبه</div>
-                            <p>1- الحفاظ علي التعليم السليم الابائي كما قيل في رساله يهوذا <span>أَنْ تَجْتَهِدُوا لأَجْلِ الإِيمَانِ الْمُسَلَّمِ مَرَّةً لِلْقِدِّيسِينَ. (يهوذا 3:1)</span>.</p>
-                            <p>2- تصحيح الفكر الارثوذكسي بكل الاعمار عملا بقول الديسقوليه <span>امحو الذنب بالتعليم</span> و كما قال القديس اثناسيوس الرسولي في كتاب <span>رسائل الروح القدس</span> الفقره 28 <span>ان كل تعاليم الكنيسه و تقاليدها هو من البدايه التي اعطاها الرب و كرز بها الرسل و حفظها الاباء و علي هذه تاسست الكنيسه</span>.</p>
-                        </div>
-                        <div class="message">
-                            <div class="title">رساله المكتبه</div>
-                            <span>فَتِّشُوا الْكُتُبَ لأَنَّكُمْ تَظُنُّونَ أَنَّ لَكُمْ فِيهَا حَيَاةً أَبَدِيَّةً. وَهِيَ الَّتِي تَشْهَدُ لِي. (يو 5: 39)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-layout">
-                <div class="socials">
-                    <div class="title">تواصل معنا علي</div>
-                    <ul class="social">
-                        <li>
-                            <a href="https://www.facebook.com/subdeaconwael?mibextid=ZbWKwL" class="facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://t.me/StAthansiousbot" class="telegram">
-                                <i class="fab fa-telegram"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="tel:+201211763098" class="phone">
-                                <i class="fa-solid fa-phone"></i>                            
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mailto:st.athanasius998@gmail.com" class="email">
-                                <i class="fa-solid fa-envelope"></i>                        
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="location">
-                    <div class="title">لزيارتنا</div>
-                    <div class="visit">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d701.9054977730455!2d31.30926201081604!3d30.153150239506015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14581501d9537b39%3A0x2d559bca8950eeab!2sChurch%20of%20the%20Great%20Martyr%20St.%20Mina%20and%20Pope%20Kirollos%20VI%20in%20El%20Khosous!5e0!3m2!1sen!2seg!4v1674991494742!5m2!1sen!2seg" width="100%" height="150px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End About Us -->
-
-    <!-- Start Browse Books -->
-    <div class="browse-books" id="browse">
-        <p class="special-title">تصفح الكتب</p>
-        <div class="container">
-            <div class="search">
-                <div class="title">البحث عن كتاب</div>
-                <hr>
-                <!-- Search Form -->
-                <form action="" class="search-form">
-                    <div class="flex">
-                        <input type="search" required class="search-book input" placeholder="البحث عن الكتاب حسب">
-                        <select class="subject input">
-                            <option value="book_name">الاسم</option>
-                            <option value="author">المؤلف</option>
-                            <option value="topic">التصنيف</option>
-                            <option value="publisher">الناشر</option>
-                        </select>
-                    </div>
-                    <input type="submit" class="submit" value="البحث">
-                </form>
-                <small></small>
-                <!-- Start Browse Books - Show Books -->
-                <div class="show-searched-books">
-                    <table class="searched-books">
-                        <tr>
-                            <th>اسم الكتاب</th>
-                            <th>المؤلف</th>
-                            <th>الناشر</th>
-                            <th>التصنيف</th>
-                        </tr>
-                    </table>
-                </div>
-                <!-- End Browse Books -->
-            </div>
-        </div>
-    </div>
-    <!-- End Browse Books -->
-
-    <!-- Start Footer -->
-    <div class="footer">
-        <div class="container">
-            <!-- Logo Box -->
-            <div class="box">
-                <a href="./index.html" class="logo">
-                    <img src="./IMGS/LOGO/Logo.png" alt="" width="88px">
-                    <h3>مكتبه القديس<br>اثناسيوس الرسولي</h3>
-                </a>    
-            </div>
-            <!-- Social Media Box -->
-            <div class="box">
-                <ul class="social">
-                    <li>
-                        <a href="https://www.facebook.com/subdeaconwael?mibextid=ZbWKwL" class="facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://t.me/StAthansiousbot" class="telegram">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tel:+201211763098" class="phone">
-                            <i class="fa-solid fa-phone"></i>                            
-                        </a>
-                    </li>
-                    <li>
-                        <a href="mailto:st.athanasius998@gmail.com" class="email">
-                            <i class="fa-solid fa-envelope"></i>                        
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- Copy Right -->
-        <p class="copy-right"></p>
-    </div>
-    <!-- End Footer -->
-    <script src="./JS/main_page/global.js" type="module"></script>
-    <script src="./JS/main_page/header.js" type="module"></script>
+    <script src="./app/JS/main_page/global.js" type="module"></script>
+    <script src="./app/JS/main_page/header.js" type="module"></script>
     <script src="./JS/main_page/search_book.js" type="module"></script>
 </body>
 </html>
