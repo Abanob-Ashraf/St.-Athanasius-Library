@@ -1,16 +1,17 @@
 @use "../../../variables/colors" as *;
 @use "../../../variables/font-sizes" as *;
-@use "../../../mixins/flex-layout/flex" as *;
-@use "../../../mixins/mixins" as *;
-@use "../../../variables/variables" as *;
+@use "../../../mixins/media-query/media" as *;
 
 @mixin member-nav($member:false) {
     @if $member == member {
         .member-nav{
-            @include flex-layout(yes,yes,yes);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;            
             display: none;
             .avatar{
-                @include flex-layout(yes,yes,yes);
+                display: flex;
+                align-items: center;                
                 .member-avatar{
                     width: 60px;
                     height: 60px;
@@ -64,7 +65,9 @@
                     }
                 }
                 a{
-                    @include flex-layout(yes,yes,yes);
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;                    
                     color: $white;
                     padding: 5px 10px;
                 }

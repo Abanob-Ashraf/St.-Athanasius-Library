@@ -46,7 +46,6 @@ ul {
 }
 .header .container .logo {
   display: flex;
-  justify-content: unset;
   align-items: center;
 }
 .header .container .logo img {
@@ -57,6 +56,7 @@ ul {
   font-size: 1.225rem;
   font-weight: bold;
   color: #fff;
+  line-height: 1.6;
 }
 @media (max-width: 991px) {
   .header .container .logo h3 {
@@ -168,7 +168,6 @@ ul {
 }
 .header .container .member-nav .avatar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 .header .container .member-nav .avatar .member-avatar {

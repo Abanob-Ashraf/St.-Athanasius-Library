@@ -1,5 +1,7 @@
-@use "../../../mixins/mixins" as *;
-@use "../../../variables/variables" as *;
+@use "../../../variables/colors" as *;
+@use "../../../variables/font-sizes" as *;
+@use "../../../mixins/media-query/media" as *;
+
 
 @mixin visitor-nav($visitor:false){
     @if $visitor == visitor{

@@ -1,10 +1,13 @@
-@use "../../../mixins/mixins" as *;
-@use "../../../variables/variables" as *;
+@use "../../../variables/colors" as *;
+@use "../../../variables/font-sizes" as *;
+@use "../../../mixins/media-query/media" as *;
+
 
 @mixin logo($logo:false){
     @if $logo == logo{
         .logo{
-            @include flex-layout(yes,no,yes);
+            display: flex;
+            align-items: center;            
             img{
                 width: 70px;
                 margin-left: $normal;
@@ -15,6 +18,7 @@
                     weight: bold;
                 }                
                 color: $white;
+                line-height: 1.6;
             }
             @include media (phones){
                 h3{

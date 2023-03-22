@@ -1,6 +1,10 @@
-@use "../../../mixins/mixins" as *;
-@use "../../../variables/variables" as *;
+@use "../../../variables/colors" as *;
+@use "../../../variables/font-sizes" as *;
 
 @mixin close-nav($close:false){
-
+    @if $close == close {
+        i{
+            background-color: $wihte;
+        }
+    }
 }
