@@ -1,0 +1,7 @@
+@mixin media ($type){
+    @if $type == phones{
+        @media (max-width:991px) {
+            @content
+        }
+    }
+}

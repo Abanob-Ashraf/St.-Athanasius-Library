@@ -1,0 +1,26 @@
+@use "../../../mixins/mixins" as *;
+@use "../../../variables/variables" as *;
+
+@mixin logo($logo:false){
+    @if $logo == logo{
+        .logo{
+            @include flex-layout(yes,no,yes);
+            img{
+                width: 70px;
+                margin-left: $normal;
+            }
+            h3{
+                font: {
+                    size: $md;
+                    weight: bold;
+                }                
+                color: $white;
+            }
+            @include media (phones){
+                h3{
+                    display: none;
+                }
+            }
+        }
+    }    
+}

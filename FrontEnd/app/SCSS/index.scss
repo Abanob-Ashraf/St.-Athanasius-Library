@@ -1,3 +1,5 @@
-@use "./global/variables" as *;
+@use "./global/variables/variables" as *;
+@use "./global/mixins/header/header" as *;
 @use "./global/global-rules";
-@use "./global/header";
+
+@include header(logo,visitor,member);

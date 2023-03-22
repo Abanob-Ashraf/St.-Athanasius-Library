@@ -28,6 +28,7 @@ a {
 
 ul {
   list-style-type: none;
+  margin: 0;
 }
 
 .header {
@@ -45,7 +46,7 @@ ul {
 }
 .header .container .logo {
   display: flex;
-  justify-content: space-between;
+  justify-content: unset;
   align-items: center;
 }
 .header .container .logo img {
@@ -160,10 +161,14 @@ ul {
   }
 }
 .header .container .member-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   display: none;
 }
 .header .container .member-nav .avatar {
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 .header .container .member-nav .avatar .member-avatar {
@@ -218,6 +223,7 @@ ul {
 }
 .header .container .member-nav .menu a {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   color: #fff;
   padding: 5px 10px;

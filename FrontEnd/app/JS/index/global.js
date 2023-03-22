@@ -1,14 +1,14 @@
-let admin = JSON.parse(sessionStorage.getItem("admin"));
-let copy_right = document.querySelector(".copy-right")
-let user_not_login = document.querySelector(".user-not-login")
-let user_login = document.querySelector(".user-login")
+const copy_right = document.querySelector(".copy-right")
+const visitor_nav = document.querySelector(".visitor-nav")
+const member_nav = document.querySelector(".member-nav")
 
 // If User's Token Not Found Remove Following Partions
 window.onload = function(){
     if (window.sessionStorage.getItem("token") == undefined){
-        user_login.remove()
+        member_nav.remove()
     }else{
-        user_not_login.remove()
+        visitor_nav.remove()
+        member_nav.style.display = "block"
     }
 }
 

@@ -1,0 +1,25 @@
+@use "../../variables/colors" as *;
+@use "../../variables/font-sizes" as *;
+@use "../../mixins/flex-layout/flex" as *;
+@use "./commponents/logo" as *;
+@use "./commponents/visitor-nav" as *;
+@use "./commponents/member-nav" as *;
+
+
+@mixin header($logo:false,$visitor:false,$member:false){
+    .header{
+        position: relative;
+        z-index: 1;
+        background-color: $metal-black;
+        height: 100px;
+    
+        .container{
+            height: 100%;
+            position: relative;
+            @include flex-layout(yes,yes,yes);
+            @include logo($logo);
+            @include visitor-nav($visitor);
+            @include member-nav($member);
+        }
+    }
+}
