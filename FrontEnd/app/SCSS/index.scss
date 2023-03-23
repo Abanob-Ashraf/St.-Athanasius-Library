@@ -2,5 +2,6 @@
 @use "./global/variables/font-sizes" as *;
 @use "./global/mixins/header/header" as *;
 @use "./global/global-rules";
+@use "./index-sections/landing";
 
 @include header(logo,visitor,member);

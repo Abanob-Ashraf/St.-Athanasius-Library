@@ -1,0 +1,25 @@
+@use "../global/variables/colors" as *;
+.landing{
+    height: calc(100vh - 100px);
+    background-image: url("../../images/background/desktop/layered-peaks-haikei.svg");
+    background-size:cover;
+    .container{
+        position: relative;
+        height: 100%;
+        img{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 250px;
+            height: 250px;
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            -o-transform: translate(-50%,-50%);
+}
+    }
+    @media (max-width:767px){
+          background-image: url("../../images/background/mobile/layered-peaks-haikei.svg");
+      }
+}
