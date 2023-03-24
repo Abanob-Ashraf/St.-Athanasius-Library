@@ -1,7 +1,12 @@
 @mixin media ($type){
-    @if $type == phones{
+    @if $type == all{
         @media (max-width:991px) {
-            @content
+            @content;
         }
-    }
+    };
+    @if $type == sm{
+        @media (max-width:780px) {
+            @content;
+        }
+    };
 }

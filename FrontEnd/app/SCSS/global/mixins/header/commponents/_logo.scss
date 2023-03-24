@@ -20,7 +20,7 @@
                 color: $white;
                 line-height: 1.6;
             }
-            @include media (phones){
+            @include media (all){
                 h3{
                     display: none;
                 }

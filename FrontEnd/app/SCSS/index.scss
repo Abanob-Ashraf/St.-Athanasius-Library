@@ -3,5 +3,6 @@
 @use "./global/mixins/header/header" as *;
 @use "./global/global-rules";
 @use "./index-sections/landing";
+@use "./index-sections/adminstrators";
 
 @include header(logo,visitor,member);
