@@ -136,7 +136,8 @@ export class BooksModel {
     book_name: string,
     author: string,
     publisher: string,
-    topic: string
+    topic: string,
+    conclusion: string
   ): Promise<object> {
     try {
       const connection = await Client.connect()
@@ -144,7 +145,8 @@ export class BooksModel {
         `SELECT * FROM books WHERE book_name LIKE '%${book_name}%' 
               OR author LIKE '%${author}%' 
               OR publisher LIKE '%${publisher}%' 
-              OR topic LIKE '%${topic}%' 
+              OR topic LIKE '%${topic}%'
+              OR conclusion LIKE '%${conclusion}%'
               ORDER BY created_date DESC`
       )
       if (result.rows.length) {

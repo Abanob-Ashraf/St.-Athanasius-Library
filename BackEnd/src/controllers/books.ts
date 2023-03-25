@@ -94,7 +94,8 @@ export const searchForBook = async (req: Request, res: Response) => {
       req.query.book_name as string,
       req.query.author as string,
       req.query.publisher as string,
-      req.query.topic as string
+      req.query.topic as string,
+      req.query.conclusion as string
     )
     res.status(book['status']).json(book['bookInfo'])
   } catch (error) {
