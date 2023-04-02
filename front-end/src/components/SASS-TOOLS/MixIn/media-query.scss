@@ -1,0 +1,13 @@
+@mixin responsive($type){
+    @if $type == all-mobiles{
+        @media (max-width:991px) {
+            @content;
+        }
+    }
+
+    @if $type == small-mobiles{
+        @media (max-width:780px) {
+            @content;
+        }
+    }
+}

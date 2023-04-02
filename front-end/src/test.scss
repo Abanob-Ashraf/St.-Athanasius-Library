@@ -1,0 +1,12 @@
+@use "./components/SASS-TOOLS/Variables/colors" as *;
+
+.test{
+    background-color: $light-gray;
+    min-height: 100vh;
+    .grid{
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(500px,1fr));
+        gap: 16px;
+        margin-bottom: 16px
+    }
+}

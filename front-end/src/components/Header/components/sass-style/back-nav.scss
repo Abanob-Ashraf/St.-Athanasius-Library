@@ -1,0 +1,10 @@
+@use "../../../SASS-TOOLS/Variables/colors" as *;
+@use "../../../SASS-TOOLS/MixIn/media-query.scss" as *;
+
+@mixin back-nav () {
+    .back-nav{
+        i{
+            background-color: $white;
+        }
+    }
+}

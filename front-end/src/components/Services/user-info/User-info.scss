@@ -1,0 +1,201 @@
+@use "../../SASS-TOOLS/MixIn/media-query.scss" as *;
+@use "../../SASS-TOOLS/Variables/colors" as *;
+
+.user-info.the-service{
+    padding: 16px;
+    background-color: $white;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    .service-name{
+        position: relative;
+        width: 150px;
+        background-color: $danger-red;
+        padding: 8px;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+        color: $white;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 16px;
+        &::after{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -20px;
+            width: 45px;
+            height: 100%;
+            background-color: $danger-red;
+            transform: skew(-45deg);
+            -webkit-transform: skew(-45deg);
+            -moz-transform: skew(-45deg);
+            -ms-transform: skew(-45deg);
+            -o-transform: skew(-45deg);
+        }
+        &::before{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -80px;
+            width: 45px;
+            height: 100%;
+            background-color: $danger-red;
+            transform: skew(-45deg);
+            -webkit-transform: skew(-45deg);
+            -moz-transform: skew(-45deg);
+            -ms-transform: skew(-45deg);
+            -o-transform: skew(-45deg);
+        }
+    }
+
+    .collection{
+        background-color: $light-gray;
+        padding: 8px;
+        border-radius: 6px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+        -o-border-radius: 6px;
+        .first-name,
+        .last-name,
+        .email,
+        .phone-number,
+        .the-role{
+            position: relative;
+            width: 100%;
+            background-color: $white;
+            color: $metal-black;
+            padding: 10px;
+            border: none;
+            font-weight: bold;
+            border-radius: 6px;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            -ms-border-radius: 6px;
+            -o-border-radius: 6px;
+            margin: 0;
+        }
+        .first-name{
+            &:hover:after{
+                content: "الأسم الأول";
+                position: absolute;
+                left: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: fit-content;
+                padding: 6px;
+                background-color: $light-gray;
+                font-size: 14px;
+                border-radius: 6px;
+                -webkit-border-radius: 6px;
+                -moz-border-radius: 6px;
+                -ms-border-radius: 6px;
+                -o-border-radius: 6px;
+                -webkit-transform: translateY(-50%);
+                -moz-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                -o-transform: translateY(-50%);
+            }
+        }
+        .last-name{
+            margin-right: 8px;
+            &:hover:after{
+                content: "الأسم الأخير";
+                position: absolute;
+                left: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: fit-content;
+                padding: 6px;
+                background-color: $light-gray;
+                font-size: 14px;
+                border-radius: 6px;
+                -webkit-border-radius: 6px;
+                -moz-border-radius: 6px;
+                -ms-border-radius: 6px;
+                -o-border-radius: 6px;
+                -webkit-transform: translateY(-50%);
+                -moz-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                -o-transform: translateY(-50%);
+            }
+        }
+        .email{
+            margin-bottom: 8px;
+            &:hover:after{
+                content: "البريد الألكتروني";
+                position: absolute;
+                left: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: fit-content;
+                padding: 6px;
+                background-color: $light-gray;
+                font-size: 14px;
+                border-radius: 6px;
+                -webkit-border-radius: 6px;
+                -moz-border-radius: 6px;
+                -ms-border-radius: 6px;
+                -o-border-radius: 6px;
+                -webkit-transform: translateY(-50%);
+                -moz-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                -o-transform: translateY(-50%);
+            }
+        }
+        .phone-number{
+            margin-bottom: 8px;
+            &:hover:after{
+                content: "رقم الهاتف";
+                position: absolute;
+                left: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: fit-content;
+                padding: 6px;
+                background-color: $light-gray;
+                font-size: 14px;
+                border-radius: 6px;
+                -webkit-border-radius: 6px;
+                -moz-border-radius: 6px;
+                -ms-border-radius: 6px;
+                -o-border-radius: 6px;
+                -webkit-transform: translateY(-50%);
+                -moz-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                -o-transform: translateY(-50%);
+            }
+        }
+        .the-role{
+            &:hover:after{
+                content: "دور الخادم";
+                position: absolute;
+                left: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: fit-content;
+                padding: 6px;
+                background-color: $light-gray;
+                font-size: 14px;
+                border-radius: 6px;
+                -webkit-border-radius: 6px;
+                -moz-border-radius: 6px;
+                -ms-border-radius: 6px;
+                -o-border-radius: 6px;
+                -webkit-transform: translateY(-50%);
+                -moz-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                -o-transform: translateY(-50%);
+            }
+        }
+        .flex-collection{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 8px;
+        }    
+    }}

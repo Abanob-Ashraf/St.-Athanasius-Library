@@ -1,0 +1,107 @@
+@use "../../SASS-TOOLS/MixIn/media-query.scss" as *;
+@use "../../SASS-TOOLS/Variables/colors" as *;
+
+.my-books.the-service{
+    padding: 16px;
+    background-color: $white;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    .service-name{
+        position: relative;
+        width: 150px;
+        background-color: $danger-red;
+        padding: 8px;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+        color: $white;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 16px;
+        &::after{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -20px;
+            width: 45px;
+            height: 100%;
+            background-color: $danger-red;
+            transform: skew(-45deg);
+            -webkit-transform: skew(-45deg);
+            -moz-transform: skew(-45deg);
+            -ms-transform: skew(-45deg);
+            -o-transform: skew(-45deg);
+        }
+        &::before{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -80px;
+            width: 45px;
+            height: 100%;
+            background-color: $danger-red;
+            transform: skew(-45deg);
+            -webkit-transform: skew(-45deg);
+            -moz-transform: skew(-45deg);
+            -ms-transform: skew(-45deg);
+            -o-transform: skew(-45deg);
+        }
+    }
+
+    .collection{
+        background-color: $light-gray;
+        padding: 8px;
+        border-radius: 6px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+        -o-border-radius: 6px;
+        margin-bottom: 8px;
+
+        .the-book{
+            &:last-child{
+                margin: 0;
+            }
+            background-color: $white;
+            padding: 8px;
+            border-radius: 6px;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            -ms-border-radius: 6px;
+            -o-border-radius: 6px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            .book-name{
+                text-align: center;
+                padding: 8px;
+                background-color: $danger-red;
+                border-radius: 6px;
+                -webkit-border-radius: 6px;
+                -moz-border-radius: 6px;
+                -ms-border-radius: 6px;
+                -o-border-radius: 6px;
+                font-weight: bold;
+                color: $white;
+                margin: 0;
+            }
+            .book-ceated-date{
+                text-align: center;
+                padding: 8px;
+                border-radius: 6px;
+                -webkit-border-radius: 6px;
+                -moz-border-radius: 6px;
+                -ms-border-radius: 6px;
+                -o-border-radius: 6px;
+                font-weight: bold;
+                color: $metal-black;
+                margin: 0;
+            }
+        }
+
+    }
+}

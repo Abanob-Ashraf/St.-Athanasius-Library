@@ -1,0 +1,26 @@
+@use "../../SASS-TOOLS/Variables/colors" as *;
+@use "../../SASS-TOOLS/MixIn/media-query.scss" as *;
+
+@mixin logo () {
+    .logo{
+        display: flex;
+        align-items: center;            
+        img{
+            width: 70px;
+            margin-left: 1rem; // 16px
+        }
+        h3{
+            font: {
+                size: 1.225rem; // 18px
+                weight: bold;
+            }                
+            color: $white;
+            line-height: 1.6;
+        }
+        @include responsive(all-mobiles){
+            h3{
+                display: none;
+            }
+        }
+    }
+}
