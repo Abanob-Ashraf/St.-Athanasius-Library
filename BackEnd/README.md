@@ -42,31 +42,13 @@ db-migrate down
 # Migrations used in this project
 
 db-migrate create users-table --sql-file
+db-migrate create librarys-table --sql-file
 db-migrate create blocks-table --sql-file
 db-migrate create shelfs-table --sql-file
 db-migrate create books-table --sql-file
 ```
 
-### 3. Environmental Variables (.env file contents)
-
-```sh
-PORT=3000
-ENV=dev
-# Set your database connection information here
-DB_HOST=127.0.0.1
-DB_PORT=5432
-DB_NAME=librarydb
-DB_NAME_TEST=librarydb_test
-DB_USER=abano
-DB_PASSWORD=abanob
-# authentication
-BCRYPT_PASSWORD=your-secret-password
-SALT_ROUND=10
-TOKEN_SECRET=your-secret-token
-JWT_EXPIRES_IN=24h
-```
-
-### 4. Build Project
+### 3. Build Project
 
 ```sh
 npm run build
@@ -74,7 +56,7 @@ npm run build
 This command will build the typeScript code into JavaScript and save them in the `./build` folder.
 ```
 
-### 5.1 Run Project
+### 4.1 Run Project
 
 ```sh
 # Run Project as Developer
@@ -83,7 +65,7 @@ npm run dev
 This command will start the server running on port `3000`.
 ```
 
-### 5.2 Run Project
+### 4.2 Run Project
 
 ```sh
 # Run Project as User
@@ -92,7 +74,7 @@ npm run start
 This command will start the server running on port `3000`.
 ```
 
-### 6. Testing, prettier and Linting
+### 5. Testing, prettier and Linting
 
 Here, test cases to test the project and also check that the code respects all the eslint rules and prettier to have a well formatted code.
 
@@ -110,7 +92,7 @@ npm run prettier
 npm run test
 ```
 
-### 7. Refrencess
+### 6. Refrencess
 
 ## Built With
 
