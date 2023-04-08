@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "rimraf build/",
     "build": "npm run clean && npx tsc",
-    "start": "npm run build && nodemon build/main.js",
+    "start": "nodemon build/main.js",
     "dev": "nodemon ./src/main.ts",
     "database:up": "db-migrate up",
     "database:update": "psql -U abano -d librarydb -a -f data_migrations/add_columns.sql",
