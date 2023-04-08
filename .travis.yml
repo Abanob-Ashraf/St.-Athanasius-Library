@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "12"
+script: 
+  - echo '******Build starts ******'
+  - echo 'Insatalling Dependencies'
+  - npm run api:install
+  - echo 'API Build'
+  - npm run api:build
+  - echo 'Start Server'
+  - npm run api:start
