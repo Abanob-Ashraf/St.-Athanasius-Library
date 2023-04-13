@@ -1,0 +1,89 @@
+.home{
+    height: calc(100vh - 70px);
+    background-image: url("/images/landing/desktop/landing.svg");
+    background-size: cover;
+    .container{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .wrapper{
+            position: relative;
+            width: 100%;
+            background-color: var(--light-gray-color);
+            height: 400px;
+            padding: 16px;
+            border-radius: 16px;
+            -webkit-border-radius: 16px;
+            -moz-border-radius: 16px;
+            -ms-border-radius: 16px;
+            -o-border-radius: 16px;
+            .logo-section{
+                position: absolute;
+                top: -45px;
+                right: -14px;
+                padding: 10px;
+                width: 150px;
+                background-color: var(--light-gray-color);
+                border-radius: 50%;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                -ms-border-radius: 50%;
+                -o-border-radius: 50%;
+                transition: 0.3s;
+                -webkit-transition: 0.3s;
+                -moz-transition: 0.3s;
+                -ms-transition: 0.3s;
+                -o-transition: 0.3s;
+                @media(max-width:768px){
+                    left: 50%;
+                    top: -72px;                        
+                    transform: translateX(-50%);
+                    -webkit-transform: translateX(-50%);
+                    -moz-transform: translateX(-50%);
+                    -ms-transform: translateX(-50%);
+                    -o-transform: translateX(-50%);
+                }
+                img{
+                    width: 100%;
+                    height: 100%;
+                    transform: rotate(25deg);
+                    -webkit-transform: rotate(25deg);
+                    -moz-transform: rotate(25deg);
+                    -ms-transform: rotate(25deg);
+                    -o-transform: rotate(25deg);
+                    @media (max-width:768px) {
+                        right: 50%;
+                        transform: rotate(0);
+                        -webkit-transform: rotate(0);
+                        -moz-transform: rotate(0);
+                        -ms-transform: rotate(0);
+                        -o-transform: rotate(0);
+                    }
+                }
+            }
+            .scroll{
+                width: 100%;
+                height: 100%;
+                border-radius: 16px;
+                -webkit-border-radius: 16px;
+                -moz-border-radius: 16px;
+                -ms-border-radius: 16px;
+                -o-border-radius: 16px;
+                background-color: var(--white-color);
+                display: grid;
+                grid-auto-flow: column;  
+                scroll-behavior: auto;
+                gap: 1.2rem;
+                overflow-x: auto;
+                overscroll-behavior-x: contain;
+                scroll-snap-type: x mandatory;
+                scrollbar-width: none;
+                &::-webkit-scrollbar{
+                    display: none;
+                }
+            }
+        }
+    }
+}

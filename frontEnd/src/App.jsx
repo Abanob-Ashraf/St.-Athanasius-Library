@@ -1,12 +1,19 @@
 import React from 'react';
-import Header from './components/Header/Header';
-import { Route, Routes } from 'react-router-dom';
-import Test from './test';
+import { createBrowserRouter , RouterProvider , Route, createRoutesFromElements } from 'react-router-dom';
+import Layout from './Pages/GlobalServices/LayOut/Layout';
+import Landing from './Pages/Landing/Landing';
+// import { requirdAuthForLogin , requirdAuth } from './utils';
+
+let router = createBrowserRouter(createRoutesFromElements(
+  <Route path='/' element={<Layout/>}>
+    <Route index element={<Landing/>}/> 
+  </Route>
+))
 
 let App = () => {
   return (
-    <Test/>
+    <RouterProvider router={router}/>
   )
 }
 
-export default App
+export default App;
