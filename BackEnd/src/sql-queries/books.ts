@@ -3,9 +3,30 @@ export const CREATEBOOK =
 
 export const GETMANYBOOKS = 'SELECT * FROM books'
 
-export const GETLATESTBOOKS = 'SELECT * FROM books ORDER BY created_date DESC LIMIT 10'
+export const GETLATESTBOOKS = `SELECT books.id,
+librarys.library_name, books.book_code, books.book_name, books.author, books.publisher, 
+books.topic, books.number_of_copies, books.number_of_pages, books.number_of_parts, books.name_of_series, books.conclusion, 
+books.currrent_user, books.old_user, books.shelf_id, books.book_number_in_shelf, books.who_edited, books.created_date, books.updated_date 
+FROM books
+INNER JOIN shelfs 
+ON shelfs.id = books.shelf_id 
+INNER JOIN blocks 
+ON blocks.id = shelfs.block_id
+INNER JOIN librarys
+ON librarys.id = blocks.library_id
+ORDER BY created_date DESC LIMIT 10`
 
-export const GETONEBOOKBYID = 'SELECT * FROM books WHERE id=($1)'
+export const GETONEBOOKBYID = `SELECT books.id,
+librarys.library_name, books.book_code, books.book_name, books.author, books.publisher, 
+books.topic, books.number_of_copies, books.number_of_pages, books.number_of_parts, books.name_of_series, books.conclusion, 
+books.currrent_user, books.old_user, books.shelf_id, books.book_number_in_shelf, books.who_edited, books.created_date, books.updated_date 
+FROM books
+INNER JOIN shelfs 
+ON shelfs.id = books.shelf_id 
+INNER JOIN blocks 
+ON blocks.id = shelfs.block_id
+INNER JOIN librarys
+ON librarys.id = blocks.library_id WHERE id=($1)`
 
 // export const SEARCHFORBOOK =
 //   'SELECT * FROM books WHERE book_name=($1) OR author=($2) OR publisher=($3) OR topic=($4) ORDER BY created_date DESC'
@@ -18,5 +39,14 @@ export const UPDATEBOOK =
 export const CHECKIFBOOKINTHISSHELF =
   'SELECT books.id FROM books WHERE books.shelf_id=($1) AND books.book_number_in_shelf=($2)'
 
-export const GETMYBOOKS =
-  'SELECT books.id, books.book_name, books.book_number_in_shelf, shelfs.shelf_number, blocks.block_number, books.updated_date FROM books INNER JOIN shelfs ON shelfs.id = books.shelf_id INNER JOIN blocks ON blocks.id = shelfs.block_id WHERE currrent_user = ($1) ORDER BY books.updated_date DESC'
+export const GETMYBOOKS = `
+SELECT books.id, books.book_name, books.book_number_in_shelf, shelfs.shelf_number, blocks.block_number, librarys.library_name ,books.updated_date 
+FROM books 
+INNER JOIN shelfs 
+ON shelfs.id = books.shelf_id 
+INNER JOIN blocks 
+ON blocks.id = shelfs.block_id
+INNER JOIN librarys
+ON librarys.id = blocks.library_id
+WHERE currrent_user = ($1) 
+ORDER BY books.updated_date DESC`

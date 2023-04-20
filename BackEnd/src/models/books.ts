@@ -142,7 +142,17 @@ export class BooksModel {
     try {
       const connection = await Client.connect()
       const result = await connection.query(
-        `SELECT * FROM books WHERE book_name LIKE '%${book_name}%' 
+        `SELECT books.id, librarys.library_name, books.book_code, books.book_name, books.author, books.publisher, 
+        books.topic, books.number_of_copies, books.number_of_pages, books.number_of_parts, books.name_of_series, books.conclusion, 
+        books.currrent_user, books.old_user, books.shelf_id, books.book_number_in_shelf, books.who_edited, books.created_date, books.updated_date 
+        FROM books 
+        INNER JOIN shelfs 
+        ON shelfs.id = books.shelf_id 
+        INNER JOIN blocks 
+        ON blocks.id = shelfs.block_id
+        INNER JOIN librarys 
+        ON librarys.id = blocks.library_id 
+        WHERE book_name LIKE '%${book_name}%' 
               OR author LIKE '%${author}%' 
               OR publisher LIKE '%${publisher}%' 
               OR topic LIKE '%${topic}%'
@@ -173,7 +183,7 @@ export class BooksModel {
   ): Promise<object> {
     try {
       const connection = await Client.connect()
-      let SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK = `SELECT books.id, books.book_code, books.book_name, books.author, books.publisher, 
+      let SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK = `SELECT books.id, librarys.library_name, books.book_code, books.book_name, books.author, books.publisher, 
       books.topic, books.number_of_copies, books.number_of_pages, books.number_of_parts, books.name_of_series, books.conclusion, 
       books.currrent_user, books.old_user, books.shelf_id, books.book_number_in_shelf, books.who_edited, books.created_date, books.updated_date 
       FROM books 
