@@ -1,0 +1,80 @@
+.adminstrators{
+    padding-bottom: 1.2rem;
+    background-color: var(--light-black-color);
+    .title{
+        text-align: center;
+        background-color: var(--danger-red-color);
+        padding: 10px;
+        margin-bottom: 1.2rem;
+        font-weight: bold;
+        color: var(--white-color);
+    }
+    .wrapper{
+        max-width: 100%;
+        .scroll{
+            display: grid;
+            grid-auto-flow: column;  
+            scroll-behavior: auto;
+            gap: 1.2rem;
+            overflow-x: auto;
+            overscroll-behavior-x: contain;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            &::-webkit-scrollbar{
+                display: none;
+            }
+            .adminstrator{
+                background-color: var(--white-color);
+                padding: 16px;
+                width: 350px;
+                border-radius: 16px;
+                -webkit-border-radius: 16px;
+                -moz-border-radius: 16px;
+                -ms-border-radius: 16px;
+                -o-border-radius: 16px;
+                .the-role{
+                    background-color: var(--danger-red-color);
+                    padding: 6px 8px;
+                    border-radius: 6px;
+                    -webkit-border-radius: 6px;
+                    -moz-border-radius: 6px;
+                    -ms-border-radius: 6px;
+                    -o-border-radius: 6px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: var(--white-color);
+                    margin-bottom: 8px;
+                    text-align: center;
+                }
+                .name{
+                    text-align: center;
+                    background-color: var(--danger-red-color);
+                    padding: 6px 8px;
+                    font-weight: bold;
+                    color: var(--white-color);
+                    border-radius: 6px 6px 0 0;
+                    -webkit-border-radius: 6px 6px 0 0;
+                    -moz-border-radius: 6px 6px 0 0;
+                    -ms-border-radius: 6px 6px 0 0;
+                    -o-border-radius: 6px 6px 0 0;
+                }
+                img{
+                    width: 100%;
+                }
+                .tele{
+                    text-align: center;
+                    display: block;
+                    background-color: var(--danger-red-color);
+                    padding: 6px 8px;
+                    font-weight: bold;
+                    color: var(--white-color);
+                    border-radius: 0 0 6px 6px;
+                    -webkit-border-radius: 0 0 6px 6px;
+                    -moz-border-radius: 0 0 6px 6px;
+                    -ms-border-radius: 0 0 6px 6px;
+                    -o-border-radius: 0 0 6px 6px;
+                }
+            }
+        }
+    }
+}
