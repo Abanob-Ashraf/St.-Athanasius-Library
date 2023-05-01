@@ -1,0 +1,69 @@
+.footer{
+    width: 100%;
+    background-color: var(--mate-black-color);
+    .container{
+        padding: 25px 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @media (max-width: 767px) {
+            flex-direction: column;
+        }
+    }
+    .box{
+        .socials{
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+            li {
+                margin-right: 10px;
+                a {
+                    background-color: var(--dark-black-color);
+                    color:var(--light-black-color);
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 50px;
+                    height: 50px;
+                    font-size: 20px;
+                    transition: 0.3s;
+                    -webkit-transition: 0.3s;
+                    -moz-transition: 0.3s;
+                    -ms-transition: 0.3s;
+                    -o-transition: 0.3s;
+                    border-radius: 5px;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    -ms-border-radius: 5px;
+                    -o-border-radius: 5px;
+                }
+                .facebook:hover {
+                    background-color: var(--facebook-color);
+                    color: var(--white-color);
+                }
+                .telegram:hover {
+                    background-color: var(--telegram-color);
+                    color: var(--white-color);
+                }
+                .phone:hover {
+                    background-color: var(--phone-color);
+                    color: var(--white-color);
+                }
+                .email:hover {
+                    background-color: var(--email-color);
+                    color: var(--white-color);
+                }
+            }
+        }
+    }
+    .copy-right {
+        padding: 15px 16px;
+        text-align: center;
+        color: var(--white-color);
+        border-top: 1px solid var(--light-black-color);
+        margin-bottom: 0;
+    }
+}

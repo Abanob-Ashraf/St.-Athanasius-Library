@@ -1,0 +1,78 @@
+.user-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;            
+    .avatar{
+        display: flex;
+        align-items: center;                
+        .user-avatar{
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            border: 3px solid var(--light-gray-color);
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            display: inline-block;
+            margin-left: 5px;
+        }
+    }
+    .menu{
+        display: none;
+        &.clicked{
+            display: block;
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            -o-transform: translateX(-50%);
+            background-color: var(--mate-black-color);
+            color: var(--light-gray-color);
+            padding: 16px;
+            border-radius: 16px;
+            -webkit-border-radius: 16px;
+            -moz-border-radius: 16px;
+            -ms-border-radius: 16px;
+            -o-border-radius: 16px;
+            width: 100%;
+            @media (max-width:991px) {
+                width: 100%;
+                @media (max-width:580px) {
+                    width: 80%;
+                }
+            }
+        }
+        li{
+            &:hover{
+                color: var(--white-color);
+                background-color: var(--dark-black-color);
+                border-radius: 5px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                -ms-border-radius: 5px;
+                -o-border-radius: 5px;
+            }
+            .logout{
+                cursor: pointer;
+            }
+            a{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;                    
+                color: var(--white-color);
+                padding: 14px 16px;
+                font-weight: bold;
+                font-size: 14px;
+            }
+        }
+        hr{
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    }
+}
