@@ -41,7 +41,7 @@ let BooksInShelf = ({ onClickForSearchedBooks }) => {
     
     let handleBlock = async() => {
         try {
-            let blocks = await allBlocks(createBookEngineFeatch.library_id);
+            let blocks = await allBlocks(booksInShelfFetch.library_id);
             return setBlockFetch(blocks)
         }catch(err){
             return setBlockFetch(null);
@@ -50,7 +50,7 @@ let BooksInShelf = ({ onClickForSearchedBooks }) => {
     
     let handleShelf = async() => {
         try {
-            let shelfs = await allShelfs(createBookEngineFeatch.block_id);
+            let shelfs = await allShelfs(booksInShelfFetch.block_id);
             return setShelfFetch(shelfs)
         }catch(err){
             return setBlockFetch(null);
