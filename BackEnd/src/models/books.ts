@@ -329,7 +329,6 @@ export class BooksModel {
       }
       return error
     } catch (error) {
-      console.log(error)
       throw new Error(`Unable to update ${b.id}, ${(error as Error).message}`)
     }
   }
