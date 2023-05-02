@@ -4,7 +4,7 @@ export const CREATEBOOK =
 export const GETMANYBOOKS = 'SELECT * FROM books'
 
 export const GETLATESTBOOKS = `SELECT books.id,
-librarys.library_name, books.book_code, books.book_name, books.author, books.publisher, 
+librarys.library_name, shelfs.shelf_number, blocks.block_number, books.book_code, books.book_name, books.author, books.publisher, 
 books.topic, books.number_of_copies, books.number_of_pages, books.number_of_parts, books.name_of_series, books.conclusion, 
 books.currrent_user, books.old_user, books.shelf_id, books.book_number_in_shelf, books.who_edited, books.created_date, books.updated_date 
 FROM books
@@ -17,7 +17,7 @@ ON librarys.id = blocks.library_id
 ORDER BY created_date DESC LIMIT 10`
 
 export const GETONEBOOKBYID = `SELECT books.id,
-librarys.library_name, books.book_code, books.book_name, books.author, books.publisher, 
+librarys.library_name, shelfs.shelf_number, blocks.block_number, books.book_code, books.book_name, books.author, books.publisher, 
 books.topic, books.number_of_copies, books.number_of_pages, books.number_of_parts, books.name_of_series, books.conclusion, 
 books.currrent_user, books.old_user, books.shelf_id, books.book_number_in_shelf, books.who_edited, books.created_date, books.updated_date 
 FROM books
@@ -26,13 +26,31 @@ ON shelfs.id = books.shelf_id
 INNER JOIN blocks 
 ON blocks.id = shelfs.block_id
 INNER JOIN librarys
-ON librarys.id = blocks.library_id WHERE id=($1)`
+ON librarys.id = blocks.library_id WHERE books.id=($1)`
 
 // export const SEARCHFORBOOK =
 //   'SELECT * FROM books WHERE book_name=($1) OR author=($2) OR publisher=($3) OR topic=($4) ORDER BY created_date DESC'
 
-export const UPDATEBOOK =
-  'UPDATE books SET book_code=($2), book_name=($3), author=($4), publisher=($5), topic=($6), number_of_copies=($7), number_of_pages=($8), number_of_parts=($9), name_of_series=($10), conclusion=($11), currrent_user=($12), old_user=($13) ,shelf_id=($14), book_number_in_shelf=($15), entry_date=($16), publish_date=($17), who_edited=($18), updated_date=($19) WHERE id=($1)'
+export const UPDATEBOOK = `UPDATE books SET 
+book_code=($2), 
+book_name=($3), 
+author=($4), 
+publisher=($5), 
+topic=($6), 
+number_of_copies=($7), 
+number_of_pages=($8), 
+number_of_parts=($9), 
+name_of_series=($10), 
+conclusion=($11), 
+currrent_user=($12), 
+old_user=($13),
+shelf_id=($14), 
+book_number_in_shelf=($15), 
+who_edited=($16),
+entry_date=($17), 
+publish_date=($18), 
+updated_date=($19) 
+WHERE id=($1)`
 
 // export const DELETEBOOK = 'DELETE FROM books WHERE id=($1)'
 
