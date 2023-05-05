@@ -16,6 +16,7 @@ let Adminstrators = () => {
                     <div className="scroll">
                         {adminstratorMaping}
                     </div>
+                    <p>{"مرر ------->"}</p>
                 </div>
             </div>
         </div>

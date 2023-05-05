@@ -28,6 +28,9 @@ let Header = ({ onClickForLogin }) => {
     if (location == "/BrowseBooks"){
         document.title = "مكتبه القديس أثناسيوس الرسولي | تصفح الكتب"
     }
+    if (location == "/ResetPassword"){
+        document.title = "مكتبه القديس أثناسيوس الرسولي | تغيير كلمه المرور"
+    }
     return (
         <div className="header">
             <div className="container">

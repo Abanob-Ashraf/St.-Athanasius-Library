@@ -38,8 +38,8 @@
             color: var(--white-color);
             line-height: 1.6;
             margin: 0;
-            @media (max-width:400px) {
-                // display: none;
+            @media (max-width:380px) {
+                display: none;
             }
         }
     }

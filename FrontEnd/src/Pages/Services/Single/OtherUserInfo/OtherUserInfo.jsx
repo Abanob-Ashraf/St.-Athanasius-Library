@@ -67,13 +67,13 @@ let OtherUserInfo = ({ ocClickForSearchedUsers , ocClickForOtherUserInfo , ocCli
                         </p>
                     </div>
                 </div>
-                {user.id != the_other_user.id && <div className="collection">
+                <div className="collection">
                     <div className="flex-collection">
-                        <button className="edit-user-info" onClick={()=>{ocClickForEditOtherUser(),ocClickForOtherUserInfo()}}>تعديل البيانات</button>
-                        {the_other_user.user_status == "AVILABLE" && <button className="delete" onClick={handleSubmitForDelete}>حذف المستخدم</button>}
+                        {((the_other_user.admin_flag == false && user.admin_flag == true && (user.job == "owner" || user.job == "أمين المكتبه") && (the_other_user.job != "owner" || the_other_user.job != "أمين المكتبه"))) && <button className="edit-user-info" onClick={()=>{ocClickForEditOtherUser(),ocClickForOtherUserInfo()}}>تعديل البيانات</button>}
+                        {((the_other_user.admin_flag == false && user.admin_flag == true && (user.job == "owner" || user.job == "أمين المكتبه") && (the_other_user.job != "owner" || the_other_user.job != "أمين المكتبه") && the_other_user.user_status == "AVILABLE")) && <button className="delete" onClick={handleSubmitForDelete}>حذف المستخدم</button>}
                     </div>
                     {the_other_user.user_status == "NOT AVILABLE" && <div className="msg">هذا المستخدم محذوف عدل عليه لتستعيده</div>}
-                </div>}
+                </div>
             </div>
         </div>
     )
