@@ -142,7 +142,7 @@ export class BooksModel {
     try {
       const connection = await Client.connect()
       const result = await connection.query(
-        `SELECT books.id, librarys.library_name, books.book_code, books.book_name, books.author, books.publisher, 
+        `SELECT books.id, librarys.library_name, shelfs.shelf_number, blocks.block_number, books.book_code, books.book_name, books.author, books.publisher, 
         books.topic, books.number_of_copies, books.number_of_pages, books.number_of_parts, books.name_of_series, books.conclusion, 
         books.currrent_user, books.old_user, books.shelf_id, books.book_number_in_shelf, books.who_edited, books.created_date, books.updated_date 
         FROM books 
@@ -183,7 +183,7 @@ export class BooksModel {
   ): Promise<object> {
     try {
       const connection = await Client.connect()
-      let SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK = `SELECT books.id, librarys.library_name, books.book_code, books.book_name, books.author, books.publisher, 
+      let SEARCHFORBOOKWITH_BLOCKORSHELFANDBLOCK = `SELECT books.id, librarys.library_name, shelfs.shelf_number, blocks.block_number, books.book_code, books.book_name, books.author, books.publisher, 
       books.topic, books.number_of_copies, books.number_of_pages, books.number_of_parts, books.name_of_series, books.conclusion, 
       books.currrent_user, books.old_user, books.shelf_id, books.book_number_in_shelf, books.who_edited, books.created_date, books.updated_date 
       FROM books 
