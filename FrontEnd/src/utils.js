@@ -8,10 +8,10 @@ export async function requirdAuth () {
     return null;
 }
 
-// export async function reverceRequirdAuth () {
-//     const isLoggend = sessionStorage.getItem("user");
-//     if (isLoggend){
-//         throw redirect("/")
-//     }
-//     return null;
-// }
+export async function reverceRequirdAuth () {
+    const isLoggend = sessionStorage.getItem("user");
+    if (isLoggend){
+        throw redirect("/")
+    }
+    return null;
+}
