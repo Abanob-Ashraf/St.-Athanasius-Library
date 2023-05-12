@@ -7,3 +7,4 @@ build/
 access.log
 *.csv
 *.zip
+dist/

@@ -27,11 +27,11 @@ let BookDetails = ({ onClickForSearchedBooks , onClickForBooksDetails , onClickF
                         </p>
                         <p className="block-number">
                             <p className="detail-data">رقم الوحده</p>
-                            {the_book.book_code[0] || "لا يوجد"}
+                            {the_book.block_number || "لا يوجد"}
                         </p>
                         <p className="shelf-number">
                             <p className="detail-data">رقم الرف</p>
-                            {the_book.book_code[2] || "لا يوجد"}
+                            {the_book.shelf_number || "لا يوجد"}
                         </p>
                         <p className="book-number">
                             <p className="detail-data">رقم الكتاب</p>

@@ -124,114 +124,125 @@ let CreateBookEngine = () => {
                 </div>
                 <div className="collection">
                     <div className="flex-collection">
-                        <input type="text"
-                        placeholder="إسم الكتاب" 
-                        required 
-                        name="book_name" 
-                        onChange={handleChange} 
-                        value={createBookEngineFeatch.book_name} 
-                        className="book-name"/>
-
-                        <input type="text" 
-                        placeholder="إسم المؤلف"
-                        required
-                        name="author" 
-                        onChange={handleChange} 
-                        value={createBookEngineFeatch.author}  
-                        className="author-name"/>
-
-                        <input type="text" 
-                        placeholder="إسم الناشر" 
-                        required
-                        name="publisher" 
-                        onChange={handleChange} 
-                        value={createBookEngineFeatch.publisher} 
-                        className="publisher-name"/>
-
-                        <input type="text" 
-                        placeholder="إسم السلسله"
-                        name="name_of_series" 
-                        onChange={handleChange} 
-                        value={createBookEngineFeatch.name_of_series} 
-                        className="series-name"/>
-
-                        <input type="text"  
-                        placeholder="تصنيف الكتاب"
-                        name="topic" 
-                        onChange={handleChange} 
-                        value={createBookEngineFeatch.topic} 
-                        className="topic"/>
+                        <div className="book-name">
+                            <p>إسم الكتاب</p>
+                            <input 
+                            placeholder="أكتب هنا"
+                            type="text" 
+                            onChange={handleChange} 
+                            value={createBookEngineFeatch.book_name} 
+                            name="book_name"/>
+                        </div>
+                        <div className="author-name">
+                            <p>إسم المؤلف</p>
+                            <input 
+                            placeholder="أكتب هنا"
+                            type="text" 
+                            onChange={handleChange} 
+                            value={createBookEngineFeatch.author}
+                                name="author"/>
+                        </div>
+                        <div className="publisher-name">
+                            <p>إسم الناشر</p>
+                            <input 
+                            placeholder="أكتب هنا"
+                            type="text" 
+                            onChange={handleChange} 
+                            value={createBookEngineFeatch.publisher} 
+                            name="publisher"/>
+                        </div>
+                        <div  className="series-name">
+                            <p>إسم السلسله</p>
+                            <input 
+                            placeholder="أكتب هنا"
+                            type="text" 
+                            onChange={handleChange} 
+                            value={createBookEngineFeatch.name_of_series} 
+                            name="name_of_series"/>
+                        </div>
+                        <div className="topic">
+                            <p>التصنيف</p>
+                            <input 
+                            placeholder="أكتب هنا"
+                            type="text" 
+                            onChange={handleChange} 
+                            value={createBookEngineFeatch.topic} 
+                            name="topic"/>
+                        </div>
                     </div>
                 </div>
                 <div className="collection">
                     <div className="flex-collection">
-                        <input 
-                        type="number" 
-                        placeholder="عدد النسخ"
-                        required
-                        name="number_of_copies" 
-                        onChange={handleChange} 
-                        value={createBookEngineFeatch.number_of_copies} 
-                        className="copies-number" 
-                        min="1"/>
-
-                        <input 
-                        type="number" 
-                        placeholder="عدد الأجزاء"
-                        required
-                        name="number_of_parts" 
-                        onChange={handleChange} 
-                        value={createBookEngineFeatch.number_of_parts} 
-                        className="parts-number" 
-                        min="1"/>
-
-                        <input 
-                        type="number" 
-                        placeholder="عدد الصفحات"
-                        required
-                        name="number_of_pages" 
-                        onChange={handleChange} 
-                        value={createBookEngineFeatch.number_of_pages} 
-                        className="pages-number" 
-                        min="1"/>
-
-                        <input 
-                        type="date" 
-                        placeholder="تاريخ النشر"
-                        name="publish_date" 
-                        onChange={handleChange} 
-                        value={createBookEngineFeatch.publish_date} 
-                        className="publish-date"/>
-
-                        <input 
-                        type="date" 
-                        placeholder="تاريخ دخول الكتاب"
-                        name="entry_date" 
-                        onChange={handleChange} 
-                        value={createBookEngineFeatch.entry_date} 
-                        className="entry-date"/>
-
-                        <input 
-                        type="number" 
-                        placeholder="رقم الكتاب في الرف"
-                        required
-                        name="book_number_in_shelf" 
-                        onChange={handleChange} 
-                        value={createBookEngineFeatch.book_number_in_shelf} 
-                        className="book-number" 
-                        min="1"/>
+                        <div  className="copies-number">
+                            <p>عدد النسخ</p>
+                            <input 
+                            placeholder="أكتب هنا"
+                            type="number" 
+                            min="1" 
+                            onChange={handleChange} 
+                            value={createBookEngineFeatch.number_of_copies} 
+                            name="number_of_copies"/>
+                        </div>
+                        <div className="parts-number">
+                            <p>عدد الأجزاء</p>
+                            <input 
+                            placeholder="أكتب هنا"
+                            type="number" 
+                            min="1" 
+                            onChange={handleChange} 
+                            value={createBookEngineFeatch.number_of_parts} 
+                            name="number_of_parts"/>
+                        </div>
+                        <div className="pages-number">
+                            <p>عدد الصفح</p>
+                            <input 
+                            placeholder="أكتب هنا"
+                            type="number" 
+                            min="1" 
+                            onChange={handleChange} 
+                            value={createBookEngineFeatch.number_of_pages} 
+                            name="number_of_pages"/>
+                        </div>
+                        <div className="publish-date" >
+                            <p>تاريخ النشر</p>
+                            <input 
+                            placeholder="أكتب هنا"
+                            type="date" 
+                            onChange={handleChange} 
+                            value={createBookEngineFeatch.publish_date} 
+                            name="publish_date"/>
+                        </div>
+                        <div  className="entry-date">
+                            <p>تاريخ الدخول</p>
+                            <input 
+                            placeholder="أكتب هنا"
+                            type="date" 
+                            onChange={handleChange} 
+                            value={createBookEngineFeatch.entry_date} 
+                            name="entry_date"/>
+                        </div>
+                        <div  className="book-number">
+                            <p>رقم الكتاب في الرف</p>
+                            <input 
+                            placeholder="أكتب هنا"
+                            type="number" 
+                            min="1" 
+                            onChange={handleChange} 
+                            value={createBookEngineFeatch.book_number_in_shelf} 
+                            name="book_number_in_shelf"/>
+                        </div>
                     </div>
                 </div>
                 <div className="collection">
-                    <textarea 
-                    name="conclusion" 
-                    placeholder="موضوع الكتاب" 
-                    onChange={handleChange} 
-                    value={createBookEngineFeatch.conclusion} 
-                    className="conclusion">
-                    </textarea>
+                    <div  className="conclusion">
+                        <p>الموضوع</p>
+                        <textarea 
+                        placeholder="أكتب هنا"
+                        onChange={handleChange} 
+                        value={createBookEngineFeatch.conclusion} 
+                        name="conclusion"/>
+                    </div>
                 </div>
-
                 {createBookEngineFeatchSuccess &&
                  <small className='note'>
                     {createBookEngineFeatchSuccess == "book created correctly" ? "تم الإنشاء الكتاب" : null}
