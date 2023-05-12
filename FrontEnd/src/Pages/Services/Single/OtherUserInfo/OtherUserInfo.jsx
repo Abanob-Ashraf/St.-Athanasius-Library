@@ -69,8 +69,8 @@ let OtherUserInfo = ({ ocClickForSearchedUsers , ocClickForOtherUserInfo , ocCli
                 </div>
                 <div className="collection">
                     <div className="flex-collection">
-                        {the_other_user.admin_flag == false && <button className="edit-user-info" onClick={()=>{ocClickForEditOtherUser(),ocClickForOtherUserInfo()}}>تعديل البيانات</button>}
-                        {(the_other_user.admin_flag == false && the_other_user.user_status == "AVILABLE") ? <button className="delete" onClick={handleSubmitForDelete}>حذف المستخدم</button> : null}
+                        {(user.job == "owner" || user.job == "أمين المكتبه" ||  user.job == "نائب أمين المكتبه") ? <button className="edit-user-info" onClick={()=>{ocClickForEditOtherUser(),ocClickForOtherUserInfo()}}>تعديل البيانات</button> : null}
+                        {(the_other_user.user_status == "AVILABLE" && user.job == "owner" || user.job == "أمين المكتبه" ||  user.job == "نائب أمين المكتبه") ? <button className="delete" onClick={handleSubmitForDelete}>حذف المستخدم</button> : null}
                     </div>
                     {the_other_user.user_status == "NOT AVILABLE" && <div className="msg">هذا المستخدم محذوف عدل عليه لتستعيده</div>}
                 </div>
