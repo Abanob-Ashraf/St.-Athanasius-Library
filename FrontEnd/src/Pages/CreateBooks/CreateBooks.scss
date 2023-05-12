@@ -1,0 +1,17 @@
+.create-books{
+    padding: 16px 0;
+    min-height: calc(100vh - 245px);
+    background-color: var(--light-gray-color);
+    .container{
+        height: 100%;
+        .services-container{
+            display: grid;
+            grid-template-columns: repeat(auto-fill,minmax(400px,1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+            @media (max-width: 768px) {
+                grid-template-columns: minmax(100%,1fr);
+            }
+        }
+    }
+}
