@@ -221,7 +221,6 @@ export const updateBook = async (req: Request, res: Response) => {
       return res.status(401).json(`you can't edite this book`)
     }
   } catch (error) {
-    console.log(error)
     res.status(409).json(error)
   }
 }
