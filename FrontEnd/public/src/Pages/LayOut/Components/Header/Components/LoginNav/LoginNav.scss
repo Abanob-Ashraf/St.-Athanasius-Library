@@ -1,0 +1,26 @@
+.login-nav{
+    .login{
+        cursor: pointer;
+        margin: 0;
+        color: var(--white-color);
+        font-size: 14px;
+        font-weight: bold;
+        transition: 0.3s;
+        -webkit-transition: 0.3s;
+        -moz-transition: 0.3s;
+        -ms-transition: 0.3s;
+        -o-transition: 0.3s;
+        padding: 8px 10px;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+        background-color: var(--dark-black-color);
+        &:hover{
+            background-color: var(--light-black-color);
+            border-color: var(--white-color);
+            color: var(--white-color);
+        }
+    }
+}

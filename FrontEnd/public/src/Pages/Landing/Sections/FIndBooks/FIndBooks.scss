@@ -1,0 +1,22 @@
+.find-a-books{
+    padding: 0 0 32px 0;
+    background-image: url("/images/browse-books/browse-books.svg");
+    background-size:cover;
+    .title{
+        text-align: center;
+        background-color: var(--danger-red-color);
+        padding: 10px;
+        margin-bottom: 1.2rem;
+        font-weight: bold;
+        color: var(--white-color);
+    }
+    .services-container{
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(400px,1fr));
+        gap: 16px;
+        @media (max-width: 768px) {
+            grid-template-columns: minmax(100%,1fr);
+        }
+    }
+    
+}
