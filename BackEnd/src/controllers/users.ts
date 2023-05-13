@@ -203,7 +203,7 @@ export const getUserDataToResetPassword = async (req: Request, res: Response) =>
           <h1>You requested a password reset</h1>
           <h3>Click this link to set a new password.</h3>
           
-          <a href="https://st-athanasious-library.netlify.app/ResetPassword?${token}"> https://st-athanasious-library.netlify.app/ResetPassword?${token} </a>
+          <a href="http://localhost:5173/ResetPassword?${token}"> http://localhost:5173/ResetPassword?${token} </a>
           <h4>This link will expire in 30 minutes.</h4>
         `
       })
