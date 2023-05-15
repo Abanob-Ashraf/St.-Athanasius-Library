@@ -53,7 +53,7 @@ export const createUser = async (req: Request, res: Response) => {
       html: `
       <h1>Wellcome in our Library</h1>
       <h3>Click this link to login in our website.</h3>
-      <a href="https://st-athanasious-library.netlify.app/ResetPassword?${token}"> https://st-athanasious-library.netlify.app/ResetPassword?${token} </a>
+      <a href="http://localhost:5173/ResetPassword?${token}"> http://localhost:5173/ResetPassword?${token} </a>
       <h4>This link will expire in 48 hours.</h4>
     `
     })
