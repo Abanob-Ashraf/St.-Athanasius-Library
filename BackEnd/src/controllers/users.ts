@@ -40,23 +40,23 @@ export const createUser = async (req: Request, res: Response) => {
     }
     const createdUser = await library.create(user)
 
-    const userData = await library.getUserDataToResetPassword(user.email)
-    const userInfo = userData['userInfo']
+    // const userData = await library.getUserDataToResetPassword(user.email)
+    // const userInfo = userData['userInfo']
 
-    const token = jwt.sign({ userInfo }, process.env.TOKEN_SECRET as unknown as string, {
-      expiresIn: process.env.JWT_EXPIRES_IN
-    })
-    transporter.sendMail({
-      to: user.email,
-      from: 'st.athanasius998@gmail.com',
-      subject: 'Signup succeeded',
-      html: `
-      <h1>Wellcome in our Library</h1>
-      <h3>Click this link to login in our website.</h3>
-      <a href="http://localhost:5173/ResetPassword?${token}"> http://localhost:5173/ResetPassword?${token} </a>
-      <h4>This link will expire in 48 hours.</h4>
-    `
-    })
+    // const token = jwt.sign({ userInfo }, process.env.TOKEN_SECRET as unknown as string, {
+    //   expiresIn: process.env.JWT_EXPIRES_IN
+    // })
+    // transporter.sendMail({
+    //   to: user.email,
+    //   from: 'st.athanasius998@gmail.com',
+    //   subject: 'Signup succeeded',
+    //   html: `
+    //   <h1>Wellcome in our Library</h1>
+    //   <h3>Click this link to login in our website.</h3>
+    //   <a href="http://localhost:5173/ResetPassword?${token}"> http://localhost:5173/ResetPassword?${token} </a>
+    //   <h4>This link will expire in 48 hours.</h4>
+    // `
+    // })
     res.status(createdUser['status']).json(createdUser['message'])
   } catch (error) {
     return res.status(409).json('this email already existe')
