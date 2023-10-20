@@ -65,7 +65,7 @@ let Login = ({ onClickForLogin , onClickForGetMail }) => {
                      null}
                 </small>}
                 <input type="submit" className="submit" value="تسجيل الدخول"/>
-                <Link onClick={onClickForGetMail}><p className='forget'> نسيت كلمه المرور؟</p></Link>
+                {/* <Link onClick={onClickForGetMail}><p className='forget'> نسيت كلمه المرور؟</p></Link> */}
             </form>
         </div>
     </div>
