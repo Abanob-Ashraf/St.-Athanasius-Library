@@ -16,7 +16,8 @@
     "database-prod:reset": "db-migrate reset --config ./database.json -e prod",
     "prettier": "prettier --write src/**/*.{ts,tsx,js,jsx}",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "qckwinsvc": "qckwinsvc"
   },
   "keywords": [],
   "author": "Abanob Ashraf",
@@ -41,7 +42,8 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.9.0",
     "nodemailer-sendgrid-transport": "^0.2.0",
-    "pg": "^8.8.0"
+    "pg": "^8.8.0",
+    "qckwinsvc": "^1.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
