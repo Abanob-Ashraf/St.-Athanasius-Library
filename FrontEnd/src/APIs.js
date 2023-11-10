@@ -1,5 +1,5 @@
 const prodURL = "https://st-athanasius-library.com.up.railway.app";
-const localURL = "https://localhost:3000";
+const localURL = "http://localhost:3000";
 let server = false;
 
 // Login API
